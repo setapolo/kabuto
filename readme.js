@@ -55,4 +55,58 @@
 
 
 
+//#003_006 Nan trail 
+(function(j){
+ j= !isNaN(j)	? j:null;
+ console.log(j);
+})(
+parseInt('one')
+);
 
+//#004_001 j plus i
+(function(j){
+	return function(){
+		j++;
+		console.log(j);
+		return this;
+	};
+})(1)();
+
+//#014_001 function's functions
+(function(j){
+	console.log("start"+j);
+	f= (function(){
+		console.log("a"+j);
+		j++;
+		return f
+	});
+	return f;
+})(1)()()()()()()()()()()()()()();
+
+//#014_002 function's functions
+(function(j){
+	console.log("start"+j);
+	f= (function(i){
+		console.log("odd"+j);
+		console.log("i"+i);
+		j++;
+		return function(ii){
+			console.log("even"+j);			
+			console.log("ii"+ii);
+			j++;
+			return f;	
+		}
+	});
+	return f;
+})(1)(2)(3)(4)(5)(6)()()()()()()()()();
+
+//#015_001 hdoc
+console.log(
+(function(){
+/*
+comment1
+comment2
+comment3
+*/
+}).toString()
+);
