@@ -1,0 +1,50 @@
+//#eval take1 
+(function(s){
+	console.log("eval#1:",s);	
+})(function(ss){
+	return eval(ss);
+}("1+1"));
+
+//eval hdoc
+(function(s){
+	console.log("eval#2:",s);	
+})(function(ss){
+	return eval(ss);
+}(
+	(function(){/*	
+	1+1
+	*/}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
+
+	));
+
+//eval hdoc with error code
+(function(s){
+	console.log("eval#3:",s);	
+})(function(ss){
+	try {
+		return eval(ss);
+	}catch (e) {
+		return e.toString();
+	}
+}(
+	(function(){/*	
+	Nan
+	*/}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
+
+	));
+
+//eval hdoc with error code -> definition_missing
+(function(s){
+	console.log("eval#4:",s);	
+})(function(ss){
+	try {
+		return eval(ss);
+	}catch (e) {
+		return(e.toString().match(/^ReferenceError: (.*) is not defined$/)[1])+"=''";
+	}
+}(
+	(function(){/*	
+	Nan
+	*/}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
+
+	));
