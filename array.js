@@ -1,35 +1,20 @@
-
-//http://bonsaiden.github.io/JavaScript-Garden/
-// c represents object
+//Array of Array :: double join
 (function (s) {
-	console.log("Object.prototype:",s);
+	console.log("#1:",s);
 })(
-	(function (c) {
-	    return Object.prototype.toString.call(c);
+	(function (aa) {
+		return aa.reduce(function(m,c,i,a){
+			return m+c;
+		});
 	})
-	//	("type")
-	//	(12345)
-	//	(null)
-	//	(undefined)
-	//	(NaN)
-		([12345])
+		([
+			[1,2,3,4],
+			[1,2,3,4],
+			[1,2,3,4]
+		]
+
+			)
 );
 
 
-
-////
-
-(function (s) {
-	console.log(s);
-})(
-	(function (c) {
-	    return Object.prototype.toString.call(c).slice(8, -1);
-	})
-	//	("type")
-	//	(12345)
-	//	(null)
-	//	(undefined)
-	//	(NaN)
-		([12345])
-);
 

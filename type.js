@@ -1,13 +1,36 @@
 
-//Array of Array
+//http://bonsaiden.github.io/JavaScript-Garden/
+// c represents object
 (function (s) {
-	console.log("#1:",s);
+	console.log("Object.prototype:",s);
 })(
-	(function (aa) {
-		return aa;
+	(function (c) {
+	    return Object.prototype.toString.call(c);
 	})
-		([[1],[2]])
+	//	("type")
+	//	(12345)
+	//	(null)
+	//	(undefined)
+	//	(NaN)
+		([12345])
 );
 
+
+
+////
+
+(function (s) {
+	console.log(s);
+})(
+	(function (c) {
+	    return Object.prototype.toString.call(c).slice(8, -1);
+	})
+	//	("type")
+	//	(12345)
+	//	(null)
+	//	(undefined)
+	//	(NaN)
+		([12345])
+);
 
 
