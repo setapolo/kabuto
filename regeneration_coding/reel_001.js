@@ -21,9 +21,9 @@
 			.replace(/\*\/$/, "")
 ));
 
+//Quine
 (function f(){
 //Quine
-	var head = '(';
-	var tail = ')()';
-	console.log([head,f,tail].join(''));
+	var h = '(',t = ')',q ='',j ='join';
+	console.log([h,f,t,h,t][j](q));
 })();
