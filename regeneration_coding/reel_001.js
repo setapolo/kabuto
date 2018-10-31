@@ -1,6 +1,6 @@
 //tochu
 (function(s){
-	console.log(s)
+	console.log("reg01",s)
 })(
 	(function(s){
 		return s.split(/\n/).map(function(c,i,a){return c.replace(/[\t|\r]/ig,'')})
@@ -20,3 +20,10 @@
 			.replace(/^\/\*/, "")
 			.replace(/\*\/$/, "")
 ));
+
+(function f(){
+//Quine
+	var head = '(';
+	var tail = ')()';
+	console.log([head,f,tail].join(''));
+})();
