@@ -29,3 +29,36 @@
 	})
 	(1)(1)()
 );
+
+(function(s){
+	console.log("reel3",s)
+})(
+	(function(o){
+		var a=[o];
+		var p={};
+		p["+"]=function(m,c,i,a){return m+c};	
+		var f=function(o){
+			a=(o=="+")?a:a.concat(o);
+			return (o=="+")?(a.reduce(p["+"])):(f);
+		}
+		return f;
+	})
+	(1)(1)("+")
+);
+
+
+(function(s){
+	console.log("reel3",s)
+})(
+	(function(o){
+		var a=[o];
+		var p={};
+		p["+"]=function(m,c,i,a){return m+c};	
+		var f=function(o){
+			a=(o=="+")?a:a.concat(o);
+			return (o=="+")?(a.reduce(p["+"])):(f);
+		}
+		return f;
+	})
+	(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)("+")
+);
