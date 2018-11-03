@@ -62,3 +62,27 @@
 	})
 	(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)("+")
 );
+
+(function(s){
+	console.log("reel4",s)
+})(
+	(function(o){
+		var a=[o];
+		var p={};
+		var q='';
+		p[q]=function(m,c,i,a){
+			var h='(';
+			var t=')';
+			return m+h+c+t
+		};	
+		var f=function(o){
+			console.log(arguments.callee['abcd'])
+			a=(o==q)?a:a.concat(o);
+			return (o==q)?(a.reduce(p[q])):(f);
+		}
+		f['abcd']=12345;
+		return f;
+	})
+	(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)('')
+);
+

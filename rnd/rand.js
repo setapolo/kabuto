@@ -13,15 +13,15 @@
 //middle-square method  very rough
 //reel 0
 (function(s){
-	console.log("reel0",s)
+	console.log("reel1",s)
 })(
-	(function(i){
+	(function(c){
+		var l = (j).toString().length;
 		f =function(j){
-			var l = (i).toString().length;
-			return (i*i).toString().substring(2,l+2);
+			return (j) ? (j*j).toString().substring(2,l+2);
 
 		}
 		return f;
 	})
-	(12345)
+	(12345)()
 );
