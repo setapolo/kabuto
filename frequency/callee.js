@@ -22,3 +22,33 @@
 	return (s2-s1)+":"+ff;	
 })()
 );
+
+
+//poc#1
+(function(s){
+	console.log("sec2",s)
+})(
+(function(){
+	var k,s1,s2;
+	s1 = Date.now();
+	var aa = (function(a){
+		var ff=(function(s){
+			var c=arguments.callee;
+			a = a.concat(s);
+			var f = function(s){
+				a = a.concat(s);
+				return (s)?f:c;
+			}
+			return (s)?f:c;
+		})
+		(1) (2)(3)(4)(5)(6)(7)(8)()
+		(1) (2)(3)(4)(5)(6)(7)(8)()
+		(1) (2)(3)(4)(5)(6)(7)(8)()
+		(1) (2)(3)(4)(5)(6)(7)(8)()
+		(1) (2)(3)(4)(5)(6)(7)(8)()();
+		return a;
+	})([]);
+	s2 = Date.now();
+	return (s2-s1)+":"+aa;	
+})()
+);
