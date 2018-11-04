@@ -3,7 +3,7 @@
 
 //poc#1
 (function(s){
-	console.log("sec2",s)
+	console.log("sec1:",s);
 })(
 (function(){
 	var k,s1,s2;
@@ -26,17 +26,18 @@
 
 //poc#1
 (function(s){
-	console.log("sec2",s)
+	console.log("sec2:",arguments);
 })(
 (function(){
 	var k,s1,s2;
 	s1 = Date.now();
-	var aa = (function(a){
-		var ff=(function(s){
+	var aa = (function(aa){
+		var ss=(function(s){
 			var c=arguments.callee;
-			a = a.concat(s);
+			var a = [s];
 			var f = function(s){
-				a = a.concat(s);
+				(!s)?null:a = a.concat(s); 
+				(!s)?aa.push(a):null; 
 				return (s)?f:c;
 			}
 			return (s)?f:c;
@@ -45,10 +46,11 @@
 		(1) (2)(3)(4)(5)(6)(7)(8)()
 		(1) (2)(3)(4)(5)(6)(7)(8)()
 		(1) (2)(3)(4)(5)(6)(7)(8)()
-		(1) (2)(3)(4)(5)(6)(7)(8)()();
-		return a;
+		(1) (2)(3)(4)(5)(6)(7)(8)()
+		();
+		return aa;
 	})([]);
 	s2 = Date.now();
-	return (s2-s1)+":"+aa;	
+	return aa;	
 })()
 );
