@@ -1,0 +1,45 @@
+<html> 
+	<div id="d"></div>
+</html>
+<script>
+	//rough
+	(function(s){
+		console.log("sec1:",s);
+		var ss = s.map(function(c,i,a){
+			return "tr"+c.map(function(cc,ii,aa){
+				return "td"+cc+"/td";
+			})+"/tr";
+		}).join("<br>");
+		ss = "table" + ss + "/table";
+		document.getElementById("d").innerHTML=ss;
+	})(
+	(function(){
+		var k,s1,s2;
+		s1 = Date.now();
+		var aa = (function(aa){
+			var ss=(function(s){
+				var c=arguments.callee;
+				var a = [s];
+				var f = function(s){
+					(!s)?null:a = a.concat(s); 
+					(!s)?aa.push(a):null; 
+					return (s)?f:c;
+				}
+				return (s)?f:c;
+			})
+			("わたしはだいじょうぶです1")("私は大丈夫です")("watashi ha daizyoubu desu")()
+			("わたしはだいじょうぶです2")("私は大丈夫です")("watashi ha daizyoubu desu")()
+			("わたしはだいじょうぶです3")("私は大丈夫です")("watashi ha daizyoubu desu")()
+			("わたしはだいじょうぶです4")("私は大丈夫です")("watashi ha daizyoubu desu")()
+			("わたしはだいじょうぶです5")("私は大丈夫です")("watashi ha daizyoubu desu")()
+			("わたしはだいじょうぶです6")("私は大丈夫です")("watashi ha daizyoubu desu")()
+			();
+			return aa;
+		})([]);
+		s2 = Date.now();
+		return aa;	
+	})()
+	);
+
+
+</script>
