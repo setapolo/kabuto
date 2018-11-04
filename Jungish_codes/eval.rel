@@ -51,3 +51,24 @@
 	*/}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
 
 	));
+
+
+	var flg=true;
+	while(flg){
+		try{
+
+			f = (function(s){
+				console.log("passed");
+				(!s)?flg=false:null;
+				return f;
+			})(Table)(TR)(DIV)(Nan)()
+
+		}catch(e){
+			console.log(e.toString());
+			eval((e.toString().match(/^ReferenceError: (.*) is not defined$/)[1])+"=''");
+		}
+		console.log("loop");
+
+	}
+	
+	console.log(1);
