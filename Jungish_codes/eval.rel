@@ -56,19 +56,23 @@
 	var flg=true;
 	while(flg){
 		try{
-
-			f = (function(s){
-				console.log("passed");
-				(!s)?flg=false:null;
+			(function(s){
+				console.log("1passed"+flg+s);
+				var f = (function(s){
+					console.log("2passed"+flg+s);
+					(!s)?flg=false:null;
+					return f;
+				});
 				return f;
-			})(Table)(TR)(DIV)(Nan)()
-
+			})(Table)(TR)(DIV)(Nan)();
 		}catch(e){
 			console.log(e.toString());
-			eval((e.toString().match(/^ReferenceError: (.*) is not defined$/)[1])+"=''");
+			console.log("var "+(e.toString().match(/^ReferenceError: (.*) is not defined$/)[1])+"='1';");
+			eval("var "+(e.toString().match(/^ReferenceError: (.*) is not defined$/)[1])+"='1';");
 		}
-		console.log("loop");
-
+		console.log("loop"+flg);
 	}
-	
-	console.log(1);
+	console.log(Table);
+    
+
+
