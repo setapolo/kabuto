@@ -110,3 +110,64 @@ comment3
 */
 }).toString()
 );
+
+//
+console.log("a"+"("+"b"+")");
+
+console.log(["a","(","b",")"].join(""));
+
+console.log("c(d)".replace(/c/ig,"a").replace(/d/ig,"b"));
+
+console.log("c(d)".
+			replace(/c/ig,"a").
+			replace(/d/ig,"b")
+			);
+
+console.log(["a",["b"]].reduce(
+	function(m,c,i,a){
+		return m+"("+c+")";
+	}
+	)
+);
+
+console.log(["a",["b","c","d"]].reduce(
+	function(m,c,i,a){
+		return m+"("+c+")";
+	}
+	)
+);
+
+console.log(["a","b","c","d"].reduce(
+	function(m,c,i,a){
+		return m+"("+c+")";
+	}
+	)
+);
+
+
+console.log(["a"].reduce(
+	function(m,c,i,a){
+		return m+"("+c+")";
+	}
+	)
+);
+
+
+console.log(["a",["b","c",["d","e"]]].reduce(
+	function(m,c,i,a){
+		return m+"("+c+")";
+	}
+	)
+);
+
+
+
+
+
+
+
+
+
+
+
+
