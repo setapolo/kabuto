@@ -162,7 +162,7 @@ console.log(["a",["b","c",["d","e"]]].reduce(
 
 
 
-
+console.log((false)?(2):(false)?3:1);
 
 
 

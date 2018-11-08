@@ -18,43 +18,26 @@ console.log(jslinks.split("\n").map(function(c,i,a){return '<script src="URL"></
 );
 //["<",HEAD,">"]
 
-
 (function(s){
   console.log(s);
 })(
-  [].reduce.call(
-    ["a",["b","c","d"],["b","c","d"],["b","c","d"]]
+(function(){
+  var HEAD=0,TAIL=1;
+//  var aa = [HEAD,"(",TAIL,")","[",HEAD,"]"];
+  var aa = ["<",HEAD," ",TAIL,">","</",HEAD,">"];
+  return [].reduce.call(
+    ["a",["b","c","d"],["e","f","g"],["h","i","j"]]
     ,function(m,c,i,a){
       var arg = arguments;
-      var a=[0,"(",1,")"].map(
+      var hed = a[0];
+      var a=aa.map(
         function(c,i,a){
-          return isNaN(c)?c:arg[c];  
+          return isNaN(c)?c:((c==0)?hed:arg[c]);  
+//          return isNaN(c)?c:arg[c];  
         })
       return a.join("");
        }
     )
+})()
 );
-/*
-//    var a=[arguments[0],"(",arguments[1],")"];
-//    return arguments[0]+"("+arguments[1]+")";
-//    return m+"("+c+")";
-arguments[0]
-double arguments
-f=function(a){
-  arguments[a[0]];
-}
-f(arguments)
-[HEAD,'(',MID,')']
-["<",HEAD,">"]これでフォームがきまる
 
-実際の情報は流し込み
-
-()printf abc efg
-(cfunction)
-
-
-
-[0,'(',1,')']これが実態
-クロージャ多様
-arguments[HEAD]
-*/
