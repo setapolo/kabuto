@@ -40,6 +40,40 @@
 	)
 );
 
+//rnd002 random integer
+(function(s){
+	console.log("rnd002_003",s);
+})(
+	(function(f){
+	  return "xxxxxxxxxx".split("").map(function(){
+	  	return f();
+	  });		
+	})(
+		(function(i,j){
+			return (function(){
+				return Math.floor((Math.random()*(j-i))+i)
+			})
+		})(1,10)
+	)
+);
+
+//rnd002 random integer
+(function(s){
+	console.log("rnd002_004",s);
+})(
+	(function(f){
+	  return "xxxxxxxxxx".split("").map(function(){
+	  	return f();
+	  }).join("");		
+	})(
+		(function(i,j){
+			return (function(){
+				return Math.floor((Math.random()*(j-i))+i)
+			})
+		})(1,10)
+	)
+);
+
 //rnd003 
 (function(s){
 	console.log("rnd003",s);
