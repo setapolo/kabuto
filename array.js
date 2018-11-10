@@ -16,5 +16,14 @@
 			)
 );
 
-
+//#014_001 function's functions
+(function(j){
+	console.log("014_001start"+j);
+	f= (function(){
+		console.log("014_001a"+j);
+		j++;
+		return f
+	});
+	return f;
+})(1)()()()()()()()()()()()()()();
 
