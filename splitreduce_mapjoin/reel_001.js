@@ -30,11 +30,12 @@
 	console.log("sprmaj",s);
 })(
 	(function(s){
-		return s.split("\n").map(
+		var LF = (s.match(/\r/))?"\r\n":"\n";
+		return s.split(LF).map(
 			function(c,i,a){
-				return ["(",c,")"].join("\n")
+				return ["(",c,")"].join(" ")
 			}
-		)
+		).join(" ")
 	})(
 (function(){
 /*
