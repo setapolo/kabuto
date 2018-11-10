@@ -34,3 +34,28 @@
 );
 
 
+(function (a) {
+	aa= a.map(function(c,i,a){
+		return [c,Object.prototype.toString.call(c).slice(8, -1)];
+	})
+	console.log(aa);
+})(
+	(function(a){
+		(function(c){
+			a=[c];
+			var f=function(c){
+				a=a.concat(c);
+				return f;
+			}
+			return f;
+		})
+		("type")
+		(12345)
+		(null)
+		(undefined)
+		(NaN)
+		([12345])
+		(NaN.toString)
+		return a;
+	})([])
+);
