@@ -92,3 +92,18 @@
 	})(["a","b","c","d","e","f"])
 );
 
+(function(s){
+	console.log("rnd004_004",s);
+})(
+	(function(f){
+	  return "xxxxxxxxxx".split("").map(function(){
+	  	return f();
+	  }).join("");		
+	})(
+		(function(a){
+			return (function(){
+				return a[Math.floor(Math.random()*a.length)]
+			})
+		})(["a","b","c","d","e","f"])
+	)
+);
