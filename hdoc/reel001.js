@@ -1,3 +1,19 @@
+(function(s){
+	console.log("sec0:",s);
+}(
+	(function(){
+	/*
+	 <tr id="word1">  
+	    <td>word2</td>
+	    <td width = "20%">
+	      <div class="float-right">
+	        <input type="button" onClick="rec_start('word1','word2');" value="rec"　>
+	      </div>
+	    </td>
+	  </tr> 
+	*/
+	}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
+));
 
 
 //
