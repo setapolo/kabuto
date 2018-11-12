@@ -196,3 +196,46 @@ a,b,c,d,e
 
 
 
+
+(function(aa){
+	s = aa.map(function(c,i,a){
+		return function(){return c}	
+	});
+	s = (function(){
+		f = function(c,i,a){return f};
+		return f}
+		)("a")("b")("c")("d")("e")
+
+	console.log("sec0:",s);
+}(
+	(function(){
+/*
+1,2,3,4,5
+1,2,3,4,5
+*/
+	}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").split(/\n/).slice(1,-1)
+));
+
+
+
+(function(aa){
+	s = aa.map((function(s){
+		console.log("base x1",s);
+		f = function(c,i,a){
+			console.log("base x2",c);
+			return f};
+		return f}
+		)("a")("b")("c")("d")("e")
+		);
+	console.log("sec0:",s);
+}(
+	(function(){
+/*
+1,2,3,4,5
+1,2,3,4,5
+*/
+	}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").split(/\n/).slice(1,-1)
+));
+
+
+
