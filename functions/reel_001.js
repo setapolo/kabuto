@@ -219,20 +219,26 @@ a,b,c,d,e
 
 
 (function(aa){
-	s = aa.map((function(s){
-		console.log("base x1",s);
+	s = aa.map((function(s,ss,sss){
+		console.log("base x1",s,ss,sss);
+		var aa=[s];
 		f = function(c,i,a){
-			console.log("base x2",c);
+			aa = (i==undefined) ? aa.concat(c): aa;
+			console.log("base x2aa",aa,(i==undefined)?null:aa[i]);
+			console.log("base x2cia",c,i,a);
 			return f};
 		return f}
-		)("a")("b")("c")("d")("e")
+		)("head")("b")("c")("d")("e")
 		);
 	console.log("sec0:",s);
 }(
 	(function(){
 /*
 1,2,3,4,5
-1,2,3,4,5
+2,2,3,4,5
+3,2,3,4,5
+4,2,3,4,5
+5,2,3,4,5
 */
 	}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "").split(/\n/).slice(1,-1)
 ));
