@@ -75,3 +75,29 @@ console.log(sss);
 	return aa;	
 })()
 );
+
+//normalization
+
+(function(a){
+	(function(){
+		var f = function(){
+			return f;
+		};
+		return f;
+	})
+	([].toString)
+	("".match,[/(?:\/\*(?:[\s\S]*?)\*\/)/])
+	([].pop)
+	("".replace,[/^\/\*/, ""])
+	("".replace,[/\*\/$/, ""])
+	("".split,[/\n/])
+	([].slice,[1,-1]);
+	return a;
+})([])
+
+
+
+
+
+
+
