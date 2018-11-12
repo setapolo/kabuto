@@ -163,5 +163,36 @@ s=[1,2,3,4,5].map(function(c,i,a){
 console.log(s);
 console.log(aa);
 
+(function(s){
+	s=s.split(/\n/).slice(1,-1).map(function(c,i,a){return c.split(",").map(function(c,i,a){return "("+c+")"});})
+	console.log("sec0:",s);
+}(
+	(function(){
+/*
+1,2,3,4,5
+a,b,c,d,e
+1,2,3,4,5
+a,b,c,d,e
+*/
+	}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
+));
+
+
+
+(function(s){
+	s = [1,2,3,4,5].map(function(c,i,a){
+		return function(){return c}	
+	});
+	s = (function(){f = function(){return f};
+		return f})()()()()()()
+	console.log("sec0:",s);
+}(
+	(function(){
+/*
+1,2,3,4,5
+*/
+	}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
+));
+
 
 
