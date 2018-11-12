@@ -134,3 +134,34 @@ a,b,c,d,e
 */
 	}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
 ));
+
+var a=[];
+s=(function(s){
+	console.log("reel_2",s)
+	a=[s];
+	var f=function(s){
+		a=a.concat(s);
+		console.log("reel_2_2",s)
+		return f};
+	return f;
+})(1)(2)(3)(4)(5);
+console.log(s);
+console.log(a);
+
+
+
+var aa=[];
+s=[1,2,3,4,5].map(function(c,i,a){
+	var f=function(s){
+		aa=aa.concat(c);
+		console.log("reel_3",c,aa)
+		return f};
+	return f;
+}).map(function(c,i,a){
+	return c.call(1,2);
+})
+console.log(s);
+console.log(aa);
+
+
+
