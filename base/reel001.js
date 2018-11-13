@@ -52,10 +52,35 @@ var Planaria=(function(a){
 				return (c)?f:a;
 			}
 			return f;
-		})
+		});
 var a=Planaria([])(1)(2)(3)(4)(5)();
-a=Planaria(a)(6)(7)(8)()
-console.log("base",a)
+a=Planaria(a)(6)(7)(8)();
+console.log("base#2",a);
+
+//Planaria #3 test
+_=(function(a){
+			var f = function(c){
+				(c)? a = a.concat(c):null;
+				return (c)?f:a;
+			}
+			return f;
+		});
+
+a=_([])(1)(2)(3)(4)(5)(/**/);
+a=_(a)(6)(7)(8)(/**/);
+console.log("base#3",a);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
