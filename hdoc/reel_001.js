@@ -77,24 +77,56 @@ console.log(sss);
 );
 
 //normalization
-
-(function(a){
-	(function(){
-		var f = function(){
-			return f;
-		};
-		return f;
+(function(f){
+	var s = (function(){
+	/*
+	 <tr id="word1">  
+	    <td>word2</td>
+	    <td width = "20%">
+	      <div class="float-right">
+	        <input type="button" onClick="rec_start('word1','word2');" value="rec"　>
+	      </div>
+	    </td>
+	  </tr> 
+	*/
 	})
-	([].toString)
-	("".match,[/(?:\/\*(?:[\s\S]*?)\*\/)/])
-	([].pop)
-	("".replace,[/^\/\*/, ""])
-	("".replace,[/\*\/$/, ""])
-	("".split,[/\n/])
-	([].slice,[1,-1]);
-	return a;
-})([])
+	console.log("sec1:",f);
+	console.log("sec1:",[].toString.call([1,2,3,4]));
+	s = f[0][0].apply(s);
+	console.log("arg1:",""+s);
+	s = f[1][0].apply(s,f[1][1]);
+	console.log("arg2:",""+s);
+	s = f[2][0].apply(s,f[2][1]);
+	console.log("arg3:",""+s);
+	s = f[3][0].apply(s,f[3][1]);
+	console.log("arg4:",""+s);
+	s = f[4][0].apply(s,f[4][1]);
+	console.log("arg5:",""+s);
+	s = f[5][0].apply(s,f[5][1]);
+	console.log("arg6:",""+s);
+	s = f[6][0].apply(s,f[6][1]);
+	console.log("arg7:",""+s);
 
+})(
+	(function(a){
+		(function(){
+			a=[arguments];
+			var f = function(){
+				a=a.concat(arguments);
+				return f;
+			};
+			return f;
+		})
+		(arguments.callee.toString)
+		("".match,[/(?:\/\*(?:[\s\S]*?)\*\/)/])
+		([].pop)
+		("".replace,[/^\/\*/, ""])
+		("".replace,[/\*\/$/, ""])
+		("".split,[/\n/])
+		([].slice,[1,-1]);
+		return a;
+	})([])
+);
 
 
 
