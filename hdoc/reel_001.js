@@ -206,7 +206,7 @@ console.log(sss);
 	console.log("sec2_2:",s);
 })(
 	(function(){
-/*
+/* hdoc palne
  <tr id="word1">  
     <td>word2</td>
     <td width = "20%">
