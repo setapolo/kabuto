@@ -128,7 +128,50 @@ console.log(sss);
 	})([])
 );
 
-
+//normalization
+(function(f){
+//heredoc plane
+	var s = (function(){
+/*
+ <tr id="word1">  
+    <td>word2</td>
+    <td width = "20%">
+      <div class="float-right">
+        <input type="button" onClick="rec_start('word1','word2');" value="rec"　>
+      </div>
+    </td>
+  </tr> 
+*/
+	})
+	var HEAD=0,TAIL=1;
+	var sss = f.map(function(c,i,a){
+		s = c[HEAD].apply(s,c[TAIL]);
+	})
+	console.log("sec1:",sss);
+	console.log("sec1:",s);
+})(
+	(function(a){
+//function array plane
+		(function(){
+			a=[arguments];
+			var f = function(){
+				a=a.concat(arguments);
+				return f;
+			};
+			return f;
+		})
+		(arguments.callee.toString)
+		("".match,[/(?:\/\*(?:[\s\S]*?)\*\/)/])
+		([].pop)
+		("".replace,[/^\/\*/, ""])
+		("".replace,[/\*\/$/, ""])
+		("".split,[/\n/])
+		([].slice,[1,-1])
+		([].join,["\n"])
+		;
+		return a;
+	})([])
+);
 
 
 
