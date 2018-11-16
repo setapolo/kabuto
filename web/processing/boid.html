@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boid</title>
+  <style>
+    canvas:focus {
+      outline: none;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"></script>
+</head>
+<body>
+  <script type="text/processing">
+    var SPEED = 4; // 移動量
+    var R = 10; // 半径
+    var NUMBER = 10;
+
+    var r1 = 1; // パラメータ：群れの中心に向かう度合
+    var r2 = 0.8; // パラメータ：仲間を避ける度合
+    var r3 = 0.1; // パラメータ：群れの平均速度に合わせる度合
+
+    var CENTER_PULL_FACTOR = 300;
+    var DIST_THRESHOLD = 30;
+
+    var birds = [];
+
+    function getRandom(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    void setup(){
+      size(document.body.offsetWidth, document.body.offsetHeight);
+      frameRate(20);
+      noFill();
+      stroke(255, 255, 255);
+
+      var angle = TWO_PI / NUMBER;
+      for(var i = 1; i <= NUMBER; i++) {
+        var addx = Math.cos(angle*i);
+        var addy = Math.sin(angle*i);
+        birds.push(new Bird(
+          width / 2 + addx*50, height / 2 + addy*50,
+          getRandom(-SPEED,SPEED)*addx, getRandom(-SPEED,SPEED)*addy,
+          i-1,birds
+        ));
+      }
+    }
+
+    void draw() {
+      background(0);
+      for(var i = 0; i < NUMBER; i++){
+        birds[i].draw();
+      }
+    }
+
+    /**
+     * Bird Constructor
+     * @param {int} x      current position
+     * @param {int} y      current position
+     * @param {int} vx     移動量
+     * @param {int} vy     移動量
+     * @param {int} id     id
+     */
+    var Bird = function(x, y, vx, vy, id, others){
+      this.x = x;
+      this.y = y; // x,y: Birdインスタンスの現在の位置
+      this.vx = vx;
+      this.vy = vy; // vx, vy: 移動量
+      this.id = id; // 個体を識別するid
+      this.others = others;
+      this.v1 = new PVector();
+      this.v2 = new PVector();
+      this.v3 = new PVector(); // 移動量を決定する要素
+    }
+
+    Bird.prototype.update = function() {
+      this.vx += r1*this.v1.x + r2*this.v2.x + r3*this.v3.x;
+      this.vy += r1*this.v1.y + r2*this.v2.y + r3*this.v3.y;
+
+      var movement = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+      if(movement > SPEED) {
+        this.vx = (this.vx / movement) * SPEED;
+        this.vy = (this.vy / movement) * SPEED;
+      }
+
+      this.x += this.vx;
+      this.y += this.vy;
+
+      this.collide();
+    }
+
+    // 壁との衝突を計算する
+    Bird.prototype.collide = function() {
+      if (this.x - R <= 0) {
+        this.x = R;
+        this.vx *= -1;
+      }
+      if (this.x + R >= width) {
+        this.x = width - R;
+        this.vx *= -1;
+      }
+
+      if (this.y - R <= 0) {
+        this.y = R;
+        this.vy *= -1;
+      }
+      if (this.y + R >= height) {
+        this.y = height - R;
+        this.vy *= -1;
+      }
+    }
+
+    Bird.prototype.clearVector = function() {
+      this.v1.set(0,0);
+      this.v2.set(0,0);
+      this.v3.set(0,0);
+    }
+
+    Bird.prototype.draw = function() {
+      this.clearVector();
+      this.check();
+      this.update();
+      ellipse(this.x, this.y, R * 2, R * 2);
+      line(this.x, this.y, this.x + this.vx * 3 , this.y + this.vy * 3);
+    }
+
+    Bird.prototype.check = function() {
+      this.center();
+      this.avoid();
+      this.average();
+    }
+
+    // 群れの中心に向かう移動量
+    Bird.prototype.center = function() {
+      for(var i = 0, other; other = this.others[i]; i++){
+        if(this.id == other.id) continue;
+        this.v1.x += other.x;
+        this.v1.y += other.y;
+      }
+
+      this.v1.x /= (NUMBER - 1);
+      this.v1.y /= (NUMBER - 1);
+
+      this.v1.x = (this.v1.x - this.x) / CENTER_PULL_FACTOR
+      this.v1.y = (this.v1.y - this.y) / CENTER_PULL_FACTOR
+    };
+
+   // 仲間を避ける
+    Bird.prototype.avoid = function() {
+      for(var i = 0, other; other = this.others[i]; i++){
+        if(this.id == other.id) continue;
+        if(dist(this.x, this.y, other.x, other.y) < DIST_THRESHOLD) {
+          this.v2.x -= (other.x - this.x);
+          this.v2.y -= (other.y - this.y);
+        }
+      }
+    };
+
+    // 群れの平均速度に合わせる
+    Bird.prototype.average = function() {
+      for(var i = 0, other; other = this.others[i]; i++){
+        if(this.id == other.id) continue;
+        this.v3.x += other.vx;
+        this.v3.y += other.vy;
+      }
+
+      this.v3.x /= (NUMBER - 1);
+      this.v3.y /= (NUMBER - 1);
+
+      this.v3.x = (this.v3.x - this.vx)/2;
+      this.v3.y = (this.v3.y - this.vy)/2;
+    };
+  </script>
+  <canvas></canvas>
+</body>
+</html>

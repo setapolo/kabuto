@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JavascriptでPDF</title>
+<script src='pdfmake.min.js'></script>
+<script src='vfs_fonts.js'></script>
+<script>
+ 
+</script>
+</head>
+ 
+<body>
+<script>
+ 
+  // ここでフォントを指定
+  pdfMake.fonts = {
+      GenShin: {
+        normal: 'GenShinGothic-Normal-Sub.ttf',
+        bold: 'GenShinGothic-Normal-Sub.ttf',
+        italics: 'GenShinGothic-Normal-Sub.ttf',
+        bolditalics: 'GenShinGothic-Normal-Sub.ttf'
+      }
+    }
+ 
+  var table_content = {
+    table: {
+      widths: '*',
+      body: [
+        []
+      ]
+    }
+  };
+  var table_head = ['見出し1','見出し2','見出し3'];
+  var head_tr = [];
+  for( let v of table_head ){
+    head_tr.push({
+      text: v,
+      fillColor: '#dddddd',
+      style: ["tableHeader", "tableCell"]
+    });
+  };
+  table_content["table"]["body"][0] = head_tr;
+  var table_body = [
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ['value1','value2','value3'],
+    ]
+  ;
+  for( let a of table_body ){
+    var tr = [];
+    for( let v of a ){
+      tr.push({
+        text: v,
+        fillColor: '#fff',
+        style: ["tableCell"]
+      });
+    };
+    table_content["table"]["body"].push(tr);
+  };
+  pdfMake.createPdf(
+    {
+    content: [{
+      text: "テキストも追加できます\n\n"},
+      table_content,
+      {text: "\n\nテーブルの後ろに追加してみました。"}
+    ],
+    defaultStyle:{
+      font: 'GenShin'//ここでデフォルトのスタイル名を指定しています。
+    }
+  }).download("ファイル名.pdf");
+ 
+</script>
+</body>
+</html>
