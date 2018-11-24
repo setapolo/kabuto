@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<canvas id="d" style="background-color:yellow;">
+</canvas>
+</body>
+</html>
+<script type="text/javascript">
+<!--
+(function(aa){
+	console.log("base2",aa)
+	var a = aa[0];
+	var b = aa[1];
+	console.log("base2",Math.sqrt(Math.pow(a,2)+Math.pow(b,2)));
+	console.log("base2",[[0,a],[b,a]]);
+	console.log("base2",[[b,a],[b,0]]);
+
+	var canvas = document.getElementById('d');
+	if (canvas.getContext) {
+		var context = canvas.getContext('2d');
+		  context.beginPath();
+		  context.moveTo(10, 10);
+		  context.lineTo(10,a*30);
+		  context.lineTo(b*30,a*30);
+		  context.closePath();
+		  context.stroke();
+	} 
+
+})(
+	(function(a){
+		(function(i){
+			a = a.concat(i); 
+			var f=function(i){
+				a = a.concat(i); 
+				return f;
+			};
+			return f;
+		})(3)(4);
+		return a;
+	})([])	
+);
+//-->
+</script>
+
