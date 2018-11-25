@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+</head>
+<body>
+  <canvas id="d" width="450" height="200"></canvas>
+</body>
+</html>
+<script>
+(function(a){
+
+  var d = document.getElementById("d");
+  var cx = d.getContext("2d");
+  cx.strokeStyle="blue";  
+  cx.fillStyle="red";     
+  (function(r,st,ed,anti){
+      a.map(function(c,i,a){
+        (function(x,y){
+          cx.beginPath();
+          cx.arc(x,y,r,st,ed,anti);
+          cx.fill();
+        })(c[0],c[1]);
+      })    
+  })(2,0,Math.PI*2,false);
+})(
+(" ".repeat(360).split("").map(function(c,i,a){
+    var x = Math.floor(Math.cos(i*Math.PI/180)*60+100);
+    var y = Math.floor(Math.sin(i*Math.PI/180)*60+100);
+    return [x,y];
+  }))
+);
+
+
+</script>
