@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+</head>
+<body>
+  <canvas id="d" width="450" height="150"></canvas>
+</body>
+</html>
+<script>
+(function(a){
+  var d = document.getElementById("d");
+  var cx = d.getContext("2d");
+  cx.strokeStyle="blue";  
+  cx.fillStyle="red";     
+  (function(r,st,ed,anti){
+      a.map(function(c,i,a){
+        (function(x,y){
+          cx.beginPath();
+          cx.arc(x,y,r,st,ed,anti);
+          cx.fill();
+        })(c[0],c[1]);
+      })    
+  })(2,0,Math.PI*2,false);
+})(
+
+(function(r,ox,oy){
+  return (function(aa){
+    console.log(arguments);
+    var f=function(c){
+      var a=[Math.floor(c)];
+      console.log("x:",a);
+      return (c)?(function(c){
+        a=a.concat(Math.floor(c));
+        aa=aa.concat([a]);
+        console.log("y:",a);
+        console.log("aa:",aa);
+        return (c)?f:aa;
+      }):aa;
+    }
+    return f
+  })
+  ([])
+  (Math.sin(10 * Math.PI / 180)*r+ox)
+  (Math.cos(10 * Math.PI / 180)*r+oy)
+  (Math.sin(20 * Math.PI / 180)*r+ox)
+  (Math.cos(20 * Math.PI / 180)*r+oy)
+  (Math.sin(30 * Math.PI / 180)*r+ox)
+  (Math.cos(30 * Math.PI / 180)*r+oy)
+  (Math.sin(40 * Math.PI / 180)*r+ox)
+  (Math.cos(40 * Math.PI / 180)*r+oy)
+  (Math.sin(90 * Math.PI / 180)*r+ox)
+  (Math.cos(90 * Math.PI / 180)*r+oy)
+  (Math.sin(140 * Math.PI / 180)*r+ox)
+  (Math.cos(140 * Math.PI / 180)*r+oy)
+  (Math.sin(180 * Math.PI / 180)*r+ox)
+  (Math.cos(180 * Math.PI / 180)*r+oy)
+  (Math.sin(270 * Math.PI / 180)*r+ox)
+  (Math.cos(270 * Math.PI / 180)*r+oy)
+  ()
+})(50,100,100)
+);
+</script>

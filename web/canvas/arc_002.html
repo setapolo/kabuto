@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+</head>
+<body>
+  <canvas id="d" width="450" height="150"></canvas>
+</body>
+</html>
+<script>
+
+  var cvs = document.getElementById("d");
+  var ctx = cvs.getContext("2d");
+  ctx.strokeStyle="blue";  
+  ctx.fillStyle="red";     
+
+(function(c,r,st,ed,anti){
+  c.beginPath();
+
+
+  (function(x,y){
+    c.arc(x,y,r,st,ed,anti);
+  })(100,100);
+  (function(x,y){
+    c.arc(x,y,r,st,ed,anti);
+  })(110,110);
+  (function(x,y){
+    c.arc(x,y,r,st,ed,anti);
+  })(120,120);
+
+  c.fill();
+
+})(ctx,4,0,Math.PI*2,false);
+
+ 
+</script>
