@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+</head>
+<body>
+  <canvas id="d" width="450" height="150"></canvas>
+</body>
+</html>
+<script>
+
+  var cvs = document.getElementById("d");
+  var ctx = cvs.getContext("2d");
+  ctx.strokeStyle="blue";  
+  ctx.fillStyle="red";     
+
+  (function(c,x,y,r,st,ed,anti){
+    c.beginPath();
+    c.arc(x,y,r,st,ed,anti);
+    c.fill();
+  })(ctx,100,100,4,0,Math.PI*2,false);
+
+
+ 
+</script>
