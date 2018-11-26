@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://www.chartjs.org/samples/latest/charts/line/basic.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Line Chart</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+	<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+
+	<style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+
+<body style="">
+	<div style="width:75%;"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+		<canvas id="canvas" width="2404" height="1202" class="chartjs-render-monitor" style="display: block; height: 601px; width: 1202px;"></canvas>
+	</div>
+	<br>
+	<br>
+	<script>
+		var timeFormat = 'MM/DD/YYYY HH:mm';
+		window.chartColors = {
+			red: 'rgb(255, 99, 132)',
+			orange: 'rgb(255, 159, 64)',
+			yellow: 'rgb(255, 205, 86)',
+			green: 'rgb(75, 192, 192)',
+			blue: 'rgb(54, 162, 235)',
+			purple: 'rgb(153, 102, 255)',
+			grey: 'rgb(201, 203, 207)'
+		};
+/*
+		// Define a plugin to provide data labels
+		Chart.plugins.register({
+			afterDatasetsDraw: function(chart) {
+				var ctx = chart.ctx;
+
+				chart.data.datasets.forEach(function(dataset, i) {
+					var meta = chart.getDatasetMeta(i);
+					if (!meta.hidden) {
+						meta.data.forEach(function(element, index) {
+							// Draw the text in black, with the specified font
+							ctx.fillStyle = 'rgb(0, 0, 0)';
+
+							var fontSize = 16;
+							var fontStyle = 'normal';
+							var fontFamily = 'Helvetica Neue';
+							ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+							// Just naively convert to string for now
+							var dataString = dataset.data[index].toString();
+
+							// Make sure alignment settings are correct
+							ctx.textAlign = 'center';
+							ctx.textBaseline = 'middle';
+
+							var padding = 5;
+							var position = element.tooltipPosition();
+							ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+						});
+					}
+				});
+			}
+		});
+*/
+
+(function(global) {
+	var Samples = global.Samples || (global.Samples = {});
+	var Color = global.Color;
+	Samples.utils = {
+		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+		srand: function(seed) {
+			this._seed = seed;
+		},
+
+		rand: function(min, max) {
+			var seed = this._seed;
+			min = min === undefined ? 0 : min;
+			max = max === undefined ? 1 : max;
+			this._seed = (seed * 9301 + 49297) % 233280;
+			return min + (this._seed / 233280) * (max - min);
+		},
+
+		numbers: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 1;
+			var from = cfg.from || [];
+			var count = cfg.count || 8;
+			var decimals = cfg.decimals || 8;
+			var continuity = cfg.continuity || 1;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var data = [];
+			var i, value;
+
+			for (i = 0; i < count; ++i) {
+				value = (from[i] || 0) + this.rand(min, max);
+				if (this.rand() <= continuity) {
+					data.push(Math.round(dfactor * value) / dfactor);
+				} else {
+					data.push(null);
+				}
+			}
+
+			return data;
+		},
+
+
+	};
+
+	// DEPRECATED
+	window.randomScalingFactor = function() {
+		return Math.round(Samples.utils.rand(-100, 100));
+	};
+
+	// INITIALIZATION
+	Samples.utils.srand(Date.now());
+
+}(this));
+
+		function newDate(days) {
+			return moment().add(days, 'd').toDate();
+		}
+
+		function newDateString(days) {
+			return moment().add(days, 'd').format(timeFormat);
+		}
+
+		var color = Chart.helpers.color;
+		var config = {
+			type: 'line',
+			data: {
+				labels: [ // Date Objects
+					newDate(0),
+					newDate(1),
+					newDate(2),
+					newDate(3),
+					newDate(4),
+					newDate(5),
+					newDate(6)
+				],
+				datasets: [{
+					label: 'My First dataset',
+					backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.red,
+					fill: false,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'My Second dataset',
+					backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.blue,
+					fill: false,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'Dataset with point data',
+					backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.green,
+					fill: false,
+					data: [{
+						x: newDateString(0),
+						y: randomScalingFactor()
+					}, {
+						x: newDateString(5),
+						y: randomScalingFactor()
+					}, {
+						x: newDateString(7),
+						y: randomScalingFactor()
+					}, {
+						x: newDateString(15),
+						y: randomScalingFactor()
+					}],
+				}]
+			},
+			options: {
+				title: {
+					text: 'Chart.js Time Scale'
+				},
+				tooltips: {
+					mode: 'index',
+					callbacks: {
+						// Use the footer callback to display the sum of the items showing in the tooltip
+						footer: function(tooltipItems, data) {
+							var sum = 0;
+
+							tooltipItems.forEach(function(tooltipItem) {
+								sum += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+							});
+							return '11/24 模試: ' + sum;
+						},
+					},
+					footerFontStyle: 'normal'
+				},
+				scales: {
+					xAxes: [{
+						type: 'time',
+						time: {
+							format: timeFormat,
+							// round: 'day'
+							tooltipFormat: 'll HH:mm'
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						}
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'value'
+						}
+					}]
+				},
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myLine = new Chart(ctx, config);
+
+		};
+
+
+
+		var colorNames = Object.keys(window.chartColors);
+
+	</script>
+
+
+
+</body></html>
