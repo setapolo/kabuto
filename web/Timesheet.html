@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)https://sbstjn.com/timesheet.js/ -->
+<html>
+   <head>
+        <style>
+.timesheet{width:720px;height:292px;margin:0 auto}.timesheet{border-top:1px solid rgba(250,250,250,.5);background-color:#333;position:relative}.timesheet.color-scheme-default .bubble-default{background-color:RGBA(252,70,74,1)}.timesheet.color-scheme-default .bubble-lorem{background-color:RGBA(154,202,39,1)}.timesheet.color-scheme-default .bubble-ipsum{background-color:RGBA(60,182,227,1)}.timesheet.color-scheme-default .bubble-dolor{background-color:RGBA(244,207,48,1)}.timesheet.color-scheme-default .bubble-sit{background-color:RGBA(169,105,202,1)}.timesheet.color-scheme-alternative .bubble-default{background-color:#f3552e}.timesheet.color-scheme-alternative .bubble-lorem{background-color:#88c33a}.timesheet.color-scheme-alternative .bubble-ipsum{background-color:#436ae0}.timesheet.color-scheme-alternative .bubble-dolor{background-color:#f4d234}.timesheet.color-scheme-alternative .bubble-sit{background-color:#707d86}.timesheet .scale{height:100%;position:absolute;top:0;left:0;float:left}.timesheet .scale section{float:left;width:59px;text-align:center;color:rgba(250,250,250,.8);font-family:signika negative;font-size:13px;line-height:24px;font-weight:lighter;border-left:1px dashed rgba(250,250,250,.2);height:100%}.timesheet .data{margin:28px 0 0;padding:0;text-align:left;list-style-type:none;color:rgba(250,250,250,.8);font-family:signika negative;font-size:13px;overflow:hidden}.timesheet .data li{margin:0 0 3px;line-height:22px;height:21px;display:block;clear:both;position:relative;white-space:nowrap}.timesheet .data li:hover .bubble{opacity:1}.timesheet .data li .date{color:#b5b5b5;font-size:14px}.timesheet .data li .label{font-weight:lighter;font-size:14px;padding-left:5px;line-height:21px;color:#979796;white-space:nowrap}.timesheet .data li .bubble{width:24px;height:7px;display:block;float:left;position:relative;top:7px;border-radius:4px;margin:0 10px 0 0;opacity:.7}#timesheet-alternative{background-color:RGBA(247,247,247,1);border-radius:5px}#timesheet-alternative section{color:RGBA(63,68,72,1);border-left:1px dashed RGBA(63,68,72,.2)}#timesheet-alternative section:first-child{border-left:1px dashed transparent}#timesheet-alternative .date{display:none}#timesheet-alternative .bubble{margin-right:7px}#timesheet-alternative .label{padding-left:0;color:RGBA(48,48,48,1)}
+        </style>
+        <style>
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block}audio,canvas,video{display:inline-block}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html,body,p,ul,li,h1,h2,h3,h4,h5,img,fieldset,input,textarea,select{margin:0;padding:0;border:0}a:focus{outline:0}a:active,a:hover{outline:0}h1{font-size:2em}h2{font-size:1em}strong{font-weight:700}dfn{font-style:italic}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}q{quotes:"“" "”" "‘" "’"}small{font-size:80%}sub{font-size:75%;line-height:0;position:relative;vertical-align:baseline;bottom:-.25em}sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;top:-.5em}img{border:0}legend{border:0;padding:0}button,input,select,textarea{font-size:100%}textarea,input{outline:0}input{line-height:normal}ul,ul li{list-style-type:none;margin:0;padding:0}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}html,body{margin:0;padding:0;width:100%;height:100%}*{transition:all .5s ease}body.black{background-color:#3d3d3d}body.white{background-color:#e6e6e6}#box{width:100%;height:100%}#box-inner{height:100%;text-align:center;vertical-align:middle}h1{font-family:open sans;font-size:60pt;font-weight:800;line-height:240px}p{width:680px;text-align:left;font-family:open sans;font-weight:400;margin:20px auto;line-height:24px}code pre{margin:0 auto;width:670px;padding:10px 8px;font-family:oxygen mono;font-size:11px;font-weight:600}code,pre{text-align:left}.footer{margin-top:65px;text-align:center;font-size:12px;font-weight:300}.footer a{font-weight:300}.footer a,.footer a:hover,.footer a:active,.footer a:visited{font-weight:300}a,a:hover,a:visited,a:active{font-weight:600;text-decoration:none}.center{text-align:center}.white h1{color:RGBA(29,175,234,1)}.white p{color:#646464}.white p span{color:RGBA(29,175,234,1);font-weight:600}.white code pre{color:#282828;background-color:#fafafa}.white .footer{color:#646464}.white .footer a{color:#646464}.white .footer span a{color:RGBA(29,175,234,1)}.black h1{color:#ff9112}.black p{color:#dcdcdc}.black code pre{background-color:#646464;color:#bebebe}.black a,.black a:hover,.black a:visited,.black a:active,.black p span{color:#ff9112}.black .footer{color:#646464}.black .footer a{color:#646464}.black .footer span a{color:#ff9112}.black #example-data{margin:0 auto;width:680px;height:300px;background-color:#646464}.black #example-data p{text-align:right;font-size:12px}.black #example-data p a{color:#ff9112;text-decoration:none}.black .version{font-size:12px;line-height:17px;margin:80px auto}.black .version a,.black .version a:visited,.black .version a:hover,.black .version a:active{font-family:open sans;color:#ff9112;text-decoration:none}.black .version span{font-weight:600;color:#fff}.black .version span{color:#ff9112;font-weight:600}
+        </style>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title></title>
+      <meta content="IE=edge,chrome=1" 'http-equiv'="X-UA-Compatible">
+      <link rel="stylesheet" type="text/css" href="./Timesheet.js - Beautiful time tables with HTML, JavaScript and CSS …_files/style.css">
+   </head>
+   <body class="black" style="">
+      <div id="box">
+         <div id="box-inner">
+            <h1>Timesheet<span>.css</span></h1>
+            <div id="timesheet-default" class="timesheet color-scheme-default">
+               <div class="scale">
+                  <section>2002</section>
+                  <section>2003</section>
+                  <section>2004</section>
+                  <section>2005</section>
+                  <section>2006</section>
+                  <section>2007</section>
+                  <section>2008</section>
+                  <section>2009</section>
+                  <section>2010</section>
+                  <section>2011</section>
+                  <section>2012</section>
+                  <section>2013</section>
+               </div>
+               <ul class="data">
+                  <li><span style="margin-left: 0px; width: 45px;" class="bubble bubble-lorem" data-duration="6"></span><span class="date">2002-09/2002</span> <span class="label">A freaking awesome time</span></li>
+                  <li><span style="margin-left: 25px; width: 80px;" class="bubble bubble-ipsum" data-duration="12"></span><span class="date">06/2002-09/2003</span> <span class="label">Some great memories</span></li>
+                  <li><span style="margin-left: 60px; width: 60px;" class="bubble bubble-default" data-duration=""></span><span class="date">2003</span> <span class="label">Had very bad luck</span></li>
+                  <li><span style="margin-left: 105px; width: 135px;" class="bubble bubble-dolor" data-duration="21"></span><span class="date">10/2003-2006</span> <span class="label">At least had fun</span></li>
+                  <li><span style="margin-left: 185px; width: 80px;" class="bubble bubble-ipsum" data-duration="12"></span><span class="date">02/2005-05/2006</span> <span class="label">Enjoyed those times as well</span></li>
+                  <li><span style="margin-left: 210px; width: 15px;" class="bubble bubble-default" data-duration="2"></span><span class="date">07/2005-09/2005</span> <span class="label">Bad luck again</span></li>
+                  <li><span style="margin-left: 225px; width: 135px;" class="bubble bubble-dolor" data-duration="21"></span><span class="date">10/2005-2008</span> <span class="label">For a long time nothing happened</span></li>
+                  <li><span style="margin-left: 360px; width: 85px;" class="bubble bubble-lorem" data-duration="12"></span><span class="date">01/2008-05/2009</span> <span class="label">LOST Season #4</span></li>
+                  <li><span style="margin-left: 420px; width: 25px;" class="bubble bubble-sit" data-duration="3"></span><span class="date">01/2009-05/2009</span> <span class="label">LOST Season #4</span></li>
+                  <li><span style="margin-left: 485px; width: 20px;" class="bubble bubble-lorem" data-duration="2"></span><span class="date">02/2010-05/2010</span> <span class="label">LOST Season #5</span></li>
+                  <li><span style="margin-left: 400px; width: 110px;" class="bubble bubble-ipsum" data-duration="16"></span><span class="date">09/2008-06/2010</span> <span class="label">FRINGE #1 &amp; #2</span></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+
+   </body>
+</html>
