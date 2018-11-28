@@ -1,0 +1,769 @@
+
+<!-- saved from url=(0071)https://cdn.rawgit.com/DKirwan/calendar-heatmap/master/example/_v3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>D3.js Calendar Heatmap</title>
+        <style>
+text.month-name,
+text.calendar-heatmap-legend-text,
+text.day-initial {
+  font-size: 10px;
+  fill: inherit;
+  font-family: Helvetica, arial, 'Open Sans', sans-serif;
+}
+rect.day-cell:hover {
+  stroke: #555555;
+  stroke-width: 1px;
+}
+.day-cell-tooltip {
+  position: absolute;
+  z-index: 9999;
+  padding: 5px 9px;
+  color: #bbbbbb;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 3px;
+  text-align: center;
+}
+.day-cell-tooltip > span {
+  font-family: Helvetica, arial, 'Open Sans', sans-serif
+}
+.calendar-heatmap {
+  box-sizing: initial;
+}
+
+        </style>
+
+  </head>
+  <body>
+  <div class="container" style="position: relative;">
+   <svg width="750" class="calendar-heatmap" height="110" style="padding: 36px;">
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="0" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dfeaea" x="0" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="0" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="0" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c6dada" x="0" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#adc9ca" x="0" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="0" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="13" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="13" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#abc8c9" x="13" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#98bcbd" x="13" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9cbfbf" x="13" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a9c7c7" x="13" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="13" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="26" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9fc0c1" x="26" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8ab3b4" x="26" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="26" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a1c1c2" x="26" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="26" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="26" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="39" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dde8e8" x="39" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8cb4b5" x="39" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#98bcbd" x="39" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dbe7e7" x="39" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="39" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="39" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="52" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#96bbbc" x="52" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b8d0d1" x="52" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="52" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b3cdce" x="52" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#90b7b8" x="52" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="52" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="65" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d9e6e6" x="65" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#cadcdd" x="65" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c8dbdb" x="65" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ccdede" x="65" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="65" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="65" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="78" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#adc9ca" x="78" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#94b9ba" x="78" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#79a8a9" x="78" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#86b0b1" x="78" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b8d0d1" x="78" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="78" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="91" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#adc9ca" x="91" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="91" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="91" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#83afb0" x="91" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b3cdce" x="91" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="91" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="104" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#96bbbc" x="104" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a1c1c2" x="104" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="104" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="104" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c2d7d7" x="104" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="104" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="117" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#afcbcb" x="117" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#88b1b2" x="117" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d7e4e4" x="117" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8ab3b4" x="117" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8eb5b6" x="117" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="117" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="130" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9abdbe" x="130" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="130" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#98bcbd" x="130" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#cadcdd" x="130" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="130" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="130" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="143" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bcd3d3" x="143" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="143" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7ba9aa" x="143" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a5c4c5" x="143" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#abc8c9" x="143" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="143" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="156" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c8dbdb" x="156" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dfeaea" x="156" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9fc0c1" x="156" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="156" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#79a8a9" x="156" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="156" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="169" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#96bbbc" x="169" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#83afb0" x="169" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#90b7b8" x="169" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="169" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9abdbe" x="169" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="169" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="182" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c8dbdb" x="182" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a7c5c6" x="182" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#94b9ba" x="182" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c8dbdb" x="182" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#90b7b8" x="182" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="182" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="195" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#94b9ba" x="195" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#90b7b8" x="195" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8cb4b5" x="195" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bcd3d3" x="195" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#81adae" x="195" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="195" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="208" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b3cdce" x="208" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#90b7b8" x="208" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="208" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#abc8c9" x="208" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c0d6d6" x="208" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="208" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="221" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d5e3e3" x="221" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9cbfbf" x="221" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d5e3e3" x="221" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#94b9ba" x="221" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="221" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="221" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="234" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#83afb0" x="234" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="234" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#98bcbd" x="234" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b3cdce" x="234" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#90b7b8" x="234" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="234" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="247" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9abdbe" x="247" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#94b9ba" x="247" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#cadcdd" x="247" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="247" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b5cfcf" x="247" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="247" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="260" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="260" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d7e4e4" x="260" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dfeaea" x="260" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dbe7e7" x="260" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#79a8a9" x="260" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="260" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="273" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a1c1c2" x="273" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="273" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#94b9ba" x="273" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#adc9ca" x="273" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="273" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="273" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="286" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b8d0d1" x="286" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8cb4b5" x="286" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#afcbcb" x="286" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="286" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="286" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="286" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="299" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#79a8a9" x="299" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a1c1c2" x="299" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c0d6d6" x="299" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="299" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9fc0c1" x="299" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="299" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="312" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c2d7d7" x="312" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="312" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dfeaea" x="312" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#92b8b9" x="312" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a1c1c2" x="312" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="312" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="325" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ccdede" x="325" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="325" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dfeaea" x="325" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#79a8a9" x="325" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#88b1b2" x="325" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="325" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="338" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c4d8d9" x="338" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8cb4b5" x="338" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c0d6d6" x="338" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d3e2e2" x="338" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b8d0d1" x="338" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="338" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="351" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d5e3e3" x="351" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="351" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#88b1b2" x="351" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#92b8b9" x="351" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7ba9aa" x="351" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="351" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="364" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#96bbbc" x="364" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bcd3d3" x="364" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="364" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9cbfbf" x="364" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d5e3e3" x="364" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="364" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="377" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="377" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="377" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#afcbcb" x="377" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8ab3b4" x="377" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="377" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="377" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="390" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dfeaea" x="390" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a7c5c6" x="390" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a1c1c2" x="390" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7facad" x="390" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="390" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="390" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="403" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#79a8a9" x="403" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b3cdce" x="403" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b8d0d1" x="403" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="403" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d1e0e1" x="403" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="403" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="416" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="416" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9fc0c1" x="416" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="416" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="416" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#cedfdf" x="416" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="416" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="429" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#92b8b9" x="429" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#90b7b8" x="429" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b5cfcf" x="429" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#afcbcb" x="429" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d9e6e6" x="429" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="429" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="442" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a7c5c6" x="442" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c2d7d7" x="442" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#abc8c9" x="442" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8cb4b5" x="442" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c2d7d7" x="442" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="442" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="455" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#92b8b9" x="455" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#cedfdf" x="455" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d9e6e6" x="455" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="455" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="455" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="455" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="468" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c2d7d7" x="468" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9cbfbf" x="468" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9cbfbf" x="468" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#98bcbd" x="468" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="468" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="468" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="481" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dbe7e7" x="481" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a9c7c7" x="481" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#92b8b9" x="481" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="481" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c6dada" x="481" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="481" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="494" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dbe7e7" x="494" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d3e2e2" x="494" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="494" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ccdede" x="494" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c8dbdb" x="494" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="494" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="507" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#92b8b9" x="507" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8ab3b4" x="507" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d9e6e6" x="507" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9fc0c1" x="507" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#abc8c9" x="507" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="507" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="520" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="520" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7facad" x="520" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7ba9aa" x="520" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#92b8b9" x="520" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#96bbbc" x="520" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="520" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="533" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c2d7d7" x="533" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7ba9aa" x="533" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a9c7c7" x="533" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="533" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a5c4c5" x="533" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="533" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e5eeee" x="546" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d7e4e4" x="546" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="546" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a3c3c3" x="546" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a7c5c6" x="546" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d5e3e3" x="546" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="546" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e3ecec" x="559" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8ab3b4" x="559" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bad2d2" x="559" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d3e2e2" x="559" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d3e2e2" x="559" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7ba9aa" x="559" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="559" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="572" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c8dbdb" x="572" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c0d6d6" x="572" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="572" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="572" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d9e6e6" x="572" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="572" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="585" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d7e4e4" x="585" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a9c7c7" x="585" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8cb4b5" x="585" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b8d0d1" x="585" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="585" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="585" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="598" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a3c3c3" x="598" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9fc0c1" x="598" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c0d6d6" x="598" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="598" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#96bbbc" x="598" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="598" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="611" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dbe7e7" x="611" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#81adae" x="611" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b8d0d1" x="611" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#83afb0" x="611" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#d3e2e2" x="611" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="611" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="624" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="624" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#9cbfbf" x="624" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7dabac" x="624" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c4d8d9" x="624" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#8eb5b6" x="624" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="624" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="637" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7ba9aa" x="637" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="637" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="637" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eef3f3" x="637" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bcd3d3" x="637" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ecf2f2" x="637" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e1ebeb" x="650" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#b5cfcf" x="650" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a3c3c3" x="650" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#7facad" x="650" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#96bbbc" x="650" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#dde8e8" x="650" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f0f4f4" x="650" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="663" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#bed4d5" x="663" y="19"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#e7efef" x="663" y="32"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#c0d6d6" x="663" y="45"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#eaf0f0" x="663" y="58"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#a1c1c2" x="663" y="71"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f2f6f6" x="663" y="84"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#f4f7f7" x="676" y="6"></rect>
+      <rect class="day-cell" width="11" height="11" fill="#ccdede" x="676" y="19"></rect>
+      <g>
+         <rect class="calendar-heatmap-legend" width="11" height="11" x="613" y="112" fill="#f4f7f7"></rect>
+         <rect class="calendar-heatmap-legend" width="11" height="11" x="626" y="112" fill="#cbdddd"></rect>
+         <rect class="calendar-heatmap-legend" width="11" height="11" x="639" y="112" fill="#b7d0d0"></rect>
+         <rect class="calendar-heatmap-legend" width="11" height="11" x="652" y="112" fill="#79a8a9"></rect>
+         <text class="calendar-heatmap-legend-text calendar-heatmap-legend-text-less" x="587" y="121">Less</text>
+         <text class="calendar-heatmap-legend-text calendar-heatmap-legend-text-more" x="667" y="121">More</text>
+      </g>
+      <text class="month-name" x="0" y="0">Nov</text>
+      <text class="month-name" x="0" y="0">Dec</text>
+      <text class="month-name" x="65" y="0">Jan</text>
+      <text class="month-name" x="117" y="0">Feb</text>
+      <text class="month-name" x="169" y="0">Mar</text>
+      <text class="month-name" x="234" y="0">Apr</text>
+      <text class="month-name" x="286" y="0">May</text>
+      <text class="month-name" x="338" y="0">Jun</text>
+      <text class="month-name" x="403" y="0">Jul</text>
+      <text class="month-name" x="455" y="0">Aug</text>
+      <text class="month-name" x="507" y="0">Sep</text>
+      <text class="month-name" x="572" y="0">Oct</text>
+      <text class="month-name" x="624" y="0">Nov</text>
+      <text class="day-initial" transform="translate(-8,26)" dy="2" style="text-anchor: middle;">M</text>
+      <text class="day-initial" transform="translate(-8,52)" dy="2" style="text-anchor: middle;">W</text>
+      <text class="day-initial" transform="translate(-8,78)" dy="2" style="text-anchor: middle;">F</text>
+   </svg>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
+    <script>
+function calendarHeatmap() {
+  // defaults
+  var width = 750;
+  var height = 110;
+  var legendWidth = 150;
+  var selector = 'body';
+  var SQUARE_LENGTH = 11;
+  var SQUARE_PADDING = 2;
+  var MONTH_LABEL_PADDING = 6;
+  var now = moment().endOf('day').toDate();
+  var yearAgo = moment().startOf('day').subtract(1, 'year').toDate();
+  var startDate = null;
+  var counterMap= {};
+  var data = [];
+  var max = null;
+  var colorRange = ['#D8E6E7', '#218380'];
+  var tooltipEnabled = true;
+  var tooltipUnit = 'contribution';
+  var legendEnabled = true;
+  var onClick = null;
+  var weekStart = 0; //0 for Sunday, 1 for Monday
+  var locale = {
+    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    No: 'No',
+    on: 'on',
+    Less: 'Less',
+    More: 'More'
+  };
+  var v = Number(d3.version.split('.')[0]);
+
+  // setters and getters
+  chart.data = function (value) {
+    if (!arguments.length) { return data; }
+    data = value;
+
+    counterMap= {};
+
+    data.forEach(function (element, index) {
+        var key= moment(element.date).format( 'YYYY-MM-DD' );
+        var counter= counterMap[key] || 0;
+        counterMap[key]= counter + element.count;
+    });
+
+    return chart;
+  };
+
+  chart.max = function (value) {
+    if (!arguments.length) { return max; }
+    max = value;
+    return chart;
+  };
+
+  chart.selector = function (value) {
+    if (!arguments.length) { return selector; }
+    selector = value;
+    return chart;
+  };
+
+  chart.startDate = function (value) {
+    if (!arguments.length) { return startDate; }
+    yearAgo = value;
+    now = moment(value).endOf('day').add(1, 'year').toDate();
+    return chart;
+  };
+
+  chart.colorRange = function (value) {
+    if (!arguments.length) { return colorRange; }
+    colorRange = value;
+    return chart;
+  };
+
+  chart.tooltipEnabled = function (value) {
+    if (!arguments.length) { return tooltipEnabled; }
+    tooltipEnabled = value;
+    return chart;
+  };
+
+  chart.tooltipUnit = function (value) {
+    if (!arguments.length) { return tooltipUnit; }
+    tooltipUnit = value;
+    return chart;
+  };
+
+  chart.legendEnabled = function (value) {
+    if (!arguments.length) { return legendEnabled; }
+    legendEnabled = value;
+    return chart;
+  };
+
+  chart.onClick = function (value) {
+    if (!arguments.length) { return onClick(); }
+    onClick = value;
+    return chart;
+  };
+
+  chart.locale = function (value) {
+    if (!arguments.length) { return locale; }
+    locale = value;
+    return chart;
+  };
+
+  function chart() {
+
+    d3.select(chart.selector()).selectAll('svg.calendar-heatmap').remove(); // remove the existing chart, if it exists
+
+    var dateRange = ((d3.time && d3.time.days) || d3.timeDays)(yearAgo, now); // generates an array of date objects within the specified range
+    var monthRange = ((d3.time && d3.time.months) || d3.timeMonths)(moment(yearAgo).startOf('month').toDate(), now); // it ignores the first month if the 1st date is after the start of the month
+    var firstDate = moment(dateRange[0]);
+    if (chart.data().length == 0) {
+      max = 0;
+    } else if (max === null) {
+      max = d3.max(chart.data(), function (d) { return d.count; }); // max data value
+    }
+
+    // color range
+    var color = ((d3.scale && d3.scale.linear) || d3.scaleLinear)()
+      .range(chart.colorRange())
+      .domain([0, max]);
+
+    var tooltip;
+    var dayRects;
+
+    drawChart();
+
+    function drawChart() {
+      var svg = d3.select(chart.selector())
+        .style('position', 'relative')
+        .append('svg')
+        .attr('width', width)
+        .attr('class', 'calendar-heatmap')
+        .attr('height', height)
+        .style('padding', '36px');
+
+      dayRects = svg.selectAll('.day-cell')
+        .data(dateRange);  //  array of days for the last yr
+
+      var enterSelection = dayRects.enter().append('rect')
+        .attr('class', 'day-cell')
+        .attr('width', SQUARE_LENGTH)
+        .attr('height', SQUARE_LENGTH)
+        .attr('fill', function(d) { return color(countForDate(d)); })
+        .attr('x', function (d, i) {
+          var cellDate = moment(d);
+          var result = cellDate.week() - firstDate.week() + (firstDate.weeksInYear() * (cellDate.weekYear() - firstDate.weekYear()));
+          return result * (SQUARE_LENGTH + SQUARE_PADDING);
+        })
+        .attr('y', function (d, i) {
+          return MONTH_LABEL_PADDING + formatWeekday(d.getDay()) * (SQUARE_LENGTH + SQUARE_PADDING);
+        });
+
+      if (typeof onClick === 'function') {
+        (v === 3 ? enterSelection : enterSelection.merge(dayRects)).on('click', function(d) {
+          var count = countForDate(d);
+          onClick({ date: d, count: count});
+        });
+      }
+
+      if (chart.tooltipEnabled()) {
+        (v === 3 ? enterSelection : enterSelection.merge(dayRects)).on('mouseover', function(d, i) {
+          tooltip = d3.select(chart.selector())
+            .append('div')
+            .attr('class', 'day-cell-tooltip')
+            .html(tooltipHTMLForDate(d))
+            .style('left', function () { return Math.floor(i / 7) * SQUARE_LENGTH + 'px'; })
+            .style('top', function () {
+              return formatWeekday(d.getDay()) * (SQUARE_LENGTH + SQUARE_PADDING) + MONTH_LABEL_PADDING * 2 + 'px';
+            });
+        })
+        .on('mouseout', function (d, i) {
+          tooltip.remove();
+        });
+      }
+
+      if (chart.legendEnabled()) {
+        var colorRange = [color(0)];
+        for (var i = 3; i > 0; i--) {
+          colorRange.push(color(max / i));
+        }
+
+        var legendGroup = svg.append('g');
+        legendGroup.selectAll('.calendar-heatmap-legend')
+            .data(colorRange)
+            .enter()
+          .append('rect')
+            .attr('class', 'calendar-heatmap-legend')
+            .attr('width', SQUARE_LENGTH)
+            .attr('height', SQUARE_LENGTH)
+            .attr('x', function (d, i) { return (width - legendWidth) + (i + 1) * 13; })
+            .attr('y', height + SQUARE_PADDING)
+            .attr('fill', function (d) { return d; });
+
+        legendGroup.append('text')
+          .attr('class', 'calendar-heatmap-legend-text calendar-heatmap-legend-text-less')
+          .attr('x', width - legendWidth - 13)
+          .attr('y', height + SQUARE_LENGTH)
+          .text(locale.Less);
+
+        legendGroup.append('text')
+          .attr('class', 'calendar-heatmap-legend-text calendar-heatmap-legend-text-more')
+          .attr('x', (width - legendWidth + SQUARE_PADDING) + (colorRange.length + 1) * 13)
+          .attr('y', height + SQUARE_LENGTH)
+          .text(locale.More);
+      }
+
+      dayRects.exit().remove();
+      var monthLabels = svg.selectAll('.month')
+          .data(monthRange)
+          .enter().append('text')
+          .attr('class', 'month-name')
+          .text(function (d) {
+            return locale.months[d.getMonth()];
+          })
+          .attr('x', function (d, i) {
+            var matchIndex = 0;
+            dateRange.find(function (element, index) {
+              matchIndex = index;
+              return moment(d).isSame(element, 'month') && moment(d).isSame(element, 'year');
+            });
+
+            return Math.floor(matchIndex / 7) * (SQUARE_LENGTH + SQUARE_PADDING);
+          })
+          .attr('y', 0);  // fix these to the top
+
+      locale.days.forEach(function (day, index) {
+        index = formatWeekday(index);
+        if (index % 2) {
+          svg.append('text')
+            .attr('class', 'day-initial')
+            .attr('transform', 'translate(-8,' + (SQUARE_LENGTH + SQUARE_PADDING) * (index + 1) + ')')
+            .style('text-anchor', 'middle')
+            .attr('dy', '2')
+            .text(day);
+        }
+      });
+    }
+
+    function pluralizedTooltipUnit (count) {
+      if ('string' === typeof tooltipUnit) {
+        return (tooltipUnit + (count === 1 ? '' : 's'));
+      }
+      for (var i in tooltipUnit) {
+        var _rule = tooltipUnit[i];
+        var _min = _rule.min;
+        var _max = _rule.max || _rule.min;
+        _max = _max === 'Infinity' ? Infinity : _max;
+        if (count >= _min && count <= _max) {
+          return _rule.unit;
+        }
+      }
+    }
+
+    function tooltipHTMLForDate(d) {
+      var dateStr = moment(d).format('ddd, MMM Do YYYY');
+      var count = countForDate(d);
+      return '<span><strong>' + (count ? count : locale.No) + ' ' + pluralizedTooltipUnit(count) + '</strong> ' + locale.on + ' ' + dateStr + '</span>';
+    }
+
+    function countForDate(d) {
+        var key= moment(d).format( 'YYYY-MM-DD' );
+        return counterMap[key] || 0;
+    }
+
+    function formatWeekday(weekDay) {
+      if (weekStart === 1) {
+        if (weekDay === 0) {
+          return 6;
+        } else {
+          return weekDay - 1;
+        }
+      }
+      return weekDay;
+    }
+
+    var daysOfChart = chart.data().map(function (day) {
+      return day.date.toDateString();
+    });
+
+  }
+
+  return chart;
+}
+
+
+// polyfill for Array.find() method
+/* jshint ignore:start */
+if (!Array.prototype.find) {
+  Array.prototype.find = function (predicate) {
+    if (this === null) {
+      throw new TypeError('Array.prototype.find called on null or undefined');
+    }
+    if (typeof predicate !== 'function') {
+      throw new TypeError('predicate must be a function');
+    }
+    var list = Object(this);
+    var length = list.length >>> 0;
+    var thisArg = arguments[1];
+    var value;
+
+    for (var i = 0; i < length; i++) {
+      value = list[i];
+      if (predicate.call(thisArg, value, i, list)) {
+        return value;
+      }
+    }
+    return undefined;
+  };
+}
+/* jshint ignore:end */    	
+
+    </script>
+    <script type="text/javascript">
+      var now = moment().endOf('day').toDate();
+      var yearAgo = moment().startOf('day').subtract(1, 'year').toDate();
+      var chartData = d3.time.days(yearAgo, now).map(function (dateElement) {
+        return {
+          date: dateElement,
+          count: (dateElement.getDay() !== 0 && dateElement.getDay() !== 6) ? Math.floor(Math.random() * 60) : Math.floor(Math.random() * 10)
+        };
+      });
+
+      var heatmap = calendarHeatmap()
+                      .data(chartData)
+                      .selector('.container')
+                      .tooltipEnabled(true)
+                      .colorRange(['#f4f7f7', '#79a8a9'])
+                      .onClick(function (data) {
+                        console.log('data', data);
+                      });
+      heatmap();  // render the chart
+    </script>
+  
+
+</body></html>
