@@ -1,0 +1,45 @@
+<html lang="en" class="wf-omnespro-n5-active wf-omnespro-n3-active wf-omnespro-n2-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+	<div id="d"></div>
+</html>
+<script>
+//rough
+
+
+
+
+var sss = (function(){
+/*
+ <tr id="word1">  
+    <td>word2</td>
+    <td width = "20%">
+      <div class="float-right">
+        <input type="button" onClick="rec_start('word1','word2');" value="rec"　>
+      </div>
+    </td>
+  </tr> 
+*/
+}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
+
+
+	(function(s){
+		console.log("sec1:",s);
+		var ss = s.map(function(c,i,a){
+			return sss.replace(/word1/ig,c[1]).replace(/word2/ig,c[0]);
+		}).join("<br>");
+		ss = '<table id="table_1" border=1 class="table table-striped">' + ss + "</table>";
+		document.getElementById("d").innerHTML=ss;
+	})(
+	(function(aa){
+		aa=`
+		test1,test2,test3
+		test4,test5,test6
+		`.split("\n").slice(1,-1).map(function(c,i,a){return c.split(",")})
+		return aa;	
+	})([])
+	);
+
+
+</script>
