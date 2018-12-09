@@ -127,10 +127,10 @@
 	return f;
 })(1)(2)(3)(4)(5)(6)()()()()()()()()();
 
-//#014_003 function's functions odd even
+//#014_003 function's functions syllogism
 (function(j){
 	console.log("014_003_head"+j);
-	f= (function(i){
+	f=(function(i){
 		console.log("014_003_1 "+j);
 		console.log("i"+i);
 		j++;
@@ -149,11 +149,21 @@
 	return f;
 })(1)(2)(3)(4)(5)(6)()()()()()()()()();
 
-
-
-
-
-
-
+//#015 "Trash Can" model
+var is = (function(rr){//Can part(Choice arena)
+	return function(s){
+		rr['alphabet'] = /^[a-zA-Z]+$/; //Definition Trash(Decision Makers)
+		return (s)?(function(c){
+			return (rr[s])?rr[s].test(c):true;//Function Trash(Solutions)
+		}):rr;
+	}
+})({});
+console.log("#015 Trash Can model",["123456","english"].filter(is("alphabet")));//Data Trash(Problems)
+//#015 add a decision Maker
+var is = (function(rr){
+	rr['number'] = /^[0-9]+$/;//Definition Trash(Decision Makers)
+	return is;
+})(is());
+console.log("#015 Trash Can model",["123456","english"].filter(is("number")));//Data Trash(Problems)
 
 
