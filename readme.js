@@ -5,6 +5,8 @@
 	console.log("",s);
 })("abcdefg")
 ;
+//basic block is defined by anonymous function https://en.wikipedia.org/wiki/Anonymous_function#JavaScript
+
 
 //#001_002 a is Array
 (function(a){
@@ -16,9 +18,9 @@
 )
 ;
 
-//#001_002 j is integer
-(function(j){
-	console.log("",j);
+//#001_003 i is integer
+(function(i){
+	console.log("",i);
 })(
 	(function(s){
 	  return parseInt(s);		
@@ -36,92 +38,79 @@
 )
 ;
 
-//#003_002 test data test trail
+//#003_002 test data test trail sets comment line
 (function(s){
-	console.log("",s);
+	console.log("#003_002",s);
 })(
 	(function(a){
 	  return a.join("");		
-	//})(["a","b","c","d"]);
-	})(["a","b","c","d"])
+//	})([1,2,3,4])//number case
+	})(["a","b","c","d"])//string case
 )
 ;
 
 //#003_003 null trail
 (function(s){
-	console.log("",s);
+	console.log("#003_003",s);
 })(
 	(function(a){
   		return (a) ? a.join(""):null;
-	//})(["a","b","c","d"]);
-	})(null)
+//	})([1,2,3,4])//number case
+//	})(["a","b","c","d"])//string case
+	})(null)//null case
 )
 ;
 
 //#003_004 undefined trail
 (function(s){
 	console.log("003_004",s);
-})(
+})(//input part
 	(function(a){
   		return (a) ? a.join(""):null;
-	//})(["a","b","c","d"]);
-	})(undefined)
+//	})([1,2,3,4])//number case
+//	})(["a","b","c","d"])//string case
+//	})(null)//null case
+	})(undefined)//undefined case
 )
 ;
 
-//#003_005 Nan trail, reduplication
+//004 function double call
 (function(s){
-	console.log("003_005",s);
-})(
-	(function(s){
-	  return (!isNaN(parseInt(s))) ? parseInt(s):null;		
-	//})("1234");
-	//})(null);
-	//})(1234);
-	})("one")
-)
-;
-
-
-
-//#003_006 Nan trail 
-(function(s){
-	console.log("003_006",s);
+	console.log("004",s);
 })(
 	(function(j){
-		return !isNaN(j)?j:null;
-	})(
-		parseInt('one')
-	)
-)
-;
-
-//#004_001 j plus i
-(function(s){
-//	console.log("004_001",s);
-})(
-	(function(j){
-		return function(){
-			j++;
-			console.log("004_001",j);
-			return this;
+		return function(i){
+			return j+i;
 		};
-	})(1)()
+	})(1)(2)
 )
 ;
 
-//#014_001 function's functions
+//#014_001 function's functions, head/body model 
 (function(j){
-	console.log("014_001start"+j);
+	console.log("014_001 head"+j);
 	f= (function(){
-		console.log("014_001a"+j);
+		console.log("014_body"+j);
 		j++;
 		return f
 	});
 	return f;
 })(1)()()()()()()()()()()()()()();
 
-//#014_002 function's functions
+//#014_001 function's functions head/body/tail(null) model
+(function(j){
+	console.log("014_001 head"+j);
+	f= (function(i){
+		console.log("014_body"+j);
+		j++;
+		return (i)?f:null;
+	});
+	return f;
+})(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)();
+
+
+
+//#014_002 function's functions odd even
 (function(j){
 	console.log("014_002start"+j);
 	f= (function(i){
@@ -138,70 +127,28 @@
 	return f;
 })(1)(2)(3)(4)(5)(6)()()()()()()()()();
 
+//#014_003 function's functions odd even
+(function(j){
+	console.log("014_003_head"+j);
+	f= (function(i){
+		console.log("014_003_1 "+j);
+		console.log("i"+i);
+		j++;
+		return function(ii){
+			console.log("014_003_2 "+j);			
+			console.log("ii"+ii);
+			j++;
+			return function(iii){
+				console.log("014_003_3 "+j);			
+				console.log("iii"+iii);
+				j++;
+				return f;	
+			}
+		}
+	});
+	return f;
+})(1)(2)(3)(4)(5)(6)()()()()()()()()();
 
-//#015_001 hdoc
-console.log(
-(function(){
-/*
-comment1
-comment2
-comment3
-*/
-}).toString()
-);
-
-//
-console.log("a"+"("+"b"+")");
-
-console.log(["a","(","b",")"].join(""));
-
-console.log("c(d)".replace(/c/ig,"a").replace(/d/ig,"b"));
-
-console.log("c(d)".
-			replace(/c/ig,"a").
-			replace(/d/ig,"b")
-			);
-
-console.log(["a",["b"]].reduce(
-	function(m,c,i,a){
-		return m+"("+c+")";
-	}
-	)
-);
-
-console.log(["a",["b","c","d"]].reduce(
-	function(m,c,i,a){
-		return m+"("+c+")";
-	}
-	)
-);
-
-console.log(["a","b","c","d"].reduce(
-	function(m,c,i,a){
-		return m+"("+c+")";
-	}
-	)
-);
-
-
-console.log(["a"].reduce(
-	function(m,c,i,a){
-		return m+"("+c+")";
-	}
-	)
-);
-
-
-console.log(["a",["b","c",["d","e"]]].reduce(
-	function(m,c,i,a){
-		return m+"("+c+")";
-	}
-	)
-);
-
-
-
-console.log((false)?(2):(false)?3:1);
 
 
 
