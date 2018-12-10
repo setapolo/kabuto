@@ -45,9 +45,7 @@ console.log(a(20)("random number"));
 console.log(a(20)("others"));
 
 var i = (function(rr){
-	rr["random number"]=function(c,i,a){
-		console.log("a",a);
-		return Math.floor((Math.random()*(a.length))+1)}
+	rr["random number"]=function(c,i,a){return Math.floor((Math.random()*(a.length))+1)};
 	return function(i){
 		return (i)?(function(c){
 			return (rr[c])?rr[c](i,i,a(i)()):i;
@@ -56,5 +54,46 @@ var i = (function(rr){
 })(a())
 console.log(i(20)("random number"));
 console.log(i(20)("others"));
+
+
+(function(rr){
+	rr["log"]=function(s){console.log(s)};
+	(function(s){
+		var f = function(ii){
+			rr[s](ii);
+			return f;	
+		}
+		return f;
+	})("log")(1)(2)(3)(4)
+})({});
+
+
+(function(rr){
+	rr["log"]=function(s){console.log("log:",s);return s};
+	(function(s){
+		var f = function(ii){
+			rr[s](ii);
+			return f;	
+		}
+		return f;
+	})("log")(1)(2)(3)(4)
+
+console.log("result:",
+	"gone".repeat(20).split("o").map(rr["log"])
+)
+
+})({});
+
+console.log("only",
+	(function(rr){
+		rr['number'] = /^[0-9]+/;
+		return function(s){
+			return (s)?(function(c){
+				return (rr[s])?rr[s].exec(c).toString():true;
+			}):rr;
+		}
+	})({})("number")("123456english")
+);
+
 
 
