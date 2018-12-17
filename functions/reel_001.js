@@ -4,6 +4,70 @@
 })(
 );
 
+//#014_001 function's functions, head/body model 
+(function(j){
+	console.log("014_001 head"+j);
+	f= (function(){
+		console.log("014_body"+j);
+		j++;
+		return f
+	});
+	return f;
+})(1)()()()()()()()()()()()()()();
+
+//#014_001 function's functions head/body/tail(null) model
+(function(j){
+	console.log("014_001 head"+j);
+	f= (function(i){
+		console.log("014_body"+j);
+		j++;
+		return (i)?f:null;
+	});
+	return f;
+})(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)();
+
+
+
+//#014_002 function's functions odd even
+(function(j){
+	console.log("014_002start"+j);
+	f= (function(i){
+		console.log("014_002odd"+j);
+		console.log("i"+i);
+		j++;
+		return function(ii){
+			console.log("014_002even"+j);			
+			console.log("ii"+ii);
+			j++;
+			return f;	
+		}
+	});
+	return f;
+})(1)(2)(3)(4)(5)(6)()()()()()()()()();
+
+//#014_003 function's functions syllogism
+(function(j){
+	console.log("014_003_head"+j);
+	f=(function(i){
+		console.log("014_003_1 "+j);
+		console.log("i"+i);
+		j++;
+		return function(ii){
+			console.log("014_003_2 "+j);			
+			console.log("ii"+ii);
+			j++;
+			return function(iii){
+				console.log("014_003_3 "+j);			
+				console.log("iii"+iii);
+				j++;
+				return f;	
+			}
+		}
+	});
+	return f;
+})(1)(2)(3)(4)(5)(6)()()()()()()()()();
+
+
 //base
 (function(s){
 	console.log("base2",s)

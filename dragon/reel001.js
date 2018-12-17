@@ -84,16 +84,6 @@ console.log("result:",
 
 })({});
 
-console.log("only",
-	(function(rr){
-		rr['number'] = /^[0-9]+/;
-		return function(s){
-			return (s)?(function(c){
-				return (rr[s])?rr[s].exec(c).toString():true;
-			}):rr;
-		}
-	})({})("number")("123456english")
-);
 
 
 

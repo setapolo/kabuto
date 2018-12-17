@@ -1,3 +1,14 @@
+//#003_003 null trail
+(function(s){
+	console.log("#003_003:",s);
+})(
+	(function(a){
+  		return (a) ? a.join(""):null;
+//	})([1,2,3,4])//number case
+//	})(["a","b","c","d"])//string case
+	})(null)//null case
+)
+;
 
 //http://bonsaiden.github.io/JavaScript-Garden/
 // c represents object
