@@ -49,10 +49,11 @@ rr = createSVG(rr,"circle")
 </script>
 <script>
 
-(function(svg){
-        target = null;
-        var offsetX = 0;
-        var offsetY = 0;
+(function(rr){
+    var target = null;
+    var offsetX = 0;
+    var offsetY = 0;
+	return function(svg){
         function screenPointToSVGPoint(svg, elem, x, y) {
             const p = svg.createSVGPoint();
             p.x = x;
@@ -68,32 +69,24 @@ rr = createSVG(rr,"circle")
                 e.clientY);
         }
         function mouseDown(e) {
-        	console.log("mouseDown",e);
-        	console.log("mouseDown",e.type);
             const event = (e.type === "mousedown") ? e : e.changedTouches[0];;
             target = event.target;
-        	console.log("target",target);
             const p = mousePointToSVGPoint(event);
             offsetX = p.x - target.getAttribute("cx");
             offsetY = p.y - target.getAttribute("cy");
         }
-
         function mouseUp(e) {
             target = null;
         }
-
         function mouseMove(e) {
-        	console.log("mouseMove",e);
-        	console.log("target",target);
             if (!target) { return; }
             const event = (e.type === "mousemove") ? e : e.changedTouches[0];
             const p = mousePointToSVGPoint(event);
             target.setAttribute("cx", p.x - offsetX);
             target.setAttribute("cy", p.y - offsetY);
         }
-
         (function(c){
-            f = function(){
+            var f = function(){
             	c.addEventListener.apply(c,arguments);
             	return f;
             };
@@ -104,21 +97,29 @@ rr = createSVG(rr,"circle")
 			("mouseup", mouseUp, false)
 			("touchend", mouseUp, false);
 
-        ["ball1","ball2","ball3"].forEach(function (id) {
-            (function(c){
-	            f = function(){
+		var f=function(id){
+			console.log(arguments);
+	        (function(c){
+	            var f = function(){
 	            	c.addEventListener.apply(c,arguments);
 	            	return f;
 	            };
 	            return f;
-            })(document.getElementById(id))
+	        })(document.getElementById(id))
 				("mousedown", mouseDown, false)
 				("touchstart", mouseDown, false)
 				("mousemove", mouseMove, false)
 				("touchmove", mouseMove, false)
 				("mouseup", mouseUp, false)
 				("touchend", mouseUp, false)
-        });
-})(document.getElementById("box_1"))
+			return f;
+		}
+		return 	f;
+	}
+})({})
+(document.getElementById("box_1"))
+	("ball1")
+	("ball2")
+	("ball3")
 
 </script>
