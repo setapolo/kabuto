@@ -49,42 +49,24 @@ rr = createSVG(rr,"circle")
 </script>
 <script>
 
-(function(rr){
-    var target = null;
-    var offsetX = 0;
-    var offsetY = 0;
+var rr=(function(rr){
 	return function(svg){
-        function screenPointToSVGPoint(svg, elem, x, y) {
-            const p = svg.createSVGPoint();
-            p.x = x;
-            p.y = y;
-            const CTM = elem.getScreenCTM();
-            return p.matrixTransform(CTM.inverse());
-        }
-        function mousePointToSVGPoint(e) {
-            return screenPointToSVGPoint(
-                svg,
-                target,
-                e.clientX,
-                e.clientY);
-        }
-        function mouseDown(e) {
+        rr.mouseDown = function(e) {
             const event = (e.type === "mousedown") ? e : e.changedTouches[0];;
-            target = event.target;
-            const p = mousePointToSVGPoint(event);
-            offsetX = p.x - target.getAttribute("cx");
-            offsetY = p.y - target.getAttribute("cy");
-        }
-        function mouseUp(e) {
-            target = null;
-        }
-        function mouseMove(e) {
-            if (!target) { return; }
+            rr.target = event.target;
+            const p = rr.mousePointToSVGPoint(event);
+            rr.offsetX = p.x - rr.target.getAttribute("cx");
+            rr.offsetY = p.y - rr.target.getAttribute("cy");
+        };
+        rr.mouseMove = function (e) {
+            console.log("this is ",this);
+            if (!rr.target) { return; }
             const event = (e.type === "mousemove") ? e : e.changedTouches[0];
-            const p = mousePointToSVGPoint(event);
-            target.setAttribute("cx", p.x - offsetX);
-            target.setAttribute("cy", p.y - offsetY);
-        }
+            const p = rr.mousePointToSVGPoint(event);
+            rr.target.setAttribute("cx", p.x - rr.offsetX);
+            rr.target.setAttribute("cy", p.y - rr.offsetY);
+        };
+
         (function(c){
             var f = function(){
             	c.addEventListener.apply(c,arguments);
@@ -92,10 +74,10 @@ rr = createSVG(rr,"circle")
             };
             return f;
         })(svg)
-        	("mousemove", mouseMove, false)
-			("touchmove", mouseMove, false)
-			("mouseup", mouseUp, false)
-			("touchend", mouseUp, false);
+        	("mousemove", rr.mouseMove, false)
+			("touchmove", rr.mouseMove, false)
+			("mouseup", rr.mouseUp, false)
+			("touchend", rr.mouseUp, false);
 
 		var f=function(id){
 			console.log(arguments);
@@ -106,20 +88,43 @@ rr = createSVG(rr,"circle")
 	            };
 	            return f;
 	        })(document.getElementById(id))
-				("mousedown", mouseDown, false)
-				("touchstart", mouseDown, false)
-				("mousemove", mouseMove, false)
-				("touchmove", mouseMove, false)
-				("mouseup", mouseUp, false)
-				("touchend", mouseUp, false)
+				("mousedown", rr.mouseDown, false)
+				("touchstart", rr.mouseDown, false)
+				("mousemove", rr.mouseMove, false)
+				("touchmove", rr.mouseMove, false)
+				("mouseup", rr.mouseUp, false)
+				("touchend", rr.mouseUp, false)
 			return f;
 		}
 		return 	f;
 	}
-})({})
-(document.getElementById("box_1"))
-	("ball1")
-	("ball2")
-	("ball3")
+})({target:null,
+	offsetX:0,
+	offsetY:0,
+	svg:document.getElementById("box_1"),
+	mouseUp:function(e) {
+            this.target = null;
+    },
+    screenPointToSVGPoint:function(svg, elem, x, y) {
+        const p = svg.createSVGPoint();
+        p.x = x;
+        p.y = y;
+        const CTM = elem.getScreenCTM();
+        return p.matrixTransform(CTM.inverse());
+    },
+    mousePointToSVGPoint:function (e) {
+        return this.screenPointToSVGPoint(
+            this.svg,
+            this.target,
+            e.clientX,
+            e.clientY);
+    }
 
+})
+	(document.getElementById("box_1"))
+		("ball1")
+		("ball2")
+		("ball3");
+
+console.log(rr);
 </script>
