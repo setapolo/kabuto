@@ -1,0 +1,124 @@
+<html> 
+	<div id="d"></div>
+<svg id="box_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400  400" width="100px"  height="100px">
+</svg>
+</html>
+<script>
+
+var createSVG = (function(rr,type){//create SVG element
+	var c = document.createElementNS(rr.namespaceURI,type);
+	rr.svg.appendChild(c);
+	var f = function(){
+		(arguments.length>0)?
+		c["setAttribute"].apply(c,[].slice.call(arguments)):null;
+		return (arguments.length>0)?f:rr;
+	}
+	return f;
+})
+var rr = createSVG({
+	namespaceURI:"http://www.w3.org/2000/svg",
+	svg:document.getElementById("box_1"),
+	type:["circle", "rect", "path", "ellipse", "text", "image"]
+},"circle")
+("fill", "blue")
+("cx", 200)
+("cy", 200)
+("r", 60)
+("id", "ball1")
+();
+
+rr = createSVG(rr,"rect")
+("fill", "red")
+("cx", 100)
+("cy", 100)
+("width", 100)
+("height", 100)
+("id", "ball2")
+();
+
+rr = createSVG(rr,"circle")
+("fill", "yellow")
+("cx", 100)
+("cy", 150)
+("r", 20)
+("id", "ball3")
+();
+
+
+
+</script>
+<script>
+
+(function(svg){
+        target = null;
+        var offsetX = 0;
+        var offsetY = 0;
+        function screenPointToSVGPoint(svg, elem, x, y) {
+            const p = svg.createSVGPoint();
+            p.x = x;
+            p.y = y;
+            const CTM = elem.getScreenCTM();
+            return p.matrixTransform(CTM.inverse());
+        }
+        function mousePointToSVGPoint(e) {
+            return screenPointToSVGPoint(
+                svg,
+                target,
+                e.clientX,
+                e.clientY);
+        }
+        function mouseDown(e) {
+        	console.log("mouseDown",e);
+        	console.log("mouseDown",e.type);
+            const event = (e.type === "mousedown") ? e : e.changedTouches[0];;
+            target = event.target;
+        	console.log("target",target);
+            const p = mousePointToSVGPoint(event);
+            offsetX = p.x - target.getAttribute("cx");
+            offsetY = p.y - target.getAttribute("cy");
+        }
+
+        function mouseUp(e) {
+            target = null;
+        }
+
+        function mouseMove(e) {
+        	console.log("mouseMove",e);
+        	console.log("target",target);
+            if (!target) { return; }
+            const event = (e.type === "mousemove") ? e : e.changedTouches[0];
+            const p = mousePointToSVGPoint(event);
+            target.setAttribute("cx", p.x - offsetX);
+            target.setAttribute("cy", p.y - offsetY);
+        }
+
+        (function(c){
+            f = function(){
+            	c.addEventListener.apply(c,arguments);
+            	return f;
+            };
+            return f;
+        })(svg)
+        	("mousemove", mouseMove, false)
+			("touchmove", mouseMove, false)
+			("mouseup", mouseUp, false)
+			("touchend", mouseUp, false);
+
+        ["ball1","ball2","ball3"].forEach(function (id) {
+            (function(c){
+	            f = function(){
+	            	c.addEventListener.apply(c,arguments);
+	            	return f;
+	            };
+	            return f;
+            })(document.getElementById(id))
+				("mousedown", mouseDown, false)
+				("touchstart", mouseDown, false)
+				("mousemove", mouseMove, false)
+				("touchmove", mouseMove, false)
+				("mouseup", mouseUp, false)
+				("touchend", mouseUp, false)
+        });
+})(document.getElementById("box_1"))
+
+</script>
