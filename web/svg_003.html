@@ -52,6 +52,7 @@ var rr = (function(rr){
 			("id", "ball3")()();
 
 console.log("rr:",rr);
+
 var rr=(function(rr){
     rr.mousePointToSVGPoint=function (e) {
         const p = rr.svg.createSVGPoint();
@@ -60,6 +61,9 @@ var rr=(function(rr){
         const CTM = rr.target.getScreenCTM();
         return p.matrixTransform(CTM.inverse());
 	}
+	rr.mouseUp = function(e) {
+        rr.target = null;
+    };
     rr.mouseDown = function(e) {
         const event = (e.type === "mousedown") ? e : e.changedTouches[0];;
         rr.target = event.target;
@@ -71,11 +75,11 @@ var rr=(function(rr){
         if (!rr.target) { return; }
         const event = (e.type === "mousemove") ? e : e.changedTouches[0];
         const p = rr.mousePointToSVGPoint(event);
+        console.log(p);
+        rr.target.setAttribute("x", p.x - rr.offsetX);
+        rr.target.setAttribute("y", p.y - rr.offsetY);
         rr.target.setAttribute("cx", p.x - rr.offsetX);
         rr.target.setAttribute("cy", p.y - rr.offsetY);
-    };
-	rr.mouseUp = function(e) {
-            rr.target = null;
     };
 	return function(svg){
         (function(c){
@@ -85,7 +89,7 @@ var rr=(function(rr){
             };
             return f;
         })
-        (svg)
+        (rr.svg)
         	("mousemove", rr.mouseMove, false)
 			("touchmove", rr.mouseMove, false)
 			("mouseup", rr.mouseUp, false)
