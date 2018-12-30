@@ -3,13 +3,18 @@
 <script>
 
 var rr = (function(rr){
-	var d=rr.body;
+	var d=document.body;
 	var createSVG=(function(type){//svg
 		var c = document.createElementNS(rr.namespaceURI,type);
 		d.appendChild(c);
-		d=(d==rr.body) ? c:d; 
-		var f = function(){
-			(arguments.length>0)?c["setAttribute"].apply(c,[].slice.call(arguments)):null;
+		d=(d==document.body) ? c:d; 
+		var f = function(k,v){
+			if(arguments.length>0){
+				v = (Object.prototype.toString.call(v).slice(8, -1)==Object.prototype.toString.call(/regexp/).slice(8, -1)) ? rr['random']()() : v;
+				console.log("v",v,Object.prototype.toString.call(v).slice(8, -1));
+				console.log(rr.random()());
+				c["setAttribute"].apply(c,[].slice.call(arguments));
+			}
 			return (arguments.length>0)?f:createSVG;
 		};
 		return (arguments.length>0)?f:rr;
@@ -18,11 +23,13 @@ var rr = (function(rr){
 })
 ({
 	namespaceURI:"http://www.w3.org/2000/svg",
-	body:document.body,
 	types:["circle", "rect", "path", "ellipse", "text", "image"],
-	random:function(){ return 
-		(function(a){return a[Math.floor(Math.random() * a.length)]})
-		(["red","blue","yellow"])
+	random:function(){ 
+		colors = ["red","blue","yellow"];
+		return (function(a){
+			a=(a)?a:colors;
+			return a[Math.floor(Math.random() * a.length)]}
+		);
 	}
 })
 ("svg")
@@ -32,7 +39,7 @@ var rr = (function(rr){
 	("width","800px")
 	("height","800px")()
 		("circle")
-			("fill", "blue")
+			("fill", /random/)
 			("cx", 200)
 			("cy", 200)
 			("r", 60)
@@ -75,34 +82,28 @@ var rr=(function(rr){
         if (!rr.target) { return; }
         const event = (e.type === "mousemove") ? e : e.changedTouches[0];
         const p = rr.mousePointToSVGPoint(event);
-        console.log(p);
         rr.target.setAttribute("x", p.x - rr.offsetX);
         rr.target.setAttribute("y", p.y - rr.offsetY);
         rr.target.setAttribute("cx", p.x - rr.offsetX);
         rr.target.setAttribute("cy", p.y - rr.offsetY);
     };
-	return function(svg){
-        (function(c){
+
+    var addEventListners = (function(c){
             var f = function(){
             	c.addEventListener.apply(c,arguments);
             	return f;
             };
             return f;
         })
+	return function(svg){
+        addEventListners
         (rr.svg)
         	("mousemove", rr.mouseMove, false)
 			("touchmove", rr.mouseMove, false)
 			("mouseup", rr.mouseUp, false)
 			("touchend", rr.mouseUp, false);
-
 		var f=function(id){
-	        (function(c){
-	            var f = function(){
-	            	c.addEventListener.apply(c,arguments);
-	            	return f;
-	            };
-	            return f;
-	        })
+	        addEventListners
 	        (document.getElementById(id))
 				("mousedown", rr.mouseDown, false)
 				("touchstart", rr.mouseDown, false)
