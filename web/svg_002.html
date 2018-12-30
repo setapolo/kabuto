@@ -1,47 +1,53 @@
 <html> 
-	<div id="d"></div>
-<svg id="box_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400  400" width="100px"  height="100px">
-</svg>
 </html>
 <script>
 
-
-
-var createSVG = (function(rr,type){//create SVG element
+var createSVG=(function(rr,type,d){//svg
 	var c = document.createElementNS(rr.namespaceURI,type);
-	rr.svg.appendChild(c);
+	d=(d) ? d : document.getElementById("box_2");
+	d.appendChild(c);
 	var f = function(){
-		(arguments.length>0)?
-		c["setAttribute"].apply(c,[].slice.call(arguments)):null;
+		(arguments.length>0)?c["setAttribute"].apply(c,[].slice.call(arguments)):null;
 		return (arguments.length>0)?f:createSVG;
-	}
+	};
 	return (arguments.length>0)?f:rr;
-})
+});
+
+createSVG({
+	namespaceURI:"http://www.w3.org/2000/svg"
+},
+"svg",
+document.body)
+	("id","box_2")
+	("version","1.1" )
+	("viewBox","0 0 800 800") 
+	("width","800px")
+	("height","800px")();
+
 var rr = {
 	namespaceURI:"http://www.w3.org/2000/svg",
-	svg:document.getElementById("box_1"),
-	type:["circle", "rect", "path", "ellipse", "text", "image"]
+	types:["circle", "rect", "path", "ellipse", "text", "image"]
 };
 rr=createSVG
-(rr,"circle")
-("fill", "blue")
-("cx", 200)
-("cy", 200)
-("r", 60)
-("id", "ball1")()
-(rr,"rect")
-("fill", "red")
-("cx", 100)
-("cy", 100)
-("width", 100)
-("height", 100)
-("id", "ball2")()
-(rr,"circle")
-("fill", "yellow")
-("cx", 100)
-("cy", 150)
-("r", 20)
-("id", "ball3")()();
+	(rr,"circle")
+		("fill", "blue")
+		("cx", 200)
+		("cy", 200)
+		("r", 60)
+		("id", "ball1")()
+	(rr,"rect")
+		("fill", "red")
+		("cx", 100)
+		("cy", 100)
+		("width", 100)
+		("height", 100)
+		("id", "ball2")()
+	(rr,"circle")
+		("fill", "yellow")
+		("cx", 100)
+		("cy", 150)
+		("r", 20)
+		("id", "ball3")()();
 
 
 
@@ -50,6 +56,13 @@ rr=createSVG
 
 var rr=(function(rr){
 	return function(svg){
+	    rr.mousePointToSVGPoint=function (e) {
+	        const p = rr.svg.createSVGPoint();
+	        p.x = e.clientX;
+	        p.y = e.clientY;
+	        const CTM = rr.target.getScreenCTM();
+	        return p.matrixTransform(CTM.inverse());
+		}
         rr.mouseDown = function(e) {
             const event = (e.type === "mousedown") ? e : e.changedTouches[0];;
             rr.target = event.target;
@@ -65,6 +78,9 @@ var rr=(function(rr){
             rr.target.setAttribute("cx", p.x - rr.offsetX);
             rr.target.setAttribute("cy", p.y - rr.offsetY);
         };
+		rr.mouseUp = function(e) {
+	            rr.target = null;
+	    };
 
         (function(c){
             var f = function(){
@@ -100,27 +116,9 @@ var rr=(function(rr){
 })({target:null,
 	offsetX:0,
 	offsetY:0,
-	svg:document.getElementById("box_1"),
-	mouseUp:function(e) {
-            this.target = null;
-    },
-    screenPointToSVGPoint:function(svg, elem, x, y) {
-        const p = svg.createSVGPoint();
-        p.x = x;
-        p.y = y;
-        const CTM = elem.getScreenCTM();
-        return p.matrixTransform(CTM.inverse());
-    },
-    mousePointToSVGPoint:function (e) {
-        return this.screenPointToSVGPoint(
-            this.svg,
-            this.target,
-            e.clientX,
-            e.clientY);
-    }
-
+	svg:document.getElementById("box_2")
 })
-	(document.getElementById("box_1"))
+	(document.getElementById("box_2"))
 		("ball1")
 		("ball2")
 		("ball3");

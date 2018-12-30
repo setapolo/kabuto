@@ -51,6 +51,10 @@ rr = createSVG(rr,"circle")
 
 var rr=(function(rr){
 	return function(svg){
+		rr.mouseUp=function(e) {
+        	rr.target = null;
+		};
+
         rr.mouseDown = function(e) {
             const event = (e.type === "mousedown") ? e : e.changedTouches[0];;
             rr.target = event.target;
@@ -102,9 +106,6 @@ var rr=(function(rr){
 	offsetX:0,
 	offsetY:0,
 	svg:document.getElementById("box_1"),
-	mouseUp:function(e) {
-            this.target = null;
-    },
     screenPointToSVGPoint:function(svg, elem, x, y) {
         const p = svg.createSVGPoint();
         p.x = x;
