@@ -372,7 +372,6 @@ console.log("uniqueArray/filter",
 );
 
 
-
 aa={};
 aa['help']='help';
 console.log("mem",
@@ -390,3 +389,7 @@ console.log("r",
 	return R;
 })(this.Rphael)
 )
+
+console.log(
+(function(a){return a[Math.floor(Math.random() * a.length)]})(["red","blue","yellow"])
+);
