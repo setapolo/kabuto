@@ -342,8 +342,8 @@ console.log(
 );
 
 
-console.log(
-	(function(a){//uniq
+console.log("uniqueArray",
+	(function(a){//uniqueArray
 		var ss = {};
 		var uniqueArray = [];
 		a.map(function(c,i,a){
@@ -355,3 +355,38 @@ console.log(
 	   	return uniqueArray;
 	})([1,2,3,4,5,1,2,3,4,5])
 );
+
+
+console.log("uniqueArray/filter",
+	(function(a){//uniqueArray
+		var ss = {};
+		return a.filter(function(c,i,a){
+	      	if (!(c in ss)) {
+	       		ss[c] = true;
+	         	return true;
+	       	}else{
+	       		return false
+	       	}
+	    });
+	})([1,2,3,4,5,1,2,3,4,5])
+);
+
+
+
+aa={};
+aa['help']='help';
+console.log("mem",
+	(function(s){//uniqueArray
+		a=[];
+		var f= function(c){
+			a=(c)?a.concat(c[s]):a;
+			return (c)?f:a;
+		}
+		return f;
+	})("help")(aa)(aa)(aa)(aa)()
+);
+console.log("r",
+(function(R){
+	return R;
+})(this.Rphael)
+)
