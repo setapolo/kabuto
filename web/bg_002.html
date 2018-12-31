@@ -1,0 +1,100 @@
+<html> 
+</html>
+<script>
+
+var rr = (function(rr){
+	var d=document.body;
+	var createSVG=(function(c){//svg
+		console.log(rr.random(/blue/))
+		console.log(rr.table())
+		if(c!=d){
+			c = document.createElement(c);
+			d.appendChild(c);
+			d=(["TR","TABLE"].includes(c.tagName))?c:d;
+
+		}
+		var f = function(k,v){
+			if(arguments.length>0){
+				v = (Object.prototype.toString.call(v).slice(8, -1)==Object.prototype.toString.call(/regexp/).slice(8, -1)) ? rr[v.toString().replace(/[/]/g,"")]()() : v;
+				c["setAttribute"].apply(c,[].slice.call(arguments));
+			}
+			return (arguments.length>0)?f:createSVG;
+		};
+		return (arguments.length>0)?f:rr;
+	});
+	return createSVG;
+})
+({
+	random:function(r){ 
+		//https://www.w3.org/TR/SVGColor12/#color
+		aa = ["aliceblue" , "antiquewhite" , "aqua" , "aquamarine" , "azure" , "beige" , 
+	    "bisque" , "black" , "blanchedalmond" , "blue" , "blueviolet" , "brown" , 
+	    "burlywood" ,"cadetblue" , "chartreuse" , "chocolate" , "coral" , "cornflowerblue" , 	
+	    "cornsilk" , "crimson" , "cyan" , "darkblue" , "darkcyan" , "darkgoldenrod" , 
+	    "darkgray" , "darkgreen" , "darkgrey" , "darkkhaki" , "darkmagenta" , "darkolivegreen" , 
+	    "darkorange" , "darkorchid" , "darkred" , "darksalmon" , "darkseagreen" , "darkslateblue" , 
+	    "darkslategray" , "darkslategrey" , "darkturquoise" , "darkviolet" , "deeppink" , "deepskyblue" , 
+	    "dimgray" , "dimgrey" , "dodgerblue" , "firebrick" , "floralwhite" , "forestgreen" , 
+	    "fuchsia" , "gainsboro" , "ghostwhite" , "gold" , "goldenrod" , "gray" , 
+	    "grey" , "green" , "greenyellow" , "honeydew" , "hotpink" , "indianred" , 
+	    "indigo" , "ivory" , "khaki" , "lavender" , "lavenderblush" , "lawngreen" , 
+	    "lemonchiffon" , "lightblue" , "lightcoral" , "lightcyan" , "lightgoldenrodyellow" , "lightgray" , 
+	    "lightgreen" , "lightgrey" , "lightpink" , "lightsalmon" , "lightseagreen" , "lightskyblue" , 
+	    "lightslategray" , "lightslategrey" , "lightsteelblue" , "lightyellow" , "lime" , 
+	    "limegreen" , "linen" , "magenta" , "maroon" , "mediumaquamarine" , "mediumblue" , 
+	    "mediumorchid" , "mediumpurple" , "mediumseagreen" , "mediumslateblue" , "mediumspringgreen" , "mediumturquoise" ,
+	    "mediumvioletred" , "midnightblue" , "mintcream" , "mistyrose" , "moccasin" , "navajowhite" , 
+	    "navy" , "oldlace" , "olive" , "olivedrab" , "orange" , "orangered" , 
+	    "orchid" , "palegoldenrod" , "palegreen" , "paleturquoise" , "palevioletred" , "papayawhip" , 
+	    "peachpuff" , "peru" , "pink" , "plum" , "powderblue" , "purple" , 
+	    "red" , "rosybrown" , "royalblue" , "saddlebrown" , "salmon" , "sandybrown" , 
+	    "seagreen" , "seashell" , "sienna" , "silver" , "skyblue" , "slateblue" , 
+	    "slategray" , "slategrey" , "snow" , "springgreen" , "steelblue" , "tan" , 
+	    "teal" , "thistle" , "tomato" , "turquoise" , "violet" , "wheat" , 
+	    "white" , "whitesmoke" , "yellow" , "yellowgreen"];
+		
+		if (Object.prototype.toString.call(r).slice(8, -1)==Object.prototype.toString.call(/regexp/).slice(8, -1)) {
+			aa = aa.filter(function(c,i,a){return r.exec(c)});
+		}
+		return (r)?aa:(function(a){
+			a=(a)?a:aa;
+			return a[Math.floor(Math.random() * a.length)]}
+		);
+	},
+	table:function(){
+		var table = document.createElement("table");
+		var d = document.body;
+		d.appendChild(table);
+		var tr =  document.createElement("tr");
+		return [1,2,3,4,5,6,7,8,9].reduce(function(p,c,i,a){
+			if ((c%3)==0){
+				td = document.createElement("td");
+				tr.appendChild(td);
+				td.innerHTML=c+"!";
+				table.appendChild(tr);
+				tr =  document.createElement("tr");
+			}else{
+				if(i==1){
+					td = document.createElement("td");
+					tr.appendChild(td);
+					td.innerHTML=p;
+				}
+				td = document.createElement("td");
+				tr.appendChild(td);
+				td.innerHTML=c;
+			}
+
+			return " "+p+" ["+c+"]";
+		})
+	}
+})(document.body)
+("bgcolor",/random/)()
+	("table")()
+		("tr")()
+			("td")()
+			("td")()
+			("td")()
+			("td")()
+
+
+</script>

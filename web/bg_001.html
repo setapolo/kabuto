@@ -4,16 +4,15 @@
 
 var rr = (function(rr){
 	var d=document.body;
-	var createSVG=(function(type){//svg
-		var c = document.createElementNS(rr.namespaceURI,type);
-		d.appendChild(c);
-		d=(d==document.body) ? c:d; 
+	var createSVG=(function(c){//svg
+		if(c!=d){
+			d.appendChild(c);
+		}
 		var f = function(k,v){
 			if(arguments.length>0){
 				v = (Object.prototype.toString.call(v).slice(8, -1)==Object.prototype.toString.call(/regexp/).slice(8, -1)) ? rr[v.toString().replace(/[/]/g,"")]()() : v;
 				c["setAttribute"].apply(c,[].slice.call(arguments));
 			}
-			console.log(rr.rnd.color())
 			return (arguments.length>0)?f:createSVG;
 		};
 		return (arguments.length>0)?f:rr;
@@ -21,11 +20,6 @@ var rr = (function(rr){
 	return createSVG;
 })
 ({
-	namespaceURI:"http://www.w3.org/2000/svg",
-	types:["circle", "rect", "path", "ellipse", "text", "image"],
-	rnd:{
-		color:function(){return function(){return "aliceblue"}}
-	},
 	random:function(){ 
 		//https://www.w3.org/TR/SVGColor12/#color
 		aa = ["aliceblue" , "antiquewhite" , "aqua" , "aquamarine" , "azure" , "beige" , 
@@ -58,98 +52,7 @@ var rr = (function(rr){
 			return a[Math.floor(Math.random() * a.length)]}
 		);
 	}
-})("svg")
-	("id","box_2")
-	("version","1.1" )
-	("viewBox","0 0 800 800") 
-	("width","800px")
-	("height","800px")()
-		("circle")
-			("fill", /random/)
-			("cx", 200)
-			("cy", 200)
-			("r", 60)
-			("id", "ball1")()
-		("rect")
-			("fill", /random/)
-			("cx", 100)
-			("cy", 100)
-			("width", 100)
-			("height", 100)
-			("id", "ball2")()
-		("circle")
-			("fill", /random/)
-			("cx", 100)
-			("cy", 150)
-			("r", 40)
-			("id", "ball3")()();
+})(document.body)
+("bgcolor",/random/)()
 
-var rr=(function(rr){
-    rr.mousePointToSVGPoint=function (e) {
-        const p = rr.svg.createSVGPoint();
-        p.x = e.clientX;
-        p.y = e.clientY;
-        const CTM = rr.target.getScreenCTM();
-        return p.matrixTransform(CTM.inverse());
-	}
-	rr.mouseUp = function(e) {
-        rr.target = null;
-    };
-    rr.mouseDown = function(e) {
-        const event = (e.type === "mousedown") ? e : e.changedTouches[0];;
-        rr.target = event.target;
-        const p = rr.mousePointToSVGPoint(event);
-        rr.offsetX = p.x - rr.target.getAttribute("cx");
-        rr.offsetY = p.y - rr.target.getAttribute("cy");
-    };
-    rr.mouseMove = function (e) {
-        if (!rr.target) { return; }
-        const event = (e.type === "mousemove") ? e : e.changedTouches[0];
-        const p = rr.mousePointToSVGPoint(event);
-        rr.target.setAttribute("x", p.x - rr.offsetX);
-        rr.target.setAttribute("y", p.y - rr.offsetY);
-        rr.target.setAttribute("cx", p.x - rr.offsetX);
-        rr.target.setAttribute("cy", p.y - rr.offsetY);
-    };
-
-    var addEventListners = (function(c){
-            var f = function(){
-            	c.addEventListener.apply(c,arguments);
-            	return f;
-            };
-            return f;
-        })
-	return function(svg){
-        addEventListners
-        (rr.svg)
-        	("mousemove", rr.mouseMove, false)
-			("touchmove", rr.mouseMove, false)
-			("mouseup", rr.mouseUp, false)
-			("touchend", rr.mouseUp, false);
-		var f=function(id){
-	        addEventListners
-	        (document.getElementById(id))
-				("mousedown", rr.mouseDown, false)
-				("touchstart", rr.mouseDown, false)
-				("mousemove", rr.mouseMove, false)
-				("touchmove", rr.mouseMove, false)
-				("mouseup", rr.mouseUp, false)
-				("touchend", rr.mouseUp, false)
-			return f;
-		}
-		return 	f;
-	}
-})
-({
-	target:null,
-	offsetX:0,
-	offsetY:0,
-	svg:document.getElementById("box_2")
-})
-(document.getElementById("box_2"))
-	("ball1")
-	("ball2")
-	("ball3");
-
-console.log(rr);
 </script>
