@@ -393,3 +393,51 @@ console.log("r",
 console.log(
 (function(a){return a[Math.floor(Math.random() * a.length)]})(["red","blue","yellow"])
 );
+
+
+console.log(
+Object.prototype.toString.call("").slice(8, -1)
+);
+
+console.log(
+Object["prototype"]["toString"]["call"]("")["slice"](8, -1)
+);
+
+console.log("try",
+	["prototype"]["toString"]["call"]("")["slice"](8, -1)
+)
+
+
+console.log(
+Object["prototype"]["toString"]["call"]("")["slice"](8, -1)
+
+);
+
+console.log("try3",
+(function(){
+	var f = ["prototype"]["toString"];
+	return f.call(/regexp/)["slice"](8, -1);
+	
+	//var abc = function(){ return ["prototype"]["toString"]};
+	//return abc().call(/re/)["slice"](8, -1)
+})()
+);
+
+console.log(
+
+(function(o){
+	var f = function(c){
+		o=(o[c])?o[c]:o; return (c)?f:o;
+	}
+	return f;
+})
+(Object)
+("prototype")
+("toString")
+
+);
+
+
+
+
+

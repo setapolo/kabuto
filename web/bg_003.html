@@ -5,17 +5,16 @@
 var rr = (function(rr){
 	var d=document.body;
 	var createSVG=(function(c){//svg
-		console.log(rr.random(/blue/))
-		console.log(rr.table())
+//		console.log(rr.random(/blue/))
+		console.log(rr.table_s(rr.random(/blue/)))
 		if(c!=d){
 			c = document.createElement(c);
 			d.appendChild(c);
 			d=(["TR","TABLE"].includes(c.tagName))?c:d;
-
 		}
 		var f = function(k,v){
 			if(arguments.length>0){
-				v = (Object.prototype.toString.call(v).slice(8, -1)==Object.prototype.toString.call(/regexp/).slice(8, -1)) ? rr[v.toString().replace(/[/]/g,"")]()() : v;
+				v = rr.eq(v)(/regexp/) ? rr[v.toString().replace(/[/]/g,"")]()() : v;
 				c["setAttribute"].apply(c,[].slice.call(arguments));
 			}
 			return (arguments.length>0)?f:createSVG;
@@ -26,6 +25,14 @@ var rr = (function(rr){
 })
 ({
 	table:{},
+	eq:function(e){
+		e = Object.prototype.toString.call(e).slice(8, -1);
+		var f = function(q){
+			q = Object.prototype.toString.call(q).slice(8, -1);
+			return (e == q)?true:false;
+		}
+		return f;
+	},
 	random:function(r){ 
 		//https://www.w3.org/TR/SVGColor12/#color
 		aa = ["aliceblue" , "antiquewhite" , "aqua" , "aquamarine" , "azure" , "beige" , 
@@ -62,40 +69,31 @@ var rr = (function(rr){
 			return a[Math.floor(Math.random() * a.length)]}
 		);
 	},
-	table:function(){
+	table_s:function(aa){
 		var table = document.createElement("table");
 		var d = document.body;
 		d.appendChild(table);
 		var tr =  document.createElement("tr");
-		return [1,2,3,4,5,6,7,8,9].reduce(function(p,c,i,a){
-			if ((c%3)==0){
+		return aa.map(function(c,i,a){
+			if (((i+1)%4)==0){
 				td = document.createElement("td");
 				tr.appendChild(td);
 				td.innerHTML=c+"!";
 				table.appendChild(tr);
 				tr =  document.createElement("tr");
 			}else{
-				if(i==1){
-					td = document.createElement("td");
-					tr.appendChild(td);
-					td.innerHTML=p;
-				}
 				td = document.createElement("td");
 				tr.appendChild(td);
 				td.innerHTML=c;
 			}
-
-			return " "+p+" ["+c+"]";
+			return c;
 		})
 	}
 })(document.body)
 ("bgcolor",/random/)()
-	("table")()
-		("tr")()
-			("td")()
-			("td")()
-			("td")()
-			("td")()
+	("table")
+	("border","1")()
+		(/table_s/)()
 
 
 </script>
