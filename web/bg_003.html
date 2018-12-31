@@ -1,16 +1,18 @@
 <html> 
 </html>
 <script>
-
 var rr = (function(rr){
 	var d=document.body;
 	var createSVG=(function(c){//svg
-//		console.log(rr.random(/blue/))
-		console.log(rr.table_s(rr.random(/blue/)))
-		if(c!=d){
-			c = document.createElement(c);
-			d.appendChild(c);
-			d=(["TR","TABLE"].includes(c.tagName))?c:d;
+		if(rr.eq(c)(/regexp/)){
+			rr[c.toString().replace(/[/]/g,"")](rr)
+		}else{
+			if(c!=d){
+				c = document.createElement(c);
+				d.appendChild(c);
+				d=(["TR","TABLE"].includes(c.tagName))?c:d;
+				rr.table = (c.tagName == "TABLE")?c:rr.table;
+			}
 		}
 		var f = function(k,v){
 			if(arguments.length>0){
@@ -25,6 +27,7 @@ var rr = (function(rr){
 })
 ({
 	table:{},
+	random_focus:"a",
 	eq:function(e){
 		e = Object.prototype.toString.call(e).slice(8, -1);
 		var f = function(q){
@@ -33,7 +36,7 @@ var rr = (function(rr){
 		}
 		return f;
 	},
-	random:function(r){ 
+	random:function(rr,r){
 		//https://www.w3.org/TR/SVGColor12/#color
 		aa = ["aliceblue" , "antiquewhite" , "aqua" , "aquamarine" , "azure" , "beige" , 
 	    "bisque" , "black" , "blanchedalmond" , "blue" , "blueviolet" , "brown" , 
@@ -60,7 +63,6 @@ var rr = (function(rr){
 	    "slategray" , "slategrey" , "snow" , "springgreen" , "steelblue" , "tan" , 
 	    "teal" , "thistle" , "tomato" , "turquoise" , "violet" , "wheat" , 
 	    "white" , "whitesmoke" , "yellow" , "yellowgreen"];
-		
 		if (Object.prototype.toString.call(r).slice(8, -1)==Object.prototype.toString.call(/regexp/).slice(8, -1)) {
 			aa = aa.filter(function(c,i,a){return r.exec(c)});
 		}
@@ -69,10 +71,13 @@ var rr = (function(rr){
 			return a[Math.floor(Math.random() * a.length)]}
 		);
 	},
-	table_s:function(aa){
-		var table = document.createElement("table");
-		var d = document.body;
-		d.appendChild(table);
+	table_s:function(rr,aa){
+		//var table = document.createElement("table");
+		var table =rr.table;
+		aa = (aa)?aa:rr.random(rr,/.*/);
+		console.log(rr.random_focus);
+		//var d = document.body;
+		//d.appendChild(table);
 		var tr =  document.createElement("tr");
 		return aa.map(function(c,i,a){
 			if (((i+1)%4)==0){
