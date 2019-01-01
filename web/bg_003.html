@@ -3,12 +3,13 @@
 <script>
 var rr = (function(rr){
 	var d=document.body;
-	var createSVG=(function(c){//svg
+	var createSVG=(function(c,s){//svg
 		if(rr.eq(c)(/regexp/)){
 			rr[c.toString().replace(/[/]/g,"")](rr)
 		}else{
 			if(c!=d){
 				c = document.createElement(c);
+				c.innerHTML = (s)?s:"";
 				d.appendChild(c);
 				d=(["TR","TABLE"].includes(c.tagName))?c:d;
 				rr.table = (c.tagName == "TABLE")?c:rr.table;
@@ -99,6 +100,7 @@ var rr = (function(rr){
 	("table")
 	("border","1")()
 		(/table_s/)()
-
+				("button","test")
+				()
 
 </script>
