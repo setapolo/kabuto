@@ -73,18 +73,15 @@ var rr = (function(rr){
 		);
 	},
 	table_s:function(rr,aa){
-		//var table = document.createElement("table");
 		var table =rr.table;
 		aa = (aa)?aa:rr.random(rr,/.*/);
 		console.log(rr.random_focus);
-		//var d = document.body;
-		//d.appendChild(table);
 		var tr =  document.createElement("tr");
 		return aa.map(function(c,i,a){
 			if (((i+1)%4)==0){
 				td = document.createElement("td");
 				tr.appendChild(td);
-				td.innerHTML=c+"!";
+				td.innerHTML=c;
 				table.appendChild(tr);
 				tr =  document.createElement("tr");
 			}else{
@@ -94,13 +91,45 @@ var rr = (function(rr){
 			}
 			return c;
 		})
-	}
+	},
+	addEventListners:function(c){
+        var f = function(){
+		 	console.log(arguments);
+		 	console.log(c);
+        	c.addEventListener.apply(c,arguments);
+        	return f;
+        };
+        return f;
+    }
 })(document.body)
 ("bgcolor",/random/)()
 	("table")
 	("border","1")()
 		(/table_s/)()
 				("button","test")
-				()
+				("id","test1")
+				();
+rr={};
+(function(rr){
+ 	rr.onclick=function(e){
+	 	console.log("onclisk");
+ 		window.alert("");
+ 	};
+    var addEventListners = (function(c){
+            var f = function(){
+			 	console.log(arguments);
+			 	console.log(c);
+            	c.addEventListener.apply(c,arguments);
+            	return f;
+            };
+            return f;
+        });
+
+	addEventListners(document.getElementById("test1"))
+	("click", rr.onclick, false);
+
+})(rr)
+
+
 
 </script>
