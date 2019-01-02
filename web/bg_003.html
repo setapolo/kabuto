@@ -4,7 +4,7 @@
 
 var rr = (function(rr){
 	var d=document.body;
-	var createTAG=(function(c,s){//svg
+	rr.createTAG=(function(c,s){//svg
 		if(rr.eq(c)(/regexp/)){
 			rr[c.toString().replace(/[/]/g,"")](rr)
 		}else{
@@ -21,11 +21,11 @@ var rr = (function(rr){
 				v = rr.eq(v)(/regexp/) ? rr[v.toString().replace(/[/]/g,"")](rr)() : v;
 				c["setAttribute"].apply(c,[].slice.call(arguments));
 			}
-			return (arguments.length>0)?f:createTAG;
+			return (arguments.length>0)?f:rr.createTAG;
 		};
 		return (arguments.length>0)?f:rr;
 	});
-	return createTAG;
+	return rr.createTAG;
 })
 ({
 	table:{},
@@ -77,18 +77,33 @@ var rr = (function(rr){
 		var table =rr.table;
 		aa = (aa)?aa:rr.random(rr,/.*/);
 		console.log(rr.random_focus);
+
+		rr.a_click=function(e){
+			console.log(e);
+		};
+
 		var tr =  document.createElement("tr");
 		return aa.map(function(c,i,a){
 			if (((i+1)%4)==0){
 				td = document.createElement("td");
 				tr.appendChild(td);
-				td.innerHTML=c;
+				a = document.createElement("a");
+				a.href="";
+				a.innerHTML=c;
+				rr.addEventListners
+				(a)("click",rr.a_click,false);
+				td.appendChild(a);
 				table.appendChild(tr);
 				tr =  document.createElement("tr");
 			}else{
 				td = document.createElement("td");
 				tr.appendChild(td);
-				td.innerHTML=c;
+				a = document.createElement("a");
+				a.href="";
+				a.innerHTML=c;
+				rr.addEventListners
+				(a)("click",rr.a_click,false);
+				td.appendChild(a);
 			}
 			return c;
 		})
@@ -112,7 +127,8 @@ var rr = (function(rr){
 (function(rr){
 	window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
 	rr.recognition = new webkitSpeechRecognition();
-	rr.recognition.lang = rr.lang;
+	//https://en.wikipedia.org/wiki/IETF_language_tag
+	rr.recognition.lang = ["ja","en-US"][0];
 	rr.onresult = function(event){
 	    var results = event.results;
 	    console.log("res",results);
@@ -122,13 +138,6 @@ var rr = (function(rr){
  	rr.onclick=function(e){
 		rr.recognition.start();
  	};
-    rr.addEventListners = function(c){
-        var f = function(){
-        	c.addEventListener.apply(c,arguments);
-        	return f;
-        };
-        return f;
-    };
 
 	rr.addEventListners
 	(document.getElementById("test1"))
@@ -139,10 +148,7 @@ var rr = (function(rr){
 		("result", rr.onresult, false);
 
 
-})({
-	lang:"ja",
-	recognition:{}
-});
+})(rr);
 
 
 
