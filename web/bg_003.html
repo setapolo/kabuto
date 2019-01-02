@@ -1,6 +1,7 @@
 <html> 
 </html>
 <script>
+
 var rr = (function(rr){
 	var d=document.body;
 	var createSVG=(function(c,s){//svg
@@ -94,8 +95,6 @@ var rr = (function(rr){
 	},
 	addEventListners:function(c){
         var f = function(){
-		 	console.log(arguments);
-		 	console.log(c);
         	c.addEventListener.apply(c,arguments);
         	return f;
         };
@@ -108,28 +107,37 @@ var rr = (function(rr){
 		(/table_s/)()
 				("button","test")
 				("id","test1")
-				();
-rr={};
+				()();
+
 (function(rr){
 	window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
 	rr.recognition = new webkitSpeechRecognition();
 	rr.recognition.lang = rr.lang;
-
+	rr.onresult = function(event){
+	    var results = event.results;
+	    console.log("res",results);
+	    for (var i = event.resultIndex; i<results.length; i++)
+	        console.log(results[i][0].transcript);
+	}
  	rr.onclick=function(e){
 		rr.recognition.start();
  	};
-    var addEventListners = (function(c){
-            var f = function(){
-			 	console.log(arguments);
-			 	console.log(c);
-            	c.addEventListener.apply(c,arguments);
-            	return f;
-            };
-            return f;
-        });
+    rr.addEventListners = function(c){
+        var f = function(){
+        	c.addEventListener.apply(c,arguments);
+        	return f;
+        };
+        return f;
+    };
 
-	addEventListners(document.getElementById("test1"))
-	("click", rr.onclick, false);
+	rr.addEventListners
+	(document.getElementById("test1"))
+		("click", rr.onclick, false);
+
+	rr.addEventListners
+	(rr.recognition)
+		("result", rr.onresult, false);
+
 
 })({
 	lang:"ja",
@@ -137,19 +145,6 @@ rr={};
 });
 
 
-(function(rr){
-	window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-	var recognition = new webkitSpeechRecognition();
-	recognition.lang = 'ja';
-	recognition.onresult = function(event){
-	    var results = event.results;
-//	    for (var i = event.resultIndex; i<results.length; i++)
-//	        document.getElementById('result_text').innerHTML = results[i][0].transcript;
-	}
-	rec_start = function(s,c){
-			recognition.start();
-	}
-})(rr)
 
 
 
