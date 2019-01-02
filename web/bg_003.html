@@ -4,7 +4,7 @@
 
 var rr = (function(rr){
 	var d=document.body;
-	var createSVG=(function(c,s){//svg
+	var createTAG=(function(c,s){//svg
 		if(rr.eq(c)(/regexp/)){
 			rr[c.toString().replace(/[/]/g,"")](rr)
 		}else{
@@ -18,14 +18,14 @@ var rr = (function(rr){
 		}
 		var f = function(k,v){
 			if(arguments.length>0){
-				v = rr.eq(v)(/regexp/) ? rr[v.toString().replace(/[/]/g,"")]()() : v;
+				v = rr.eq(v)(/regexp/) ? rr[v.toString().replace(/[/]/g,"")](rr)() : v;
 				c["setAttribute"].apply(c,[].slice.call(arguments));
 			}
-			return (arguments.length>0)?f:createSVG;
+			return (arguments.length>0)?f:createTAG;
 		};
 		return (arguments.length>0)?f:rr;
 	});
-	return createSVG;
+	return createTAG;
 })
 ({
 	table:{},
@@ -40,7 +40,7 @@ var rr = (function(rr){
 	},
 	random:function(rr,r){
 		//https://www.w3.org/TR/SVGColor12/#color
-		aa = ["aliceblue" , "antiquewhite" , "aqua" , "aquamarine" , "azure" , "beige" , 
+		var aa = ["aliceblue" , "antiquewhite" , "aqua" , "aquamarine" , "azure" , "beige" , 
 	    "bisque" , "black" , "blanchedalmond" , "blue" , "blueviolet" , "brown" , 
 	    "burlywood" ,"cadetblue" , "chartreuse" , "chocolate" , "coral" , "cornflowerblue" , 	
 	    "cornsilk" , "crimson" , "cyan" , "darkblue" , "darkcyan" , "darkgoldenrod" , 
@@ -65,7 +65,7 @@ var rr = (function(rr){
 	    "slategray" , "slategrey" , "snow" , "springgreen" , "steelblue" , "tan" , 
 	    "teal" , "thistle" , "tomato" , "turquoise" , "violet" , "wheat" , 
 	    "white" , "whitesmoke" , "yellow" , "yellowgreen"];
-		if (Object.prototype.toString.call(r).slice(8, -1)==Object.prototype.toString.call(/regexp/).slice(8, -1)) {
+		if (rr.eq(r)(/regexp/)) {
 			aa = aa.filter(function(c,i,a){return r.exec(c)});
 		}
 		return (r)?aa:(function(a){
@@ -105,9 +105,9 @@ var rr = (function(rr){
 	("table")
 	("border","1")()
 		(/table_s/)()
-				("button","test")
-				("id","test1")
-				()();
+			("button","test")
+			("id","test1")()
+			();
 
 (function(rr){
 	window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
