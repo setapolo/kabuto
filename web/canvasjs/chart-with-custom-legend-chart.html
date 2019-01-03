@@ -4,7 +4,112 @@
 <meta charset="UTF-8">
 <script>
 window.onload = function () {
-	
+
+var r={};
+rrr=[r,"a","b","c"].reduce(function(p,c,i,a){
+	p[c]=p;
+	return p;
+});
+console.log(rrr);
+
+
+var r={};
+rrr=[r,"a","b","c","d","e"].reduce(function(p,c,i,a){
+	p[c]={};
+	return p;
+});
+console.log(rrr);
+var r={};
+
+r["a"]={};
+r["a"]["b"]={};
+r["a"]["b"]["c"]={};
+console.log("r1",r);
+//a[1][1][2]
+a=r["a"]={};
+a["b"]={};
+b={};
+b["c"]=a
+//r["a"]["b"]["c"]={};
+console.log("r2",b);
+
+
+/*
+rrr=(function(aa){
+	var ff =function(){
+		var f = function(){
+			return f;
+		}
+		return f;
+	};
+	return aa.reduce(function(p,c,i,a){
+		return ff.call(p).call(c);
+	});
+})(["a","b","c","d"]);
+*/
+console.log("rrr",rrr);
+var r={};
+
+
+var rr = (function(rr){
+	var aa=[];
+	var head=function(kk,vv){
+		if (kk){
+			aa.push(kk);
+			rr[kk]={};
+		}
+		if (rr.eq(vv)([])){
+			console.log("[]",rr.eq([])());
+			console.log("{}",rr.eq({})());
+			console.log("{}",rr.eq("")());
+		}
+		var f=function(k,v){
+			if (v){
+				rr[kk][k]=v;
+			}else{
+				aa.push(k);
+			}
+			return (k)?f:head;
+		}
+		console.log(kk);
+		
+		return (kk)?f:rr
+	}
+	return head;
+
+})({eq:function(e){
+		e = Object.prototype.toString.call(e).slice(8, -1);
+		var f = function(q){
+			qq = Object.prototype.toString.call(q).slice(8, -1);
+			return (e == qq)?true:((q)?false:e);
+		}
+		return f;
+	}
+})
+("title")
+	("text", "Internet users")()
+("axisX")
+	("lineColor", "black")
+	("labelFontColor", "black")()
+("legend")
+	("cursor", "pointer")()
+("data",[])
+	("type", "spline")
+	("dataPoints", [])()
+()
+
+
+
+/*
+("animationEnabled",true)
+	("subtitles",[{text: "Try Clicking and Hovering over Legends!"}])
+*/
+;
+
+
+
+console.log(rr);	
+
 var chart = new CanvasJS.Chart("chartContainer", {
 	//theme: "light2", // "light1", "light2", "dark1", "dark2"
 	animationEnabled: true,
