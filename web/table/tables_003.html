@@ -1,0 +1,55 @@
+<html lang="en" class="wf-omnespro-n5-active wf-omnespro-n3-active wf-omnespro-n2-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+	<div id="d"></div>
+</html>
+<script>
+//rough
+
+
+
+
+var sss = (function(){
+/*
+ <tr id="word1">  
+    <td>word2</td>
+    <td width = "20%">
+      <div class="float-right">
+        <input type="button" onClick="rec_start('word1','word2');" value="rec"　>
+      </div>
+    </td>
+  </tr> 
+*/
+}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
+
+
+
+
+
+
+	(function(s){
+		console.log("sec1:",s);
+		var ss = s.map(function(c,i,a){
+			return sss.replace(/word1/ig,c[1]).replace(/word2/ig,c[0]);
+		}).join("<br>");
+		ss = '<table id="table_1" border=1 class="table table-striped">' + ss + "</table>";
+		document.getElementById("d").innerHTML=ss;
+	})(
+	(function(){
+
+return [
+["このチャットボットは家を探すことができるチャットボットです","このチャットボットは家を探すことができるチャットボットです"],
+["このチャットボットはJava言語を利用して開発しています","このチャットボットはJava言語を利用して開発しています"],
+["家の見学予定を調整できます","家の見学予定を調整できます"],
+["英語の質問に答えることができます","英語の質問に答えることができます"],
+["自分の好きな家を探すことができます","自分の好きな家を探すことができます"],
+];
+
+
+
+	})()
+	);
+
+
+</script>
