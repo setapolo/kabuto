@@ -440,4 +440,40 @@ console.log(
 
 
 
+var r={};
+rrr=[r,"a","b","c"].reduce(function(p,c,i,a){
+	p[c]=p;
+	return p;
+});
+console.log(rrr);
+
+
+var r={};
+rrr=["a","b","c","d","e"].reduce(function(p,c,i,a){
+	var a={};
+	a[c]=p;
+	return a;
+});
+console.log("moc",rrr);
+
+var r={};
+r["a"]={};
+r["a"]["b"]={};
+r["a"]["b"]["c"]={};
+console.log("r1",r);
+//a[1][1][2]
+a=r["a"]={};
+a["b"]={};
+b={};
+b["c"]=a
+//r["a"]["b"]["c"]={};
+console.log("r2",b);
+
+rrr=["a","b","c","d","e"].reduceRight(function(p,c,i,a){
+	var a={};
+	a[c]=p;
+	return a;
+});
+console.log("rrr_r",rrr);
+console.log("rrr_r",rrr["a"]["b"]["c"]["d"]);
 

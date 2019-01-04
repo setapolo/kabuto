@@ -5,78 +5,25 @@
 <script>
 window.onload = function () {
 
-var r={};
-rrr=[r,"a","b","c"].reduce(function(p,c,i,a){
-	p[c]=p;
-	return p;
-});
-console.log(rrr);
-
 
 var r={};
-rrr=[r,"a","b","c","d","e"].reduce(function(p,c,i,a){
-	p[c]={};
-	return p;
-});
-console.log(rrr);
-var r={};
-
-r["a"]={};
-r["a"]["b"]={};
-r["a"]["b"]["c"]={};
-console.log("r1",r);
-//a[1][1][2]
-a=r["a"]={};
-a["b"]={};
-b={};
-b["c"]=a
-//r["a"]["b"]["c"]={};
-console.log("r2",b);
-
-
-/*
-rrr=(function(aa){
-	var ff =function(){
-		var f = function(){
-			return f;
-		}
-		return f;
-	};
-	return aa.reduce(function(p,c,i,a){
-		return ff.call(p).call(c);
-	});
-})(["a","b","c","d"]);
-*/
-console.log("rrr",rrr);
-var r={};
-
-
-var rr = (function(rr){
-	var aa=[];
+var rrr = (function(rr){
 	var head=function(kk,vv){
 		if (kk){
-			aa.push(kk);
-			rr[kk]={};
-		}
-		if (rr.eq(vv)([])){
-			console.log("[]",rr.eq([])());
-			console.log("{}",rr.eq({})());
-			console.log("{}",rr.eq("")());
+			if (rr.eq(vv)([])){
+				rr[kk]=[{}];
+			}else{
+				rr[kk]={};
+			}
 		}
 		var f=function(k,v){
-			if (v){
-				rr[kk][k]=v;
-			}else{
-				aa.push(k);
-			}
+			rr[kk][k]=v;
 			return (k)?f:head;
 		}
-		console.log(kk);
 		
 		return (kk)?f:rr
 	}
 	return head;
-
 })({eq:function(e){
 		e = Object.prototype.toString.call(e).slice(8, -1);
 		var f = function(q){
@@ -87,29 +34,102 @@ var rr = (function(rr){
 	}
 })
 ("title")
-	("text", "Internet users")()
+	("text", "Internet users#")()
 ("axisX")
 	("lineColor", "black")
 	("labelFontColor", "black")()
-("legend")
-	("cursor", "pointer")()
-("data",[])
+("axisY2")
+	("gridThickness", 0)
+	("title", "% of Population")
+	("suffix", "%")
+	("titleFontColor", "black")
+	("labelFontColor", "black")()
+("data",[])()()
+
+/*
 	("type", "spline")
-	("dataPoints", [])()
+	("name", "Sweden")
+	("markerSize", 5)
+	("axisYType", "secondary")
+	("xValueFormatString", "YYYY")
+	("yValueFormatString", "#,##0.0'%'")
+	("showInLegend", true)
+	("dataPoints", [])
+		({ x: new Date(2000, 00), y: 47.5 })
+		({ x: new Date(2005, 00), y: 84.8 })
 ()
-
-
-
+*/
 /*
 ("animationEnabled",true)
 	("subtitles",[{text: "Try Clicking and Hovering over Legends!"}])
 */
 ;
 
+/*
+rrr = {
+	//theme: "light2", // "light1", "light2", "dark1", "dark2"
+	animationEnabled: true,
+	title:{
+		text: "Internet users"  
+	},
+	axisX: {
+		lineColor: "black",
+		labelFontColor: "black"
+	},
+	data: []
+};
+*/
+
+rrr.data.push(
+	{
+		type: "spline",
+		name: "Sweden",
+		markerSize: 5,
+      	axisYType: "secondary",
+		xValueFormatString: "YYYY",
+		yValueFormatString: "#,##0.0'%'",
+		showInLegend: true,
+		dataPoints: [
+			{ x: new Date(2000, 00), y: 47.5 },
+			{ x: new Date(2005, 00), y: 84.8 },
+			{ x: new Date(2009, 00), y: 91 },
+			{ x: new Date(2010, 00), y: 90 },
+			{ x: new Date(2011, 00), y: 92.8 },
+			{ x: new Date(2012, 00), y: 93.2 },
+			{ x: new Date(2013, 00), y: 94.8 },
+			{ x: new Date(2014, 00), y: 92.5 }
+		]
+	}
+);
+
+rrr.data.push(
+	{
+		type: "spline",
+		name: "Sweden",
+		markerSize: 5,
+      	axisYType: "secondary",
+		xValueFormatString: "YYYY",
+		yValueFormatString: "#,##0.0'%'",
+		showInLegend: true,
+		dataPoints: [
+			{ x: new Date(2000, 00), y: 26.8 },
+			{ x: new Date(2005, 00), y: 70 },
+			{ x: new Date(2009, 00), y: 83.6 },
+			{ x: new Date(2010, 00), y: 85 },
+			{ x: new Date(2011, 00), y: 85.4 },
+			{ x: new Date(2012, 00), y: 87.5 },
+			{ x: new Date(2013, 00), y: 89.8 },
+			{ x: new Date(2014, 00), y: 91.6 }
+		]
+	}
+);
 
 
-console.log(rr);	
+var chart = new CanvasJS.Chart("chartContainer",rrr)
+//console.log("rr",rr);	
+console.log("rrr",rrr);	
 
+/*
 var chart = new CanvasJS.Chart("chartContainer", {
 	//theme: "light2", // "light1", "light2", "dark1", "dark2"
 	animationEnabled: true,
@@ -326,9 +346,11 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		]
 	}]
 });
+*/
 chart.render();
 
 }
+
 </script>
 </head>
 <body>
