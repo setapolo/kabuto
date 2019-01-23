@@ -477,3 +477,15 @@ rrr=["a","b","c","d","e"].reduceRight(function(p,c,i,a){
 console.log("rrr_r",rrr);
 console.log("rrr_r",rrr["a"]["b"]["c"]["d"]);
 
+
+
+//#014_001 closure cascading
+(function(j){
+	console.log("014_001 head",j);
+	var f = (function(i){
+		j=j+i;
+		console.log("014_001 body",j);
+		return f;
+	});
+	return f;
+})(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1);
