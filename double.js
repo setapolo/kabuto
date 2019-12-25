@@ -17,6 +17,20 @@ console.log(
 })({
   'm':[],
   'push':function(c){this.m.push(c)},
-  'reduce':function(f){return this.m}})
-  (4)(2)(3)(5)(8)()
+  'reduce':function( callback ) {
+    var t = this.m, len = t.length >>> 0, k = 0, value;
+    if ( arguments.length >= 2 ) {
+      value = arguments[1];
+    } else {
+      while ( k < len && ! k in t ) k++;
+      value = t[ k++ ];
+    }
+    for ( ; k < len ; k++ ) {
+      if ( k in t ) {
+         value = callback( value, t[k], k, t );
+      }
+    }
+    return value;
+  }})
+  (4)(2)(3)()
 )
