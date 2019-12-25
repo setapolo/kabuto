@@ -1,0 +1,19 @@
+<html><body></body></html>
+<script>
+//Web Curry Source
+	(function(rr){
+		return function(d){
+			return function(t){
+				return function(s){
+					var e = d.createElement(t);
+					e.innerHTML=s;
+					d.body.appendChild(e);
+					return arguments.callee;
+				}
+			}	
+		}
+	})({})(document)("div") //Curry Cascading
+						("this")
+						("is")
+						("test");
+</script>

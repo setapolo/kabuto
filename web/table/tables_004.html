@@ -1,0 +1,69 @@
+<html lang="en" class="wf-omnespro-n5-active wf-omnespro-n3-active wf-omnespro-n2-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+	<div id="d"></div>
+</html>
+<script>
+//rough
+
+
+
+
+var sss = (function(){
+/*
+ <tr id="word1">  
+    <td>word2</td>
+    <td>word1</td>
+    <td>word3</td>
+    <td>word4</td>
+    <td>word5</td>
+    <td>word6</td>
+  </tr> 
+*/
+}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
+
+
+
+
+
+
+	(function(s){
+		console.log("sec1:",s);
+		var ss = s.map(function(c,i,a){
+			return sss.replace(/word1/ig,c[1]).replace(/word2/ig,c[0]).replace(/word3/ig,c[2]).replace(/word4/ig,c[3]).replace(/word5/ig,c[4]).replace(/word6/ig,c[5]);
+		}).join("");
+		ss = '<table id="table_1" border=1 class="table table-striped">' + ss + "</table>";
+		document.getElementById("d").innerHTML=ss;
+	})(
+	(function(){
+
+return `
+Aグループ	クンザン	2018/11 インターン（内々定）	22	7	12	N3	Jul-19	C3+
+Aグループ	ダムチョ	2018/1 面接予定（セック）	25	7	12	N3	Jul-19	C3+
+Bグループ	ツェリン	2019/1 インターン面接（延長？）	24	7	12	NAT3	Jul-19	C3+
+Bグループ	イーシー	2019/1 インターン面接（延長？）	26	7	12	NAT3	Jul-19	C3
+Cグループ	リグパ	NAT3スコア確認予定（延長or帰国）	25	7	12	==	Jul-19	C3+
+Cグループ	ダワ	NAT3スコア確認予定（延長or帰国）	27	7	12	==	Jul-19	C3+
+D個別	デチェン	2018/12 面接中（PGよりオファー予定）	28	17	24	N3	Mar-19	C3
+D個別	キンザン	2018/12 面接中（内々定）	27	17	24	NAT3	Mar-19	C3
+一期生	トゥアン	IT以外の仕事斡旋開始予定	27 	14		NAT3	Mar-19	C3+
+一期生	タンディン	2018/11 インターン(内定)	23 	14	24	N2	Mar-19	C3+
+一期生	タイ	2018/10 インターン（内々定）	23 	11		N3	Mar-19	C3+
+一期生	チン	2018/10 インターン（内々定）	23 	11		N3	Mar-19	C3+
+一期生	チュン	2018/10 インターン（内々定）	24 	11		NAT2	Mar-19	C3+
+一期生	バ	2018/9 就職	27 	11		N3	Sep-23	C3+
+一期生	チィ	2018/9 就職	25 	14		N3	Sep-23	C3+
+一期生	トゥン	2018/11 就職	26 	14		N3	2023/11	C3+
+一期生	フォン	2018/12 就職	31 	14		N3	2023/12	C3+
+D個別	キンガ	2019/1 帰国予定（現地企業斡旋中）	28	17		NAT3	Mar-19	C3
+
+		`.split("\n").map(function(c,i,a){return c.split("\t")}).slice(1,-1);
+
+
+
+	})()
+	);
+
+
+</script>
