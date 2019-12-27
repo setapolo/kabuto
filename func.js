@@ -7,8 +7,9 @@ console.log(
         return f;
     })
     ([])
-    (function(){console.log(1)})
-    (function(){console.log(2)})
-    (function(){console.log(3)})
-    ().map(function(c){return c.call()})
+    (function(c){console.log(c);return c})
+    (function(c){console.log(c);return c})
+    (function(c){console.log(c);return c})
+    (function(c){console.log(c*2);return c})
+    ().map(function(c,i,a){return ( typeof c == "function" )?c.apply(a,[i]):0})
 )
