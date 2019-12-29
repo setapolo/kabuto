@@ -13,12 +13,12 @@ console.log(
         }
         return f;
     })
-    ({
-        map:function(){this['a']=this['a']['map'](this['apply']);return this;},
-        apply:function(c,i,a){return ( typeof c == "function" )?c['apply'](this['a'],[i]):0}
-    })
+    ({})
+    ("map")(function(){this['a']=this['a']['map'](this['apply']);return this;})
+    ("apply")(function(c,i,a){return (typeof c == "function")?c['apply'](this['a'],[i]):0})
     ("log")(function(c){console.log(c);return c})
+    ("rnd")(function(c){console.log(Math.round(Math.random(0)*10));return c})
     (/log/)("log")("log")
     ("log")(/log/)({})(8)
-    ("log")(true)().map()
+    ("rnd")(true)().map()
 )
