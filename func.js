@@ -11,5 +11,7 @@ console.log(
     (function(c){console.log(c);return c})
     (function(c){console.log(c);return c})
     (function(c){console.log(c*2);return c})
-    ().map(function(c,i,a){return ( typeof c == "function" )?c.apply(a,[i]):0})
+    ().map(function(c,i,a){
+        return ( typeof c == "function" )?c.apply(a,[i]):0}
+        )
 )
