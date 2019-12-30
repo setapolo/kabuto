@@ -1,11 +1,25 @@
+var document={createElement:function(){
+    return {innerHTML:""}
+    },
+    body:{appendChild:function(){}
+}
+};
+//var document=("createElement")("innerHTML")
+//                ({})("body")("appendChild")
+
 console.log(
     (function(rr){
         var s;
         var ss;
         var _a=[];
-        rr['apply']=function(c,i,a){ss=(typeof c == "function")?(c['apply'](rr['a'],[i,ss])):(0);return ss}
+        rr['apply']=function(c,i,a){ss=(typeof c == "function")?(c['apply'](rr,[i,ss,rr['props']])):(0);return ss}
         var f=function(c){
-            (typeof c == "object")  ?(_a=[])  :(0);
+            console.log(typeof c);
+            (typeof c == "object")  ?(function(){
+                                        _a=[];
+                                        rr['props']=c;
+                                        console.log("props",c);
+                                    }())      :(0);
             (typeof c == "string")  ?(s=c)    :(0);
             (typeof c == "function")?(rr[s]=c):(0);
             (typeof c == "number")  ?(function(){
@@ -22,6 +36,7 @@ console.log(
     })
     ({
         a:[],
+        props:{},
         push:function(c){this['a']['push'](c)},
         map:function(){this['a']=this['a']['map'](this['apply']);return this;}
     })
@@ -29,11 +44,20 @@ console.log(
     ("rnd")(function(c){return Math.random(c)})
     ("x10")(function(c,ss){return ss*10})
     ("round")(function(c,ss){return Math.round(ss)})
-    ({})(/log/)("log")("log")(1)
+    ("div")(function(c,ss,props){
+        console.log("div",props.text);
+        (function(d){
+            var e = d['createElement']("div");
+            e['innerHTML']=props.text;
+            d['body']['appendChild'](e);
+        })(document)
+    })
+    ({})(/log/)("log")(1)
     ({})("log")(/log/)(1)
     ({})("rnd")("x10")("round")(3)
     ({})("rnd")("x10")("round")(3)
     ({})("rnd")("x10")("round")(3)
     ("log")(1)
-    (true)()['map']()
+    ({text:"goo"})("div")(10)
+    (true)("rnd")()['map']()
 )
