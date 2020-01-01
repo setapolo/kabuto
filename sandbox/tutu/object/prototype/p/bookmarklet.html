@@ -1,0 +1,52 @@
+<html>
+<title>世界の天然　Object.prototype.p ブックマークレット</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35035226-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script src="http://www.suiyokai.org/tutu/object/prototype/x/p.js" ></script>
+<script src="http://www.suiyokai.org/tutu/object/prototype/x/x.js" ></script>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+sample=function(){
+	ahref = function(s){
+		return function(){return "<a href='"+this+"'>"+s+"</a>"};
+	};
+	Array.prototype.px=function(c){
+		var e=document.createElement(c+'');
+		this.each(function(){return e[this[0]]=this[1]});
+		return e;
+	};
+	Object.prototype.let=function(c){window[c]=this;};
+	Object.prototype.set=function(c,d){window[c][d]=this;};
+	"Object.prototype.p ブックマークレット".p("h3");
+	"ブックマークレットを手早く作成します".p(document);
+	"http://www.suiyokai.org/tutu/object/prototype/x/".p("".link);
+	"http://www.suiyokai.org/tutu/object/prototype/p/".p("".link);
+	send = function(ff,tt,vv){
+		var f=ff;var t=tt;var v=tt;
+		return function(){
+			window[f][v].p(ahref(window[t][v])).p(document);
+		};
+	};
+	[['type','text'],['value','bokmarklet test'],['id','book'],['size','60'],['onchange',send("d","b","value")]].px("input").p(document).let('b');
+	"".p(document);
+	[['type','text'],['value','text2'],['id','book2'],['cols','60'],['rows','10']].px("textarea").p(document).let('d');
+	"javascript:var%20d=document;var%20tx=d.selection?d.selection.createRange().text:d.getSelection();alert(tx);".set("d","value");
+	"".p(document);
+	[['type','button'],['value','bokmarklet test'],['id','book'],['size','60'],['onclick',send("d","b","value")]].px("input").p(document).let('f');
+	
+
+};
+sample();
+
+</script>

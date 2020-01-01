@@ -1,0 +1,183 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44372591-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<title>世界の天然　Object.prototype.p</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+sample=function(){
+Array.prototype.each = function(c){var _a=[];for (var i=0; i<this.length;++i){_a[i]=c.call(this[i],i);} return _a;};
+typeNameOf = function(c){
+	return Object.prototype.toString.call(c).slice(8, -1);
+}
+Object.prototype.p=function(c){
+	var _typeNameOf_c = typeNameOf(c);
+	var _typeNameOf_this = typeNameOf(this);
+
+	if(_typeNameOf_c == 'Undefined'){
+        return this;
+    }else if (_typeNameOf_c == 'Function'){
+		var s=c.call(this,this+'');
+		var e=document.createElement("div");
+		e.innerHTML=s.toString();
+		document['body'].appendChild(e);
+		return this;
+    }else if (_typeNameOf_c == 'Array'){
+        return this;
+    }else if (_typeNameOf_c == 'String'){
+		if (c == 'canvas'){
+			var e=document.createElement("canvas");
+			e.width="240";
+			e.height="140";
+			var e2 = e.getContext('2d');
+			e2.clearRect(0,0,240,140);
+			e2.strokeStyle='rgb(00,00,255)';	
+			if (_typeNameOf_this == 'Array'){
+				this.each(
+					function(i){
+						e2.beginPath();
+						if (typeof this[0]=='undefined'){
+							var x =((i+0)*10)+10;
+							var y =this+0;
+						}else{
+							var x =this[0]+0;
+							var y =this[1]+0;
+						}
+						e2.arc(x, y, 1, 0, Math.PI*2, false);
+						e2.closePath();
+						e2.stroke();
+				}
+				);
+			}else{
+				e2.font="30px Arial";
+				e2.fillText(this+'',10,50);
+			}
+			document['body'].appendChild(e);
+		}else if (c == 'option'){
+			var e = document.createElement("select");
+			if(_typeNameOf_this == 'Array'){
+			　	this.each(function(){
+					option = new Option(this+'', this+'');
+					e.options[e.options.length] = option;
+				  return this;
+				});
+			}
+			document['body'].appendChild(e);
+		}else{
+			var e=document.createElement(c+'');
+			var e2=document.createTextNode(this+'');
+			e.appendChild(e2);
+			document['body'].appendChild(e);
+		}
+		return this;
+    }else if (_typeNameOf_c == 'Boolean'){
+        return this;
+    }else if (_typeNameOf_c == 'Object'){
+		console.log(c['_p'].call(this,this));
+		console.log(this);
+		var e=document.createElement("div");
+		e.innerHTML=c['_p'].call(this,this).toString().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<BR>');
+		document['body'].appendChild(e);
+		return this;
+    }else if (_typeNameOf_c == 'RegExp'){
+        return this;
+    }else if (_typeNameOf_c == 'Number'){
+        return this;
+    }else if (_typeNameOf_c == 'Window'){
+		window.alert(this+'');
+		return this;
+	}else if (_typeNameOf_c =="HTMLDocument"){
+		if(_typeNameOf_this == 'Array'){
+			var e=c.createElement("table");
+			e['border']="1";
+			this.each(function(){
+				var e2=c.createElement("tr");
+				e.appendChild(e2);
+				var e3=c.createElement("td");
+				e3.innerHTML=this.toString();
+				e2.appendChild(e3);
+				}
+			);
+			c['body'].appendChild(e);
+		}else if(_typeNameOf_this == 'String'){
+			var e=c.createElement("div");
+			e.innerHTML=this.toString().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<BR>');
+			c['body'].appendChild(e);
+		}else{
+			c['body'].appendChild(e);
+		}
+		return this;
+	}else{
+        return this;
+    }
+};
+String.prototype.img =function(){return ('<img src="'+this+'">')}
+"http://www.suiyokai.org/tutu/object/prototype/p/5236c9cf77805NHVLxs6zi4_s.png".p("".img);
+"Object.prototype.p（未承諾α版）とは".p("H3");
+"Object.prototype.pはデバック、トライアンドエラー、急なお客様の要件などにすべて対応すべく、”ちゃっちゃと”手早いオブジェクトの可視化を目的とした関数です。".p(document);
+"ご利用方法".p("H3");
+"Objectのプロトタイプとして宣言しますので、あらゆるデータ型の末尾にpを付加してご用命いただけます。".p(document);
+"非破壊をコンセプトとしていますので、戻り値は基本呼び出した元のデータが返ります（破壊されたらバグ）".p(document);
+"ご利用例".p("H3");
+'"hello world".p(document); //"hello world"をdivタグとしてbodyに表示します'.p(document);
+'"hello world".p(window); //"hello world"をwindow.alertの引数として表示します'.p(document);
+
+'"hello world".p(); //"hello world"をデバッグ表示(現在console.logに対応)'.p(document);
+'(function(){return true}).p(document); //関数のソースコードをdivタグとしてbodyに表示します'.p(document);
+'(function(){return [1,2,3,4,5];})().p().join(":").p().split(":").p(document);//functionの実行結果をデバック出力し、その後joinしたものをさらにデバッグ出力、splitいれてbodyにdivタグとして出力（本来の用途）'.p(document);
+'[[10,10],[20,20],[30,30],[40,40]].p(document);//配列をtableとして表示します'.p(document);
+[[10,10],[20,20],[30,30],[40,40]].p(document);
+
+'["option a","option b","option c","option d"].p("option");'.p(document);
+["option a","option b","option c","option d"].p("option");
+
+'[[10,10],[20,20],[30,30],[40,40]].p("canvas");//canvasを作成し、xy座標としてグラフを表示します'.p(document);
+[[10,10],[20,20],[30,30],[40,40]].p("canvas");
+'[2013,12,24].p({_p:function(c){return c[0]+"/"+c[1]+"/"+c[2];}});'.p(document);
+[2013,12,24].p({_p:function(c){return c[0]+"/"+c[1]+"/"+c[2];}});
+["y","a","x"].p({_p:function(c){return c[0]+"="+c[1]+""+c[2];}});
+["y","2","x"].p({_p:function(c){return c[0]+"="+c[1]+""+c[2];}});
+["y","sin","x"].p({_p:function(c){return c[0]+"="+c[1]+"("+c[2]+")";}});
+["y","sin","x"].p({_p:function(c){return Date()+c[0]+"="+c[1]+"("+c[2]+")";}});
+"対応プラットフォーム、バージョン".p("H3");
+"現在firefox23.0.1にて開発評価を行っていますが、他のプラットフォームにも随時対応の予定でございます".p(document);
+"ライセンスについて".p("H3");
+"こんな息子でよかったらと、βリリースを検討中ですが、当面ご自由にご利用ください。承諾も不要です。".p(document);
+"開発コンセプト".p("H3");
+"本関数は、fasborn構文糖衣(仮)及び、それに利用するxとy関数の可視化のために作成されました。リリースに関してもコンセプトの検証を目的に行いました".p(document);
+"ヒストリ".p("H3");
+"2013.9.16 アルファ版リリース(v0.0.1)".p(document);
+"今後の開発予定".p("H3");
+"fasborn糖衣(仮)及びxとy関数の整理後、あらゆるデータの可視化をモットーにβ版のリリースを行う予定でございます".p(document);
+"注意点".p("H3");
+"ご利用の際に他のメソッドとの名前の衝突、いわゆる汚染が発生する場合があります。以下の名前に関してはご注意ください。利用名称に関してはベータ版までに整理を行う所存でございます。".p(document);
+"Object.prototype.p".p(document);
+"Array.prototype.each".p(document);
+"免責、お問い合わせ".p("H3");
+"メール等のお問い合わせは受け付けておりませんので、twitterの以下のアカウントまでご連絡いただけましたら幸いです".p(document);
+"https://twitter.com/twcritique".p("".link);
+"ソース".p("H3");
+"http://www.suiyokai.org/tutu/object/prototype/p/p.js".p("".link);
+
+};
+sample();
+
+
+
+</script>

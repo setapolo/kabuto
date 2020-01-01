@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35035226-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<title>cssSpriteを使ったアニメーションの実装例</title>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+Object.prototype.alert=function(){window.alert(this.toString())}
+	Object.prototype.$=function(){if(arguments.length>0){return document.getElementById(arguments[0]);}else{return document.getElementById(this.toString());}};
+
+	Element.prototype.addTextNode=function(s){_ss=document.createTextNode(s); this.appendChild(_ss);return this}
+	Element.prototype.isChildOf=function(c){c['appendChild'](this);return this}
+	Element.prototype._=function(n,v){this.setAttribute(n,v);return this}
+	Element.prototype.add=function(s){document.createElement(s).isChildOf(document.body);return this}
+	String.prototype.to_tag=function(s){return document.createElement(s).addTextNode(this).isChildOf(document.body);};
+	String.prototype.to_s_tag=function(s){return document.createElement(s)._("id",this)._("value",this).isChildOf(document.body);};
+
+"rca".to_s_tag("img")._("src","http://bit.ly/155FAbl");
+"cssSpriteを使ったアニメーションの実装例（レビュー中）".to_tag("div");
+"".to_tag("hr");
+"（レビュー中）cssSpriteを使ったアニメーションの実装例".to_tag("div");
+'(function(){cha.css("backgroundPosition",a[i++%4]);}).setTimeout(500)()'.to_tag("div");
+
+sample=function(){
+	Object.prototype.$=function(){if(arguments.length>0){return document.getElementById(arguments[0]);}else{return document.getElementById(this.toString());}};
+	Array.prototype.each =   function(c){var _a=[];for (var i=0; i<this.length       ;++i){_a[i]=c.call(this[i]);} return _a;};
+	Element.prototype.att=function(n,v){this.setAttribute(n,v);return this}
+	Element.prototype.tex=function(s){_ss=document.createTextNode(s); this.appendChild(_ss);return this}
+	Element.prototype.apto=function(c){c['appendChild'](this);return this}
+	Element.prototype.add=  function(s){     document.createElement(s).apto(document.body);return this}
+	Element.prototype.css=  function(k,v){this.style[k]=v;return this}
+	Element.prototype.css_px=  function(k,v){this.style[k]=v+"px";return this}
+	String.prototype.telm=function(s){return document.createElement(s).apto(document.body).tex(this);};
+	String.prototype.elm=function(s) {return document.createElement(s).apto(document.body).att("id",this).att("value",this);};
+	Object.prototype['is'  ]=function(_a){_a['_is'  ](this);return this;}
+
+
+	Object.prototype.print=function(c){var p_name="value";c[p_name]=this}
+
+/////////////	
+	window._setTimeout=function(c){
+		var root = c;
+		return function(){
+			root.apply();
+//			$("time").value=(count++)+(Date())+root+root["interval"];
+			window.setTimeout( this._setTimeout(root), root["interval"]);
+		}		
+	};
+	Function.prototype.setTimeout=function(t){
+		this["interval"] =t;
+		var task = window._setTimeout(this);
+		return function(){
+			window.setTimeout( task, this["interval"]);
+			return this;		
+		};
+	};
+////////
+	css_sprite=[];
+	css_sprite['_is']=function(c){
+			css_sprite=[["0 -74px"],["-56px -74px"],["-112px -74px"],["-168px -74px"]];
+	}
+	cha=[];
+/////////
+	cha="".telm("A").is(css_sprite).css("background","url('http://silveiraneto.net/wp-content/uploads/2009/03/warrior_2xzoom.png') no-repeat top left")
+	.css("display","block").css_px("height","80").css_px("width","56");
+	i=0;
+	(function(){cha.css("backgroundPosition",css_sprite[i++%4]);}).setTimeout(500)()
+
+
+};
+	sample();
+
+
+	"".elm("br").add("br");
+	"test".elm("img").att("src","http://silveiraneto.net/wp-content/uploads/2009/03/warrior_2xzoom.png");
+	"(cc) Silveira Neto".telm("div").add("br");
+	"http://silveiraneto.net/2009/04/14/my-free-charset-version-3-one-quadrillion-of-new-chars/".telm("A").att("href","http://silveiraneto.net/2009/04/14/my-free-charset-version-3-one-quadrillion-of-new-chars/");
+
+"".elm("br").add("br").add("br").add("br").add("br");
+"利用の際は下記をコピペして使えます".to_tag("div")
+"<html>".telm("div");
+"<body>".telm("div");
+"<\/body>".telm("div");
+"<\/html>".telm("div");
+'<script type="text/javascript">'.telm("div");
+
+String.line_feed='\n';
+String.prototype.del_first_line=function(){_a=this.split(String.line_feed);_a.shift(); return _a.join(String.line_feed)};
+String.prototype.del_last_line=function() {_a=this.split(String.line_feed);_a.pop()  ; return _a.join(String.line_feed)};
+sample.toString().del_first_line().del_last_line().to_tag("pre").add("br");
+"".to_s_tag("br");
+"<\/script>".telm("div");
+</script>

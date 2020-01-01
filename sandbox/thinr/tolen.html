@@ -1,0 +1,475 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+* {	margin:0;padding:0;}
+html {background:#fff;}
+body {margin:10px 0;font-size:75%;font-family:verdana, sans-serif;color:#333;line-height:150%;background:#fff;}
+a {color:#099;text-decoration:none;}
+a:hover	{color:#099;text-decoration:underline;}
+img {border: none;}
+ul {list-style:none;}
+body#tab_sample h1 {margin-bottom:2em;font-size:200%;font-weight:normal;line-height:100%;text-align:center;}
+body#tab_sample div#javascript_tab_sample {margin:20px auto 0 auto;	width:450px;text-align:left;}
+div#javascript_tab_sample ul#tab {margin:0;	padding:0;	border-bottom:1px solid #000;background-color:#fff;	float:left;	width:100%;}
+div#javascript_tab_sample ul#tab li {margin:0 0 0 1em;padding:0.2em 0;text-align:center;border:1px solid #000;border-bottom:none;float:left;width:5em;}
+div#javascript_tab_sample ul#tab li.selected {background-color:#000;}
+div#javascript_tab_sample ul#tab li.selected a {color:#fff;}
+div#javascript_tab_sample dl {margin:0;padding:1px;color:#000;border:1px solid #ccc;border-top:none;background-color:#fff;clear:both;}
+div#javascript_tab_sample dl dt {margin-bottom:1px;	padding-bottom:1px;	border-bottom:1px dotted #fff;}
+div#javascript_tab_sample dl dd {}
+div#javascript_tab_sample dl dd p {margin-bottom:1px;}
+.text {font-size: 16px;}
+</style>
+<title>thinner</title>
+<script src="thinner_files/raphael.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="javascript_tab_sample">
+<ul id="tab">
+<li class="selected" class="text"><a href="#w3c">main</a></li>
+<li class="" class="text"><a href="#xhtml">resource</a></li>
+<li class="" class="text"><a href="#css">inside</a></li>
+<li class="" class="text"><a href="#css2">network</a></li>
+<li class="" class="text"><a href="#css3">timer</a></li>
+<li class="" class="text"><a href="#css4">Info</a></li>
+</ul>
+<dl style="display: block;" id="w3c">
+<dd>
+<table border=1 >
+<tbody><tr><td colspan=2>
+<input value="run" onclick="s=$('s').value;(eval($('e').value)).p();" class="text" type="button">
+<input value="build" onclick="window.open(window.location.protocol+'//'+window.location.host+window.location.pathname+'?src='+encodeURIComponent($('e').value)+'&res='+encodeURIComponent($('s').value));" class="text" type="button">
+<input value="cut" onclick="with($('e')){println(value);value=''}" class="text" type="button">
+<input value="paste" onclick="with($('e')){value=$('clipboard').value}" class="text" type="button">
+<input value="mailto" onclick="with($('e')){location.href = 'mailto:address?subject=title&amp;body='+value;}" class="text" type="button">
+<input value="download" onclick="location.href = 'data:application/octet-stream,'+encodeURIComponent($('e').innerHTML);" class="text" type="button"><br>
+<input value="sly"><input type="button" value="Serach"><br>
+</td></tr>
+<tr>
+<td width=30%>
+<textarea rows="6" id="s" onchange="text_change()" class="text" style="width:35%">
+1	あ	a
+2	い	b
+3	う	c
+4	え	d
+5	お	e
+6	か	f
+</textarea><textarea rows="6" id="s2" onchange="text_change()" class="text"  style="width:35%">
+1	あ	a
+2	い	b
+3	う	c
+4	え	d
+5	お	e
+6	か	f
+</textarea><br>
+<textarea rows="7" id="e" class="text" style="width:35%">new Date;</textarea>
+<textarea rows="7" id="e2" class="text" style="width:35%">new Date;</textarea><br>
+<br>
+</td>
+</tr><tr>
+<td style="vertical-align: top;">
+<div style="overflow-y:auto;height:180px" id="source.list">
+<li onclick="this.title" title="abc">drag.circle(needs raphael.js)</li>
+<li onclick="$('e').value=this.title" 
+title="
+	$('e').style.height=window.innerHeight/2;
+	$('e').style.width=window.innerWidth/3*2;
+	$('e').style.fontSize='24px';
+	$('e').style.color='green';
+">color change</li>
+<li onclick='$("e").value=$("efg").innerHTML'>loading
+<div id="efg" style="display: none;">
+jload("test.json")
+//test json
+callback( "var namespace='test.abc.efg'" );
+</div>
+</li>
+<li onclick='$("e").value=$("hij").innerHTML'>selection
+<div id="hij" style="display: none;">
+tx=""
+            if (window.getSelection) {     
+                var selectionRange = window.getSelection ();
+                selText = selectionRange.toString ();
+				if (selectionRange.rangeCount > 0) {
+                    var range = selectionRange.getRangeAt (0);
+                    var docFragment = range.cloneContents ();
+                    var tmpDiv = document.createElement ("div");
+                    tmpDiv.appendChild (docFragment);
+                    tx = tmpDiv.innerHTML;
+                }
+            }
+		alert(tx);
+</div>
+</li>
+<li onclick='$("e").value=$("klm").innerHTML'>download
+
+<div id="klm" style="display: none;">
+location.href = 'data:application/octet-stream,'+encodeURIComponent($('e').value);
+</div>
+</li>
+<li onclick='$("e").value=$("nop").innerHTML'>each
+<div id="nop" style="display: none;">
+String.prototype.each = function(reg,c) {for (var i=0;i<this.split(reg).length; ++i) {c.call(this.split(reg)[i]);}};s.each(/\n/,function(){println(":"+this.each(/\t/,function(){this;})+"<br/>");});
+Array.prototype.each=null 
+</div>
+</li>
+<li  onclick='println(eval($("encodeURIComponent").innerHTML))'>encodeURIComponent(s);
+<div id="encodeURIComponent" style="display: none;">
+encodeURIComponent($("e").value);
+</div>
+</li>
+
+<li  onclick='$("e").value = $("conjugation").innerHTML)'>conjugation
+
+<textarea id="conjugation" style="display: none;">
+Array.prototype.each = function(c) {var _a=[];for (var i=0; i<this.length; ++i){_a[i]=c.call(this[i]);} return _a;};
+Array.prototype.conjugation=function(a,b,c){
+return this.each(function(){return eval(a) + this.each(function(){return eval(b)})+ eval(c)});
+};
+[["a", "b", "c", "d"], ["e", "f", "g", "h"],["i", "j", "k", "l"]].conjugation("'['","'('+this+')'","']'");
+</textarea>
+</li>
+<li  onclick='$("e").value = $("quadrisect").innerHTML'>quadrisect
+<textarea id="quadrisect" style="display: none;">
+Array.prototype.each = function(c) {var _a=[];for (var i=0; i<this.length; ++i){_a[i]=c.call(this[i]);} return _a;};
+
+String.prototype.quadrisect=function(a,b){
+return this.split(a).each(function(){return this.split(b);});
+};
+"a-b-c;e-f-g;h-i-j;".quadrisect(/-/,/;/);
+</textarea>
+</li>
+
+<li  onclick='$("e").value = $("HTMLTableElement.prototype.toArray").innerHTML'>HTMLTableElement.toArray
+<textarea id="HTMLTableElement.prototype.toArray" style="display: none;">
+HTMLTableRowElement.prototype.each=function(){
+var _a=[];for (var i=0; i<this.cells.length; ++i){_a[i]=this.cells.item(i).firstChild.data;} return _a;
+}
+HTMLTableElement.prototype.toArray=function(){
+var _a=[];for (var i=0; i<this.rows.length; ++i){_a[i]=this.rows.item(i).each();} return _a;
+}
+var newdiv = document.createElement("div");
+newdiv.innerHTML=s;
+newdiv.firstChild.toArray();
+</textarea>
+</li>
+<li  onclick='$("e").value = $("HTMLSelectElement.prototype.toArray").innerHTML'>HTMLSelectElement.toArray
+<textarea id="HTMLSelectElement.prototype.toArray" style="display: none;">
+HTMLSelectElement.prototype.toArray=function(){
+var _a=[];for (var i=0; i<this.length; ++i){_a[i]=this.options.item(i).firstChild.data;} return _a;
+}
+var newdiv = document.createElement("div");
+newdiv.innerHTML=s;
+newdiv.firstChild.toArray();
+</textarea>
+</li>
+
+<li  onclick='$("e").value = $("xargs").innerHTML'>xargs
+<textarea id="xargs" style="display: none;">
+Array.prototype.each = function(c) {var _a=[];for (var i=0; i<this.length;
+++i){_a[i]=c.call(this[i]);} return _a;};
+Array.prototype.xargs=function(s){this.each(function(){return s=eval(this.toString())});return s;}
+["s+1","s+1","s+1"].xargs(1); 
+</textarea>
+</li>
+
+
+</div>
+</td>
+</tr></tbody></table>
+<hr>
+</dd>
+</dl>
+<dl style="display: none;" id="xhtml">
+<dt>resource</dt>
+<dd>
+<table>
+
+<tbody><tr><td>
+
+<input value="s.toArray" onclick="eval($('s.toArray').value)" class="text" type="button">
+<textarea rows="3" cols="60" id="s.toArray" style="display:none">
+Array.prototype.each = function(c) {var _ss="";for (var i=0; i<this.length; ++i){_ss+=c.call(this[i]);} return _ss;}; 
+$("_a").innerHTML="<select id='a' class='text' style='width:180px;'>"+$("s").value.split("\n").each(function(){return "<option value='"+this+"'>"+this+"</option>"; })+"</select>";
+</textarea>
+<input value="s.toHash" onclick="eval($('s.toHash').value)" class="text" type="button">
+<textarea rows="3" cols="60" id="s.toHash" style="display:none">
+Array.prototype.each = function(c) {var _ss="";for (var i=0; i<this.length; ++i){_ss+=c.call(this[i]);} return _ss;};
+$("_h").innerHTML="<table border=1 id='h'>"+$("s").value.split(/\n/).each(function(){var _a=this.split(/\t/);_s=_a.shift();return "<tr><td>"+_s+"</td><td>"+_a.join("\t")+"</td></tr>"})+"</table>";
+</textarea>
+<input value="s.toTable" onclick="eval($('s.toTable').value)" class="text" type="button">
+<textarea rows="3" cols="60" id="s.toTable" style="display:none">
+Array.prototype.each = function(c) {var _ss="";for (var i=0; i<this.length; ++i){_ss+=c.call(this[i]);} return _ss;}; 
+$("_m").innerHTML="<table border=1 id='m'>"+$("s").value.each(/\n/,function(){return "<tr>"+this.split(/\t/).each.call(this,function(){return "<td>"+this+"</td>";})+"</tr>";})+"</table>"; 
+</textarea>
+<br>
+<div id="_a"></div><input value="a.toString()" onclick="eval($('a.toArray').value)" class="text" type="button">
+<textarea rows="3" cols="60" id="a.toArray" style="display:none">
+HTMLOptionsCollection.prototype.each = function(c) {var _ss="";for (var i=0; i<this.length; ++i){_ss+=c.call(this[i]);} return _ss;}; 
+$("s").value=$("a").options.each(function(){return this.value+"\n"; })
+</textarea>
+
+<br>
+
+<div id="_h">
+</div>	
+<div id="_m">
+</div>	
+
+<br>
+clipBoard<br>
+<textarea rows="3" cols="50" id="clipboard" class="text"></textarea><br>
+<input value="run" onclick="eval($('clipboard').value)" class="text" type="button">
+</td>
+<td style="vertical-align: top;">
+<li  onclick='println(eval($("decodeURIComponent").innerHTML))'>decodeURIComponent(s);
+<div id="decodeURIComponent" style="display: none;">
+decodeURIComponent($("s").value);
+
+</div>
+</li>
+<li>
+Document
+</li>
+<li>
+Date
+</li>
+<li>
+Array
+</li>
+<li>
+Number
+</li>
+<li>
+Window
+</li>
+
+<li>
+Node
+</li>
+<li>
+Range
+</li>
+<li>
+Style
+</li>
+<li>
+Event
+</li>
+<li>
+Object
+</li>
+</td>
+</tr>
+
+</tbody></table>
+</dd>
+</dl>
+<dl style="display: none;" id="css">
+<dt>Inside</dt>
+<dd>
+<textarea rows="3" cols="60" id="book" style="display: none;">
+
+</textarea><br>
+onLoad<br>
+<textarea rows="20" cols="60" id="on_load" class="text"> 
+jload=function(url){
+var s = document.createElement("script"); s.type = "text/javascript";
+s.src =url; 
+println(url,"H3");
+document.getElementsByTagName("head")[0].appendChild(s); };
+echo=function(s){ 
+$('comment').innerHTML=s;
+return s;
+};
+println=function (s, type){ 
+if(!type){ type='out'; }
+if((s=String(s))){ 
+echo(s); 
+var newdiv = document.createElement("div");
+newdiv.appendChild(document.createTextNode(s));
+newdiv.addEventListener('click', function(){$('clipboard').value=s},false);
+$('out').appendChild(newdiv); } 
+};
+
+jload("raphael.js");
+
+eval("String.prototype.each = function(reg,c) {var ss='';for (var i=0;i<this.split(reg).length; ++i) {ss+=c.call(this.split(reg)[i]);};return ss;};");
+argv=new Array;
+window.location.search.substring(1).each(/&/,function(){return argv[this.split(/=/)[0]]=decodeURIComponent(this.split(/=/)[1])});
+if(argv["src"]){ $('e').value=argv["src"]; }
+if(argv["res"]){ $('s').value=argv["res"]; }
+
+if (document.cookie){ cookies=document.cookie.split(/;/);println(cookies,"H3"); } 
+
+var newdiv = document.createElement("a");
+newdiv.href = encodeURI(eval($('book').value.replace(/\r/g,'').replace(/\n/g,'')));
+newdiv.appendChild(document.createTextNode("src"));
+$('out').appendChild(newdiv);
+
+</textarea>
+
+included:
+<div id="included" class="text"></div>
+</dd>
+
+</dl>
+<dl style="display: none;" id="css2">
+<dt>Network</dt>
+<input size="40" name="namae" id="text" class="text" type="text">
+<input value="jsLoad" name="button2" onclick='jload($("text").value);' class="text" type="button"><br>
+<dd>
+</dd>
+</dl>
+<dl style="display: none;" id="css3">
+<dt>Timer</dt>
+<dd>
+<textarea rows="6" cols="60" id="timer_s" onchange="" class="text">echo(new Date);</textarea><br>
+delay:<input size="4" name="namae" id="delay" class="text" value="5000" type="text">
+
+<input value="set" name="button2" onclick="println(eval($('timer_e').value));" class="text" type="button">timer_id:<input size="4" name="namae" id="timer_id" class="text" type="text">
+<input value="clear" name="button2" onclick="println(clearTimeout($('timer_id').value));" class="text" type="button"><br>
+<textarea rows="6" cols="60" id="timer_e" onchange="" class="text">	timer=function() {
+		eval($('timer_s').value);
+		$('timer_id').value = setTimeout(timer , $('delay').value);
+	}
+		$('timer_id').value = setTimeout(timer , $('delay').value);
+</textarea>
+<br>
+
+</dd>
+</dl>
+<dl style="display: none;" id="css4">
+<dt>Tolen v0.01</dt>
+
+Thanks for source code<br>
+<li>Javascript shell
+</li><li>http://www.squarefree.com/shell/
+
+</li><li>Tab sample
+</li><li>http://hyper-text.org/archives/2007/09/tab_sample.shtml
+
+<br>
+<dd>
+</dd>
+</li></dl>
+
+</div>
+
+<table><tbody><tr><td>
+<img id="icon_here" height="48" width="48">
+</td><td>
+<div id="comment" class="text" onclick="$('clipboard').value=$('comment').innerHTML"></div>
+</td>
+</tr>
+</tbody></table>
+<div id="out" class="text"></div>
+
+<div id="holder"></div>
+<a href="javascript:%20tx%3D%22%22%3B%20if%20(window.getSelection)%20%7B%20var%20selectionRange%20%3D%20window.getSelection%20()%3B%20selText%20%3D%20selectionRange.toString%20()%3B%20if%20(selectionRange.rangeCount%20%3E%200)%20%7B%20var%20range%20%3D%20selectionRange.getRangeAt%20(0)%3B%20var%20docFragment%20%3D%20range.cloneContents%20()%3B%20var%20tmpDiv%20%3D%20document.createElement%20(%22div%22)%3B%20tmpDiv.appendChild%20(docFragment)%3B%20tx%20%3D%20tmpDiv.innerHTML%3B%20%7D%20%7D%20subw=window.open('http://freezing-rain-12.heroku.com/thinner.html?res='+encodeURIComponent(tx)).document;">thin</a>
+
+<script type="text/javascript" charset="utf-8">
+//Syntactic sugar--$
+Object.prototype.$=function(){
+	if(arguments.length>0)
+		return document.getElementById(arguments[0]);
+	else
+		return document.getElementById(this.toString());
+};
+
+//sess and eval model for String
+String.prototype.e="";
+String.prototype.eval=function(){
+	return eval(this.toString());
+};
+String.prototype.sess=function(e){
+    s=this.toString;
+	this.e=e.toString;
+	return e.eval();
+};
+
+String.prototype.toSource=function(){
+return "s='"+this+"';eval('"+this.e+"')";
+};
+
+String.prototype.toSess=function(){
+return "s='"+this+"';eval('"+this.e+"')";
+};
+
+//STDOU and STDIN for Device
+stdout=$("comment");
+stdin=$("s");
+errout=$("comment");
+
+Object.prototype.p =function (){
+stdout.innerHTML = this.toString();
+return this.toString();
+};
+
+String.prototype.euc=function(){
+return encodeURIComponent(this.toString());
+};
+//
+String.prototype.duc=function(){
+return decodeURIComponent(this.toString());
+};
+//
+
+
+var tab = {
+   init: function(){
+      var tabs = this.setup.tabs;
+      var pages = this.setup.pages;
+      
+      for(i=0; i<pages.length; i++) {
+         if(i !== 0) pages[i].style.display = 'none';
+         tabs[i].onclick = function(){ tab.showpage(this); return false; };
+      }
+   },
+   showpage: function(obj){
+      var tabs = this.setup.tabs;
+      var pages = this.setup.pages;
+      var num;
+      for(num=0; num<tabs.length; num++) {
+         if(tabs[num] === obj) break;
+      }
+      for(var i=0; i<pages.length; i++) {
+         if(i == num) {
+            pages[num].style.display = 'block';
+            tabs[num].className = 'selected';
+         }
+         else{
+            pages[i].style.display = 'none';
+            tabs[i].className = null;
+         }
+      }
+   }
+}
+tab.setup = {
+   tabs: $('tab').getElementsByTagName('li'),
+   pages: [
+      $('w3c'),
+      $('xhtml'),
+      $('css'),
+      $('css2'),
+      $('css3'),
+      $('css4')
+   ]
+}
+tab.init();
+window.onload = function () {
+if(navigator.userAgent.match(/iPad/)){
+//	$("e").style.height=window.innerHeight/2;
+//	$("e").style.width=window.innerWidth/3*2;
+//	$("e").style.fontSize="24px";
+	}else{
+//	$("e").style.height=window.innerHeight/2;
+//	$("e").style.width=window.innerWidth/3*2;
+//	$("e").style.fontSize="24px";	
+}
+
+eval($('on_load').value);
+};
+</script>
+</body></html>

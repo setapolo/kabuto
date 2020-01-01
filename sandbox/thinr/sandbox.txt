@@ -1,0 +1,834 @@
+
+ 
+
+(8).times(function(){abc=g.ellipse((500).rand(),(500).rand(),4,8).attr({fill:Raphael.getColor(),opacity:.5}).draggable().pushin(Raphael.gravities);});
+
+
+Raphael.el.fill = function (c) {
+	return this.attr{fill:c};
+}
+
+
+            window.onload = function () {
+                var remove = spinner("holder", 70, 120, 12, 25, "#fff");
+                var form = {
+                    form: document.getElementsByTagName("form")[0],
+                    r1: document.getElementById("radius1"),
+                    r2: document.getElementById("radius2"),
+                    count: document.getElementById("count"),
+                    width: document.getElementById("width"),
+                    color: document.getElementById("color")
+                };
+                form.form.onsubmit = function () {
+                    remove();
+                    remove = spinner("holder", +form.r1.value, +form.r2.value, +form.count.value, +form.width.value, form.color.value);
+                    return false;
+                };
+            };
+            
+            function spinner(holderid, R1, R2, count, stroke_width, colour) {
+                var sectorsCount = count || 12,
+                    color = colour || "#fff",
+                    width = stroke_width || 15,
+                    r1 = Math.min(R1, R2) || 35,
+                    r2 = Math.max(R1, R2) || 60,
+                    cx = r2 + width,
+                    cy = r2 + width,
+                    r = Raphael(holderid, r2 * 2 + width * 2, r2 * 2 + width * 2),
+                    
+                    sectors = [],
+                    opacity = [],
+                    beta = 2 * Math.PI / sectorsCount,
+
+                    pathParams = {stroke: color, "stroke-width": width, "stroke-linecap": "round"};
+                    Raphael.getColor.reset();
+                for (var i = 0; i < sectorsCount; i++) {
+                    var alpha = beta * i - Math.PI / 2,
+                        cos = Math.cos(alpha),
+                        sin = Math.sin(alpha);
+                    opacity[i] = 1 / sectorsCount * i;
+                    sectors[i] = r.path([["M", cx + r1 * cos, cy + r1 * sin], ["L", cx + r2 * cos, cy + r2 * sin]]).attr(pathParams);
+                    if (color == "rainbow") {
+                        sectors[i].attr("stroke", Raphael.getColor());
+                    }
+                }
+                var tick;
+                (function ticker() {
+                    opacity.unshift(opacity.pop());
+                    for (var i = 0; i < sectorsCount; i++) {
+                        sectors[i].attr("opacity", opacity[i]);
+                    }
+                    r.safari();
+                    tick = setTimeout(ticker, 1000 / sectorsCount);
+                })();
+                return function () {
+                    clearTimeout(tick);
+                    r.remove();
+                };
+            }
+
+
+http://design.canonical.com/brand/Examples/Emoticons/emoticons.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 10.0, SVG Export Plug-In . SVG Version: 3.0.0 Build 77)  --><svg enable-background="new 0 0 176.665 150.154" height="150.154" i:pageBounds="0 792 612 0" i:rulerOrigin="0 0" i:viewOrigin="216.9995 471" overflow="visible" space="preserve" viewBox="0 0 176.665 150.154" width="176.665" xmlns="http://www.w3.org/2000/svg" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <metadata>
+    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work rdf:about="">
+        <dc:title>Blueberry Muffin</dc:title>
+        <dc:description>Blueberry Muffin</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+
+            <rdf:li>food</rdf:li>
+            <rdf:li>muffin</rdf:li>
+            <rdf:li>carbohydrate</rdf:li>
+            <rdf:li>menu</rdf:li>
+            <rdf:li>blueberry</rdf:li>
+          </rdf:Bag>
+
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://www.openclipart.org/">
+            <dc:title>Open Clip Art Project</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent rdf:about="http://web.resource.org/cc/PublicDomain">
+
+            <dc:title>Gerald G.</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent rdf:about="http://web.resource.org/cc/PublicDomain">
+            <dc:title>Public Domain</dc:title>
+          </cc:Agent>
+        </dc:rights>
+
+        <dc:date>2005/05/30</dc:date>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
+
+        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g i:dimmedPercent="50" i:layer="yes" i:rgbTrio="#4F008000FFFF" id="Layer_1">
+    <g>
+      <path clip-rule="evenodd" d="     M55.867,16.578c-0.288,0.72-1.908,1.764-4.716,2.844c-2.952,1.044-8.172,1.44-12.312,3.816     c-4.248,2.304-8.496,7.848-12.312,10.404c-3.888,2.412-8.208,1.944-10.44,4.716c-2.304,2.808-0.468,8.1-2.844,11.844     c-2.52,3.6-9.54,6.264-11.34,9.936c-1.908,3.492-3.276,7.416,0.468,11.376c3.744,3.924,10.872,8.027,21.78,12.313     c3.996,17.135,7.128,30.168,9.936,39.779c2.664,9.432,4.716,15.121,6.156,17.064c-0.036,2.844,4.608,5.004,14.22,6.623     c9.648,1.621,30.636,3.025,43.092,2.844c12.348-0.432,22.176-1.836,30.313-4.752c4.68-5.58,8.891-13.031,12.779-23.184     c3.889-10.115,7.309-22.283,10.404-36.936c5.111-0.648,9.035-2.123,12.313-4.283c3.059-2.27,4.391-6.517,6.623-9.001     c2.268-2.556,6.156-3.816,6.66-6.156c0.217-2.556-2.377-6.048-4.283-8.532c-1.945-2.556-4.609-4.392-6.625-6.624     c-2.016-2.34-3.707-4.428-5.221-7.092c-1.654-2.736-0.18-6.984-3.779-9c-3.6-2.088-12.455-0.504-17.531-3.312     c-5.186-2.88-8.533-10.8-13.248-13.752c-4.861-3.06-10.98-2.16-15.156-4.248c-4.141-2.232-6.049-6.372-9.469-8.532     c-3.492-2.304-6.912-4.572-11.375-4.716C85.207-0.09,78.547,2.79,73.867,3.797c-4.716,0.9-8.892-0.792-11.844,1.44     C58.927,7.434,57.019,11.034,55.867,16.578z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+
+      <path clip-rule="evenodd" d="     M69.691,6.174c-2.556,0.288-4.284-0.576-6.012,0.72c-1.836,1.224-3.564,4.284-4.608,6.696c-1.152,2.304,0.576,5.364-1.764,7.092     c-2.484,1.584-9.252,1.836-12.384,2.844c-3.24,0.864-3.42,0.9-6.372,3.168c-3.168,2.232-8.028,7.956-11.664,10.368     c-3.708,2.34-8.496,0.828-9.936,3.528c-1.548,2.556,2.376,8.712,1.08,11.952c-1.368,3.096-9.972,5.04-8.856,7.092     c1.08,2.052,7.668,2.7,15.588,5.292c7.956,2.52,20.916,7.488,31.5,9.9c10.404,2.303,31.032,2.917,30.78,3.924     c-0.504,0.863-22.536,2.303-32.904,1.404c-10.476-1.045-20.808-5.005-29.052-7.453c-8.424-2.628-16.812-7.632-20.16-7.776     c-3.276-0.216-3.816,3.78,0.72,6.732c4.536,2.916,14.688,7.559,26.172,10.62c11.412,2.988,27.252,6.049,42.12,7.092     c14.796,0.9,31.212,0.324,46.044-1.439c14.76-1.836,36.684-8.064,41.76-9.539c4.824-1.586-6.012-0.217-12.385,0.359     c-6.479,0.432-26.063,3.313-25.848,2.809c0.324-0.613,18.9-3.637,27.252-6.013c8.281-2.412,18.793-5.94,21.961-8.496     c3.061-2.7-1.691-4.572-3.564-7.416c-2.016-3.024-6.156-6.156-8.137-9.936c-2.088-3.78-0.287-10.044-3.887-12.384     c-3.816-2.376-12.637,0.792-17.713-1.764c-5.004-2.7-7.668-10.872-12.023-13.824c-4.535-2.988-9.648-1.548-14.508-3.888     c-4.969-2.52-10.404-8.136-14.508-10.62c-4.141-2.52-7.092-3.888-10.26-4.248c-3.312-0.432-6.156,1.62-9.216,2.124     C75.775,5.598,72.247,5.778,69.691,6.174z" fill="#F2C802" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M44.203,136.098c-2.88-9-13.212-44.027-13.788-48.168c-0.54-4.031,9.036,23.111,10.26,24.084     c1.008,0.756-4.428-19.152-3.528-18.756c0.936,0.359,7.272,20.951,8.856,21.24c1.332,0.072-1.188-19.225-0.36-19.836     c0.828-0.469,3.564,16.559,5.292,16.631c1.62-0.18,3.384-17.459,4.608-16.992c1.116,0.541,1.152,19.693,2.484,19.836     c1.188-0.107,3.6-24.91,5.292-19.836c1.62,5.258,5.328,45.721,4.608,50.293c-0.864,4.211-7.668-24.156-9.18-24.443     c-1.548-0.182,0.9,22.318,0,22.643c-1.008,0.037-4.896-20.988-5.688-21.563c-0.792-0.469,1.26,18.07,0.72,18.395     c-0.756,0.037-4.104-17.314-4.608-17.352c-0.504,0.037,2.772,17.531,1.764,17.352c-1.152-0.504-7.56-19.188-8.136-19.115     c-0.576,0.18,4.248,17.459,4.608,20.16C47.623,143.227,46.975,144.846,44.203,136.098z" fill="#E4E877" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M136.616,104.563c-1.404,6.623-9.109,29.699-10.621,32.58c-1.619,2.627,2.412-15.912,1.404-15.912     c-1.225,0.07-6.732,15.912-7.775,16.271c-1.045,0.18,2.734-14.977,1.764-14.508c-1.117,0.539-7.92,22.031-7.777,17.676     c0.109-4.68,7.201-40.537,8.496-44.244c1.225-3.527-2.051,22.932-1.08,23.004c0.9-0.072,5.293-22.969,6.373-23.004     c0.828-0.072-1.729,22.428-0.721,22.645c1.117,0.035,5.293-19.045,7.092-21.564C135.463,95.094,137.803,97.865,136.616,104.563z" fill="#E4E877" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M114.655,101.395c-1.691-5.58-3.348-7.813-4.969-7.094c-1.727,0.758-3.238,4.609-4.932,11.701     c-1.943-8.893-3.672-13.355-5.328-13.824c-1.691-0.469-3.168,3.313-4.572,11.34c-2.986-6.553-5.219-9.576-7.091-9.217     c-1.872,0.396-3.168,4.033-3.888,11.342c-2.232-7.777-4.14-11.773-6.012-12.385c-1.944-0.576-4.896,0.9-4.968,8.855     c-0.036,8.029,2.844,32.617,4.608,38.197c1.62,5.326,3.384,3.168,5.292-6.336c1.944,7.199,3.708,10.871,5.292,11.303     c1.548,0.324,2.808-2.736,3.923-9.18c1.693,6.408,3.277,9.611,4.609,9.9c1.332,0.18,2.555-2.557,3.527-8.496     c1.691,5.256,3.203,7.561,4.932,7.057c1.621-0.576,3.275-3.061,4.969-10.225C111.667,127.063,113.106,116.227,114.655,101.395z" fill="#E4E877" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M109.686,42.354c2.629,0.468,4.572,0.972,5.689,1.8c1.08,0.756,1.475,1.692,1.043,2.808c2.664-2.52,5.256-4.068,7.777-4.932     c2.52-0.828,4.752-0.828,7.092,0c-0.756-3.96-2.449-6.516-4.934-7.812c-2.627-1.368-7.523-1.368-10.26,0     C113.288,35.55,111.2,38.213,109.686,42.354z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M112.17,41.31c1.549-0.108,2.557-0.036,3.564,0.36c0.9,0.36,1.439,0.9,1.764,1.764c2.701-1.62,4.752-2.592,6.697-3.204     c1.799-0.612,3.275-0.72,4.283-0.324c-1.477-2.016-3.133-3.276-4.969-3.924c-1.943-0.72-4.535-0.9-6.371,0     C115.231,36.882,113.575,38.61,112.17,41.31z" fill="#2161A1" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M58.387,46.242c-2.484,0.072-3.996,1.188-4.932,3.204c-0.828,2.052-1.08,4.86-0.36,8.856c-5.508-3.564-8.46-6.588-8.856-9.216     c-0.432-2.736,3.96-5.832,6.372-6.372C52.951,42.209,55.543,43.434,58.387,46.242z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M55.219,44.837c-2.52-0.72-4.284-0.972-5.688-0.36c-1.44,0.504-2.772,1.728-2.484,3.528c0.252,1.728,1.512,3.924,3.924,6.732     c-0.54-2.34-0.324-4.392,0.36-6.012C52.015,46.961,53.311,45.846,55.219,44.837z" fill="#2161A1" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M127.04,19.35c2.375-1.404,4.57-1.944,6.73-1.764c2.088,0.108,4.969,0.036,6.014,2.844c0.898,2.808,0.826,7.272-0.361,13.788     c-2.699-2.34-5.004-4.572-7.055-7.092C130.243,24.605,128.514,22.014,127.04,19.35z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+
+      <path clip-rule="evenodd" d="     M129.522,21.114l7.094,7.812c1.439-2.628,1.979-4.608,1.764-6.372c-0.217-1.872-1.836-3.6-3.205-3.924     C133.663,18.342,131.827,19.169,129.522,21.114z" fill="#2161A1" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M19.111,38.07c-1.26-2.448-1.548-4.716-1.26-6.804c0.216-2.232,0.432-5.004,3.276-5.796c2.88-0.684,7.272-0.36,13.716,1.368     c-2.448,2.556-4.968,4.608-7.56,6.552C24.583,35.262,21.991,36.773,19.111,38.07z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M21.055,35.766l8.28-6.516c-2.412-1.692-4.536-2.304-6.228-2.232c-1.872,0.072-3.744,1.368-4.104,2.916     C18.643,31.374,19.327,33.318,21.055,35.766z" fill="#2161A1" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M67.891,24.39c2.772-8.424,5.616-12.528,8.676-12.6c3.024,0,6.228,3.996,9.612,12.42c-3.636-0.936-6.84-1.332-9.9-1.332     C73.255,22.877,70.411,23.382,67.891,24.39z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M71.455,21.114c0.144-3.384,0.972-5.508,2.484-6.372c1.512-0.9,4.932-0.072,6.372,1.08c1.332,1.044,1.764,2.808,1.44,5.292     c-1.332-0.288-2.916-0.36-4.608-0.36C75.451,20.753,73.507,20.826,71.455,21.114z" fill="#2161A1" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M119.911,68.273c2.736-8.388,5.688-12.636,8.713-12.6c3.059-0.036,6.156,4.068,9.576,12.456c-3.637-1.008-6.842-1.368-9.9-1.368     C125.274,66.762,122.43,67.266,119.911,68.273z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M123.51,64.998c0.145-3.42,0.973-5.436,2.484-6.336c1.512-0.864,4.932-0.144,6.373,1.044c1.26,1.044,1.727,2.808,1.402,5.292     c-1.439-0.252-2.879-0.36-4.607-0.324C127.434,64.638,125.598,64.746,123.51,64.998z" fill="#2161A1" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M76.423,58.662c2.628,0.396,4.572,0.936,5.688,1.764c1.08,0.756,1.476,1.692,1.044,2.808c2.664-2.521,5.256-4.068,7.775-4.932     c2.521-0.828,4.752-0.828,7.092,0c-0.826-3.96-2.482-6.516-4.967-7.812c-2.629-1.368-7.524-1.368-10.26,0     C79.987,51.894,77.863,54.521,76.423,58.662z" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+      <path clip-rule="evenodd" d="     M78.907,57.582c1.548-0.108,2.556-0.036,3.564,0.36c0.9,0.36,1.44,0.9,1.764,1.764c2.7-1.548,4.752-2.556,6.695-3.168     c1.836-0.612,3.205-0.684,4.248-0.36c-1.404-2.016-3.096-3.276-4.932-3.924c-1.98-0.72-4.428-0.9-6.372,0     C81.967,53.154,80.311,54.882,78.907,57.582z" fill="#2161A1" fill-rule="evenodd" i:knockout="Off" stroke="#000000" stroke-miterlimit="10" stroke-width="0.036"/>
+
+    </g>
+  </g>
+</svg>
+
+
+                var r = Raphael("holder", 620, 420),
+                    discattr = {fill: "#fff", stroke: "none"};
+                r.rect(0, 0, 619, 419, 10).attr({stroke: "#666"});
+                r.text(310, 20, "Drag the points to change the curves").attr({fill: "#fff", "font-size": 16});
+                function curve(x, y, ax, ay, bx, by, zx, zy, color) {
+                    var path = [["M", x, y], ["C", ax, ay, bx, by, zx, zy]],
+                        path2 = [["M", x, y], ["L", ax, ay], ["M", bx, by], ["L", zx, zy]],
+                        curve = r.path(path).attr({stroke: color || Raphael.getColor(), "stroke-width": 4, "stroke-linecap": "round"}),
+                        controls = r.set(
+                            r.path(path2).attr({stroke: "#ccc", "stroke-dasharray": ". "}),
+                            r.circle(x, y, 5).attr(discattr),
+                            r.circle(ax, ay, 5).attr(discattr),
+                            r.circle(bx, by, 5).attr(discattr),
+                            r.circle(zx, zy, 5).attr(discattr)
+                        );
+                    controls[1].update = function (x, y) {
+                        var X = this.attr("cx") + x,
+                            Y = this.attr("cy") + y;
+                        this.attr({cx: X, cy: Y});
+                        path[0][1] = X;
+                        path[0][2] = Y;
+                        path2[0][1] = X;
+                        path2[0][2] = Y;
+                        controls[2].update(x, y);
+                    };
+                    controls[2].update = function (x, y) {
+                        var X = this.attr("cx") + x,
+                            Y = this.attr("cy") + y;
+                        this.attr({cx: X, cy: Y});
+                        path[1][1] = X;
+                        path[1][2] = Y;
+                        path2[1][1] = X;
+                        path2[1][2] = Y;
+                        curve.attr({path: path});
+                        controls[0].attr({path: path2});
+                    };
+                    controls[3].update = function (x, y) {
+                        var X = this.attr("cx") + x,
+                            Y = this.attr("cy") + y;
+                        this.attr({cx: X, cy: Y});
+                        path[1][3] = X;
+                        path[1][4] = Y;
+                        path2[2][1] = X;
+                        path2[2][2] = Y;
+                        curve.attr({path: path});
+                        controls[0].attr({path: path2});
+                    };
+                    controls[4].update = function (x, y) {
+                        var X = this.attr("cx") + x,
+                            Y = this.attr("cy") + y;
+                        this.attr({cx: X, cy: Y});
+                        path[1][5] = X;
+                        path[1][6] = Y;
+                        path2[3][1] = X;
+                        path2[3][2] = Y;
+                        controls[3].update(x, y);
+                    };
+                    controls.drag(move, up);
+                }
+                function setmove(dx, dy) {
+                    this.update(dx - (this.dx || 0), dy - (this.dy || 0));
+                    this.dx = dx;
+                    this.dy = dy;
+                }
+                function setup() {
+                    this.dx = this.dy = 0;
+                }
+                curve(70, 100, 110, 100, 130, 200, 170, 200, "hsb(0, .75, .75)");
+                curve(170, 100, 210, 100, 230, 200, 270, 200, "hsb(.8, .75, .75)");
+                curve(270, 100, 310, 100, 330, 200, 370, 200, "hsb(.3, .75, .75)");
+                curve(370, 100, 410, 100, 430, 200, 470, 200, "hsb(.6, .75, .75)");
+                curve(470, 100, 510, 100, 530, 200, 570, 200, "hsb(.1, .75, .75)");
+            };
+            
+            
+//static code generator fork
+if(navigator.userAgent.match(/iPad/)){
+}else{
+}
+<html onclick="keepFocusInTextbox(event)" >
+<g xmlns="http://www.w3.org/2000/svg">
+  <title>Layer 1</title>
+  <path opacity="0.6" id="path587" fill="none" fill-opacity="0.75" fill-rule="evenodd" stroke="#000000" stroke-width="7.5" d="
+  m190.242569,167.703125c-4.808182,0 -8.679031,4.405075 -8.679031,9.876862l0,18.812332c-11.561661,1.007889 -21.366272,-2.486099 -27.813538,-9.884583c2.495819,11.328842 13.308167,20.679733 27.813538,24.792465l0,31.119812c0,5.471786 3.87085,9.876862 8.679031,9.876862l136.328415,0c4.808197,0 8.679016,-4.40509 8.679016,-9.876862l0,-64.840027c0,-5.471771 -3.870819,-9.876862 -8.679016,-9.876862l-136.328415,0z
+  
+  "/>
+ </g>
+function curve(x, y, ax, ay, bx, by, zx, zy, color) { 
+var path = [["M", 70, 100], ["C", 110, 100, 130, 200, 170, 200]], 
+path2 = [["M", x, y], ["L", ax, ay], ["M", bx, by], ["L", zx, zy]], 
+
+curve = 
+
+g.path([["M", 70, 100], ["C", 110, 100, 130, 200, 170, 200]]).attr({stroke: Raphael.getColor(), "stroke-width": 4, "stroke-linecap": "round"}) 
+controls = r.set( r.path(path2).attr({stroke: "#ccc", "stroke-dasharray": ". "}), 
+r.circle(x, y, 5).attr(discattr), 
+r.circle(ax, ay, 5).attr(discattr), 
+r.circle(bx, by, 5).attr(discattr), 
+r.circle(zx, zy, 5).attr(discattr) );
+function curve(x, y, ax, ay, bx, by, zx, zy, color) {
+70, 100, 110, 100, 130, 200, 170, 200
+
+
+asc=String.fromCharCode;
+sq=asc(0x27);
+dq=asc(0x22);
+
+navigator.props().to_s().split(/,/).each(function(){return ('navigator['+dq+this+dq+']')+'='+eval('navigator['+dq+this+dq+']')}).join('<BR>').p();
+
+String.prototype.sess=function(e){
+	s=this.toString;
+	this.e=e.toString;
+	return e.eval();
+};
+ function printWithRunin(h, s, type)
+{
+  var div = println(s, type);
+  var head = document.createElement("strong");
+  head.appendChild(document.createTextNode(h + ": "));
+  div.insertBefore(head, div.firstChild);
+}
+ 
+//print : function print(s) {
+//	println(s, "print"); 
+//},
+// the normal function, "print", shouldn't return a value
+// (suggested by brendan; later noticed it was a problem when showing others)
+//pr : function pr(s)
+//{
+//  shellCommands.print(s); // need to specify shellCommands so it doesn't try window.print()!
+//  return s;
+//},
+String.prototype.toSource=function(){
+	return "s='"+this+"';eval('"+this.e+"')";
+};
+ 
+String.prototype.toSess=function(){
+	return "s='"+this+"';eval('"+this.e+"')";
+};
+
+//   var rect = document.getElementById('rect');
+//    new MyDraggable(rect, 100, 100);
+HTMLImageElement.prototype.start=function(){
+	/* this = html element here */
+	var thiz = this.draggable;
+	thiz.old_x = evt.clientX;
+	thiz.old_y = evt.clientY;
+	thiz.onmm_orig = this.onmousemove;
+	this.onmousemove = thiz.dragevent;
+	thiz.ondrag = true;
+}
+HTMLImageElement.prototype.move=function(){
+//	if (this.ondrag) {
+	    this.elem.style.left  = parseInt(this.elem.style.left)
+		+ evt.clientX - this.old_x + 'px';
+	    this.elem.style.top = parseInt(this.elem.style.top)
+		+ evt.clientY - this.old_y + 'px';
+//	    if (thiz.onmousemove_orig) {
+//		this.onmousemove_orig(evt);
+//	    }
+	    this.old_x = evt.clientX;
+	    this.old_y = evt.clientY;
+//	}
+}
+HTMLImageElement.prototype.up=function(){
+	/* this = html element here */
+	var thiz = this.draggable;
+	thiz.ondrag = false;
+	this.onmousemove = thiz.onmm_orig;
+	thiz.onmm_orig = null;
+}
+HTMLImageElement.prototype.init=function(){
+	this.elem = elem;
+	this.elem.style.position = 'absolute';
+	this.elem.style.left   = x + 'px';
+	this.elem.style.top    = y + 'px';
+	this.old_x = 0;
+	this.old_y = 0;
+	this.ondrag = false;
+	this.onmousemove_orig = null;
+	this.elem.onmousedown  = this.dragstart;
+	this.elem.onmouseup    = this.dragend;
+	this.elem.draggable = this;
+}
+
+
+Date.prototype.timeDiff=function(timeDiff){
+ return new Date(this.getTime()+timeDiff*60*60*1000);
+}
+Date.prototype.now=function(){
+ return (new Date());
+}
+
+//	String.prototype.log =function (){
+//		println(this.toString(),"message");
+//		return this.toString();
+//	};
+
+//comma separated data to ruby
+//s=title
+//s2=data
+//[[100,100],[200,200],[300,300]].balls()
+//	return [["a", "b", "c"], ["e", "f", "g"],["h","i", "j"]].conjugation("'['","'('+this+')'","']'");
+
+Array.prototype.each_i = function(c) {var _a=[];for (var i=0; i<this.length; ++i){_a[i]=c.call(this[i],i);} return _a;};
+a2=s2.split(/,/)
+s.split(/,/).each_i(function(i){return "#{"+this+"}";}).join(",");
+
+Array.prototype.fibonacci2 = function(n) {
+	if(0 == n) {
+		return [0];
+	}
+
+	var i, n1 = 1, n2 = 1, r = 1, result = [0, 1];
+
+	if(2 <= n) {
+		result[2] = 1;
+	}
+
+	for(i = 3; i <= n; i++) {
+		r = n1 + n2;
+		n2 = n1;
+		n1 = r;
+		result[i] = r;
+	}
+
+	return result;
+}
+
+
+[1,2,3].each(function(){return this.to_s().img()})
+
+
+asc=String.fromCharCode;sq=asc(0x27); dq=asc(0x22);
+navigator.props().to_s().split(/,/).each(function(){return ('navigator['+dq+this+dq+']')+'='+eval('navigator['+dq+this+dq+']')}).join('<BR>').p()
+
+
+Array.prototype.each_i = function(c) {var _a=[];for (var i=0; i<this.length; ++i){_a[i]=c.call(this[i],i);} return _a;};
+
+//g.circle(30,30,30).attr({fill:"hsb(.8, 1, 1)",opacity:.5}).drag(move,start,up)
+//g.path("M 200 50 L 300 150 L 200 150 L 200 50").attr({fill:"white"})
+//g.path("M 60 0 L 120 0 L 180 60 L 180 120 L 120 180 L 60 180 L 0 120 L 0 60").attr({fill:"white"})
+
+Array.prototype.each = function(c) {var _a=[];for (var i=0; i<this.length; ++i){_a[i]=c.call(this[i]);} return _a;};
+Object.prototype.$=function(){
+	if(arguments.length>0)
+  		return document.getElementById(arguments[0]);
+ 	else
+  		return document.getElementById(this.toString());
+};
+window.onerror=function(){println(arguments[0]+arguments[1]+arguments[2],"message");}
+argv=[];
+
+//("function unescapeHTML() {".split(/ /)[1]).replace(/[(][^)]*[)]/,"") + "=" + (s().split(/ /)[0])+ "()" + (s().split(/ /)[2])
+
+/////
+"'hello world!'.p()".replace(/hello/,"hell").eval()
+Array.prototype.eachif = function(c) {var _a=[];for (var i=0; i<this.length; ++i){
+if(c.call(this[i])){_a.push(this[i]);}} return _a;};
+
+Array.prototype.unique = function() {
+var uniqueArray = [];
+var storage = {};
+uniqueArray = this.eachif(function(){
+      if (!(this in storage)) {
+       storage[this] = true;
+         return true;
+       }else{return false}
+})
+   return uniqueArray;
+};
+[44,4,1,2,6,3,4,5,6,6,6,6].unique ();
+
+//$('input').selectionStart.to_s().p();
+//$('d').innerHTML= e.keyCode;
+
+
+//Array.prototype.each = function(c) {var _ss="";for (var i=0; i<this.length; ++i){_ss+=c.call(this[i]);} return _ss;}; 
+//Object.prototype.onload=function(data){data["station_l"].each(function(){_a=[]; _a.push(this["station_cd"]);_a.push(this["station_g_cd"]);_a.push(this["station_name"]);_a.push(this["lon"]);_a.push(this["lat"]); return _a;}).toTable().p();Object.prototype.onload=undefined};"http://www.ekidata.jp/api/l/11302.json".load();
+//each for 2D-ArrayArray.prototype.each = function(c) {var _a=[];for (var i=0; i<this.length; ++i){_a[i]=c.call(this[i]);} return _a;};Array.prototype.conjugation=function(a,b,c){return this.each(function(){return eval(a) + this.each(function(){return eval(b)})+ eval(c)});};//[["a", "b", "c", "d"], ["e", "f", "g", "h"],["i", "j", "k", "l"]].conjugation("'['","'('+this+')'","']'");Array.prototype.transpose=function(){
+//}
+
+//http://gdata.youtube.com/feeds/users/GoogleDevelopers/uploads?alt=json-in-script&callback=showMyVideos2&max-results=30
+//http://code.google.com/apis/youtube/articles/view_youtube_jsonc_responses.html
+//http://gdata.youtube.com/feeds/api/videos?q=raphael&json-in-script&callback=showMyVideos2&max-results=30
+//http://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&q=raphael&callback=showMyVideos2
+//http://www.youtube.com/v/jwQtQdCQz_8
+//"http://www.youtube.com/v/jwQtQdCQz_8".loadVideo(1)
+
+
+
+
+   if (b.delay() == 4){
+		com = b.jj.shift();
+		b[com](10);
+		b.jj.push(com)
+   }
+   if (bb.delay() == 4){
+		com = bb.jj.shift();
+		bb[com](10);
+		bb.jj.push(com)
+   }
+<input value="navigator"   onclick="$('input').value=this.title;go();" class="text" type="button" title="navigator.props()">
+<input value="cookie"      onclick="$('input').value=this.title;go();"  class="text" type="button"  title="document.cookie"> 
+<input value="source"      onclick='location.href=("javascript:%20tx%3D%22%22%3B%20if%20(window.getSelection)%20%7B%20var%20selectionRange%20%3D%20window.getSelection%20()%3B%20selText%20%3D%20selectionRange.toString%20()%3B%20if%20(selectionRange.rangeCount%20%3E%200)%20%7B%20var%20range%20%3D%20selectionRange.getRangeAt%20(0)%3B%20var%20docFragment%20%3D%20range.cloneContents%20()%3B%20var%20tmpDiv%20%3D%20document.createElement%20(%22div%22)%3B%20tmpDiv.appendChild%20(docFragment)%3B%20tx%20%3D%20tmpDiv.innerHTML%3B%20%7D%20%7D%20alert((tx))");' class="text" type="button">
+
+
+<input value="odd" onclick='$("input").value ="a=(10).times(function(i){return i}).each(function(){return (this*2)-1})";go();' class="text" type="button">
+<input value="even" onclick='$("input").value ="a=(10).times(function(i){return i}).each(function(){return (this*2)})";go();' class="text" type="button">
+<input value="Draggable" onclick='$("input").value ="g.recent_element.draggable();";go();' class="text" type="button">
+
+Array.prototype uniq()
+  Array.reduce(this,
+    function(a, b)
+      a.indexOf(b) == -1? a.concat(b): a
+    , []);
+
+paper.path("M21.871,9.814 15.684,16.001 21.871,22.188 18.335,25.725 8.612,16.001 18.335,6.276z").attr({fill: "#000", stroke: "none"});
+
+icons.props().each(function(){return this.to_path().attr({fill: Raphael.getColor()})})
+
+g.path("M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466zM20.729,7.375c0.934,0,1.688,1.483,1.688,3.312S21.661,14,20.729,14c-0.932,0-1.688-1.483-1.688-3.312S19.798,7.375,20.729,7.375zM11.104,7.375c0.932,0,1.688,1.483,1.688,3.312S12.037,14,11.104,14s-1.688-1.483-1.688-3.312S10.172,7.375,11.104,7.375zM16.021,26c-2.873,0-5.563-1.757-7.879-4.811c2.397,1.564,5.021,2.436,7.774,2.436c2.923,0,5.701-0.98,8.215-2.734C21.766,24.132,18.99,26,16.021,26z").attr({fill: Raphael.getColor()}).transform("t100,100").draggable();
+
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+
+
+public class MassiveBall extends SimulationApplet {
+//(C) Suto Kentaro 2000-2010 <catincat@mac.com> 
+    static final double r_max=50,r_mid=20,r_min=10;
+    
+    Ball[] large=new Ball[5];
+    Ball[] small=new Ball[150];
+    Ball[] all=new Ball[large.length+small.length];
+    Grid grid;
+    Ball seized;
+    
+    public void init() {
+        super.init();
+        int i=0;
+        for (int j=0;j<large.length;j++,i++) 
+            all[i]=large[j]=createBall(r_max,r_mid);
+        for (int j=0;j<small.length;j++,i++) 
+            all[i]=small[j]=createBall(r_mid,r_min);
+        grid=new Grid(width,height,r_mid,10);
+    }
+    
+    private Ball createBall(double r_max,double r_min) {
+        double r=Math.random()*(r_max-r_min)+r_min;
+        double x=Math.random()*(width-2*r)+r;
+        double y=Math.random()*(height-2*r)+r;
+        Color color=new Color(random(),random(),random());
+        return new Ball(x,y,r,color);
+    }
+    
+    private static float random() {
+        return (float)Math.random();
+    }
+    
+    protected synchronized void run(double dt) {
+        grid.clear();
+        for (int i=0;i<small.length;i++) 
+            grid.add(small[i],small[i].x,small[i].y);
+        grid.apply(new Grid.Operator() {
+            public void matchObjects(Object a,Object b) {
+                if (((Ball)a).id<((Ball)b).id)
+                    ((Ball)a).collide((Ball)b);
+            }
+        });
+        for (int i=0;i<large.length;i++) {
+            for (int j=0;j<i;j++)
+                large[i].collide(large[j]);
+            for (int j=0;j<small.length;j++)
+                large[i].collide(small[j]);
+        }
+        for (int i=0;i<all.length;i++) {
+            all[i].fall(dt);
+            all[i].bound(width,height);
+            all[i].move(dt);
+        }
+        if (seized!=null) {
+            seized.u+=dt*2*((mouse_x-seized.x)/ft-seized.u)/ft;
+            seized.v+=dt*2*((mouse_y-seized.y)/ft-seized.v)/ft;
+        }
+    }
+    
+    protected void mousePressed(int x,int y) {
+        for (int i=0;i<all.length;i++) {
+            Ball b=all[i];
+            double dx=b.x-x,dy=b.y-y;
+            if (dx*dx+dy*dy<b.r*b.r) seized=b;
+        }
+    }
+    
+    protected void mouseReleased(int x,int y) {
+        seized=null;
+    }
+    
+    protected void paintOffscreen(Graphics g) {
+        for (int i=0;i<all.length;i++) {
+            Ball b=all[i];
+            g.setColor(b.color);
+            g.fillOval(
+                (int)(b.x-b.r),(int)(b.y-b.r),
+                (int)(2*b.r),(int)(2*b.r));
+        }
+    }
+}
+
+class Ball {
+    private static final double elasticity=0.8;
+    private static final double gravity=200;
+    private static final double bounce=0.7;
+    private static int number=0;
+    
+    public double x,y;
+    public double u,v;
+    public double r,m;
+    public int id;
+    
+    public Color color;
+    
+    public Ball(double x,double y,double r,Color color) {
+        this.x=x;
+        this.y=y;
+        this.r=r;
+        this.color=color;
+        m=Math.PI*r*r;
+        id=number++;
+    }
+    
+    public void fall(double dt) {
+        v+=dt*gravity;
+    }
+    
+    public void move(double dt) {
+        x+=dt*u;
+        y+=dt*v;
+    }
+    
+    public void collide(Ball b) {
+        double dx=b.x-x,dy=b.y-y;
+        double dr=Math.sqrt(dx*dx+dy*dy);
+        if (dr<b.r+r) {
+            dx/=dr;
+            dy/=dr;
+            double dw=(b.u-u)*dx+(b.v-v)*dy;
+            if (dw<0) {
+                double fw=dw*(1+elasticity)/(b.m+m);
+                u+=fw*dx*b.m;
+                v+=fw*dy*b.m;
+                b.u+=-fw*dx*m;
+                b.v+=-fw*dy*m;
+            }
+            double fr=bounce*(dr-b.r-r)/(b.m+m);
+            x+=fr*dx*b.m;
+            y+=fr*dy*b.m;
+            b.x+=-fr*dx*m;
+            b.y+=-fr*dy*m;
+        }
+    }
+    
+    public void bound(double width,double height) {
+        if (x<r) {
+            if (u<0) u*=-elasticity;
+            x+=bounce*(r-x);
+        }
+        if (x>width-r) {
+            if (u>0) u*=-elasticity;
+            x+=bounce*(width-r-x);
+        }
+        if (y<r) {
+            if (v<0) v*=-elasticity;
+            y+=bounce*(r-y);
+        }
+        if (y>height-r) {
+            if (v>0) v*=-elasticity;
+            y+=bounce*(height-r-y);
+        }
+    }
+}
+
+class Grid {
+    private double width,height,delta;
+    private int cols,rows,capacity;
+    private Object[][][] cell;
+    private int[][] count;
+    
+    public Grid(double width,double height,double delta,int capacity) {
+        this.width=width;
+        this.height=height;
+        this.delta=delta;
+        this.capacity=capacity;
+        cols=(int)Math.ceil(width/delta);
+        rows=(int)Math.ceil(height/delta);
+        cell=new Object[cols][rows][capacity];
+        count=new int[cols][rows];
+    }
+    
+    public void clear() {
+        for (int i=0;i<cols;i++)
+            for (int j=0;j<rows;j++)
+                count[i][j]=0;
+    }
+    
+    public void add(Object obj,double x,double y) {
+        int i=(int)(x/delta);
+        int j=(int)(y/delta);
+        if (i<0) i=0;
+        if (i>=cols) i=cols-1;
+        if (j<0) j=0;
+        if (j>=rows) j=rows-1;
+        if (count[i][j]<capacity)
+            cell[i][j][count[i][j]++]=obj;
+    }
+    
+    public void apply(Operator op) {
+        for (int i=0;i<cols;i++) {
+            int i2min=Math.max(0,i-1);
+            int i2max=Math.min(i+1,cols-1);
+            for (int j=0;j<rows;j++) {
+                int j2min=Math.max(0,j-1);
+                int j2max=Math.min(j+1,rows-1);
+                for (int k=0;k<count[i][j];k++) 
+                    for (int i2=i2min;i2<=i2max;i2++)
+                        for (int j2=j2min;j2<=j2max;j2++)
+                            for (int k2=0;k2<count[i2][j2];k2++)
+                                op.matchObjects(
+                                    cell[i][j][k],
+                                    cell[i2][j2][k2]);
+            }
+        }
+    }
+    
+    public interface Operator {
+        void matchObjects(Object a,Object b);
+    }
+}
+
+abstract class SimulationApplet extends Applet
+implements MouseListener,MouseMotionListener,Runnable {
+    public static final double ft=0.1;
+    public static final double dt=0.01;
+    
+    private Thread daemon;
+    private Image offscreen;
+    protected int width,height;
+    protected int mouse_x,mouse_y;
+    protected boolean mouse_down;
+    private volatile double mouse_interval;
+    
+    public void init() {
+        width=getSize().width;
+        height=getSize().height;
+        setBackground(Color.white);
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        offscreen=createImage(width,height);
+    }
+    
+    public synchronized void start() {
+        daemon=new Thread(this);
+        daemon.setDaemon(true);
+        daemon.start();
+    }
+    
+    public synchronized void stop() {
+        daemon.interrupt();
+    }
+    
+    protected abstract void run(double dt);
+    
+    public void run() {
+        try {
+            while (!Thread.interrupted()) {
+                for (int t=0;t<(int)(ft/dt);t++) synchronized (this) {
+                    run(dt);
+                }
+                repaint();
+                Thread.sleep((int)(1000*ft));
+            }
+        } catch (InterruptedException e) {
+        }
+    }
+    
+    public synchronized void mousePressed(MouseEvent e) {
+        mouse_x=e.getX();
+        mouse_y=e.getY();
+        mouse_down=true;
+        mousePressed(mouse_x,mouse_y);
+    }
+    
+    protected void mousePressed(int x,int y) {
+    }
+    
+    public void mouseReleased(MouseEvent e) {
+        mouse_down=false;
+        mouseReleased(e.getX(),e.getY());
+    }
+    
+    protected void mouseReleased(int x,int y) {
+    }
+    
+    public synchronized void mouseClicked(MouseEvent e) {
+        mouseClicked(e.getX(),e.getY());
+    }
+    
+    protected void mouseClicked(int x,int y) {
+    }
+    
+    public void mouseEntered(MouseEvent e) {
+    }
+    
+    public void mouseExited(MouseEvent e) {
+    }
+    
+    public void mouseMoved(MouseEvent e) {
+    }
+    
+    public synchronized void mouseDragged(MouseEvent e) {
+        mouseDragged(e.getX(),e.getY(),
+            e.getX()-mouse_x,e.getY()-mouse_y);
+        mouse_x=e.getX();
+        mouse_y=e.getY();
+    }
+    
+    protected void mouseDragged(int x,int y,int dx,int dy) {
+    }
+    
+    public void update(Graphics g) {
+        paint(g);
+    }
+    
+    public synchronized void paint(Graphics g) {
+        Graphics og=offscreen.getGraphics();
+        og.clearRect(0,0,width,height);
+        paintOffscreen(og);
+        og.dispose();
+        g.drawImage(offscreen,0,0,this);
+    }
+    
+    protected abstract void paintOffscreen(Graphics g);
+}
+
+
+
+
+
+
+
+
+
+Array.prototype.each = function(c) {var _a=[];for (var i=0; i<this.length; ++i){_a[i]=c.call(this[i]);} return _a;};
+
+Array.prototype.unique = function() {
+var storage = {};
+var uniqueArray = [];
+var i,value;
+for ( i=0; i<this.length; i++) {
+   value = this[i];
+      if (!(value in storage)) {
+       storage[value] = true;
+         uniqueArray.push(value);
+       }
+   }
+   return uniqueArray;
+};
+[1,2,6,3,4,5,6,6,6,6].unique ()
+
+            function unique(arrayName)
+            {
+                var newArray=new Array();
+                label:for(var i=0; i<arrayName.length;i++ )
+                {  
+                    for(var j=0; j<newArray.length;j++ )
+                    {
+                        if(newArray[j]==arrayName[i]) 
+                            continue label;
+                    }
+                    newArray[newArray.length] = arrayName[i];
+                }
+                return newArray;
+            }

@@ -1,0 +1,51 @@
+<html>
+<title>世界の天然　Object.prototype.p スピログラフの例</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35035226-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script src="http://www.suiyokai.org/tutu/object/prototype/p/p.js" ></script>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+sample=function(){
+	Array.prototype.Spirograph=function(R,r,O){
+	var a=[];
+	var x1 = R-O;
+	var y1 = 0;
+	var i = 1;
+	do {
+		if (i>20000) break;
+			var x2 = (R+r)*Math.cos(i*Math.PI/72) - (r+O)*Math.cos(((R+r)/r)*(i*Math.PI/72)) ;
+			var y2 = (R+r)*Math.sin(i*Math.PI/72) - (r+O)*Math.sin(((R+r)/r)*(i*Math.PI/72)) ;
+			x1 = x2+100;
+			y1 = (y2*-1)+100;
+			a.push([Math.round(x1),Math.round(y1)]);
+			i++;
+		} while (x2 != R-O && y2 != 0 );
+	
+		return a;
+	};
+	i=j=3;
+	"Object.prototype.p スピログラフの例".p("h3");
+	"Object.prototype.pのサンプルとしてスピログラフ（内トロコイド）の配列を作成し、その描画をキャンバス上に行います".p(document);
+	"http://www.suiyokai.org/tutu/object/prototype/p/".p("".link);
+	"http://www.suiyokai.org/tutu/object/prototype/p/p.js".p("".link);
+	"[].Spirograph(10*(j+3)/(j+2),-2*(i+3)/(i+1),10).p('canvas');//キャンバス上に表示".p("h4");
+	[].Spirograph(10*(j+3)/(j+2),-2*(i+3)/(i+1),10).p('canvas');
+	"[].Spirograph.p(document);//スピログラフ発生のソース".p("h4");
+	[].Spirograph.p(document);
+	"[].Spirograph(10*(j+3)/(j+2),-2*(i+3)/(i+1),10).p('document');数列を表示".p("h4");
+	[].Spirograph(10*(j+3)/(j+2),-2*(i+3)/(i+1),10).p(document);
+};
+sample();
+
+</script>

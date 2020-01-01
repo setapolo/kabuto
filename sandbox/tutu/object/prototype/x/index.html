@@ -1,0 +1,226 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35035226-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<title>世界の天然　Object.prototype.x</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+sample=function(){
+Array.prototype.each = function(c){var _a=[];for (var i=0; i<this.length;++i){_a[i]=c.call(this[i],i);} return _a;};
+Object.prototype.p=function(c){
+	var type = Object.prototype.toString.call(c).slice(8, -1); 
+	var type2 = Object.prototype.toString.call(this).slice(8, -1); 
+	if(type == 'Undefined'){
+        return this;
+    }else if (type == 'Function'){
+		var s=c.call(this,this+'');
+		var e=document.createElement("div");
+		e.innerHTML=s.toString();
+		document['body'].appendChild(e);
+		return this;
+    }else if (type == 'Array'){
+        return this;
+    }else if (type == 'String'){
+		if (c == 'canvas'){
+			var e=document.createElement("canvas");
+			e.width="240";
+			e.height="140";
+			var e2 = e.getContext('2d');
+			e2.clearRect(0,0,240,140);
+			e2.strokeStyle='rgb(00,00,255)';	
+			if (type2 == 'Array'){
+				this.each(
+					function(i){
+						e2.beginPath();
+						if (typeof this[0]=='undefined'){
+							var x =((i+0)*10)+10;
+							var y =this+0;
+						}else{
+							var x =this[0]+0;
+							var y =this[1]+0;
+						}
+						e2.arc(x, y, 1, 0, Math.PI*2, false);
+						e2.closePath();
+						e2.stroke();
+				}
+				);
+			}else{
+				e2.font="30px Arial";
+				e2.fillText(this+'',10,50);
+			}
+			document['body'].appendChild(e);
+		}else{
+			var e=document.createElement(c+'');
+			var e2=document.createTextNode(this+'');
+			e.appendChild(e2);
+			document['body'].appendChild(e);
+		}
+		return this;
+    }else if (type == 'Boolean'){
+        return this;
+    }else if (type == 'Object'){
+        return this;
+    }else if (type == 'RegExp'){
+        return this;
+    }else if (type == 'Number'){
+        return this;
+    }else if (type == 'Window'){
+		window.alert(this+'');
+		return this;
+	}else if (type =="HTMLDocument"){
+		if(type2 == 'Array'){
+			var e=c.createElement("table");
+			this.each(function(){
+				var e2=c.createElement("tr");
+				e.appendChild(e2);
+				var e3=c.createElement("td");
+				e3.innerHTML=this.toString();
+				e2.appendChild(e3);
+				}
+			);
+			c['body'].appendChild(e);
+		}else{
+			var e=c.createElement("div");
+			e.innerHTML=this.toString().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<BR>');
+			c['body'].appendChild(e);
+		}
+		return this;
+	}else{
+        return this;
+    }
+};
+Object.prototype.x=function(c){
+	var type = Object.prototype.toString.call(c).slice(8, -1); 
+	var type2 = Object.prototype.toString.call(this).slice(8, -1); 
+    if(type2 == 'Undefined'){
+        return [this];
+    }else if (type2 == 'Function'){
+        return [this];
+    }else if (type2 == 'Array'){
+		if (type  == 'Array'){
+			return this.each(function(){
+				var cc=this;
+				return c.each(function(){
+					var type3 = Object.prototype.toString.call(cc).slice(8, -1); 
+					var type4 = Object.prototype.toString.call(this).slice(8, -1); 
+					if (type3 == 'Number'){
+						return [cc*this]
+					}else{
+						return [this+cc]
+					}
+			})});
+		}else{
+			var a=[];
+			a=this;
+			a.push(c);
+			return a;
+		}
+	}else if (type2 == 'String'){
+		return this.match(/./g);
+    }else if (type2 == 'Boolean'){
+        return [this];
+    }else if (type2 == 'Object'){
+        return [this];
+    }else if (type2 == 'RegExp'){
+		var s ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		var a=[];
+		if (s.match(this)){
+			while(a.length < c){
+				var r = Math.floor(Math.random() * (s.match(/./g).length-1))+1;
+				var ch = s.match(/./g)[r];
+				if (ch.match(this)){
+					a.push(ch);
+				}else{
+				}
+			}
+			return a
+		}else{
+			return [""];
+		}
+    }else if (type2 == 'Number'){
+		var n=Math.min(this,c);
+		var m=Math.max(this,c);
+		var a=[];
+		for (var i=n;i<=m;i++){
+			a.push(i);
+		}
+		return a;
+    }else{
+        return [this];
+    }
+
+};
+
+String.prototype.img =function(){return ('<img src="'+this+'">')}
+"http://www.suiyokai.org/tutu/object/prototype/p/5236c9cf77805NHVLxs6zi4_s.png".p("".img);
+"Object.prototype.x（未承諾α版）とは".p("H3");
+"Object.prototype.xはデバック、トライアンドエラー、急なお客様の要件などにすべて対応すべく、”ちゃっちゃと”手早いオブジェクトの配列化を目的とした関数です。".p(document);
+"ご利用方法".p("H3");
+"Objectのプロトタイプとして宣言しますので、あらゆるデータ型の末尾にxを付加してご用命いただけます。".p(document);
+"戻り値は配列(Array)となります（Array以外ならバグ）".p(document);
+"ご利用例".p("H3");
+"x関数は、呼び出し元のオブジェクトの型と、引数の型によって処理の内容を変えます。".p(document);
+"(1).x(10).p(document);//[1,2,3,4,5,6,7,8,9,10]の配列となります".p("li");
+(1).x(10).join(',').p(document);
+"[1,2,3,4,5,6,7,8,9].x([1,2,3,4,5,6,7,8,9]);//9x9の表を作ります".p("li");
+[1,2,3,4,5,6,7,8,9].x([1,2,3,4,5,6,7,8,9]).p(document);
+"['a','i','u','e'].x('o');//push('o')と同じです".p("li");
+['a','i','u','e'].x('o').join(',').p(document);
+"['a','i','u','e'].x('o').x(['','k','s','t','n','h','m','y','l','w']);//五十音表を作ります".p("li");
+['a','i','u','e'].x('o').x(['','k','s','t','n','h','m','y','l','w']).p(document);
+"'abcdefg'.x()//match(/./)と同じです".p("li");
+'abcdefg'.x().join(',').p(document);
+"[1,2,3,4].x(5)//push(2)と同じです".p("li");
+[1,2,3,4].x(5).join(',').p(document);
+"[1,2,3,4,5].x([2])//[2,4,6,8,10]が返ります".p("li");
+[1,2,3,4,5].x([2]).join(',').p(document);
+"[1,2,3,4,5].x([1,1])//[[1,1],[2,2],[3,3],[4,4],[5,5]]が返ります".p("li");
+[1,2,3,4,5].x([1,1]).p(document);
+"(/[a-z]/).x(10)//指定した正規表現のダミー文字列を十文字出力します".p("li");
+(/[a-z]/g).x(10).join(',').p(document);
+"(/[A-Z]/).x(10)//指定した正規表現のダミー文字列を十文字出力します".p("li");
+(/[A-Z]/g).x(10).join(',').p(document);
+"(/[a,b,c]/).x(10)//指定した正規表現のダミー文字列を十文字出力します".p("li");
+(/[a,b,c]/g).x(10).join(',').p(document);
+
+"対応プラットフォーム、バージョン".p("H3");
+"現在firefox23.0.1にて開発評価を行っていますが、他のプラットフォームにも随時対応の予定でございます".p(document);
+"ライセンスについて".p("H3");
+"こんな息子でよかったらと、βリリースを検討中ですが、当面ご自由にご利用ください。承諾も不要です。".p(document);
+"開発コンセプト".p("H3");
+"本関数は、fasborn構文糖衣(仮)のために作成されました。リリースに関してもコンセプトの検証を目的に行いました".p(document);
+"fasborn構文糖衣".p("H3");
+"fasborn構文糖衣（ファスボーンしんたっくすしゅがー以下fasborn）は、コンピューター言語の文字列処理と数学処理を念頭に置いたデータ処理関数と構文糖衣（シンタックスシュガーです）。javascriptの主要なデータ型/オブジェクトであるfunction/string/boolean/object/regexp/numberの頭文字から取ったことばです。".p(document);
+"ヒストリ".p("H3");
+"2013.9.16 アルファ版リリース(v0.0.1)".p(document);
+"今後の開発予定".p("H3");
+"いつかβ版のリリースを行う予定でございます".p(document);
+"注意点".p("H3");
+"ご利用の際に他のメソッドとの名前の衝突、いわゆる汚染が発生する場合があります。以下の名前に関してはご注意ください。利用名称に関してはベータ版までに整理を行う所存でございます。".p(document);
+"Object.prototype.x".p(document);
+"Array.prototype.each".p(document);
+"免責、お問い合わせ".p("H3");
+"メール等のお問い合わせは受け付けておりませんので、twitterの以下のアカウントまでご連絡いただけましたら幸いです".p(document);
+"https://twitter.com/twcritique".p("".link);
+"ソース".p("H3");
+"http://www.suiyokai.org/tutu/object/prototype/x/x.js".p("".link);
+
+};
+sample();
+
+
+
+</script>

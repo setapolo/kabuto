@@ -1,0 +1,25 @@
+<html>
+<body>
+<input value="test" onclick="$('s').value=this.title" class="text" type="button" title="this is test">
+<input type="button" value="post" onClick="f();">
+<BR>
+<TEXTAREA id="s" cols="30" rows="5">a,b,c,d,e,f
+1,2,3,4,5
+c,c,c,c,c,c
+</TEXTAREA><BR> 
+</body>
+</html>
+<script type="text/javascript">
+	Object.prototype.$=function(){
+		if(arguments.length>0)
+			return document.getElementById(arguments[0]);
+		else
+			return document.getElementById(this.toString());
+	};
+	_parent=window.dialogArguments;
+	$('s').value=_parent.output();
+	function f(){
+		_parent.input(document.getElementById('s').value);
+		window.close();
+	}
+</script>
