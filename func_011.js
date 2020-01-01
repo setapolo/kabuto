@@ -22,7 +22,7 @@ HTMLtoXML("<p><b>Hello")
                 rr[c]=0;
                 back=c;
             }()):
-        (c)?
+        (typeof c == "object")?
             (rr.a.push(c)):0);
 
         return (c)?set:map;
@@ -83,30 +83,20 @@ HTMLtoXML("<p><b>Hello")
 */
       }).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
     })
-    ("split")(function(c,cc,rr){
-        var r = rr.args.shift();
-        return ((c['split'])?(c.split(r)):c);
-    })
-    ("join")(function(c,cc,rr){
-        var r = rr.args.shift();
-        return ((c['join'])?(c.join(r)):c);
-    })
-    ("p")(function(c,rr){
-        console.log("p#",c);
+    ("p")(function(c,cc,rr){
+        console.log("p:",c);
         return c;
     })
-    ("join_>")(function(){
-        return ">";
+    ("join")(function(c,cc,rr){
+        rr.a = rr.a.map(function(c,i,a){return c.join("")})
+        return rr.a;
     })
-    ("divide_>")(function(){
-        return />/;
-    })
-    ("test")(function(c,rr){
-        return c.replace(/tr/ig,"br");
+    ("table")(function(c,cc,rr){
+        var ret = rr.a.map(function(c,i,a){return ["<tr><td>",c,"</td></tr>"].join("")})
+        return ["<table>",ret.join("\n"),"</table>"].join("");
     })
     ([1,2,3,4])(8)()
-    ("ss")("test")
-    (/divide_>/)("split")(/join_>/)("join")("p")(1)
+    ("join")("table")("p")(1)
     //("p")(1)
     ;
 
