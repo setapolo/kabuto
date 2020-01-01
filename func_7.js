@@ -1,5 +1,3 @@
-
-
 (function(st){
     var rr={ff:[],a:[],i:0};var back;var fs=[];var ret=1;
     var set=function(c){console.log(rr.i++,":set",arguments);
@@ -30,7 +28,6 @@
             (function(){
                 "_"['repeat'](c)['split']('')['map'](function(cc,ii,aa){
                     fs.map(function(ccc,iii,aaa){ret = ccc.apply(rr,[ret])});
-                    //ret = func.apply(rr,[ret]);                                
                 });
                 fs=[];
             })():0;
@@ -49,5 +46,6 @@
             return String.fromCharCode(i+"a".charCodeAt(0));
         });
     })
-    ([1,2,3,4])(8)
-    ()("x2")("x2")("x4")("x2")("p")(10)("p")(1);
+    ([1,2,3,4])(8)()
+    ("x2")("x2")("x4")
+    ("x2")("x4")("x4")("p")(10)("p")(1);
