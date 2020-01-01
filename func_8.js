@@ -1,6 +1,3 @@
-<html><body></body></html>
-<script>
-
 (function(st){
     var rr={ff:[],a:[],i:0};var back;var fs=[];var ret=1;
     var set=function(c){console.log(rr.i++,":set",arguments);
@@ -34,36 +31,37 @@
                 fs=[];
             })():0;
         (typeof c == "object")?
-        	(c['map'])?
-        	(function(){
-				c['map'](function(cc,ii,aa){
-                    fs.map(function(ccc,iii,aaa){ret = ccc.apply(rr,[ret,cc])});
+            (c['map'])?
+            (function(){
+                c['map'](function(cc,ii,aa){
+                    fs.map(function(ccc,iii,aaa){
+                        ret = ccc.apply(rr,[ret,cc])
+                    });
                 });
-        	}()):((c['source'])?(
-        		function(){
-	    			var cc = map(rr[c['source']].apply(rr,[ret]));
-        		}()
-        	):0):0;
+            }()):((c['source'])?(
+                function(){
+                    ret = rr[c['source']].apply(rr,[ret]);
+                    var cc = map(ret);
+                }()
+            ):0):0;
 
         return (c)?map:set;
     };
     return set;
 })({})
-    ("document")(function(c,rr){return document;})
-    ("createElement")
-    (function(c,i){
-		var e = c.createElement("div");
-		e.innerHTML="test "+i;
-		c.body.appendChild(e);
-		return c
-	})
+    ("x2")(function(c,rr){return c*2;})
+    ("x4")(function(c,rr){return c*4;})
+    ("join")(function(c,rr){console.log("join::",c)
+        return (c['join'])?(c.join("")):(c);
+    })
+    ("p")(function(c,rr){
+        console.log("function#3",c);
+        return c;
+    })
     ("alphabet")(function(){
         return "_".repeat(26).split('').map(function(c,i,a){
             return String.fromCharCode(i+"a".charCodeAt(0));
         });
     })
-()
-    ("document")("createElement")("div")(/alphabet/)({});
-
-console.log((/alphabet/).source);
-</script>
+    ([1,2,3,4])(8)()
+    (/alphabet/)("join")("join")("join")("p")(1);
