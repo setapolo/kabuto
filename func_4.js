@@ -1,16 +1,29 @@
-var document={createElement:function(){
-    return {innerHTML:""}
+var document={
+    createElement:function(){
+        return {innerHTML:""}
     },
-    body:{appendChild:function(){}
-}
+    body:{
+        appendChild:function(){}
+    }
 };
-//var document=("createElement")("innerHTML")
-//                ({})("body")("appendChild")
 
-console.log(
+var _ = function(){
+    var f=function(){
+        return f;
+    }
+    return f;
+};
+_({})("test")("test")("test")("test");
+
+var __ = function(){
+    console.log(arguments);
+    return __;
+};
+__(1)(2)(3)(4);
+
+//console.log(
     (function(rr){
-        var s;
-        var ss;
+        var s,ss;
         var _a=[];
         rr['apply']=function(c,i,a){ss=(typeof c == "function")?(c['apply'](rr,[i,ss,rr['props']])):(0);return ss}
         var f=function(c){
@@ -60,4 +73,4 @@ console.log(
     ("log")(1)
     ({text:"goo"})("div")(10)
     (true)("rnd")()['map']()
-)
+//)
