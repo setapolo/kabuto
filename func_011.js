@@ -1,3 +1,8 @@
+require("./htmlparser.js");
+console.log(
+HTMLtoXML("<p><b>Hello") 
+);
+
 (function(st){
     var rr={ff:[],a:[],i:0,args:[]};var back;var fs=[];var ret=1;
     rr=Object.assign(rr,st);
