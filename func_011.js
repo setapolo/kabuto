@@ -3,14 +3,18 @@ console.log(
 HTMLtoXML("<p><b>Hello") 
 );
 
-(function(st){
+ (function(st){
     var rr={ff:[],a:[],i:0,args:[]};var back;var fs=[];var ret=1;
     rr=Object.assign(rr,st);
     var set=function(c){
 //        console.log(rr.i++,":set",arguments);
 //        console.log("typeof:",typeof c,c);
         (typeof c == "function")?
-            (rr[back]=c):0;
+            ((back)?(function(){
+              rr[back]=c;
+              back=null;
+            }()):(c.apply(rr,[rr])))
+              :0;
         (typeof c == "number")?
             (function(){
                 "_"['repeat'](c)['split']('')['map'](function(){
