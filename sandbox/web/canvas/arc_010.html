@@ -20,7 +20,11 @@
 //        console.log(rr.i++,":set",arguments);
 //        console.log("typeof:",typeof c,c);
         (typeof c == "function")?
-            (rr[back]=c):0;
+            ((back)?(function(){
+              rr[back]=c;
+              back=null;
+            }()):(c.apply(rr,[rr])))
+              :0;
         (typeof c == "number")?
             (function(){
                 "_"['repeat'](c)['split']('')['map'](function(){
@@ -79,35 +83,24 @@
         return []["slice"]["apply"](Object["prototype"]["toString"]["call"](c),[8,-1])["join"]("");
     }
 })
-    ("ss")(function(){
-        return (function(){
-/*
- <tr id="word1">  
-    <td>word2</td>
-    <td width = "20%">
-      <div class="float-right">
-        <input type="button" onClick="rec_start('word1','word2');" value="rec"　>
-      </div>
-    </td>
-  </tr> 
-*/
-      }).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "")
-    })
     ("circle")(function(c,cc,rr){
-      console.log(rr.ca);
+      console.log("circle",rr.a[0]);
+      var aa = rr.a[0];
       var a=rr.ca(c);
       rr=Object.assign(c,rr.args[0]);
       (function(c,x,y,r,st,ed,anti){
         c.beginPath();
-        c.arc(x,y,r,st,ed,anti);
+        aa.map(function(p){
+          c.arc(p[0],p[1],r,st,ed,anti);
+        })
         c.fill();
-//      })(c,100,100,20,0,Math.PI*2,false);
         }).apply(c,a);
+
       return c;
     })
     ("canvas")(function(c,cc,rr){
       var cvs = document.getElementById("d");
-      c = cvs.getContext("2d")
+      c = cvs.getContext("2d");
       return c;
     })
     ("ca")(function(c,cc,rr){
@@ -119,7 +112,13 @@
           fillStyle:"red"     
         };
     })
-    ([1,2,3,4])(8)()
+    ([1,2,3,4])(function(rr){
+      console.log("helper",rr.a);
+      rr.a[0] = rr.a[0].map(function(c,i,a){
+        return [c*30,c*30]})      
+      console.log("helper",rr);
+      return rr;
+    })()
     ("canvas")(/default_style/)("circle")(1)
     //("p")(1)
     ;
