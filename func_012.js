@@ -8,7 +8,7 @@
             ((back)?(function(){
               rr[back]=c;
               back=null;
-            }()):(c.apply(rr,[rr])))
+            }()):(ret=c.apply(rr,[rr])))
               :0;
         (typeof c == "number")?
             (function(){
@@ -22,7 +22,11 @@
                 back=c;
             }()):
         (typeof c == "object")?
-            (rr.a.push(c)):0);
+            (function(){
+                rr.a.push(c);
+                ret=c;
+            }())
+            :0);
 
         return (c)?set:map;
     };
@@ -72,16 +76,20 @@
     ("p")(function(c,cc,rr){
         //Sieve of Eratosthenes https://rosettacode.org/wiki/Sieve_of_Eratosthenes#JavaScript
         var primes = [];
-        limit=rr.a[0][rr.a[0].length-1];
-        var nums = rr.a[0];
+        var nums = c;
+        limit=c[c.length-1];
         console.log(limit);
         (limit >= 2)?(function(){
             var sqrtlmt = Math.sqrt(limit) - 2;
-            "_"['repeat'](sqrtlmt+1)['split']('')['map'](function(cc,ii,aa){
-                var p = nums[ii];
-                if (p)
-                    for (var j = p * p - 2; j < nums.length; j += p)
-                        nums[j] = 0;
+            "_"['repeat'](sqrtlmt+1)['split']('')['map'](
+                function(cc,ii,aa){
+                    var p = nums[ii];
+                    (p)?(function(){
+                           for (var j = p * p - 2; j < nums.length; j += p){
+                                console.log("p:",sqrtlmt,p,p*p-2,ii,j)
+                                nums[j] = 0;
+                           }
+                        }()):0;
             });
             primes=(function(a,b){
                 a['map'](function(p,ii,aa){
