@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+</head>
+<body>
+  <canvas id="d" width="450" height="450"></canvas>
+</body>
+</html>
+<script>
+ (function(st){
+    var rr={ff:[],a:[],i:0,args:[]};var back;var ret=null;
+    rr=Object.assign(rr,st);
+    var set=function(c){
+        (typeof c == "function")?
+            ((back)?(function(){
+              rr[back]=c;
+              back=null;
+            }()):(ret=c.apply(rr,[ret,rr]))):0;
+        (typeof c == "number")?
+            (function(){
+                "_"['repeat'](c)['split']('')['map'](function(){
+                    rr.a.push(rr.a[rr.a.length-1]);                                
+                });
+                (ret)?(function(){
+                    (ret['push'])?(ret.push(c)):0;
+                    (typeof ret=="number")?(ret=[ret,c]):0;
+                }())
+                :(ret=c);
+            }()):(
+        (typeof c == "string")?
+            (function(){
+                rr[c]=0;
+                back=c;
+            }()):
+        (typeof c == "object")?
+            (function(){
+                rr.a.push(c);
+                ret=c;
+            }())
+        :0);
+        return (c)?set:map;
+    };
+    var fs=[];
+    var map=function(c){
+        (typeof c == "function")?
+            (c.apply(rr,[rr])):0;
+        (typeof c == "string")?
+            ((rr[c])?(function(){fs.push(rr[c])}()):0):0;
+        (typeof c == "number")?
+            (function(){
+                "_"['repeat'](c)['split']('')['map'](function(cc,ii,aa){
+                    fs.map(function(ccc,iii,aaa){
+                        ret = ccc.apply(rr,[ret,rr])
+                    });
+                });
+                fs=[];
+            })():0;
+        (typeof c == "object")?
+            (ret=c):0;
+
+        return (c)?map:set;
+    };
+    return set;
+})
+({
+    type:function(c){
+        return []["slice"]["apply"](Object["prototype"]["toString"]["call"](c),[8,-1])["join"]("");
+    }
+})
+    ("circle")(function(c,rr){
+      console.log(c);
+      var aa = c.a;
+      var a=rr.ca(c);
+      var cvs = document.getElementById("d");
+      (function(rr){
+        rr.offsetX = cvs.getBoundingClientRect().left;
+        rr.offsetY = cvs.getBoundingClientRect().top;
+        rr.draggable=false;
+        rr.draw=function(){
+          c.clearRect(0, 0, cvs.width, cvs.height); 
+          c.beginPath();
+          (function(c,x,y,r,st,ed,anti){
+            console.log(arguments);
+            rr.a[0].map(function(p,i){
+              console.log("i",rr.a[0][0][0],rr.a[0][0][1]);
+              c.arc(rr.a[0][0][0],rr.a[0][0][1],r,st,ed,anti);
+            })
+          }).apply(c,a);
+          c.fill();
+        }
+        rr.draw();
+        cvs.addEventListener('mousemove', 
+          (function(rr){
+            return function(e){
+              rr.x = e.clientX - rr.offsetX;
+              rr.y = e.clientY - rr.offsetY;
+              (rr.draggable)?(
+                (function(){
+                  console.log("hit")
+                  rr.a[0][0][0]=rr.x;
+                  rr.a[0][0][1]=rr.y;
+                  rr.draw();
+                }())):0;
+            }
+          })(rr)
+          , false);
+        cvs.addEventListener('mousedown', 
+          (function(rr){
+            return function(e){
+              rr.x = e.clientX - rr.offsetX;
+              rr.y = e.clientY - rr.offsetY;
+              (Math.pow(rr.x - aa[0][0], 2) + Math.pow(rr.y - aa[0][1], 2) <= Math.pow(20, 2))?(rr.draggable=true):0;
+            }
+          })(rr)
+          , false);
+
+        cvs.addEventListener('mouseup',
+          (function(rr){
+            return function(e){
+              rr.draggable=false;
+              rr.x = e.clientX - rr.offsetX;
+              rr.y = e.clientY - rr.offsetY;
+            }
+          })(rr)
+           , false);
+      })(rr)
+
+      return c;
+    })
+    ("canvas")(function(c,rr){
+      rr.a[0]=c;
+      var cvs = document.getElementById("d");
+      c = cvs.getContext("2d");
+      c.a = rr.a[0];
+      return c;
+    })
+    ("default_style")(function(c,rr){
+      c=Object.assign(c,{
+          strokeStyle:"blue",  
+          fillStyle:"red"     
+      });
+      return c;
+    })
+    ("ca")(function(c,rr){
+      return [c,100,100,20,0,Math.PI*2,false];
+    })
+    ([1,2,3,4,5,6])(function(c,rr){
+      c = c.map(function(cc,i,a){
+        return [cc*30,cc*30];
+      });      
+      return c;
+    })()
+    ("canvas")("default_style")("circle")(1);
+
+
+</script>
