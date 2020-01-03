@@ -5,14 +5,10 @@
 <title>canvas</title>
 </head>
 <body>
-  <canvas id="d" width="450" height="150"></canvas>
+  <canvas id="d" width="450" height="450"></canvas>
 </body>
 </html>
 <script>
-
-
-
-
  (function(st){
     var rr={ff:[],a:[],i:0,args:[]};var back;var ret=null;
     rr=Object.assign(rr,st);
@@ -21,8 +17,7 @@
             ((back)?(function(){
               rr[back]=c;
               back=null;
-            }()):(ret=c.apply(rr,[ret,rr])))
-        :0;
+            }()):(ret=c.apply(rr,[ret,rr]))):0;
         (typeof c == "number")?
             (function(){
                 "_"['repeat'](c)['split']('')['map'](function(){
@@ -57,27 +52,13 @@
             (function(){
                 "_"['repeat'](c)['split']('')['map'](function(cc,ii,aa){
                     fs.map(function(ccc,iii,aaa){
-                        ret = ccc.apply(rr,[ret,ii,rr])
+                        ret = ccc.apply(rr,[ret,rr])
                     });
                 });
                 fs=[];
             })():0;
         (typeof c == "object")?
-            (c['map'])?
-            (function(){
-                c['map'](function(cc,ii,aa){
-                    fs.map(function(ccc,iii,aaa){
-                        ret = ccc.apply(rr,[ret,cc,rr])
-                    });
-                });
-            }()):((c['source'])?(
-                (typeof rr[c['source']]=="function")?(
-                    function(){
-                        rr.args.push(rr[c['source']].apply(rr,[ret]));
-                        ret=c;
-                    }()
-                ):(ret = c)    
-            ):0):0;
+            (ret=c):0;
 
         return (c)?map:set;
     };
@@ -88,45 +69,44 @@
         return []["slice"]["apply"](Object["prototype"]["toString"]["call"](c),[8,-1])["join"]("");
     }
 })
-    ("circle")(function(c,cc,rr){
-      console.log("circle",rr.a[0]);
-      var aa = rr.a[0];
+    ("circle")(function(c,rr){
+      console.log(c);
+      var aa = c.a;
       var a=rr.ca(c);
-      rr=Object.assign(c,rr.args[0]);
+      c.beginPath();
       (function(c,x,y,r,st,ed,anti){
-        c.beginPath();
         aa.map(function(p){
           c.arc(p[0],p[1],r,st,ed,anti);
         })
-        c.fill();
-        }).apply(c,a);
+      }).apply(c,a);
 
+      c.fill();
       return c;
     })
-    ("canvas")(function(c,cc,rr){
+    ("canvas")(function(c,rr){
+      rr.a[0]=c;
       var cvs = document.getElementById("d");
       c = cvs.getContext("2d");
+      c.a = rr.a[0];
       return c;
     })
-    ("ca")(function(c,cc,rr){
-      return [c,100,100,20,0,Math.PI*2,false];
-    })
-    ("default_style")(function(c,cc,rr){
-        return {
+    ("default_style")(function(c,rr){
+      c=Object.assign(c,{
           strokeStyle:"blue",  
           fillStyle:"red"     
-        };
+      });
+      return c;
     })
-    ([1,2,3,4])(function(c,rr){
-      console.log("helper",rr.a);
-      rr.a[0] = rr.a[0].map(function(c,i,a){
-        return [c*30,c*30]})      
-      console.log("helper",rr);
-      return rr;
+    ("ca")(function(c,rr){
+      return [c,100,100,20,0,Math.PI*2,false];
+    })
+    ([1,2,3,4,5,6])(function(c,rr){
+      c = c.map(function(cc,i,a){
+        return [cc*30,cc*30];
+      });      
+      return c;
     })()
-    ("canvas")(/default_style/)("circle")(1)
-    //("p")(1)
-    ;
+    ("canvas")("default_style")("circle")(1);
 
 
 </script>
