@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<title>canvas</title>
-</head>
-<body>
-  <canvas id="d" width="450" height="150"></canvas>
-</body>
-</html>
-<script>
-
-
-
-
  (function(st){
-    var rr={ff:[],a:[],i:0,args:[]};var back;var ret=null;
+    var rr={ff:[],a:[],i:0,args:[]};var back;var fs=[];var ret=1;
     rr=Object.assign(rr,st);
     var set=function(c){
+//        console.log(rr.i++,":set",arguments);
+//        console.log("typeof:",typeof c,c);
         (typeof c == "function")?
             ((back)?(function(){
               rr[back]=c;
               back=null;
-            }()):(ret=c.apply(rr,[ret,rr])))
-        :0;
+            }()):(ret=c.apply(rr,[rr])))
+              :0;
         (typeof c == "number")?
             (function(){
                 "_"['repeat'](c)['split']('')['map'](function(){
-                    rr.a.push(rr.a[rr.a.length-1]);                                
+                    rr.a.push(rr.a[rr.a.length-1])                                
                 });
-                (ret)?(function(){
-                    (ret['push'])?(ret.push(c)):0;
-                    (typeof ret=="number")?(ret=[ret,c]):0;
-                }())
-                :(ret=c);
             }()):(
         (typeof c == "string")?
             (function(){
@@ -44,11 +26,13 @@
                 rr.a.push(c);
                 ret=c;
             }())
-        :0);
+            :0);
+
         return (c)?set:map;
     };
-    var fs=[];
     var map=function(c){
+//        console.log(rr.i++,":map",arguments);
+//        console.log("map args:",rr.args);
         (typeof c == "function")?
             (c.apply(rr,[rr])):0;
         (typeof c == "string")?
@@ -56,9 +40,7 @@
         (typeof c == "number")?
             (function(){
                 "_"['repeat'](c)['split']('')['map'](function(cc,ii,aa){
-                    fs.map(function(ccc,iii,aaa){
-                        ret = ccc.apply(rr,[ret,ii,rr])
-                    });
+                    fs.map(function(ccc,iii,aaa){ret = ccc.apply(rr,[ret,ii,rr])});
                 });
                 fs=[];
             })():0;
@@ -74,6 +56,8 @@
                 (typeof rr[c['source']]=="function")?(
                     function(){
                         rr.args.push(rr[c['source']].apply(rr,[ret]));
+//                    var cc = map(ret);
+//                    console.log("rr.args",rr.args);
                         ret=c;
                     }()
                 ):(ret = c)    
@@ -86,47 +70,21 @@
 ({
     type:function(c){
         return []["slice"]["apply"](Object["prototype"]["toString"]["call"](c),[8,-1])["join"]("");
-    }
+    },
+    primez:[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
 })
-    ("circle")(function(c,cc,rr){
-      console.log("circle",rr.a[0]);
-      var aa = rr.a[0];
-      var a=rr.ca(c);
-      rr=Object.assign(c,rr.args[0]);
-      (function(c,x,y,r,st,ed,anti){
-        c.beginPath();
-        aa.map(function(p){
-          c.arc(p[0],p[1],r,st,ed,anti);
-        })
-        c.fill();
-        }).apply(c,a);
-
-      return c;
+    ("gcd")(function(c,cc,rr){
+        console.log(c);
+        //gcd https://rosettacode.org/wiki/Greatest_common_divisor#JavaScript
+        ret = (function gcd_rec(a, b) {
+          return b ? gcd_rec(b, a % b) : Math.abs(a);
+        }).apply(rr,c);
+        console.log("ret",ret);
+        return ret;
     })
-    ("canvas")(function(c,cc,rr){
-      var cvs = document.getElementById("d");
-      c = cvs.getContext("2d");
-      return c;
-    })
-    ("ca")(function(c,cc,rr){
-      return [c,100,100,20,0,Math.PI*2,false];
-    })
-    ("default_style")(function(c,cc,rr){
-        return {
-          strokeStyle:"blue",  
-          fillStyle:"red"     
-        };
-    })
-    ([1,2,3,4])(function(c,rr){
-      console.log("helper",rr.a);
-      rr.a[0] = rr.a[0].map(function(c,i,a){
-        return [c*30,c*30]})      
-      console.log("helper",rr);
-      return rr;
-    })()
-    ("canvas")(/default_style/)("circle")(1)
+    ([1071,1029])()
+    ("gcd")(1)
     //("p")(1)
     ;
 
 
-</script>

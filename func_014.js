@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<title>canvas</title>
-</head>
-<body>
-  <canvas id="d" width="450" height="150"></canvas>
-</body>
-</html>
-<script>
-
-
-
-
  (function(st){
     var rr={ff:[],a:[],i:0,args:[]};var back;var ret=null;
     rr=Object.assign(rr,st);
@@ -86,47 +71,18 @@
 ({
     type:function(c){
         return []["slice"]["apply"](Object["prototype"]["toString"]["call"](c),[8,-1])["join"]("");
-    }
+    },
 })
-    ("circle")(function(c,cc,rr){
-      console.log("circle",rr.a[0]);
-      var aa = rr.a[0];
-      var a=rr.ca(c);
-      rr=Object.assign(c,rr.args[0]);
-      (function(c,x,y,r,st,ed,anti){
-        c.beginPath();
-        aa.map(function(p){
-          c.arc(p[0],p[1],r,st,ed,anti);
-        })
-        c.fill();
-        }).apply(c,a);
-
-      return c;
+    ("p")(function(c,cc,rr){
+        console.log("p",c);
+        return c;
     })
-    ("canvas")(function(c,cc,rr){
-      var cvs = document.getElementById("d");
-      c = cvs.getContext("2d");
-      return c;
-    })
-    ("ca")(function(c,cc,rr){
-      return [c,100,100,20,0,Math.PI*2,false];
-    })
-    ("default_style")(function(c,cc,rr){
-        return {
-          strokeStyle:"blue",  
-          fillStyle:"red"     
-        };
-    })
-    ([1,2,3,4])(function(c,rr){
-      console.log("helper",rr.a);
-      rr.a[0] = rr.a[0].map(function(c,i,a){
-        return [c*30,c*30]})      
-      console.log("helper",rr);
-      return rr;
+    (1)(2)(3)(4)(function(c){
+        ret = (c['map'])?(c['map'](function(cc,ii,aa){return cc*2})):c;
+        return ret;
     })()
-    ("canvas")(/default_style/)("circle")(1)
+    ("p")(1)
     //("p")(1)
     ;
 
 
-</script>
