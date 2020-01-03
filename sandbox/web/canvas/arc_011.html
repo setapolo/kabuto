@@ -5,7 +5,7 @@
 <title>canvas</title>
 </head>
 <body>
-  <canvas id="d" width="450" height="450"></canvas>
+  <canvas id="d" width="850" height="450"></canvas>
 </body>
 </html>
 <script>
@@ -71,62 +71,76 @@
 })
     ("circle")(function(c,rr){
       console.log(c);
-      var aa = c.a;
       var a=rr.ca(c);
+      rr.r=20;
       var cvs = document.getElementById("d");
       (function(rr){
         rr.offsetX = cvs.getBoundingClientRect().left;
         rr.offsetY = cvs.getBoundingClientRect().top;
-        rr.draggable=false;
+        rr.draggable=-1;
         rr.draw=function(){
           c.clearRect(0, 0, cvs.width, cvs.height); 
-          c.beginPath();
           (function(c,x,y,r,st,ed,anti){
-            console.log(arguments);
-            rr.a[0].map(function(p,i){
-              console.log("i",rr.a[0][0][0],rr.a[0][0][1]);
-              c.arc(rr.a[0][0][0],rr.a[0][0][1],r,st,ed,anti);
+            var arr=rr.a[0].map(function(p,i){
+              c.beginPath();
+              c.arc(p[0],p[1],rr.r,st,ed,anti);
+              c.fill();
+              return p;
             })
+            console.log("arr:",arr+"");
           }).apply(c,a);
-          c.fill();
         }
         rr.draw();
-        cvs.addEventListener('mousemove', 
-          (function(rr){
-            return function(e){
-              rr.x = e.clientX - rr.offsetX;
-              rr.y = e.clientY - rr.offsetY;
-              (rr.draggable)?(
-                (function(){
-                  console.log("hit")
-                  rr.a[0][0][0]=rr.x;
-                  rr.a[0][0][1]=rr.y;
-                  rr.draw();
-                }())):0;
-            }
-          })(rr)
-          , false);
-        cvs.addEventListener('mousedown', 
-          (function(rr){
-            return function(e){
-              rr.x = e.clientX - rr.offsetX;
-              rr.y = e.clientY - rr.offsetY;
-              (Math.pow(rr.x - aa[0][0], 2) + Math.pow(rr.y - aa[0][1], 2) <= Math.pow(20, 2))?(rr.draggable=true):0;
-            }
-          })(rr)
-          , false);
 
-        cvs.addEventListener('mouseup',
-          (function(rr){
-            return function(e){
-              rr.draggable=false;
-              rr.x = e.clientX - rr.offsetX;
-              rr.y = e.clientY - rr.offsetY;
-            }
-          })(rr)
-           , false);
+        var ar=[
+        ['mousemove', 
+        (function(rr){
+          return function(e){
+            rr.x = e.clientX - rr.offsetX;
+            rr.y = e.clientY - rr.offsetY;
+            (rr.draggable>-1)?(
+              (function(){
+                rr.a[0][rr.draggable][0]=rr.x;
+                rr.a[0][rr.draggable][1]=rr.y;
+                rr.draw();
+              }())):0;
+          }
+        })(rr)
+        , false],
+        ['mousedown', 
+        (function(rr){
+          return function(e){
+            rr.x = e.clientX - rr.offsetX;
+            rr.y = e.clientY - rr.offsetY;
+            var arr=rr.a[0].map(function(p,i){
+                (Math.pow(rr.x - p[0], 2) + Math.pow(rr.y - p[1], 2) <= Math.pow(rr.r, 2))?(rr.draggable=i):0;
+              return p;
+            })
+            console.log("arr:",arr+"");
+          }
+        })(rr)
+        , false],
+        ['mouseup',
+        (function(rr){
+          return function(e){
+            rr.draggable=-1;
+          }
+        })(rr)
+         , false],
+        ['wheel',
+        (function(rr){
+          return function(e){
+            rr.r = rr.r + (e.deltaY*0.1)
+            rr.draw();
+            console.log("deltaY",e.deltaY);
+          }
+        })(rr)
+         , false]]
+         .map(function(ccc){
+          cvs.addEventListener.apply(cvs,ccc);
+        });   
+
       })(rr)
-
       return c;
     })
     ("canvas")(function(c,rr){
