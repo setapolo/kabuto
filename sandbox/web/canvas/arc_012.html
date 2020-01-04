@@ -12,7 +12,7 @@
  (function(st){
     var rr={ff:[],a:[],i:0,args:[]};var back;var ret=null;
     rr=Object.assign(rr,st);
-    var set=function(c){
+    var set=function(c){console.log("set",rr.iii);
         (typeof c == "function")?
             ((back)?(function(){
               rr[back]=c;
@@ -43,7 +43,7 @@
         return (c)?set:map;
     };
     var fs=[];
-    var map=function(c){
+    var map=function(c){console.log("map",rr.iii);
         (typeof c == "function")?
             (c.apply(rr,[rr])):0;
         (typeof c == "string")?
@@ -167,7 +167,25 @@
       });      
       return c;
     })()
-    ("canvas")("default_style")("circle")("draggable")("wheel")(1)([])()
+    ("canvas")("default_style")("circle")("draggable")("wheel")(1)()
+    ("button")(function(c,rr){
+      rr.iii=(rr.iii)?(rr.iii+1):1;
+      e=document.createElement("button");
+      e.type = 'button';
+      e.onclick=(function(iii){
+        return function(){
+          rr.a[0].map(function(p,i){
+            rr.a[0][i][0]=(Math.cos(i))*(60*iii)+200;
+            rr.a[0][i][1]=(Math.sin(i))*(60*iii)+200;
+          })
+          rr.draw();
+        };
+      }(rr.iii));
+      var submit = document.createTextNode("submit_"+rr.iii);
+      e.appendChild(submit);
+      document.body.appendChild(e)
+      return c;
+    })()("button")(3)()
     ;
 
 
