@@ -70,28 +70,28 @@
     }
 })
     ("circle")(function(c,rr){
-      console.log(c);
-      var a=rr.ca(c);
       rr.r=20;
-      var cvs = document.getElementById("d");
+      var a=[rr.ctx,100,100,20,0,Math.PI*2,false];
       (function(rr){
-        rr.offsetX = cvs.getBoundingClientRect().left;
-        rr.offsetY = cvs.getBoundingClientRect().top;
-        rr.draggable=-1;
         rr.draw=function(){
-          c.clearRect(0, 0, cvs.width, cvs.height); 
-          (function(c,x,y,r,st,ed,anti){
+          rr.ctx.clearRect(0, 0, c.width, c.height); 
+          (function(ctx,x,y,r,st,ed,anti){
             var arr=rr.a[0].map(function(p,i){
-              c.beginPath();
-              c.arc(p[0],p[1],rr.r,st,ed,anti);
-              c.fill();
+              ctx.beginPath();
+              ctx.arc(p[0],p[1],rr.r,st,ed,anti);
+              ctx.fill();
               return p;
             })
-            console.log("arr:",arr+"");
-          }).apply(c,a);
+          }).apply(rr.ctx,a);
         }
         rr.draw();
-
+      })(rr)
+      return c;
+    })
+    ("draggable")(function(c,rr){
+        rr.offsetX = c.getBoundingClientRect().left;
+        rr.offsetY = c.getBoundingClientRect().top;
+        rr.draggable=-1;
         var ar=[
         ['mousemove', 
         (function(rr){
@@ -116,7 +116,6 @@
                 (Math.pow(rr.x - p[0], 2) + Math.pow(rr.y - p[1], 2) <= Math.pow(rr.r, 2))?(rr.draggable=i):0;
               return p;
             })
-            console.log("arr:",arr+"");
           }
         })(rr)
         , false],
@@ -126,39 +125,40 @@
             rr.draggable=-1;
           }
         })(rr)
-         , false],
-        ['wheel',
+         , false]]
+         .map(function(ccc){
+          c.addEventListener.apply(c,ccc);
+        });   
+      return c;   
+
+    })
+    ("wheel")(function(c,rr){
+      var ar=[['wheel',
         (function(rr){
           return function(e){
             rr.r = rr.r + (e.deltaY*0.1)
             rr.draw();
-            console.log("deltaY",e.deltaY);
           }
         })(rr)
          , false]]
          .map(function(ccc){
-          cvs.addEventListener.apply(cvs,ccc);
+          c.addEventListener.apply(c,ccc);
         });   
-
-      })(rr)
-      return c;
+      return c;   
     })
     ("canvas")(function(c,rr){
       rr.a[0]=c;
-      var cvs = document.getElementById("d");
-      c = cvs.getContext("2d");
+      rr.canvas = document.getElementById("d");
+      rr.ctx = rr.canvas.getContext("2d");
       c.a = rr.a[0];
-      return c;
+      return rr.canvas;
     })
     ("default_style")(function(c,rr){
-      c=Object.assign(c,{
+      rr.ctx=Object.assign(rr.ctx,{
           strokeStyle:"blue",  
           fillStyle:"red"     
       });
       return c;
-    })
-    ("ca")(function(c,rr){
-      return [c,100,100,20,0,Math.PI*2,false];
     })
     ([1,2,3,4,5,6])(function(c,rr){
       c = c.map(function(cc,i,a){
@@ -166,7 +166,7 @@
       });      
       return c;
     })()
-    ("canvas")("default_style")("circle")(1);
+    ("canvas")("default_style")("circle")("draggable")("wheel")(1);
 
 
 </script>
