@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+</head>
+<body>
+  <canvas id="d" width="850" height="450"></canvas>
+</body>
+</html>
+<script>
+ (function(st){
+    var rr={ff:[],a:[],i:0,args:[]};var back;var ret=null;
+    rr=Object.assign(rr,st);
+    var set=function(c){console.log("set",rr.iii);
+        (typeof c == "function")?
+            ((back)?(function(){
+              rr[back]=c;
+              back=null;
+            }()):(ret=c.apply(rr,[ret,rr]))):0;
+        (typeof c == "number")?
+            (function(){
+                "_"['repeat'](c)['split']('')['map'](function(){
+                    rr.a.push(rr.a[rr.a.length-1]);                                
+                });
+                (ret)?(function(){
+                    (ret['push'])?(ret.push(c)):0;
+                    (typeof ret=="number")?(ret=[ret,c]):0;
+                }())
+                :(ret=c);
+            }()):(
+        (typeof c == "string")?
+            (function(){
+                rr[c]=0;
+                back=c;
+            }()):
+        (typeof c == "object")?
+            (function(){
+                rr.a.push(c);
+                ret=c;
+            }())
+        :0);
+        return (c)?set:map;
+    };
+    var fs=[];
+    var map=function(c){console.log("map",rr.iii);
+        (typeof c == "function")?
+            (c.apply(rr,[rr])):0;
+        (typeof c == "string")?
+            ((rr[c])?(function(){fs.push(rr[c])}()):0):0;
+        (typeof c == "number")?
+            (function(){
+                "_"['repeat'](c)['split']('')['map'](function(cc,ii,aa){
+                    fs.map(function(ccc,iii,aaa){
+                        ret = ccc.apply(rr,[ret,rr])
+                    });
+                });
+                fs=[];
+            })():0;
+        (typeof c == "object")?
+            (ret=c):0;
+
+        return (c)?map:set;
+    };
+    return set;
+})
+({
+    type:function(c){
+        return []["slice"]["apply"](Object["prototype"]["toString"]["call"](c),[8,-1])["join"]("");
+    }
+})
+    ("circle")(function(c,rr){
+      rr.r=20;
+      var a=[rr.ctx,100,100,20,0,Math.PI*2,false];
+      (function(rr){
+        rr.draw=function(){
+          rr.ctx.clearRect(0, 0, c.width, c.height); 
+          (function(ctx,x,y,r,st,ed,anti){
+            var arr=rr.a[0].map(
+              function(p,i){
+                ctx.beginPath();
+                ctx.arc(p[0],p[1],rr.r,st,ed,anti);
+                ctx.fill();
+                return p;
+              })
+          }).apply(rr.ctx,a);
+        }
+        rr.draw();
+      })(rr)
+
+      countup = (function(rr){
+        rr.direction=1;
+        rr.count=1;
+        return function(){
+          (rr.a[0][0][0]<0)?(rr.direction=1):(rr.a[0][0][0]>rr.canvas.width)?(rr.direction=-1):0          
+          rr.a[0][0][0]=rr.a[0][0][0]+rr.direction;
+          (rr.a[0][0][0] % 10)?(0):(
+            (function(){
+              rr.count=rr.count+1;
+              rr.a[0][0][1]=(Math.cos(rr.count)*30) + rr.a[0][0][1]
+            })()
+          );
+
+          rr.draw();
+          setTimeout(countup, 10);
+        } 
+      }(rr))
+      setTimeout(countup, 1000);
+
+      return c;
+    })
+    ("draggable")(function(c,rr){
+        rr.offsetX = c.getBoundingClientRect().left;
+        rr.offsetY = c.getBoundingClientRect().top;
+        rr.draggable=-1;
+        var ar=[
+        ['mousemove', 
+        (function(rr){
+          return function(e){
+            rr.x = e.clientX - rr.offsetX;
+            rr.y = e.clientY - rr.offsetY;
+            (rr.draggable>-1)?(
+              (function(){
+                rr.a[0][rr.draggable][0]=rr.x;
+                rr.a[0][rr.draggable][1]=rr.y;
+                rr.draw();
+              }())):0;
+          }
+        })(rr)
+        , false],
+        ['mousedown', 
+        (function(rr){
+          return function(e){
+            rr.x = e.clientX - rr.offsetX;
+            rr.y = e.clientY - rr.offsetY;
+            var arr=rr.a[0].map(function(p,i){
+                (Math.pow(rr.x - p[0], 2) + Math.pow(rr.y - p[1], 2) <= Math.pow(rr.r, 2))?(rr.draggable=i):0;
+              return p;
+            })
+          }
+        })(rr)
+        , false],
+        ['mouseup',
+        (function(rr){
+          return function(e){
+            rr.draggable=-1;
+          }
+        })(rr)
+         , false]]
+         .map(function(ccc){
+          c.addEventListener.apply(c,ccc);
+        });   
+      return c;   
+
+    })
+    ("wheel")(function(c,rr){
+      var ar=[['wheel',
+        (function(rr){
+          return function(e){
+            rr.r = rr.r + (e.deltaY*0.1)
+            rr.draw();
+          }
+        })(rr)
+         , false]]
+         .map(function(ccc){
+          c.addEventListener.apply(c,ccc);
+        });   
+      return c;   
+    })
+    ("canvas")(function(c,rr){
+      rr.a[0]=c;
+      rr.canvas = document.getElementById("d");
+      rr.ctx = rr.canvas.getContext("2d");
+      c.a = rr.a[0];
+      return rr.canvas;
+    })
+    ("default_style")(function(c,rr){
+      rr.ctx=Object.assign(rr.ctx,{
+          strokeStyle:"blue",  
+          fillStyle:"red"     
+      });
+      return c;
+    })
+    ([1,2,3,4,5,6])(function(c,rr){
+      c = c.map(function(cc,i,a){
+        return [cc*30,cc*30];
+      });      
+      return c;
+    })()
+    ("canvas")("default_style")("circle")("draggable")("wheel")(1)()
+    ("button")(function(c,rr){
+      rr.iii=(rr.iii)?(rr.iii+1):1;
+      e=document.createElement("button");
+      e.type = 'button';
+      e.onclick=(function(iii){
+        return function(){
+          rr.a[0].map(function(p,i){
+            rr.a[0][i][0]=(Math.cos(i))*(60*iii)+200;
+            rr.a[0][i][1]=(Math.sin(i))*(60*iii)+200;
+          })
+          rr.draw();
+        };
+      }(rr.iii));
+      var submit = document.createTextNode("submit_"+rr.iii);
+      e.appendChild(submit);
+      document.body.appendChild(e)
+      return c;
+    })()("button")(3)()
+    ;
+
+
+</script>
