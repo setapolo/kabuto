@@ -69,22 +69,24 @@
         return []["slice"]["apply"](Object["prototype"]["toString"]["call"](c),[8,-1])["join"]("");
     }
 })
-    ("p")(function(c,cc,rr){
+    ("p")(function(c,rr){
         arp=[];
+        rr.a=[];
         var j=0;
         for (var i=0;i<100;i++){
             j=j+0.01;
             arp.push(j)
         }
-        arp.map(function(p){
+        rr.a[0]=arp.map(function(p,i){
             var entropy = -p*Math.log2(p) - (1-p)*Math.log2(1-p)
             console.log("entropy",entropy);
+            return [i,entropy]
         });
         console.log("p",c);
         return c;
     })
     ("circle")(function(c,rr){
-      rr.r=20;
+      rr.r=2;
       var a=[rr.ctx,100,100,20,0,Math.PI*2,false];
       (function(rr){
         rr.draw=function(){
@@ -151,8 +153,8 @@
       var ar=[['wheel',
         (function(rr){
           return function(e){
-            rr.r = rr.r + (e.deltaY*0.1)
-            rr.draw();
+//            rr.r = rr.r + (e.deltaY*0.1)
+//            rr.draw();
           }
         })(rr)
          , false]]
@@ -196,10 +198,19 @@
       return c;
     })
     ([1,2,3,4,5,6])(function(c,rr){
-      c = c.map(function(cc,i,a){
-        return [cc*30,cc*30];
-      });      
-      return c;
+        arp=[];
+        var j=0;
+        for (var i=0;i<100;i++){
+            j=j+0.01;
+            arp.push(j)
+        }
+        c=arp.map(function(p,i){
+            var entropy = -p*Math.log2(p) - (1-p)*Math.log2(1-p)
+            console.log("entropy",entropy);
+            return [i,(-entropy*100)+200]
+        });
+        console.log("p",c);
+        return c;
     })()
     ("p")("canvas")("default_style")("circle")("draggable")("wheel")("timer_test")(1)()
     ("button")(function(c,rr){
