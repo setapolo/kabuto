@@ -26,7 +26,8 @@
         (typeof c == "object")?
             (function(){
                 rr.a.push(c);
-                ret=c;
+                ret = Object.assign(c,ret);
+//                ret=c;
             }())
         :0);
         return (c)?set:map;
@@ -62,23 +63,12 @@
 })
     ("p")(function(c,cc,rr){
         console.log("p",c);
-        arp=[];
-        var j=0;
-        for (var i=0;i<100;i++){
-            j=j+0.01;
-            arp.push(j)
-        }
-        arp.map(function(p){
-            var entropy = -p*Math.log2(p) - (1-p)*Math.log2(1-p)
-            console.log("entropy",entropy);
-        });
-        console.log("p",c);
+        c = Object.assign(c,"goho");
         return c;
     })
-    (1)(2)(3)(4)(5)(function(c){
-        ret = (c['map'])?(c['map'](function(cc,ii,aa){return cc*2})):c;
-        return ret;
-    })()
+    (1)(2)(3)(4)(5)([6,7,8])([1,2,3])()
+    ("p")(1)()
+    (1)(2)(3)()
     ("p")(1)
     //("p")(1)
     ;
