@@ -6,18 +6,17 @@
     var f=function(){};
     var set=function(c){
         ss= Object.prototype.toString.call(c).slice(8, -1);
-        a.push(c);
         (ss=="String")?(function(c){o[c]=[];l=c})(c):0;
         (ss=="Number")?o[l].push(c):0;
+        console.log(a);
+
         return (c!=null)?set:map;
     };
     var map=function(c){
         ss= Object.prototype.toString.call(c).slice(8, -1);
         (ss=="String")?s=o[c]:0;
-        (ss=="Number")?o["type"].push(c):0;
-//        "_"['repeat'](c)['split']('')['map'](function(){
-//                    rr.a.push(rr.a[rr.a.length-1]);                                
-//                })
+        (ss=="Number")?(function(c){s="_"['repeat'](c)['split']('')['map'](function(cc,ii,aa){return s})})(c):0;
+        (ss=="Function")?s=c.call(a,arguments[1]):0;
         console.log(s);
         return (c!=null)?map:set;
     };
@@ -29,5 +28,5 @@
 ("type")
     (1)(2)(3)(4)()
 ("type")
-    (10);
+    (1)(5)()();//([].join,["\n"]);
 
