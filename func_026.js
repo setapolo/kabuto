@@ -4,6 +4,7 @@
     var a=[];
     var o={};
     var ret={};
+    var f=null;
     var is = function(c){
             var ss=Object.prototype.toString.call(c).slice(8, -1)
 //            console.log(typeof c,ss,(c)?true:false);
@@ -32,7 +33,7 @@
     var map=function(c){
         is(c)
         ("String")(function(){
-            s=c;
+            (s)?map(o[c]):s=c;
         })()
         ("Function")(function(){
             is(o[s])("Array")(
@@ -52,8 +53,8 @@
                 })
             })
         })()
-
        ;
+        s=(c!=null)?s:'';
         return (c!=null)?map:set;
     };
     set(rr);
@@ -68,9 +69,13 @@
     (function(){})(Date)//functions
     (/[a-z]/)([1,2,3])([])({})(new Date)()()
 ("array")
-    (1)(1)(1)(1)(1)(1)(1)(1)(1)(1)()
+    (1)(1)(1)(1)(1)(1)(1)(1)(1)(1)()()
+("double")
+    (function(c,i,a){console.log("double");return c*2})()
 ("types")([console.log])
-("array")(function(c,i,a){return c*2})(function(c,i,a){return c*2})([console.log])
-("array")(function(c,i,a){return c*2})([console.log])
+("array")("double")([console.log])
+//("types")(function(c,i,a){return [i,typeof c,c]})([console.log])
+//("array")(function(c,i,a){return c*2})(function(c,i,a){return c*2})([console.log])
+//("array")(function(c,i,a){return c*2})([console.log])
     ();
 
