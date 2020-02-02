@@ -3,25 +3,33 @@
     var s='';
     var a=[];
     var o={};
-    _ = function(c){
+    var is = function(c){
+            var ss=Object.prototype.toString.call(c).slice(8, -1)
+            //console.log(typeof c,ss,(c)?true:false);
             return function(sss){
-                var b = (sss==Object.prototype.toString.call(c).slice(8, -1));
+                var b = (sss==ss);
                 return function(f){
                     return (b)?f.apply():0;
                 }
             }
         };
     var set=function(c){
-        _(c)("String")(function(){
-            console.log(1);
+        is(c)("String")(function(){
+            s=(s)?s:c;
+            (o[s])?(o[s].push(c)):(o[s]=[]);
         });
+        (o[s])?(o[s].push(c)):0;
         a.push(c);
-        //console.log(typeof c,ss,(c)?true:false);
+        s=(c!=null)?s:'';
         return (c!=null)?set:map;
     };
     var map=function(c){
-        _(c)("Function")(function(){
-            a=c.call(a,a)
+        is(c)("String")(function(){
+            s=c;
+        });
+        is(c)("Function")(function(){
+            var mat=(o[s])?o[s]:a;
+            a=c.call(mat,mat)
         });
         return (c!=null)?map:set;
     };
@@ -32,10 +40,13 @@
 })
 ("types")
     (1)(0)(NaN)//Number
-    ("2")(`test`)("")
-    (true)(false)
-    (function(){})(Date)
-    (/[a-z]/)([1,2,3])([])({})(new Date)()
-("types")(function(a){return a})(console.log)
+    ("2")(`test`)("")//String
+    (true)(false)//Boolean
+    (function(){})(Date)//functions
+    (/[a-z]/)([1,2,3])([])({})(new Date)()()
+("array")
+    (1)(1)(1)(1)(1)(1)(1)(1)(1)(1)()
+("types")(console.log)
+("array")(console.log)
     ();
 
