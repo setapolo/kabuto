@@ -1,9 +1,9 @@
  (function(rr){
-    var l='';
     var s='';
     var a=[];
     var o={};
     var ret={};
+    var f=null;
     var is = function(c){
 //            console.log(typeof c,ss,(c)?true:false);
             return function(sss){
@@ -20,15 +20,23 @@
             }
         };
     var set=function(c){
-        is(c)
-        ("String")(function(){
+        is(c)("String")
+        (function(){
             s=(s)?s:c;
             is(o[s])(true)
                 (function(){o[s].push(c)})
-                (function(){o[s]=[]});
+                (function(){
+                    is(f)(true)
+                    (function(){o[s]=f;f=null})    
+                    (function(){o[s]=[];})
+                    
+                });
         })(function(){
             is(c)(true)
                 (function(){
+                    is(c)("Function")(function(){
+                            f=c;
+                    })
                     is(o[s])(true)(function(){o[s].push(c)})
                     a.push(c);
                 })
@@ -42,6 +50,7 @@
     var map=function(c){
         is(c)
         ("String")(function(){
+            is(o[c])("Function")(function(){o[c].call("")})
             s=c;
         })()
         ("Function")(function(){
@@ -77,11 +86,13 @@
     (true)(false)//Boolean
     (function(){})(Date)//functions
     (/[a-z]/)([1,2,3])([])({})(new Date)()()
+(function(){console.log(5678)})
+    ("double")()()
 ("array")
     (1)(1)(1)(1)(1)(1)(1)(1)(1)(1)()
 ("types")([console.log])
 ("array")(function(c,i,a){return c*2})(function(c,i,a){return c*2})([console.log])
 ("array")(function(c,i,a){return c*2})([console.log])
-()
-    ();
+("array")("double")
+();
 
