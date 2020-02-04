@@ -11,9 +11,9 @@
                 var type=typeof sss;
                 var b = (type=="boolean")?(c!=null):(sss==ss);
                 return function(f){
-                    (b==true)?f.apply():0;
+                    (b==true)?f.apply(c,[c,ss,sss]):0;
                     return function(ff){
-                        (b==false)?((ff)?ff.apply():0):0;
+                        (b==false)?((ff)?ff.apply(c,[c,ss,sss]):0):0;
                         return is(c);
                     };
                 }
