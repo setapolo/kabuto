@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+</html>
+<script>
+
+ (function(rr){
+    var s='';
+    var a=[];
+    var o={};
+    var ret={};
+    var f=null;
+    var k=null;
+
+    var is = function(c){
+            return function(sss){
+                var ss=Object.prototype.toString.call(c).slice(8, -1);
+                var type=typeof sss;
+                var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(typeof c==type));
+//                console.log(c,"_is_",typeof c,ss,"_compareto_",sss,b);
+                return function(f){
+                    (b==true)?f.apply(c,[c,ss,sss]):0;
+                    return function(ff){
+                        (b==false)?((ff)?ff.apply(c,[c,ss,sss]):0):0;
+                        return is(c);
+                    };
+                }
+            }
+        };
+    var set=function(c){
+//        is(c)({}) (function(){console.log("some")})(function(){console.log("nan")});
+        is(c)({})(function(){
+          ret={};
+          console.log(c,"is","obj");
+//          is(ret)(false)(function(){console.log("some")})(function(){console.log("nan")});
+        })()("String")(function(){
+          is(k)(true)(function(){ret[k]=c;k=null})
+                     (function(){k=c});
+          console.log(ret);
+        })
+        return (c!=null)?set:map;
+    };
+    var map=function(c){
+        return (c!=null)?map:set;
+    };
+    set(rr);
+    rr.set=set;            
+    rr.map=map;            
+    return set;
+})({})
+  ("id")("d")
+  ("width")("450")
+  ("heght")("150")
+  (document.createElement("canvas"))
+  ()([console.log])
+  ;
+
+
+  var e = document.createElement("canvas");
+  e.id="d";
+  e.width="450";
+  e.heght="150";
+  document.body.appendChild(e)
+  
+  var cvs = document.getElementById("d");
+  var ctx = cvs.getContext("2d");
+  ctx.strokeStyle="blue";  
+  ctx.fillStyle="red";     
+
+  (function(c,x,y,r,st,ed,anti){
+    c.beginPath();
+    c.arc(x,y,r,st,ed,anti);
+    c.fill();
+  })(ctx,100,100,4,0,Math.PI*2,false);
+
+
+ 
+</script>
