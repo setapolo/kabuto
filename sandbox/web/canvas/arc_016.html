@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+</html>
+<script>
+  (function(rr){
+    var s='';
+    var a=[];
+    var o={};
+    var ret={};
+    var f=null;
+    var k=null;
+    var p=function(c){
+      console.log(c,"is",Object.prototype.toString.call(c).slice(8, -1));
+    };
+    var is = function(c){
+            return function(sss){
+                var ss=Object.prototype.toString.call(c).slice(8, -1);
+                var type=typeof sss;
+                var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(typeof c==type));
+                b=(typeof c=="boolean")?c:b;
+                //console.log(c,"_is_",typeof c,ss,"_compareto_",sss,b);
+                return function(f){
+                  console.log([c,ss,sss]);
+                    (b==true)?f.apply(c,[c,ss,sss]):0;
+                    return function(ff){
+                        console.log(b,ff);
+                        (b==false)?((ff)?ff.apply(c,[c,ss,sss]):0):0;
+                        return is(c);
+                    };
+                }
+            }
+        };
+    var set=function(c){
+        is(c)({})(function(){
+          is(Object.keys(c).length==0)(true)
+                (function(){ret=c;})(function(){
+                  Object.assign(ret,c)
+                });
+        })()("String")(function(){
+          is(k)(true)(function(){ret[k]=c;k=null})
+                     (function(){k=c});
+        })
+        return (c!=null)?set:map;
+    };
+    var map=function(c){
+        is(c)(true)(function(){
+          is(c)("HTMLDocument")(function(){
+            c.body.appendChild(ret)
+          })()("String")(function(){
+            is(ret[c])("Function")(function(){
+              ret[c].apply(ret,a);
+            });
+          })()("Array")(function(){
+              a=c;
+          });
+        });
+        return (c!=null)?map:set;
+    };
+    set(rr);
+    rr.set=set;            
+    rr.map=map;            
+    return set;
+})(document.createElement("canvas"))
+  ("width")("540")
+  ("height")("200")
+  ("id")("d")
+  ()
+  (document)
+  ()
+  (document.getElementById("d").getContext("2d"))
+  ("strokeStyle")("blue")
+  ("fillStyle")("blue")
+  ()
+  ([])("beginPath")
+  ([100,100,20,0,Math.PI*2,false])("arc")
+  ([])("fill")   
+;
+  
+
+
+ 
+</script>
