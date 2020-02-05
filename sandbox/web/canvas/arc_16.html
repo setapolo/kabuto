@@ -14,7 +14,6 @@
       console.log(c,"is",Object.prototype.toString.call(c).slice(8, -1));
     };
     var is = function(c){
-        //p(c);
             return function(sss){
                 var ss=Object.prototype.toString.call(c).slice(8, -1);
                 var type=typeof sss;
@@ -25,6 +24,7 @@
                   console.log([c,ss,sss]);
                     (b==true)?f.apply(c,[c,ss,sss]):0;
                     return function(ff){
+                        console.log(b,ff);
                         (b==false)?((ff)?ff.apply(c,[c,ss,sss]):0):0;
                         return is(c);
                     };
@@ -47,20 +47,17 @@
         return (c!=null)?set:map;
     };
     var map=function(c){
-        console.log(ret);
         is(c)(true)(function(){
           is(c)("HTMLDocument")(function(){
             c.body.appendChild(ret)
           })()("String")(function(){
             is(ret[c])("Function")(function(){
               ret[c].apply(ret,a);
-            })(function(){
-              is(c)("Array")(function(){
+            });
+          })()("Array")(function(){
                 p("arrayly");
               a=c;
-              });
-            })
-          })
+          });
         });
         return (c!=null)?map:set;
     };
@@ -79,23 +76,11 @@
   ("strokeStyle")("blue")
   ("fillStyle")("blue")
   ()
-  ("beginPath")
-  ([200,200,4,0,Math.PI*2,false])("arc")
-  ("fill")
-
-   
+  ([])("beginPath")
+  ([100,100,20,0,Math.PI*2,false])("arc")
+  ([])("fill")   
 ;
   
-  var cvs = document.getElementById("d");
-  var ctx = cvs.getContext("2d");
- // ctx.strokeStyle="blue";  
- // ctx.fillStyle="red";     
-
-  (function(c,x,y,r,st,ed,anti){
-    c.beginPath();
-    c.arc(x,y,r,st,ed,anti);
-    c.fill();
-  })(ctx,100,100,4,0,Math.PI*2,false);
 
 
  
