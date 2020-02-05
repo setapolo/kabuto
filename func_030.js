@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-</html>
-<script>
-//var e = document.createElement("canvas");
   (function(rr){
     var s='';
     var a=[];
@@ -10,11 +5,8 @@
     var ret={};
     var f=null;
     var k=null;
-    var p=function(c){
-      console.log(c,"is",Object.prototype.toString.call(c).slice(8, -1));
-    };
+
     var is = function(c){
-        //p(c);
             return function(sss){
                 var ss=Object.prototype.toString.call(c).slice(8, -1);
                 var type=typeof sss;
@@ -22,7 +14,6 @@
                 b=(typeof c=="boolean")?c:b;
                 //console.log(c,"_is_",typeof c,ss,"_compareto_",sss,b);
                 return function(f){
-                  console.log([c,ss,sss]);
                     (b==true)?f.apply(c,[c,ss,sss]):0;
                     return function(ff){
                         (b==false)?((ff)?ff.apply(c,[c,ss,sss]):0):0;
@@ -35,9 +26,8 @@
 //        is(c)({}) (function(){console.log("some")})(function(){console.log("nan")});
         is(c)({})(function(){
           is(Object.keys(c).length==0)(true)
-                (function(){ret=c;})(function(){
-                  Object.assign(ret,c)
-                });
+                (function(){ret={};})(function(){Object.assign(ret,c)});
+          console.log(Object.keys(c).length==0);
 //          is(ret)(false)(function(){console.log("some")})(function(){console.log("nan")});
         })()("String")(function(){
           is(k)(true)(function(){ret[k]=c;k=null})
@@ -48,55 +38,13 @@
     };
     var map=function(c){
         console.log(ret);
-        is(c)(true)(function(){
-          is(c)("HTMLDocument")(function(){
-            c.body.appendChild(ret)
-          })()("String")(function(){
-            is(ret[c])("Function")(function(){
-              ret[c].apply(ret,a);
-            })(function(){
-              is(c)("Array")(function(){
-                p("arrayly");
-              a=c;
-              });
-            })
-          })
-        });
         return (c!=null)?map:set;
     };
     set(rr);
     rr.set=set;            
     rr.map=map;            
     return set;
-})(document.createElement("canvas"))
-  ("width")("540")
-  ("height")("200")
-  ("id")("d")
-  ()
-  (document)
-  ()
-  (document.getElementById("d").getContext("2d"))
-  ("strokeStyle")("blue")
-  ("fillStyle")("blue")
-  ()
-  ("beginPath")
-  ([200,200,4,0,Math.PI*2,false])("arc")
-  ("fill")
-
-   
+})({})({a:1})({b:1})({c:1,a:2})({c:1,a:3})()([console.log])
 ;
-  
-  var cvs = document.getElementById("d");
-  var ctx = cvs.getContext("2d");
- // ctx.strokeStyle="blue";  
- // ctx.fillStyle="red";     
 
-  (function(c,x,y,r,st,ed,anti){
-    c.beginPath();
-    c.arc(x,y,r,st,ed,anti);
-    c.fill();
-  })(ctx,100,100,4,0,Math.PI*2,false);
-
-
- 
-</script>
+console.log(/.*/);
