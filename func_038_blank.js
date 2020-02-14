@@ -48,14 +48,15 @@
     return set;
 })({})("0")(4)()(function(rr){
     //rr.is(rr,true);
+    //"-i "+('0'+(i+rr["st"])).slice(-2)+".mp3";
     var rep = (function(s){
             return function(n){
-                rr.is(s.repeat(n),true);
-                return rep;
+                return function(nn){
+                    rr.is(s.repeat(n)+nn,true);
+                    return rep;
+                };
             }});
-//    ["x",4,"z",8,"o",16].map(function(c,i,a){
-//        (i==0)?o=rep(c):((i%2)==0)?(o=b(c)):(b=o(c));
-//    });
+
     (function(a){
         var x= function(c){
             a.push(c);
@@ -63,9 +64,9 @@
         }
         return x;
     })([])
-    ("x")(4)
-    ("z")(9)
-    ("o")(8)().map(function(c,i,a){
+    ("0")(4)(1)
+    ("0")(9)(10)
+    ("0")(1)(100)().map(function(c,i,a){
         (i==0)?o=rep(c):((i%2)==0)?(o=b(c)):(b=o(c));
     });
 //    return (function(s,n){return s.repeat(n)}).apply(rr,rr.a);
