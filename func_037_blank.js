@@ -48,7 +48,6 @@
     return set;
 })({})("0")(4)()(function(rr){
     //rr.is(rr,true);
-
     var rep = (function(s){
             return function(n){
                 rr.is(s.repeat(n),true);
@@ -59,23 +58,19 @@
 //        (i==0)?o=rep(c):((i%2)==0)?(o=b(c)):(b=o(c));
 //    });
 
-    var x=function(){
-        var a=[];
-        return function(c){
+    (function(a){
+        var x= function(c){
             a.push(c);
             return (c)?x:a;
         }
-    }()
-    x("x")(2)
-     ("z")(3)
-     ("o")(8)().map(function(c,i,a){
+        return x;
+    })([])
+    ("x")(4)
+    ("z")(9)
+    ("o")(8)().map(function(c,i,a){
         (i==0)?o=rep(c):((i%2)==0)?(o=b(c)):(b=o(c));
     });
-
-
 //    return (function(s,n){return s.repeat(n)}).apply(rr,rr.a);
 });
 
-
-;
 
