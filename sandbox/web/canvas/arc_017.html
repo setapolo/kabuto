@@ -21,7 +21,6 @@
                 b=(typeof c=="boolean")?c:b;
                 //console.log(c,"_is_",typeof c,ss,"_compareto_",sss,b);
                 return function(f){
-                  console.log([c,ss,sss]);
                     (b==true)?f.apply(c,[c,ss,sss]):0;
                     return function(ff){
                         console.log(b,ff);
@@ -32,17 +31,14 @@
             }
         };
     var set=function(c){
-//        is(c)({}) (function(){console.log("some")})(function(){console.log("nan")});
         is(c)({})(function(){
           is(Object.keys(c).length==0)(true)
                 (function(){ret=c;})(function(){
                   Object.assign(ret,c)
                 });
-//          is(ret)(false)(function(){console.log("some")})(function(){console.log("nan")});
         })()("String")(function(){
           is(k)(true)(function(){ret[k]=c;k=null})
                      (function(){k=c});
-          //console.log(ret);
         })
         return (c!=null)?set:map;
     };

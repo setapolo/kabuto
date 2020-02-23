@@ -1,10 +1,6 @@
-  (function(rr){
-    var s='';
+(function(rr){
     var a=[];
-    var o={};
-    var ret={};
     var ff=[];
-    var k=null;
     var is = function(c,flg){
             (flg)?(console.log(flg,c)):0;
             return function(sss,flg){
@@ -13,7 +9,6 @@
                 var type=typeof sss;
                 var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(typeof c==type));
                 b=(typeof c=="boolean")?c:b;
-                //console.log(c,"_is_",typeof c,ss,"_compareto_",sss,b);
                 return function(f){
                     (b==true)?f.apply(c,[c,ss,sss]):0;
                     return function(ff){
@@ -23,8 +18,6 @@
                 }
             }
         };
-
-    var i=0;
     var set=function(c){
         is(c)("Number")(function(c){a.push(c)});
         return (c!=null)?set:map;
@@ -53,10 +46,10 @@
     this.is(a.join(" "),"rd");
 })
 (function(c,i,a){
-        return "-i "+('0'+(i)).slice(-2)+".mp3";
+        return i;
 })
 (function(c,i,a){
-        return i;
+        return "-i "+('0'+(i)).slice(-2)+".mp3";
 })
 (0);
 
