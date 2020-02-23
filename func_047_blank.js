@@ -34,9 +34,9 @@
             var aaa="_"['repeat'](c)['split']('')['map'](
                 function(ccc,iii,aaa){
                     ff.map(function(cc,ii,aa){
-                        a[1]=(iii*14)+1;
+                        a[1]=(this[1]*14)+1;
                         cc.apply(rr,a)
-                    });
+                    },arguments);
                 });
         });
         is(c)("Function")(function(c){
@@ -53,7 +53,6 @@
         a.unshift(head);
         a.push(tail);
         this.is(a.join(" ")," ");
-
     });
     rr.p=(function(c,i,a){
   //          return "-i "+('0'+(i+this[1])).slice(-2)+".mp3";
@@ -61,6 +60,8 @@
     });
     return set;
 })({})
-("fmpeg")(1)(14)(`-filter_complex “concat=n=2:v=0:a=1”`)()
+("fmpeg")
+(1)(14)
+(`-filter_complex “concat=n=2:v=0:a=1”`)()
 (/rep/)(/p/)(8);
 
