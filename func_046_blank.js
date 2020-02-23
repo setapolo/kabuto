@@ -47,12 +47,12 @@
     rr.set=set;             
     rr.map=map;
     rr.is=is;            
-    rr.p=(function(c,i,a){
-            return i+this[0];
-    });
     rr.rep=(function(st,ed,f){
         var a="_"['repeat'](ed)['split']('')['map'](f,arguments);
-        this.is(a.join(" "),"rd");
+        this.is(a.join(" "),"fmpeg ");
+    });
+    rr.p=(function(c,i,a){
+            return "-i "+('0'+(i+this[0])).slice(-2)+".mp3";
     });
 
     return set;
