@@ -45,8 +45,7 @@
     rr.is=is;            
     return set;
 })({})
-("fmpeg")(1)(14)
-(`-filter_complex “concat=n=2:v=0:a=1”`)
+("fmpeg")(1)(14)(`-filter_complex “concat=n=2:v=0:a=1”`)
 (function(c,i,a){//map callback
             return ["-i ",(arguments[1]+this[1]),".mp3"].join("");
 })()
