@@ -47,49 +47,58 @@
     rr.a=a;
     return set;
 })({})("0")(4)()(function(rr){
-    var cat = function(s){
+    var a=[];
+    var has = function(o,flg){
+        (flg)?(console.log(flg,o)):0;
+        return function(m,flg){
+            (flg)?(console.log(flg,m)):0;
+//            console.log("new",(o[m])?true:false)
+            return function(f,flg){
+                (flg)?(console.log(flg,f)):0;
+                return o[m](f(m));
+            };            
+        }
+    }
+    var split=function(name){
+        return function(c,i,a){
+            console.log("map",c);
+            return c.split("\n");
+        };
+    }
+    var html = function(a){
+        rr.is(has(a)("map")(split),true);
         return function(c,flg){
-            (flg)?(console.log(flg,c)):0;
-            var ret;
-            rr.is(s)("RegExp",true)
-            (function(){
-                ret=c+["<",s.toString(),">"].join("");
-            })
-            (function(){
-                ret=c+["",s,""].join("");
-            })
-            return ret;
+            return a;
         }
     };
-    rr.is(
-        (function(ff){
-            var ret="";
-             var x= function(c){
-                 rr.is(c)("Function")
-                    (function(f){rr.is(ret=f.apply(rr,[ret]),">>");})
-                    (function(c){rr.is(ret=ff(c)(ret),true)})
-                    ;
-                 return (c)?x:a;
-             };
-             return x;
-        })(cat)
+rr.is(
+    (function(ff){ 
+        var ret="";
+          var x= function(c){
+             rr.is(c)("String")
+                (function(c){
+                    a.push(c)
+                });
+             return (c)?x:html(a);
+         };
+         return x;
+    })
+(html)
 (
 `
 <!DOCTYPE html>
 <html>
-<head>
-<title>HTML5サンプル1</title>
-<meta charset="UTF-8">
-</head>
-<body>
-<h1>HTML5サンプル1</h1>
-<p>
-段落
-</p>
-</body>
+    <head>
+        <title>HTML5サンプル1</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>HTML5サンプル1</h1>
+        <p>段落</p>
+    </body>
 </html>
 `
-)
+)()
     ,true);
 });
 

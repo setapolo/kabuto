@@ -3,7 +3,7 @@
     var a=[];
     var o={};
     var ret={};
-    var f=null;
+    var ff=[];
     var k=null;
     var is = function(c,flg){
             (flg)?(console.log(flg,c)):0;
@@ -25,20 +25,20 @@
         };
 
     var i=0;
-    [1,2,3].map(function(c,i,a){
-
-    })
     var set=function(c){
-        //console.log("welcome set",c);
-        is(c)("Object")(function(c){ret = c});
-        is(c)("String")(function(c){k = c});
-        is(c)("Number")(function(c){ret[k] = c});
-        is(ret);
+        is(c)("Number")(function(c){a.push(c)});
         return (c!=null)?set:map;
     };
     var map=function(c){
-        is(c,true)("Function")(function(c){c.apply(rr,[rr])});
-        //console.log("welcome map",c);
+        is(c)("Number")(function(c){
+            a.push(ff.pop())
+            ff.map(function(cc,ii,aa){
+                cc.apply(rr,a)
+            });
+        });
+        is(c)("Function")(function(c){
+            ff.push(c);
+        });
         return (c!=null)?map:set;
     };
     set(rr);
@@ -47,13 +47,16 @@
     rr.is=is;            
     return set;
 })({})
-("st")(43)
-("ed")(14)()(function(rr){rr.is(rr["st"],true);
-    var a="_"['repeat'](rr["ed"])['split']('')['map'](function(c,i,a){
-        return "-i "+('0'+(i+rr["st"])).slice(-2)+".mp3";
-    })
-    rr.is(a.join(" "),"rd");
+(1)(14)()
+(function(st,ed,f){
+    var a="_"['repeat'](ed)['split']('')['map'](f);
+    this.is(a.join(" "),"rd");
 })
-
-;
+(function(c,i,a){
+        return "-i "+('0'+(i)).slice(-2)+".mp3";
+})
+(function(c,i,a){
+        return i;
+})
+(0);
 
