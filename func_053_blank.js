@@ -46,8 +46,20 @@
     rr.is=is;            
     return set;
 })({})
-("concat=n=2:v=0:a=1")
-("concat=n=")(".*")(":v=0:a=1")
+(`
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5サンプル1</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>HTML5サンプル1</h1>
+        <p>段落</p>
+    </body>
+</html>
+`)
+("<p>")(".*")("</p>")
 (function(rr){
     return function(){
         var ret=arguments[1]+rr.iii+arguments[3];
@@ -55,8 +67,11 @@
     }
 })()
 (function(){//[head,st,ed,tail1,tail2,f]
-        var r = new RegExp("("+arguments[1]+")"+"("+arguments[2]+")"+"("+arguments[3]+")")
+        var a = [].slice.call(arguments); 
+        var f=a.pop()
+        var s=a.shift()
+        var r = new RegExp(a.reduce(function(p,c,i,a){return (i==1)?["(",p,")","(",c,")"].join(""):[p,"(",c,")"].join("");}),"ig")
         ret = arguments[0]['replace'](r,arguments[arguments.length-1](this))
         this.is(ret,"ret: ");
-})(12);
+})(10);
 
