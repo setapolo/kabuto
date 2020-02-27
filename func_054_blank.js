@@ -67,19 +67,30 @@
 `)
 ("<p>")(function(rr){return rr.iii*2})("</p>")
 ()
-(function(){//[head,st,ed,tail1,tail2,f]
-        var a = [].slice.call(arguments); 
-        var f=a.pop()
-        var s=a.shift()
-        var r = new RegExp(a.reduce(function(p,c,i,a){return (i==1)?["(",p,")","(",c,")"].join(""):[p,"(",c,")"].join("");}),"ig")
+(function(){//(rr,[head,st,ed,tail1,tail2,f])
+        var a = []["slice"]["call"](arguments); 
+        var f=a.pop();
+        var s=a.shift();
+
+        var pcia=function(){//_head,_tail
+            var _head=arguments[0];
+            var _tail=arguments[1];
+            return function(p,c,i,a){
+                return (i==1)?[_head,p,_tail,_head,c,_tail].join(""):[p,_head,c,_tail].join("");
+            }
+        };
+        var ss=a.reduce(pcia.apply(this,["(",")"]));
+        var r = new RegExp(ss,"ig");
         ret = arguments[0]['replace'](r,arguments[arguments.length-1](this))
         this.is(ret,"ret: ");
 })
 (function(rr){
-    return function(){
-        var ret=arguments[1]+rr.fff[0](rr)+arguments[3];
+    return function(){//hits
+        var _head=arguments[1];
+        var _tail=arguments[3];
+        var ret=[_head,rr.fff[0](rr),_tail].join("");
         return ret; 
     }
 })
-(10);
+(6);
 
