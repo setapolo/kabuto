@@ -2,8 +2,8 @@
 var que=function(rr){
     var i=0;
     return function(){
-        i++;
         console.log(i);
+        i++;
         return rr.iii*2;
     };
 };
@@ -102,5 +102,5 @@ var que=function(rr){
         return ret; 
     }
 })
-(6);
+(1);
 
