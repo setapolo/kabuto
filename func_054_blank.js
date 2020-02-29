@@ -1,3 +1,13 @@
+
+var que=function(rr){
+    var i=0;
+    return function(){
+        i++;
+        console.log(i);
+        return rr.iii*2;
+    };
+};
+
 (function(rr){
     var N="Number",S="String",F="Function";
     var a=[];
@@ -21,10 +31,9 @@
             }
         };
     var set=function(c){
-        is(c)(N)(function(c){a.push(c)});
         is(c)(S)(function(c){a.push(c)});
         is(c)(F)(function(c){
-            fff.push(c);
+            fff.push(c(rr));
             a.push(".*")
         });
         return (c!=null)?set:map;
@@ -62,16 +71,17 @@
     <body>
         <h1>HTML5サンプル1</h1>
         <p>段落</p>
+        aaaaaa
+        <p>段落</p>
     </body>
 </html>
 `)
-("<p>")(function(rr){return rr.iii*2})("</p>")
+("<p>")(que)("</p>")
 ()
 (function(){//(rr,[head,st,ed,tail1,tail2,f])
         var a = []["slice"]["call"](arguments); 
         var f=a.pop();
         var s=a.shift();
-
         var pcia=function(){//_head,_tail
             var _head=arguments[0];
             var _tail=arguments[1];
@@ -88,7 +98,7 @@
     return function(){//hits
         var _head=arguments[1];
         var _tail=arguments[3];
-        var ret=[_head,rr.fff[0](rr),_tail].join("");
+        var ret=[_head,rr.fff[0](),_tail].join("");
         return ret; 
     }
 })
