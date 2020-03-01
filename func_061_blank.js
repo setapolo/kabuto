@@ -56,8 +56,10 @@
     var tag_name=arguments[0];
     return function(){
         var parent=arguments[0];
+        var head=arguments[1][1];
+        var tail=arguments[1][2];
         ret+=TAB.repeat(iii);
-        ret+=["<",tag_name,">"].join("");
+        ret+=[head," ",tag_name," ",tail,"{"].join("");
         ret+=BR;
         var f=function(cc){
             var aa =[].slice.call(arguments); 
@@ -65,7 +67,7 @@
                 (function(){})
                 (function(){
                     ret+=TAB.repeat(iii);
-                    ret+= "</"+tag_name+">";
+                    ret+= "}";
                     ret+=BR;
                 });
             is(cc)("Function")(function(){
@@ -84,59 +86,20 @@
         return f;
     }
 })
-("tag3",function(){
-    var tag_name=arguments[0];
-    return function(){
-        var content = arguments[1][1];
-        ret+=TAB.repeat(iii);
-        ret+=["<",tag_name,">"].join("");
-        is(content)(true)(function(){
-            ret+=arguments[0];
-        })
-        ret+= "</"+tag_name+">";
-        ret+=BR;
-        return "<head>";
-    }
-})
-("tag4",function(){
-    var tag_name=arguments[0];
-    return function(){
-        ret+=TAB.repeat(iii);
-        ret+="<meta "+kvs(_meta)+">";
-        ret+=BR;
-        return "<head>";
-    }
-})
-("_meta",{"charset":"UTF-8"})
-("html",tag("html"))
-("head",tag("head"))
-("body",tag("body"))
-("title",tag3("title"))
-("meta",tag4("meta"))
-("h1",tag3("h1"))
-("p",tag3("p"))
+("clas",tag("class"))
+("main",tag("main"))
 (function(){
-    html()(head)(title,"HTML5サンプル2")(meta)()
-        (body)(h1,"タイトル")(p,"段落1")(p,"段落2")()
-        ();
+    clas(null,[null,"public","HelloWorld"])(main,"public static void","(String[] args)")()();
     console.log(ret);
     return 0;
 })
 ()
 (`
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>HTML5サンプル1</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>HTML5サンプル1</h1>
-        <p>段落</p>
-        aaaaaa
-        <p>段落</p>
-    </body>
-</html>
+public class HelloWorld{
+   public static void main(String[] args){
+     System.out.println("Hello World!!");
+   }
+}
 `)
 ;
 
