@@ -2,7 +2,6 @@
 (function(rr){
     var N="Number",S="String",F="Function",O="Object";
     var a=[];
-    var oo;
     var is = function(c,flg){
             (flg)?(console.log(flg,c)):0;
             var ss=Object['prototype']['toString']['call'](c).slice(8, -1);
@@ -45,6 +44,7 @@
     return set;
 })({})
 ("BR","\n")
+("TAB","\t")
 ("ret","")
 ("_meta",{"charset":"UTF-8"})
 ("kvs",function(){
@@ -53,69 +53,90 @@
     })
 })
 ("html",function(){
-    console.log("a",arguments);
     ret="<!DOCTYPE html>";
     ret+=BR;
     ret+="<html>";
     ret+=BR;
     var f=function(c){
-        console.log("a-2",arguments);
-        (c!=null)?0:(ret+= "</html>");
+        is(c)(true)
+            (function(){})
+            (function(){
+                ret+= "</html>";
+            })
         is(c)("Function")(function(){
             cc=c.apply(this,[f]);
         });
-        is(ret,"ret");
+        console.log(ret);
         return (c!=null)?cc:f;
     };
     return f;
 })
 ("head",function(c){
-    console.log("b",arguments);
+    ret+=TAB;
     ret+="<head>";
     ret+=BR;
     var f = function(cc){
-        console.log("c",arguments);
-        (cc!=null)?0:(ret+= "</head>");
+        is(cc)(true)
+            (function(){})
+            (function(){
+                ret+=TAB;
+                ret+= "</head>";
+                ret+=BR;
+            })
         is(cc)("Function")(function(){
             ccc=cc.apply(this,[f]);
         });
-        is(ret,"ret2");
         return (cc!=null)?f:c;
     }
     return f;
 })
 ("body",function(c){
-    console.log("b",arguments);
+    ret+=TAB;
     ret+="<body>";
     ret+=BR;
     var f = function(cc){
-        console.log("c",arguments);
-        (cc!=null)?0:(ret+= "</body>");
+        is(cc)(true)
+            (function(){})
+            (function(){
+                ret+=TAB;
+                ret+= "</body>";
+                ret+=BR;
+            })
         is(cc)("Function")(function(){
             ccc=cc.apply(this,[f]);
         });
-        is(ret,"ret2");
         return (cc!=null)?f:c;
     }
     return f;
 })
 ("title",function(){
+    ret+=TAB;
+    ret+=TAB;
     ret+="<title>";
+    ret+="HTML5サンプル1";
     ret+="</title>";
     ret+=BR;
     return "<head>";
 })
 ("meta",function(){
-    ret+="<meta>";
+    ret+=TAB;
+    ret+=TAB;
+    ret+="<meta "+kvs(_meta)+">";
     ret+=BR;
     return "<head>";
 })
 ("h1",function(){
+    ret+=TAB;
+    ret+=TAB;
+    ret+=TAB;
     ret+="<h1></h1>";
     ret+=BR;
     return "</h1>";
 })
 ("p",function(){
+    ret+=TAB;
+    ret+=TAB;
+    ret+=TAB;
     ret+="<p></p>";
     ret+=BR;
     return "</p>";
