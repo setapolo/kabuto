@@ -41,12 +41,12 @@
     rr.map=map;
     rr.is=is;            
     global.is=is;            
+    global.iii=0;
     return set;
 })({})
 ("BR","\n")
 ("TAB","\t")
 ("ret","")
-("_meta",{"charset":"UTF-8"})
 ("kvs",function(){
     return Object.keys(_meta).map(function(c,i,a){
         return [c,'"'+_meta[c]+'"'].join("=");
@@ -54,77 +54,73 @@
 })
 ("tag",function(){
     var tag_name=arguments[0];
-    var level=arguments[1];
     return function(){
-        ret+=TAB.repeat(level);
+        var parent=arguments[0];
+        ret+=TAB.repeat(iii);
         ret+=["<",tag_name,">"].join("");
         ret+=BR;
-        var f=function(c){
-            is(c)(true)
+        var f=function(cc){
+            var aa =[].slice.call(arguments); 
+            is(cc)(true)
                 (function(){})
                 (function(){
-                    ret+=TAB.repeat(level);
+                    ret+=TAB.repeat(iii);
                     ret+= "</"+tag_name+">";
                     ret+=BR;
                 });
-            is(c)("Function")(function(){
-                cc=c.apply(this,[f]);
+            is(cc)("Function")(function(){
+                iii++;
+                aa.push(iii);
+                ccc=cc.apply(this,[f,aa]);
             });
-            console.log(ret);
-            return (c!=null)?cc:f;
+            var tr=ccc;
+            var fl=0;
+            is(parent)(true)(function(){
+                iii--;
+                tr=f;
+                fl=parent;
+            })
+            return (cc!=null)?tr:fl;
         };
         return f;
     }
 })
-("tag2",function(){
-    var tag_name=arguments[0];
-    var level=arguments[1];
-    return function(c){
-    ret+=TAB.repeat(level);
-    ret+=["<",tag_name,">"].join("");
-    ret+=BR;
-    var f = function(cc){
-        is(cc)(true)
-            (function(){})
-            (function(){
-                ret+=TAB.repeat(level);
-                ret+= "</"+tag_name+">";
-                ret+=BR;
-            })
-        is(cc)("Function")(function(){
-            ccc=cc.apply(this,[f]);
-        });
-        return (cc!=null)?f:c;
-    }
-    return f;
-}})
 ("tag3",function(){
     var tag_name=arguments[0];
-    var level=arguments[1];
     return function(){
-    ret+=TAB.repeat(2);
-    ret+=["<",tag_name,">"].join("");
-    ret+="HTML5サンプル1";
-    ret+= "</"+tag_name+">";
-    ret+=BR;
-    return "<head>";
-}})
-("html",tag("html"))
-("head",tag2("head",1))
-("body",tag2("body",1))
-("title",tag3("title",2))
-("meta",function(){
-    ret+=TAB.repeat(2);
-    ret+="<meta "+kvs(_meta)+">";
-    ret+=BR;
-    return "<head>";
+        var content = arguments[1][1];
+        ret+=TAB.repeat(iii);
+        ret+=["<",tag_name,">"].join("");
+        is(content)(true)(function(){
+            ret+=arguments[0];
+        })
+        ret+= "</"+tag_name+">";
+        ret+=BR;
+        return "<head>";
+    }
 })
-("h1",tag3("h1",3))
-("p",tag3("p",3))
+("tag4",function(){
+    var tag_name=arguments[0];
+    return function(){
+        ret+=TAB.repeat(iii);
+        ret+="<meta "+kvs(_meta)+">";
+        ret+=BR;
+        return "<head>";
+    }
+})
+("_meta",{"charset":"UTF-8"})
+("html",tag("html"))
+("head",tag("head"))
+("body",tag("body"))
+("title",tag3("title"))
+("meta",tag4("meta"))
+("h1",tag3("h1"))
+("p",tag3("p"))
 (function(){
-    html()(head)(title)(meta)()
-        (body)(h1)(p)(p)
-        ()();
+    html()(head)(title,"HTML5サンプル2")(meta)()
+        (body)(h1,"タイトル")(p,"段落1")(p,"段落2")()
+        ();
+    console.log(ret);
     return 0;
 })
 ()
