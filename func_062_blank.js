@@ -23,11 +23,9 @@
     var set=function(c,o){
         is(c)(S,"")(function(c){
             global[c]=o;
-//            a.push(c);
         });
         is(c)(F)(function(){
             ff.push(c);
-           // a=c.apply(rr,a);
             
         })
         return (c!=null)?set:map;
@@ -41,10 +39,9 @@
                     ret=cc.apply(rr,a);
                     is(ret,true);
               })
-//            a.push(c)
         });
         is(c)(F)(function(c){
-            a=c.apply(rr,a);
+            a.push(c);
         });
         return (c!=null)?map:set;
     };
@@ -127,16 +124,26 @@
 ("meta",tag4("meta"))
 ("h1",tag3("h1"))
 ("p",tag3("p"))
-(function(_t,_h){
+(function(_t,_h,_f){
     html()(head)(title,_t)(meta)()
-        (body)(h1,_h)(p,"段落1")(p,"段落2")()
+        (body)(h1,_h)
+            (p,_f())
+            (p,_f())
+            (p,_f())()
         ();
     console.log(ret);
 
     return 0;
 })
 ()
-("HTML5 sample3")("タイトル2")(1)
+("HTML5 sample3")("タイトル2")(function(){
+    var i=0;
+    return function(){
+        i++;
+        return "段落"+i;
+    }
+}())
+(1)
 ;
 
 
