@@ -1,5 +1,5 @@
 
-(function(rr){
+(function(rr){//dragon plane
     var N="Number",S="String",F="Function",O="Object";
     var a=[];
     var ff=[];
@@ -20,6 +20,19 @@
                 }
             }
         };
+    var eq=function(c,flg){
+            (flg)?(console.log(flg,c)):0;
+        return function(sss,flg){
+             var b=(c==sss)?true:false;
+            return function(f){
+                (b==true)?f.apply(c,[c]):0;
+                return function(ff){
+                    (b==false)?((ff)?ff.apply(c,[c]):0):0;
+                    return eq(c);
+                };
+            }
+        }        
+    }    
     var set=function(c,o){
         is(c)(S,"")(function(c){
             global[c]=o;
@@ -50,19 +63,16 @@
     rr.map=map;
     rr.is=is;            
     global.is=is;            
+    global.eq=eq;            
     global.iii=0;
     return set;
-})({})
+})({})//body plane
 ("BR","\n")
 ("TAB","\t")
 ("ret","")
-("kvs",function(){
-    return Object.keys(_meta).map(function(c,i,a){
-        return [c,'"'+_meta[c]+'"'].join("=");
-    })
-})
 ("tag",function(){
     var tag_name=arguments[0];
+    var type=(arguments[1])?arguments[1]:0;
     return function(){
         var parent=arguments[0];
         ret+=TAB.repeat(iii);
@@ -95,47 +105,57 @@
 })
 ("tag3",function(){
     var tag_name=arguments[0];
+    var type=(arguments[1])?arguments[1]:0;
     return function(){
         var content = arguments[1][1];
         ret+=TAB.repeat(iii);
-        ret+=["<",tag_name,">"].join("");
-        is(content)(true)(function(){
-            ret+=arguments[0];
+        eq(type)(2)
+        (function(){
+            ret+=["<",tag_name,">"].join("");
+            is(content)(true)(function(){
+                ret+=arguments[0];
+            })
+            ret+= "</"+tag_name+">";
         })
-        ret+= "</"+tag_name+">";
-        ret+=BR;
-        return "<head>";
-    }
-})
-("tag4",function(){
-    var tag_name=arguments[0];
-    return function(){
-        ret+=TAB.repeat(iii);
-        ret+="<meta "+kvs(_meta)+">";
+        (function(){
+            ret+="<meta "+kvs(_meta)+">";
+        })
         ret+=BR;
         return "<head>";
     }
 })
 ("_meta",{"charset":"UTF-8"})
+("kvs",function(){//0:{"charset":"UTF-8"}
+    var kv=arguments[0];
+    return Object.keys(kv).map(function(c,i,a){
+        return [c,'"'+_meta[c]+'"'].join("=");
+    })
+})
 ("html",tag("html"))
 ("head",tag("head"))
 ("body",tag("body"))
-("title",tag3("title"))
-("meta",tag4("meta"))
-("h1",tag3("h1"))
-("p",tag3("p"))
-(function(_t,_h,_f){
-    html()(head)(title,_t)(meta)()
-        (body)(h1,_h)
+("title",tag3("title",2))
+("meta",tag3("meta",3))
+("h1",tag3("h1",2))
+("p",tag3("p",2))
+(function(){
+    var _t=arguments[0]
+    var _h=arguments[1]
+    var _f=arguments[2]
+    html()
+    (head)(title,_t)(meta)()
+        (body)
+            (h1,_h)
             (p,_f())
             (p,_f())
-            (p,_f())()
-        ();
+            (p,_f())
+        ()
+    ();
     console.log(ret);
 
     return 0;
 })
-()
+()//tail plane
 ("HTML5 sample3")("title2")(function(){
     var i=0;
     return function(){
