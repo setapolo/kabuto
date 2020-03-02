@@ -2,6 +2,7 @@
 (function(rr){
     var N="Number",S="String",F="Function",O="Object";
     var a=[];
+    var ff=[];
     var is = function(c,flg){
             (flg)?(console.log(flg,c)):0;
             var ss=Object['prototype']['toString']['call'](c).slice(8, -1);
@@ -22,17 +23,28 @@
     var set=function(c,o){
         is(c)(S,"")(function(c){
             global[c]=o;
-            a.push(c);
+//            a.push(c);
         });
         is(c)(F)(function(){
-            a=c.apply(rr,a);
+            ff.push(c);
+           // a=c.apply(rr,a);
+            
         })
         return (c!=null)?set:map;
     };
     var map=function(c){
-        is(c)(N)(function(c){a.push(c)});
+        is(c)(S)(function(){
+            a.push(c);
+        });
+        is(c)(N)(function(c){
+              ff.map(function(cc,ii,aa){
+                    ret=cc.apply(rr,a);
+                    is(ret,true);
+              })
+//            a.push(c)
+        });
         is(c)(F)(function(c){
-                        a=c.apply(rr,a);
+            a=c.apply(rr,a);
         });
         return (c!=null)?map:set;
     };
@@ -47,14 +59,17 @@
 ("BR","\n")
 ("TAB","\t")
 ("ret","")
+("kvs",function(){
+    return Object.keys(_meta).map(function(c,i,a){
+        return [c,'"'+_meta[c]+'"'].join("=");
+    })
+})
 ("tag",function(){
     var tag_name=arguments[0];
     return function(){
         var parent=arguments[0];
-        var head=arguments[1][1];
-        var tail=arguments[1][2];
         ret+=TAB.repeat(iii);
-        ret+=[head," ",tag_name," ",tail,"{"].join("");
+        ret+=["<",tag_name,">"].join("");
         ret+=BR;
         var f=function(cc){
             var aa =[].slice.call(arguments); 
@@ -62,7 +77,7 @@
                 (function(){})
                 (function(){
                     ret+=TAB.repeat(iii);
-                    ret+= "}";
+                    ret+= "</"+tag_name+">";
                     ret+=BR;
                 });
             is(cc)("Function")(function(){
@@ -81,22 +96,65 @@
         return f;
     }
 })
-("clas",tag("class"))
-("main",tag("main"))
-(function(){
-    clas(null,[null,"public","HelloWorld"])(main,"public static void","(String[] args)")()();
+("tag3",function(){
+    var tag_name=arguments[0];
+    return function(){
+        var content = arguments[1][1];
+        ret+=TAB.repeat(iii);
+        ret+=["<",tag_name,">"].join("");
+        is(content)(true)(function(){
+            ret+=arguments[0];
+        })
+        ret+= "</"+tag_name+">";
+        ret+=BR;
+        return "<head>";
+    }
+})
+("tag4",function(){
+    var tag_name=arguments[0];
+    return function(){
+        ret+=TAB.repeat(iii);
+        ret+="<meta "+kvs(_meta)+">";
+        ret+=BR;
+        return "<head>";
+    }
+})
+("_meta",{"charset":"UTF-8"})
+("html",tag("html"))
+("head",tag("head"))
+("body",tag("body"))
+("title",tag3("title"))
+("meta",tag4("meta"))
+("h1",tag3("h1"))
+("p",tag3("p"))
+(function(_t,_h){
+    html()(head)(title,_t)(meta)()
+        (body)(h1,_h)(p,"段落1")(p,"段落2")()
+        ();
     console.log(ret);
+
     return 0;
 })
 ()
-(`
-public class HelloWorld{
-   public static void main(String[] args){
-     System.out.println("Hello World!!");
-   }
-}
-`)
+("HTML5 sample3")("タイトル2")(1)
 ;
+
+
+`
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5サンプル1</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>HTML5サンプル1</h1>
+        <p>段落</p>
+        aaaaaa
+        <p>段落</p>
+    </body>
+</html>
+`
 
 
 
