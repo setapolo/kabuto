@@ -91,8 +91,6 @@
                 (function(){
                     conc("ret")(TAB.repeat(iii));
                     conc("ret")("</")(tag_name)(">")(BR);
-
-    //                conc("ret")("</"+tag_name+">")(BR);
                 });
             is(cc)("Function")(function(){
                 iii++;
