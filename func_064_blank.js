@@ -56,20 +56,6 @@
 ("BR","\n")
 ("TAB","\t")
 ("ret","")
-("eq",function(c,flg){
-            (flg)?(console.log(flg,c)):0;
-        return function(sss,flg){
-             var b=(c==sss)?true:false;
-            return function(f){
-                (b==true)?f.apply(c,[c]):0;
-                return function(ff){
-                    (b==false)?((ff)?ff.apply(c,[c]):0):0;
-                    return eq(c);
-                };
-            }
-        }        
-    }    
-)
 ("conc",function(s){
     return function(){
         var v=arguments[0];
@@ -84,7 +70,23 @@
         var parent=arguments[0];
         var content = (arguments[1])?(arguments[1][1])?(arguments[1][1]):0:0;
         conc("ret")(TAB.repeat(iii));
-        conc("ret")("<")(tag_name)(">")(BR);
+
+        is(type)(0)(function(){
+            conc("ret")("<")(tag_name)(">");
+        })
+        is(type)(2)
+            (function(){
+                conc("ret")("<")(tag_name)(">");
+                is(content)(true)(function(){
+                    conc("ret")(arguments[0]);
+                })
+                conc("ret")("</")(tag_name)(">");
+            });
+        is(type)(3)
+            (function(){
+                conc("ret")("<meta ")(kvs(_meta))(">");
+            });
+        conc("ret")(BR)
 
 
         var f=function(){
@@ -112,28 +114,6 @@
         return f;
     }
 })
-("tag3",function(){
-    var tag_name=arguments[0];
-    var type=(arguments[1])?arguments[1]:0;
-    return function(){
-        var content = (arguments[1])?(arguments[1][1])?(arguments[1][1]):0:0;
-        conc("ret")(TAB.repeat(iii));
-        is(type)(2)
-            (function(){
-                conc("ret")("<")(tag_name)(">");
-                is(content)(true)(function(){
-                    conc("ret")(arguments[0]);
-                })
-                conc("ret")("</")(tag_name)(">");
-            });
-        is(type)(3)
-            (function(){
-                conc("ret")("<meta ")(kvs(_meta))(">");
-            });
-        conc("ret")(BR)
-        return "<head>";
-    }
-})
 ("_meta",{"charset":"UTF-8"})
 ("kvs",function(){//0:{"charset":"UTF-8"}
     var kv=arguments[0];
@@ -144,10 +124,10 @@
 ("html",tag("html"))
 ("head",tag("head"))
 ("body",tag("body"))
-("title",tag3("title",2))
-("meta",tag3("meta",3))
-("h1",tag3("h1",2))
-("p",tag3("p",2))
+("title",tag("title",2))
+("meta",tag("meta",3))
+("h1",tag("h1",2))
+("p",tag("p",2))
 (function(){
     var _t=arguments[0]
     var _h=arguments[1]
