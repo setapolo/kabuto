@@ -9,7 +9,7 @@
             return function(sss,flg){
                 (flg)?(console.log(flg,ss)):0;
                 var type=typeof sss;
-                var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(typeof c==type));
+                var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(c==sss));
                 b=(typeof c=="boolean")?c:b;
                 return function(f){
                     (b==true)?f.apply(c,[c,ss,sss]):0;
@@ -82,9 +82,13 @@
     var type=(arguments[1])?arguments[1]:0;
     return function(){
         var parent=arguments[0];
+        var content = (arguments[1])?(arguments[1][1])?(arguments[1][1]):0:0;
         conc("ret")(TAB.repeat(iii));
         conc("ret")("<")(tag_name)(">")(BR);
-        var f=function(cc){
+
+
+        var f=function(){
+            var cc = arguments[0];
             var aa =[].slice.call(arguments); 
             is(cc)(true)  
                 (function(){})
@@ -114,17 +118,18 @@
     return function(){
         var content = (arguments[1])?(arguments[1][1])?(arguments[1][1]):0:0;
         conc("ret")(TAB.repeat(iii));
-        eq(type)(2)
+        is(type)(2)
             (function(){
                 conc("ret")("<")(tag_name)(">");
                 is(content)(true)(function(){
                     conc("ret")(arguments[0]);
                 })
                 conc("ret")("</")(tag_name)(">");
-            })
+            });
+        is(type)(3)
             (function(){
                 conc("ret")("<meta ")(kvs(_meta))(">");
-            })
+            });
         conc("ret")(BR)
         return "<head>";
     }
