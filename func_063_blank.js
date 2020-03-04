@@ -20,19 +20,6 @@
                 }
             }
         };
-    var eq=function(c,flg){
-            (flg)?(console.log(flg,c)):0;
-        return function(sss,flg){
-             var b=(c==sss)?true:false;
-            return function(f){
-                (b==true)?f.apply(c,[c]):0;
-                return function(ff){
-                    (b==false)?((ff)?ff.apply(c,[c]):0):0;
-                    return eq(c);
-                };
-            }
-        }        
-    }    
     var set=function(c,o){
         is(c)(S,"")(function(c){
             global[c]=o;
@@ -63,29 +50,49 @@
     rr.map=map;
     rr.is=is;            
     global.is=is;            
-    global.eq=eq;            
     global.iii=0;
     return set;
 })({})//body plane
 ("BR","\n")
 ("TAB","\t")
 ("ret","")
+("eq",function(c,flg){
+            (flg)?(console.log(flg,c)):0;
+        return function(sss,flg){
+             var b=(c==sss)?true:false;
+            return function(f){
+                (b==true)?f.apply(c,[c]):0;
+                return function(ff){
+                    (b==false)?((ff)?ff.apply(c,[c]):0):0;
+                    return eq(c);
+                };
+            }
+        }        
+    }    
+)
+("conc",function(s){
+    return function(){
+        var v=arguments[0];
+        global[s] += (v)?v:"";
+        return conc(s);
+    }
+})
 ("tag",function(){
     var tag_name=arguments[0];
     var type=(arguments[1])?arguments[1]:0;
     return function(){
         var parent=arguments[0];
-        ret+=TAB.repeat(iii);
-        ret+=["<",tag_name,">"].join("");
-        ret+=BR;
+        conc("ret")(TAB.repeat(iii));
+        conc("ret")("<")(tag_name)(">")(BR);
         var f=function(cc){
             var aa =[].slice.call(arguments); 
-            is(cc)(true)
+            is(cc)(true)  
                 (function(){})
                 (function(){
-                    ret+=TAB.repeat(iii);
-                    ret+= "</"+tag_name+">";
-                    ret+=BR;
+                    conc("ret")(TAB.repeat(iii));
+                    conc("ret")("</")(tag_name)(">")(BR);
+
+    //                conc("ret")("</"+tag_name+">")(BR);
                 });
             is(cc)("Function")(function(){
                 iii++;
@@ -107,20 +114,20 @@
     var tag_name=arguments[0];
     var type=(arguments[1])?arguments[1]:0;
     return function(){
-        var content = arguments[1][1];
-        ret+=TAB.repeat(iii);
+        var content = (arguments[1])?arguments[1][1]?(arguments[1][1]):0:0;
+        conc("ret")(TAB.repeat(iii));
         eq(type)(2)
-        (function(){
-            ret+=["<",tag_name,">"].join("");
-            is(content)(true)(function(){
-                ret+=arguments[0];
+            (function(){
+                conc("ret")("<")(tag_name)(">");
+                is(content)(true)(function(){
+                    conc("ret")(arguments[0]);
+                })
+                conc("ret")("</")(tag_name)(">");
             })
-            ret+= "</"+tag_name+">";
-        })
-        (function(){
-            ret+="<meta "+kvs(_meta)+">";
-        })
-        ret+=BR;
+            (function(){
+                conc("ret")("<meta ")(kvs(_meta))(">");
+            })
+        conc("ret")(BR)
         return "<head>";
     }
 })
