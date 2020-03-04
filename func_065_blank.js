@@ -74,6 +74,7 @@
     return a[1]+aa[0]+a[2];
 })
 ("conc2",set_func(pls,"<",">"))
+("conc3",set_func(pls,"<",">"))
 ("tag",function(){
     var tag_name=arguments[0];
     var type=(arguments[1])?arguments[1]:0;
@@ -157,7 +158,9 @@
 })
 ()//tail plane
 ("HTML5 sample3")("title2")(function(){
-    conc2(1)(2)("title")(4)(5)(6);
+    conc2(1)(2)(3)(4);
+    conc2(5)(6)(7);
+    conc3(8)(9)(10);
     var i=0;
     return function(){
         i++;
