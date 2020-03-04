@@ -58,6 +58,22 @@
         return conc(s);
     }
 })
+("set_func",function(f){
+    var a =[].slice.call(arguments); 
+    var ff= function(c){
+        var aa =[].slice.call(arguments); 
+        a.push(f.apply(a,aa));
+        return ff;
+    }
+    return ff;
+})
+("pls",function(){
+    var a =[].slice.call(this); 
+    var aa =[].slice.call(arguments); 
+    console.log(a);
+    return a[1]+aa[0]+a[2];
+})
+("conc2",set_func(pls,"<",">"))
 ("tag",function(){
     var tag_name=arguments[0];
     var type=(arguments[1])?arguments[1]:0;
@@ -141,15 +157,16 @@
 })
 ()//tail plane
 ("HTML5 sample3")("title2")(function(){
+    conc2(1)(2)("title")(4)(5)(6);
     var i=0;
     return function(){
         i++;
         return "段落"+i;
     }
+
 }())
 (1)
 ;
-
 
 `
 <!DOCTYPE html>
