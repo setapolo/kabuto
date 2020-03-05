@@ -73,7 +73,6 @@
     console.log(a);
     return a[1]+aa[0]+a[2];
 })
-("conc2",set_func(pls,"<",">"))
 ("conc3",set_func(pls,"<",">"))
 ("tag",function(){
     var tag_name=arguments[0];
@@ -133,6 +132,7 @@
         return [c,'"'+_meta[c]+'"'].join("=");
     })
 })
+("conc2",set_func(pls,"<",">"))
 ("html",tag("html"))
 ("head",tag("head"))
 ("body",tag("body"))
