@@ -1,16 +1,18 @@
 
 html=(function(a){//dragon plane
     var a =[].slice.call(arguments); 
+
     var is = function(c,flg){
             (flg)?(console.log(flg,c)):0;
+
             var ss=Object['prototype']['toString']['call'](c).slice(8, -1);
             return function(sss,flg){
                 (flg)?(console.log(flg,ss)):0;
+
                 var zz=Object['prototype']['toString']['call'](sss).slice(8, -1);
                 var type=typeof sss;
                 var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(c==sss));
                 b=(typeof c=="boolean")?c:b;
-
                 b=(zz=="Array")?((sss.reduce(
                     (function(base){
                         return function(pp,cc,ii,aa){
@@ -18,6 +20,7 @@ html=(function(a){//dragon plane
                     }(c))))==0)?true:false:b;
                 return function(f){
                     (b==true)?f.apply(c,[c,ss,sss]):0;
+
                     return function(ff){
                         (b==false)?((ff)?ff.apply(c,[c,ss,sss]):0):0;
                         return is(c);
@@ -25,22 +28,28 @@ html=(function(a){//dragon plane
                 }
             }
         };
+
     var tag=[];    
+    var goo=[];    
     var f=function(aa){
         var aa =[].slice.call(arguments); 
-        is(aa[0])(["head","body"])
-            (function(){
-                console.log(aa[0],"haleluya!");
-            });
+
         is(aa[0])(true)
             (function(){
-                tag.push(aa[0]);
+                is(aa[0])(["head","body"])
+                    (function(c){
+                        goo.push("/"+c);
+                    });
+                is(aa[0])("String")(function(){
+                    tag.push(aa[0]);
+                })       
             })
             (function(){
-                a=[tag,a];
+                var s = goo.pop();
+                a=[a.join(" "),tag.join(" "),s];
                 tag=[];
             });
-        console.log(a,aa);
+        console.log("log:",a,aa,goo);
         return f;
     }
     return f;
@@ -70,5 +79,5 @@ html("head")("title")("meta")()
     </body>
 </html>
 `
-//[html,section,[title,meta]]
+
 
