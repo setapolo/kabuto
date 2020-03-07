@@ -1,14 +1,11 @@
 
 html=(function(a){//dragon plane
     var a =[].slice.call(arguments); 
-
     var is = function(c,flg){
             (flg)?(console.log(flg,c)):0;
-
             var ss=Object['prototype']['toString']['call'](c).slice(8, -1);
             return function(sss,flg){
                 (flg)?(console.log(flg,ss)):0;
-
                 var zz=Object['prototype']['toString']['call'](sss).slice(8, -1);
                 var type=typeof sss;
                 var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(c==sss));
@@ -28,12 +25,10 @@ html=(function(a){//dragon plane
                 }
             }
         };
-
     var tag=[];    
     var goo=[];    
     var f=function(aa){
         var aa =[].slice.call(arguments); 
-
         is(aa[0])(true)
             (function(){
                 is(aa[0])(["head","body"])
