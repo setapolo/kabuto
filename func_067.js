@@ -30,7 +30,7 @@ html=(function(a){//dragon plane
         var aa =[].slice.call(arguments); 
         is(aa[0])(true)
             (function(){
-                is(aa[0])(["head","body"])
+                is(aa[0])(["class","method"])
                     (function(c){
                         goo.push("/"+c);
                     });
@@ -49,29 +49,14 @@ html=(function(a){//dragon plane
     return f;
 })({})//body plane
 ;
-html("head")("title")("meta")()
-        ("body")
-            ("h1")
-            ("p")
-            ("p")
-            ("p")
-        ()
+html("class")("method")()
     ();
 ;
 `
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>HTML5サンプル1</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>HTML5サンプル1</h1>
-        <p>段落</p>
-        aaaaaa
-        <p>段落</p>
-    </body>
-</html>
+public class HelloWorld{
+   public static void main(String[] args){
+     System.out.println("Hello World!!");
+   }
+}
 `
-
 
