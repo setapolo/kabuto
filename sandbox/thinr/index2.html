@@ -1,0 +1,384 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html onclick="keepFocusInTextbox(event)" onmousemove="mousemove(event)">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Thinr(thinner) Shell v.0.0.5</title>
+<script type="text/javascript" src="raphael.js"></script>
+<script type="text/javascript" src="thinr.js"></script>
+<script type="text/javascript">
+
+var
+histList = [""],
+histPos = 0,
+_scope = {},
+_win, // a top-level context
+question,
+_in,
+_out,
+tooManyMatches = null,
+lastError = null;
+
+
+function refocus()
+{
+  _in.blur(); // Needed for Mozilla to scroll correctly.
+  _in.focus();
+}
+ 
+function init()
+{
+  _in = document.getElementById("input");
+  _out = document.getElementById("output");
+
+  _win = window;
+
+  initTarget();
+
+  recalculateInputHeight();
+  refocus();
+  init_for_thinr();//added for thinr
+}
+  
+function initTarget()
+{
+  _win.Shell = window;
+  _win.print = shellCommands.print;
+}
+// Unless the user is selected something, refocus the textbox.
+// (requested by caillon, brendan, asa)
+function keepFocusInTextbox(e)
+{
+  var g = e.srcElement ? e.srcElement : e.target; // IE vs. standard
+ 
+  while (!g.tagName)
+    g = g.parentNode;
+
+  var t = g.tagName.toUpperCase();
+  if (t=="A" || t=="INPUT")
+    return;
+   
+  if (window.getSelection) {
+    // Mozilla
+    if (String(window.getSelection()))
+      return;
+  }
+  else if (document.getSelection) {
+    // Opera? Netscape 4?
+    if (document.getSelection())
+      return;
+  }
+  else {
+    // IE
+    if ( document.selection.createRange().text )
+      return;
+  }
+ 
+  refocus();
+}
+
+function inputKeydown(e) {
+keyevent(e);
+  function caretInFirstLine(textbox)
+  {
+      // IE doesn't support selectionStart/selectionEnd
+      if (textbox.selectionStart == undefined)
+        return true;
+ 
+      var firstLineBreak = textbox.value.indexOf("\n");
+      return ((firstLineBreak == -1) || (textbox.selectionStart <= firstLineBreak));
+  }
+ 
+  function caretInLastLine(textbox)
+  {
+      // IE doesn't support selectionStart/selectionEnd
+      if (textbox.selectionEnd == undefined)
+        return true;
+ 
+      var lastLineBreak = textbox.value.lastIndexOf("\n");
+ 
+      return (textbox.selectionEnd > lastLineBreak);
+  } 
+  // Use onkeydown because IE doesn't support onkeypress for arrow keys
+  //e.keyCode.p();
+  if (e.shiftKey && e.keyCode == 13) { // shift-enter
+    // don't do anything; allow the shift-enter to insert a line break as normal
+  } else if (e.keyCode == 13) { // enter
+    // execute the input on enter
+    try { go(); } catch(er) { alert(er); };
+    setTimeout(function() { _in.value = ""; }, 0); // can't preventDefault on input, so clear it later
+  } else if (e.keyCode == 38) { // up
+    // go up in history if at top or ctrl-up
+    if (e.ctrlKey || caretInFirstLine(_in))
+      hist(true);
+  } else if (e.keyCode == 40) { // down
+    // go down in history if at end or ctrl-down
+    if (e.ctrlKey || caretInLastLine(_in))
+      hist(false);
+  } else if (e.keyCode == 9) { // tab
+    tabcomplete();
+    setTimeout(function() { refocus(); }, 1); // refocus because tab was hit
+  } else if (e.keyCode == 18) { // tab
+    tabcomplete();
+    setTimeout(function() { refocus(); }, 1); // refocus because tab was hit
+  } else if (e.keyCode == 27) { // tab
+    tabcomplete();
+    setTimeout(function() { refocus(); }, 1); // refocus because tab was hit
+  } else if (e.keyCode == 39) { // left for thinr
+  if ($('input').selectionStart > $('input').value.length -1)
+    $('input').value += "()";
+  } else { }
+  setTimeout(recalculateInputHeight, 0);
+  //return true;
+};
+ 
+function recalculateInputHeight()
+{
+  var rows = _in.value.split(/\n/).length
+    + 1 // prevent scrollbar flickering in Mozilla
+    + (window.opera ? 1 : 0); // leave room for scrollbar in Opera
+ 
+  if (_in.rows != rows) // without this check, it is impossible to select text in Opera 7.60 or Opera 8.0.
+    _in.rows = rows;
+}
+ 
+function println(s, type)
+{
+  if((s=String(s)))
+  {
+    s=s.split(/,/).join(", "); 
+    var newdiv = document.createElement("div");
+    newdiv.appendChild(document.createTextNode(s));
+    newdiv.className = type;
+    _out.insertBefore(newdiv,_out.firstChild);
+  if (_out.childNodes.length > 21)
+      _out.removeChild(_out.lastChild);
+
+    return newdiv;
+  }
+}
+//function printWithRunin(h, s, type) has been deleted
+var shellCommands =
+{
+load : function load(url)
+{
+  var s = _win.document.createElement("script");
+  s.type = "text/javascript";
+  s.src = url;
+   try{
+    _win.document.getElementsByTagName("head")[0].appendChild(s);
+   }catch(er){
+    println(er);
+   }
+  println("Loading " + url + "...", "message");
+},
+ 
+clear : function clear()
+{
+  var CHILDREN_TO_PRESERVE = 3;
+  while (_out.childNodes[CHILDREN_TO_PRESERVE])
+    _out.removeChild(_out.childNodes[CHILDREN_TO_PRESERVE]);
+
+  g.clear();
+},
+ 
+//print : function print(s) { deleted
+//pr : function pr(s) deleted 
+//props : function props(e, onePerLine) has been moved into props.js
+//blink : function blink(node)  has been deleted and move into blink.js 
+scope : function scope(sc)
+{
+  if (!sc) sc = {};
+  _scope = sc;
+  println("Scope is now " + sc + ".  If a variable is not found in this scope, window will also be searched.  New variables will still go on window.", "message");
+},
+ans : undefined
+};
+//mathHelp : function mathHelp() has been deleted
+function hist(up)
+{
+  // histList[0] = first command entered, [1] = second, etc.
+  // type something, press up --> thing typed is now in "limbo"
+  // (last item in histList) and should be reachable by pressing
+  // down again.
+ //histList = histList.unique();
+  var L = histList.length;
+ 
+  if (L == 1)
+    return;
+ 
+  if (up)
+  {
+    if (histPos == L-1)
+    {
+      // Save this entry in case the user hits the down key.
+      histList[histPos] = _in.value;
+    }
+ 
+    if (histPos > 0)
+    {
+      histPos--;
+      // Use a timeout to prevent up from moving cursor within new text
+      // Set to nothing first for the same reason
+      setTimeout(
+        function() {
+          _in.value = '';
+          _in.value = histList[histPos];
+          var caretPos = _in.value.length;
+          if (_in.setSelectionRange)
+            _in.setSelectionRange(caretPos, caretPos);
+        },
+        0
+      );
+    }
+  }
+  else // down
+  {
+    if (histPos < L-1)
+    {
+      histPos++;
+      _in.value = histList[histPos];
+    }
+    else if (histPos == L-1)
+    {
+      // Already on the current entry: clear but save
+      if (_in.value)
+      {
+        histList[histPos] = _in.value;
+        ++histPos;
+        _in.value = "";
+      }
+    }
+  }
+}
+ 
+
+function printAnswer(a)
+{
+  if (a !== undefined) {
+    println(a, "normalOutput");
+    shellCommands.ans = a;
+  }
+}
+ 
+function printError(er,s)
+{
+  var lineNumberString;
+  lastError = er; // for debugging the shell
+  if (er.name)
+  {
+    ss=s;
+    //lineNumberString should not be "", to avoid a very wacky bug in IE 6.
+    lineNumberString = (er.lineNumber != undefined) ? (" onn line " + er.lineNumber + ": ") : ": ";
+    println(er.name + lineNumberString + er.message, "error"); // Because IE doesn't have error.toString.
+  }
+  else
+    println(er, "error"); // Because security errors in Moz /only/ have toString.
+}
+ 
+function go(s)
+{
+  _in.value = question = s ? s : _in.value;
+ 
+  if (question == "")
+    return;
+ 
+  histList[histList.length-1] = question;
+  histList[histList.length] = "";
+  histPos = histList.length - 1;
+ 
+  // Unfortunately, this has to happen *before* the JavaScript is run, so that
+  // print() output will go in the right place.
+  _in.value='';
+  recalculateInputHeight();
+  println(question, "normalOutput");
+
+  if (!("Shell" in _win))
+    initTarget(); // silent
+ 
+   try{ 
+    Shell.printAnswer(
+    eval('with(Shell._scope) with(Shell.shellCommands) {' + Shell.question + String.fromCharCode(10) + '}')); 
+   } catch(er) { 
+    Shell.printError(er,Shell.question); 
+   }; 
+   setTimeout(Shell.refocus, 0);
+
+ 
+  // Evaluate Shell.question using _win's eval (this is why eval isn't in the |with|, IIRC).
+  //_win.location.href = "javascript:try{ Shell.printAnswer(eval('with(Shell._scope) with(Shell.shellCommands) {' + Shell.question + String.fromCharCode(10) + '}')); } catch(er) { Shell.printError(er); }; setTimeout(Shell.refocus, 0); void 0";
+};
+
+function init_for_thinr(){
+  //set i/o of browser
+  Object.prototype.$=function(){
+    if(arguments.length>0)
+      return document.getElementById(arguments[0]);
+    else
+      return document.getElementById(this.toString());
+  };
+  stdout=$("d");
+  stdin=$("s");
+  errout=$("p");
+  Object.prototype.p =function (){
+    var s=this.toString();
+    println(s, "normalOutput");
+    if (arguments[0])
+      $(arguments[0]).innerHTML=s;
+    else
+      stdout.innerHTML = s;
+    return s;
+  };
+
+// for shell
+  shellCommands.load("./jsshell/tabcomplete.js");
+  shellCommands.load("./jsshell/props.js");
+// for raphaels
+//  shellCommands.load("raphael.js");
+  shellCommands.load("raphael_bst.js");
+
+
+
+ window.location.search.substring(1).split(/&/).each(function(){return argv[this.split(/=/)[0]]=decodeURIComponent(this.split(/=/)[1])});
+ if(argv["src"]){ $('input').value=argv["src"];  go();}
+ if(argv["res"]){ $('s').value=argv["res"]; }
+
+}
+
+</script>
+ 
+<!-- for http://ted.mielczarek.org/code/mozilla/extensiondev/ -->
+<style type="text/css">
+  h3 { margin-top: 0; margin-bottom: 0em; }
+  h3 + div { margin: 0; }
+  form { margin: 0; padding: 0; }
+  body { background: black; color: gray; }
+  .output {word-break:break-all; white-space: normal; white-space: -moz-pre-wrap;  background:rgba(0,0,0,0)} /* Preserve line breaks, but wrap too if browser supports it */
+  .input {overflow:auto; width: 640px;color: gray; border: none;background: black; font: inherit; font-weight: bold; margin-top: .5em; background:rgba(0,0,0,0) }
+  .normalOutput { color: gray; background:rgba(0,0,0,0) }
+  .print { color: gray; background: background:rgba(0,0,0,0)  }
+  .error { color: gray; background: background:rgba(0,0,0,0); }
+  .propList { color: gray; background:rgba(0,0,0,0) }
+  .message { color: gray;  background:rgba(0,0,0,0) }
+  .tabcomplete { color: gray; background:rgba(0,0,0,0) }
+  .text {font-size: 16px;color: gray;  background:black;}
+  .text2 {font-size: 16px;color: #E6E6FF;  background:rgba(0,0,0,0);border: none;color: gray;}
+</style>
+</head>
+<body onload="init()" id="body" class="text" >
+<div id="d" class="text"></div><BR>
+<table width="100%">
+  <tr>
+  <td width="60%" valign="top">
+  <textarea id="input" class="input" wrap="soft" onkeydown="inputKeydown(event)" rows="1" width="60%"></textarea>
+  </td>
+  <td width="40%">
+  <textarea id="s" class="text2" wrap="soft" rows="1"></textarea>
+  <div id="output" class="text2" ></div>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

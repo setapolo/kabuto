@@ -1,0 +1,39 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+</html>
+<style type="text/css"> 
+</style>  
+<script type="text/javascript">
+(function (g){
+  a=[];
+  stylesheet = document.styleSheets.item( 0 );
+  stylesheet.insertRule("body { background: black; color: gray; }"); 
+  var rule=function(head){
+    var a =[].slice.call(arguments); 
+    head = a[0];
+    var ret=[];
+    var ff=function(k){
+      var aa =[].slice.call(arguments); 
+      var k = aa[0];
+      return function(){
+        var aaa =[].slice.call(arguments); 
+        var v = aa[1];
+        ret.push([k,v]);
+        return ff
+      };
+    }
+    return f;
+  }
+  var f=function(){
+    var aa =[].slice.call(arguments); 
+    return rule(aa[0]);
+  }
+  return f;
+})(window||document)
+    ("body")
+      ("background")("black")
+      ("color")("gray")
+//console.log();
+
+</script>
