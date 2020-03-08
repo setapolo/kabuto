@@ -5,35 +5,41 @@
 <style type="text/css"> 
 </style>  
 <script type="text/javascript">
+
 (function (g){
-  a=[];
-  stylesheet = document.styleSheets.item( 0 );
-  stylesheet.insertRule("body { background: black; color: gray; }"); 
+  var ret=[];
   var rule=function(head){
-    var a =[].slice.call(arguments); 
-    head = a[0];
-    var ret=[];
-    var ff=function(k){
-      var aa =[].slice.call(arguments); 
-      var k = aa[0];
-      return function(){
-        var aaa =[].slice.call(arguments); 
-        var v = aa[1];
+    ret.push(head);
+    var ff=function(k){var fff=function(v){
         ret.push([k,v]);
         return ff
       };
+      return (k!=null)?(fff):(f(k));
     }
-    return f;
+    return ff;
   }
-  var f=function(){
-    var aa =[].slice.call(arguments); 
-    return rule(aa[0]);
+  stylesheet = document.styleSheets.item( 0 );
+  var f=function(top){
+    ((top!=null)?(0):function(){
+          tt=ret.shift();
+          var v= ret.reduce(function(p,c,i,a){
+            var s = (i==1)?(function(){
+                a.shift();
+                return [tt," ","{",p.join(":"),"; ",c.join(":"),";"].join("");
+            })():p+c+" <"+(typeof c) + "> "+c;
+            a.shift();
+            return s;
+          })+"}";  
+        stylesheet.insertRule(v); 
+        return v;
+    }()) 
+    return (top!=null)?rule:rule;
   }
   return f;
-})(window||document)
-    ("body")
-      ("background")("black")
-      ("color")("gray")
-//console.log();
-
+})(window)
+    (document)
+        ("body")
+          ("background")("black")
+          ("color")("gray")()
+          ;
 </script>
