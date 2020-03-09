@@ -1,0 +1,48 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+</html>
+<style type="text/css"> 
+</style>  
+<script type="text/javascript">
+
+(function (g){
+  var ret=[];
+  var rule=function(head){
+    ret.push(head);
+    var ff=function(k){var fff=function(v){
+        ret.push([k,v]);
+        return ff
+      };
+      return (k!=null)?(fff):(f(k));
+    }
+    return ff;
+  }
+  stylesheet = document.styleSheets.item( 0 );
+  var f=function(top){
+    ((top!=null)?(0):function(){
+          tt=ret.shift();
+          var v= ret.reduce(function(p,c,i,a){
+            var s = (i==1)?(function(){
+                a.shift();
+                return [tt," ","{",p.join(":"),"; ",c.join(":"),";"].join("");
+            })():p+c+" <"+(typeof c) + "> "+c;
+            a.shift();
+            return s;
+          })+"}";  
+        stylesheet.insertRule(v); 
+        return v;
+    }()) 
+    return (top!=null)?rule:rule;
+  }
+  return f;
+})(window)
+    (document)
+        ("script")
+          ("type")("text/javascript")
+          ("src")("raphael.js")()
+        ("script")
+          ("type")("text/javascript")
+          ("src")("thinr.js")()
+          ;
+</script>
