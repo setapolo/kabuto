@@ -1,8 +1,8 @@
 (function(g,flg){
     (flg)?(console.log(flg,arguments)):0;
+    g.a=[];
     g.command_line=function(bootstrap,flg){
         (flg)?(console.log(flg,arguments)):0;
-        g.a=[];
         var f = function(c,flg){
             (flg)?(console.log(flg,arguments)):0;
             a.push(c);
@@ -41,7 +41,7 @@
         var ret=bootstrap;
         var f=function(c){
             is(head)("Function")(function(cc){
-                        ret=cc(bootstrap(c));
+                        ret=cc(bootstrap)(c);
                         g.back=ret;
 
                     })(voi)
