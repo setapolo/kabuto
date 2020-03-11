@@ -1,12 +1,21 @@
-
-(function(g){//dragon plane
+(function(g,flg){
+    (flg)?(console.log(flg,arguments)):0;
+    g.command_line=function(bootstrap,flg){
+        (flg)?(console.log(flg,arguments)):0;
+        g.a=[];
+        var f = function(c,flg){
+            (flg)?(console.log(flg,arguments)):0;
+            a.push(c);
+            return (c!=null)?f:bootstrap(c);
+        }
+        return f;
+    };
     var a=[];
-    var is = function(c,flg){
-            (flg)?(console.log(flg,c)):0;
+    g.is = function(c,flg){
+            (flg)?(console.log(flg,arguments)):0;
             var ss=Object['prototype']['toString']['call'](c).slice(8, -1);
-
             var cmp=function(sss,flg){
-                (flg)?(console.log(flg,ss)):0;
+                (flg)?(console.log(flg,arguments)):0;
                 var zz=Object['prototype']['toString']['call'](sss).slice(8, -1);
                 var type=typeof sss;
                 var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(c==sss));
@@ -26,22 +35,30 @@
             }
             return cmp;
         };
-    var f=function(c){
-        a.push(c);
-        is(c)(true)
-        (function(c){
-        })
-        (function(c){
-            console.log(a.join(" "));
-        })
-        return (c!=null)?f:f;
-    }
-    return f;
+    var voi = function(){};    
+    var bootstrap=function(c){
+        (flg)?(console.log(flg,arguments)):0;
+        ret=bootstrap;
+        is(c)
+            ("Function")
+                (function(cc){
+                    ret=cc(bootstrap);
+                })
+                (voi)
+            (true)
+                (voi)
+                (function(cc){
+                    ret=command_line(bootstrap);
+                })
+        console.log("b",a)
+        return ret;
+    };
+    return bootstrap;
 })(global)
-    ("ls")("-al")()
-    ("ls")("-a")()
-    ("ls")("-at")()
-
+    (command_line)
+        ("ls")("-al")()
+        ("ls")("-a")()
+        ("ls")("-at")()
 ;
-
+console.log(process.argv);
 
