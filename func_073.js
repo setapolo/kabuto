@@ -1,8 +1,8 @@
 (function(g,flg){
     (flg)?(console.log(flg,arguments)):0;
-    g.a=[];
-    g.command_line=function(bootstrap,flg){
+    g.compare=function(bootstrap,flg){
         (flg)?(console.log(flg,arguments)):0;
+        g.a=[];
         var f = function(c,flg){
             (flg)?(console.log(flg,arguments)):0;
             a.push(c);
@@ -36,29 +36,40 @@
             return cmp;
         };
     var voi = function(){};    
-    var bootstrap=function(head){
+    var bootstrap=function(c){
         (flg)?(console.log(flg,arguments)):0;
         var ret=bootstrap;
-        var f=function(c){
-            is(head)("Function")(function(cc){
-                        ret=cc(bootstrap(c));
-                        g.back=ret;
-
-                    })(voi)
-            is(c)(true)(voi)(function(cc){
-                        console.log("b",a)
-                        ret=g.back;
-                    })
-            return ret;
-        }
-        return f;
+        is(c)("Function")(function(cc){
+                    ret=cc(bootstrap);
+                    g.back=ret;
+                })(voi)
+            (true)(voi)
+                (function(cc){
+                    ret=g.back;
+                })
+//        console.log("b",a)
+        return ret;
     };
     return bootstrap;
 })(global)
-    (command_line)
-        ("ls")("-al")()
-        ("ls")("-a")()
-        ("ls")("-at")()
+    (compare)
+        ("ls")("ls")()
+        ("ls")("lsa")()
+        ("ls")("als")()()
 ;
-//console.log(process.argv);
+let a, b, rest;
+[a,b,...rest]=process.argv;
+//console.log(a);
+//console.log(b);
+//console.log(rest);
+rest[0].split("").map(function(c,i,a){
+    rest[1].split("").map(function(cc,ii,aa){
+        (c==cc)?(console.log("identical",c)):0;
+        
+    })
+//    console.log(c);
+});
+
+
+
 
