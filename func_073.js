@@ -1,11 +1,10 @@
-(function(g,flg){
-    (flg)?(console.log(flg,arguments)):0;
-    var a=[];
+(function(g,flg){//should be equal global scope
+    (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
     g.is = function(c,flg){
-            (flg)?(console.log(flg,arguments)):0;
+           (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
             var ss=Object['prototype']['toString']['call'](c).slice(8, -1);
             var cmp=function(sss,flg){
-                (flg)?(console.log(flg,arguments)):0;
+                (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
                 var zz=Object['prototype']['toString']['call'](sss).slice(8, -1);
                 var type=typeof sss;
                 var b = (type=="boolean")?(c!=null):((type=="string")?(sss==ss):(c==sss));
@@ -25,32 +24,20 @@
             }
             return cmp;
         };
-    var voi = function(){};    
+    var diov = function(){};    
     var bootstrap=function(c,flg){
-        (flg)?(console.log(flg,arguments)):0;
+        (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
         var ret=bootstrap;
-        (c['getopt'])?(function(){
-            c.getopt(g)("aa")("bb");
-            aa.split("").map(function(c,i,a){
-                bb.split("").map(function(cc,ii,aa){
-                    (c==cc)?(console.log("identical",c)):0;
-                })
-            });
-        })():0;
-
-        is(c)("Function")(function(cc){
-                    ret=cc(bootstrap);
-                    g.back=ret;
-                })(voi)
-            (true)(voi)
-                (function(cc){
-                    ret=g.back;
-                })
+        Object.assign(g,c);
+        is(c)("Function")(function(){
+            ret = c(g);
+        })
         return ret;
     };
     return bootstrap;
 })(global) // basicall golobal scope representation
-    ({getopt:function(g){
+    ({getopt:function(g,flg){
+        (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
         var argc=0;
         var argv=[];
         var execPath="";
@@ -62,8 +49,7 @@
             }
         );        
         var f=function(c,flg){
-            (flg)?(console.log(flg,arguments)):0;
-
+            (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
             is(c)("String")(function(){
                 g[c]=argv[argc];
                 argc++;
@@ -72,11 +58,14 @@
         }
         return f;
 
-    }},true)
+    }})
+    (getopt)("aa")("bb")()
 ;
-
-
-
+    aa.split("").map(function(c,i,a){
+        bb.split("").map(function(cc,ii,aa){
+            (c==cc)?(console.log("identical",c)):0;
+        })
+    });
 
 /*
 
