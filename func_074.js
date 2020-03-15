@@ -93,30 +93,34 @@
     (getopt)("file1")("file2")()(function(){
         var userHome;
         var sep;
+        var LF;
         is(process)(true)(function(){
-            is(process.platform)(/win32/)(function(){
+            is(process.platform)(/win32/)(function(){//win32
                 userHome=process.env["USERPROFILE"];
                 sep="\\";
+                LF="\r\n"
             })(function(c){
                 userHome=process.env["HOME"];
                 sep="/";
-
+                LF="\n"
             });
         });
         var hrstart = process.hrtime();
         const fs = require('fs');
         //console.log(fs.readdirSync(userHome));
-        console.log(fs.existsSync(userHome+"/Downloads/"+file1, 'utf-8'));
-        console.log(fs.existsSync(userHome+"/Downloads/"+file2, 'utf-8'));
-        let text1 = fs.readFileSync(userHome+"/Downloads/"+file1, 'utf-8');
-        let text2 = fs.readFileSync(userHome+"/Downloads/"+file2, 'utf-8');
-        text1.split("\n").map(function(c,i,a){
-            text2.split("\n").map(function(cc,ii,aa){
+        console.log(fs.existsSync([userHome,"Downloads",file1].join(sep), 'utf-8'));
+        console.log(fs.existsSync([userHome,"Downloads",file2].join(sep), 'utf-8'));
+        let text1 = fs.readFileSync([userHome,"Downloads",file1].join(sep), 'utf-8');
+        let text2 = fs.readFileSync([userHome,"Downloads",file2].join(sep), 'utf-8');
+        text1.split(LF).map(function(c,i,a){
+            text2.split(LF).map(function(cc,ii,aa){
                 (c==cc)?(console.log("identical",c)):0;
             })
         });
         var hrend = process.hrtime(hrstart);
         console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
+        console.log("aaa",[userHome,"Downloads",file1].join(sep));
+
     })
 ;
 
