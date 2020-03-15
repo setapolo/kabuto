@@ -1,15 +1,5 @@
 (function(g,flg){
     (flg)?(console.log(flg,arguments)):0;
-    g.compare=function(bootstrap,flg){
-        (flg)?(console.log(flg,arguments)):0;
-        g.a=[];
-        var f = function(c,flg){
-            (flg)?(console.log(flg,arguments)):0;
-            a.push(c);
-            return (c!=null)?f:bootstrap(c);
-        }
-        return f;
-    };
     var a=[];
     g.is = function(c,flg){
             (flg)?(console.log(flg,arguments)):0;
@@ -36,9 +26,18 @@
             return cmp;
         };
     var voi = function(){};    
-    var bootstrap=function(c){
+    var bootstrap=function(c,flg){
         (flg)?(console.log(flg,arguments)):0;
         var ret=bootstrap;
+        (c['getopt'])?(function(){
+            c.getopt(g)("aa")("bb");
+            aa.split("").map(function(c,i,a){
+                bb.split("").map(function(cc,ii,aa){
+                    (c==cc)?(console.log("identical",c)):0;
+                })
+            });
+        })():0;
+
         is(c)("Function")(function(cc){
                     ret=cc(bootstrap);
                     g.back=ret;
@@ -47,28 +46,39 @@
                 (function(cc){
                     ret=g.back;
                 })
-//        console.log("b",a)
         return ret;
     };
     return bootstrap;
-})(global)
-    (compare)
-        ("ls")("ls")()
-        ("ls")("lsa")()
-        ("ls")("als")()()
+})(global) // basicall golobal scope representation
+    ({getopt:function(g){
+        var argc=0;
+        var argv=[];
+        var execPath="";
+        var execfile="";
+        [execPath,execfile,...argv]=process.argv;
+        is(g)(true)
+            (function(){
+                g.argv=argv;
+            }
+        );        
+        var f=function(c,flg){
+            (flg)?(console.log(flg,arguments)):0;
+
+            is(c)("String")(function(){
+                g[c]=argv[argc];
+                argc++;
+            })
+            return f;
+        }
+        return f;
+
+    }},true)
 ;
-let a, b, rest;
-[a,b,...rest]=process.argv;
-//console.log(a);
-//console.log(b);
-//console.log(rest);
-rest[0].split("").map(function(c,i,a){
-    rest[1].split("").map(function(cc,ii,aa){
-        (c==cc)?(console.log("identical",c)):0;
-        
-    })
-//    console.log(c);
-});
+
+
+
+
+/*
 
 var hrstart = process.hrtime();
 const fs = require('fs');
@@ -87,3 +97,4 @@ console.log(text1.split("\r\n").length);
 console.log((Array.from(new Set(text1.split("\r\n")))).length);
 console.log(text2.split("\r\n").length);
 console.log((Array.from(new Set(text2.split("\r\n")))).length);
+*/
