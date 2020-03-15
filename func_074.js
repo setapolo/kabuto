@@ -108,19 +108,38 @@
         var hrstart = process.hrtime();
         const fs = require('fs');
         //console.log(fs.readdirSync(userHome));
+        var cat = function(c,flg){
+            (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
+            var a=[c];
+            var f=function(cc,flg){
+                (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
+                is(cc)(true)(function(){
+                    a.push(cc);
+                })(function(){
+                    console.log(a.join(sep));                    
+                })
+                return f;
+            };
+            return f;
+        };
+        cat(userHome)("Downloads")
+                            (file1)()
+                            (file2)();
+        console.log(file1);                    
+/*
         console.log(fs.existsSync([userHome,"Downloads",file1].join(sep), 'utf-8'));
         console.log(fs.existsSync([userHome,"Downloads",file2].join(sep), 'utf-8'));
         let text1 = fs.readFileSync([userHome,"Downloads",file1].join(sep), 'utf-8');
         let text2 = fs.readFileSync([userHome,"Downloads",file2].join(sep), 'utf-8');
         text1.split(LF).map(function(c,i,a){
             text2.split(LF).map(function(cc,ii,aa){
-                (c==cc)?(console.log("identical",c)):0;
+              //  (c==cc)?(console.log("identical",c)):0;
             })
         });
         var hrend = process.hrtime(hrstart);
         console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
         console.log("aaa",[userHome,"Downloads",file1].join(sep));
-
+*/
     })
 ;
 
