@@ -1,5 +1,6 @@
 (function(g,flg){//should be equal global scope
     (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
+
     g.is = function(c,flg){
            (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
             var ss=Object['prototype']['toString']['call'](c).slice(8, -1);
@@ -48,12 +49,12 @@
             }
             return (ss=="RegExp")?cmp:cmp_str;
         };
-//    var diov = function(){};    
     var bootstrap=function(c,flg){
         (flg)?(console.log(flg,arguments," at ",arguments.callee.name)):0;
         var ret=bootstrap;
         Object.assign(g,c);
         is(c)("Function")(function(){
+            g.back=bootstrap;
             ret = c(g);
         })
         return ret;
@@ -78,37 +79,45 @@
                 g[c]=argv[argc];
                 argc++;
             })
-            return f;
+            is(c)(true)(function(){
+                g.ret=f;    
+            })(function(){
+                g.ret=g.back("");    
+            })
+            return g.ret;    
+;
         }
         return f;
 
     }})
-    (getopt)("aa")("bb")()
-;
-var userHome;
-is(process)(true)(function(){
-    is(process.platform)(/win32/)(function(){
-        userHome=process.env["USERPROFILE"];
-    })(function(c){
-        userHome=process.env["HOME"];
-    });
-});
-console.log(userHome);
+    (getopt)("file1")("file2")()(function(){
+        var userHome;
+        var sep;
+        is(process)(true)(function(){
+            is(process.platform)(/win32/)(function(){
+                userHome=process.env["USERPROFILE"];
+                sep="\\";
+            })(function(c){
+                userHome=process.env["HOME"];
+                sep="/";
 
-var hrstart = process.hrtime();
-/*
-const fs = require('fs');
-//console.log(fs.readdirSync(userHome));
-console.log(fs.existsSync(userHome+"/Downloads/"+aa, 'utf-8'));
-console.log(fs.existsSync(userHome+"/Downloads/"+bb, 'utf-8'));
-let text1 = fs.readFileSync(userHome+"/Downloads/"+aa, 'utf-8');
-let text2 = fs.readFileSync(userHome+"/Downloads/"+bb, 'utf-8');
-text1.split("\n").map(function(c,i,a){
-    text2.split("\n").map(function(cc,ii,aa){
-        (c==cc)?(console.log("identical",c)):0;
+            });
+        });
+        var hrstart = process.hrtime();
+        const fs = require('fs');
+        //console.log(fs.readdirSync(userHome));
+        console.log(fs.existsSync(userHome+"/Downloads/"+file1, 'utf-8'));
+        console.log(fs.existsSync(userHome+"/Downloads/"+file2, 'utf-8'));
+        let text1 = fs.readFileSync(userHome+"/Downloads/"+file1, 'utf-8');
+        let text2 = fs.readFileSync(userHome+"/Downloads/"+file2, 'utf-8');
+        text1.split("\n").map(function(c,i,a){
+            text2.split("\n").map(function(cc,ii,aa){
+                (c==cc)?(console.log("identical",c)):0;
+            })
+        });
+        var hrend = process.hrtime(hrstart);
+        console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
     })
-});
-var hrend = process.hrtime(hrstart);
-console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
+;
 
-*/
+
