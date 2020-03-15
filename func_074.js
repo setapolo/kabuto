@@ -63,9 +63,10 @@
 ;
 console.log(global);
 var hrstart = process.hrtime();
+const userHome = process.env[process.platform == "win32" ? "USERPROFILE" : "HOME"];
 const fs = require('fs');
-let text1 = fs.readFileSync("C:\\Users\\student06\\Downloads\\"+aa, 'utf-8');
-let text2 = fs.readFileSync("C:\\Users\\student06\\Downloads\\"+bb, 'utf-8');
+let text1 = fs.readFileSync(userHome+"\\Downloads\\"+aa, 'utf-8');
+let text2 = fs.readFileSync(userHome+"\\Downloads\\"+bb, 'utf-8');
 
     aa.split("").map(function(c,i,a){
         bb.split("").map(function(cc,ii,aa){
@@ -78,21 +79,6 @@ text1.split("\r\n").map(function(c,i,a){
     })
 });
 
-/*
+var hrend = process.hrtime(hrstart);
+console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
 
-let text1 = fs.readFileSync("C:\\Users\\student06\\Downloads\\list1.csv", 'utf-8');
-let text2 = fs.readFileSync("C:\\Users\\student06\\Downloads\\list2.csv", 'utf-8');
-text1.split("\r\n").map(function(c,i,a){
-    text2.split("\r\n").map(function(cc,ii,aa){
-        (c==cc)?(console.log("identical",c)):0;
-    })
-});
-var hrend = process.hrtime(hrstart)
-//console.log(hrend);
-//console.info('Execution time: %dms', end)
-console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000)
-console.log(text1.split("\r\n").length);
-console.log((Array.from(new Set(text1.split("\r\n")))).length);
-console.log(text2.split("\r\n").length);
-console.log((Array.from(new Set(text2.split("\r\n")))).length);
-*/
