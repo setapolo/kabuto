@@ -1,0 +1,56 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<meta charset="utf-8">
+<html></html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+var g=function(c){ 
+  return function(d){
+    _ff=[];
+    return function(ff){
+      a={};
+      var f=function(k){
+        return (k!=null)?(function(v){
+          a[k]=v;
+          return f;
+        }):ff()(a);
+      }
+      return f;
+    };
+    return f;
+    };
+};
+
+var vid=function(f){
+  return function(aa){
+    return function(a){
+      var s = aa.pop();
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      document.body.appendChild(e);
+      return f;
+    }
+  }
+};
+
+(function (w,flg){
+  return function(d,flg){
+    var _g=g(w)(d);
+    var aa=[];
+    var f= function(c){
+      (c != null)?(aa.push(c)):0;
+      return (typeof c == "string")?_g(f):(c != null)?f:vid(f)(aa);
+    }
+    return f;
+  };
+})(window)
+    (document)
+        ("script")
+          ("type")("text/javascript")
+          ("src")("cc.js")()
+        ("div")
+          ("innerHTML")("Hello,World")()
+          ;
+
+
+</script>
