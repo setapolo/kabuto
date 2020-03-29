@@ -25,7 +25,6 @@ var vid=function(f){
   return function(aa){
     return function(a){
       var s = aa.pop();
-      //console.log("CODEE",s);
       s=(typeof s == "function")?s(document.body)(a):s;
       return f;
     }

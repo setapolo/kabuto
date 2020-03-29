@@ -7,15 +7,20 @@
 var g=function(c){ 
   return function(d){
     var b=[];
+    var d=[];
     return function(ff){
       var a={};
+      var bb=[];
       var f=function(k){
-        (typeof k=="function")?(console.log("aaa",a)):0;
+//        (typeof k=="function")?(console.log("aaa",a)):0;
         (typeof k=="function")?(b.push(a)):0;
+        (typeof k=="function")?(d.push(k)):0;
+        bb=(k==null)?b:[];
+        b=(k==null)?[]:b;
         return (k!=null)?(typeof k=="function")?(ff(k)):(function(v){
           a[k]=v;
           return f;
-        }):ff()(a,b);
+        }):ff()(a,bb,d);
       }
       return f;
     };
@@ -25,9 +30,15 @@ var g=function(c){
 
 var vid=function(f){
   return function(aa){
-    return function(a,b){
-//      console.log("bbb",b);
-      b.map(function(ccc,iii,aaa){console.log("ccc",ccc);})
+    return function(a,b,d){
+      b.push(a);
+      console.log(d);
+      b.reduce(function(ppp,ccc,iii,aaa){
+        (iii==1)?(console.log(ppp)):0;
+//        (iii==1)?(console.log(ppp)):0;
+        console.log("ddd",ccc);
+        return 0
+      })
       var s = aa.pop();
       s=(typeof s == "function")?s(document.body)(a):s;
       return f;
