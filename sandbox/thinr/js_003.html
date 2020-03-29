@@ -1,0 +1,83 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<meta charset="utf-8">
+<html></html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+var g=function(c){ 
+  return function(d){
+    var _ff=[];
+    var idx=0;
+    return function(ff){
+      idx++;
+      var a={};
+      var f=function(k){
+        return (k!=null)?(typeof k=="function")?(ff(k)):(function(v){
+          a[k]=v;
+          _ff[idx]=a;
+          return f;
+        }):ff()(a,_ff);
+      }
+      return f;
+    };
+    return f;
+    };
+};
+
+var vid=function(f){
+  return function(aa){
+    return function(a){
+      var s = aa.pop();
+      s=(typeof s == "function")?s(document.body)(a):s;
+      return f;
+    }
+  }
+};
+
+var tags=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+}
+script=tags("script");
+div=tags("div");
+button=tags("button");
+img=tags("img");
+
+(function (w,flg){
+  return function(d,flg){
+    var _g=g(w)(d);
+    var aa=[];
+    var f= function(c){
+      (c != null)?(aa.push(c)):0;
+      return ((typeof c == "string")||(typeof c == "function"))?_g(f):(c != null)?f:vid(f)(aa);
+    }
+    return f;
+  };
+})(window)
+    (document)
+        (script)
+          ("type")("text/javascript")
+          ("src")("cc.js")()
+        (div)
+          ("innerHTML")("Hello,World1")
+          ("onclick")(console.log)()
+        (div)
+          ("innerHTML")("Hello,World2")
+          ("onclick")(console.log)
+        (div)
+          ("innerHTML")("Hello,World3")
+          ("onclick")(console.log)()
+        (div)
+          ("innerHTML")("Hello,World4")
+          ("onclick")(console.log)()
+          ()
+          ;
+
+
+</script>

@@ -6,9 +6,9 @@
 //CCas Closure Cascading v.0.03 2020/3/28 moka
 var g=function(c){ 
   return function(d){
-    _ff=[];
+    var _ff=[];
     return function(ff){
-      a={};
+      var a={};
       var f=function(k){
         return (k!=null)?(typeof k=="function")?(ff(k)):(function(v){
           a[k]=v;
@@ -24,9 +24,9 @@ var g=function(c){
 var vid=function(f){
   return function(aa){
     return function(a){
-//      console.log(aa.map(function(c,i,aaa){return c(document.body)}));
       var s = aa.pop();
-      s=(typeof s == "function")?s(document.body):s;
+      //console.log("CODEE",s);
+      s=(typeof s == "function")?s(document.body)(a):s;
       return f;
     }
   }
@@ -34,10 +34,12 @@ var vid=function(f){
 
 var tags=function(s){
   return function(p){
-    var e = document.createElement(s);
-    e = Object.assign(e,a);
-    p.appendChild(e);
-    return 0
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
   }
 }
 script=tags("script");
@@ -61,10 +63,10 @@ img=tags("img");
           ("type")("text/javascript")
           ("src")("cc.js")()
         (div)
-          ("innerHTML")("Hello,World")()
+          ("innerHTML")("Hello,World")
           ("onclick")(console.log)()
         (div)
-          ("innerHTML")("Hello,World")()
+          ("innerHTML")("Hello,World")
           ("onclick")(console.log)()
         (button)
           ("innerHTML")("Hello,World")
