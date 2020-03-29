@@ -6,17 +6,16 @@
 //CCas Closure Cascading v.0.03 2020/3/28 moka
 var g=function(c){ 
   return function(d){
-    var _ff=[];
-    var idx=0;
+    var b=[];
     return function(ff){
-      idx++;
       var a={};
       var f=function(k){
+        (typeof k=="function")?(console.log("aaa",a)):0;
+        (typeof k=="function")?(b.push(a)):0;
         return (k!=null)?(typeof k=="function")?(ff(k)):(function(v){
           a[k]=v;
-          _ff[idx]=a;
           return f;
-        }):ff()(a,_ff);
+        }):ff()(a,b);
       }
       return f;
     };
@@ -26,7 +25,9 @@ var g=function(c){
 
 var vid=function(f){
   return function(aa){
-    return function(a){
+    return function(a,b){
+//      console.log("bbb",b);
+      b.map(function(ccc,iii,aaa){console.log("ccc",ccc);})
       var s = aa.pop();
       s=(typeof s == "function")?s(document.body)(a):s;
       return f;
@@ -72,9 +73,15 @@ img=tags("img");
           ("onclick")(console.log)
         (div)
           ("innerHTML")("Hello,World3")
-          ("onclick")(console.log)()
+          ("onclick")(console.log)
         (div)
           ("innerHTML")("Hello,World4")
+          ("onclick")(console.log)()
+        (div)
+          ("innerHTML")("Hello,World5")
+          ("onclick")(console.log)()
+        (div)
+          ("innerHTML")("Hello,World6")
           ("onclick")(console.log)()
           ()
           ;
