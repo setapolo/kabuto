@@ -11,16 +11,18 @@ var g=function(c){
     return function(ff){
       var a={};
       var bb=[];
+      var dd=[];
       var f=function(k){
-//        (typeof k=="function")?(console.log("aaa",a)):0;
         (typeof k=="function")?(b.push(a)):0;
         (typeof k=="function")?(d.push(k)):0;
         bb=(k==null)?b:[];
         b=(k==null)?[]:b;
+        dd=(k==null)?d:[];
+        d=(k==null)?[]:d;
         return (k!=null)?(typeof k=="function")?(ff(k)):(function(v){
           a[k]=v;
           return f;
-        }):ff()(a,bb,d);
+        }):ff()(a,bb,dd);
       }
       return f;
     };
@@ -32,15 +34,15 @@ var vid=function(f){
   return function(aa){
     return function(a,b,d){
       b.push(a);
-      console.log(d);
-      b.reduce(function(ppp,ccc,iii,aaa){
-        (iii==1)?(console.log(ppp)):0;
-//        (iii==1)?(console.log(ppp)):0;
-        console.log("ddd",ccc);
-        return 0
-      })
+      console.log((d['length'])?((d.length)):0);
+      var ee=(d['length'])?(d.reduce(function(ppp,ccc,iii,aaa){
+        var e=(iii==1)?(ppp(document.body)(b[0])):document.body;
+        return ccc(e)(b[iii]);
+      })):document.body;
+      console.log("ee",ee);
       var s = aa.pop();
-      s=(typeof s == "function")?s(document.body)(a):s;
+//      s=(typeof s == "function")?s(document.body)(a):s;
+      s=(typeof s == "function")?s(ee)(a):s;
       return f;
     }
   }
@@ -49,6 +51,8 @@ var vid=function(f){
 var tags=function(s){
   return function(p){
     return function(a){
+      console.log("p",p);
+
       var e = document.createElement(s);
       e = Object.assign(e,a);
       p.appendChild(e);

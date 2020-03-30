@@ -1,0 +1,65 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<meta charset="utf-8">
+<html></html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+
+
+var tags=function(s){
+  return function(p){
+    return function(a){
+      console.log("p p p ",p);
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+}
+script=tags("script");
+div=tags("div");
+button=tags("button");
+img=tags("img");
+
+(function (w,flg){
+  return function(d,flg){
+    var aa=[];
+    var k=null;
+    var f= function(c){
+      (c==null)?(console.log("BR")):0;
+      (typeof c=="function")?(console.log("function")):0;
+      k=(c!=null)?(typeof c=="string")?(c):k:null
+      console.log("head",k);
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+        (script)
+          ("type")("text/javascript")
+          ("src")("cc.js")()
+        (div)
+          ("innerHTML")("Hello,World1")
+          ("onclick")(console.log)()
+        (div)
+          ("innerHTML")("Hello,World2")
+          ("onclick")(console.log)()
+        (div)
+          ("innerHTML")("Hello,World3")
+          ("onclick")(console.log)
+        (div)
+          ("innerHTML")("Hello,World4")
+          ("onclick")(console.log)()
+        (div)
+          ("innerHTML")("Hello,World5")
+          ("onclick")(console.log)
+        (div)
+          ("innerHTML")("Hello,World6")
+          ("onclick")(console.log)()
+          ()
+          ;
+
+
+</script>
