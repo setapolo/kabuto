@@ -1,8 +1,7 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <meta charset="utf-8">
-<html>
-</html>
+<html></html>
 <script type="text/javascript">
 //CCas Closure Cascading v.0.03 2020/3/28 moka
 
@@ -12,6 +11,7 @@ var tags=function(s){
       console.log(s,a);
       var e = document.createElement(s);
       e = Object.assign(e,a);
+      console.log(e);
       p.appendChild(e);
       return e
     }
@@ -33,6 +33,10 @@ var tags2=function(s){
 }
 script=tags("script");
 div=tags("div");
+table=tags("table");
+tr=tags("tr");
+td=tags("td");
+
 svg=tags2("svg");
 circle=tags2("circle");
 
@@ -76,8 +80,19 @@ circle=tags2("circle");
           ("type")("text/javascript")
           ("src")("cc.js")()
         (div)
-          ("innerHTML")("Circle Void")
+          ("innerHTML")("table Void")
           ("onclick")(console.log)()
+        (table)
+          (tr)
+            (td)
+              ("innerHTML")("1")()
+          (tr)
+            (td)
+              ("innerHTML")("2")()
+          (tr)
+            (td)
+              ("innerHTML")("3")()
+        ()
         (svg)
           ("height")("100")
           ("width")("100")
