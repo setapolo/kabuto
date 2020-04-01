@@ -37,6 +37,22 @@ td=tags("td");
 svg=tags2("svg");
 circle=tags2("circle");
 
+var event=function(g){
+  var drag = false;
+  var f=function(c){
+    g[c]=function(){
+      drag=true;
+      console.log(drag);
+      console.log(arguments);
+    };
+    console.log(arguments);
+    return f;
+  };
+  drag = false;
+  return f;
+};
+event(window)("click");
+
 (function (w,flg){
   return function(d,flg){
     var a={};
@@ -80,16 +96,7 @@ circle=tags2("circle");
           ("src")("cc.js")()
         (div)
           ("innerHTML")("table Void")
-          ("onclick")(console.log)()
-        (table)
-          ("border")("1")  
-          (tr)(td)
-              ("innerHTML")("1")()()
-          (tr)(td)
-              ("innerHTML")("2")()()
-          (tr)(td)
-              ("innerHTML")("3")()()
-        ()
+          ("onclick")(click)()
         (svg)
           ("height")("100")
           ("width")("100")
