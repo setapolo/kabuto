@@ -42,8 +42,7 @@ var event=function(g){
   var f=function(c){
     g[c]=function(){
       drag=true;
-      console.log(drag);
-      console.log(arguments);
+      console.log(drag,Date.now(),arguments);
     };
     console.log(arguments);
     return f;
@@ -106,6 +105,9 @@ event(window)("click");
             ("r")("40")
             ("fill")("red")
             ("stroke")("black")
+          ("onmousedown")("click()")
+          ("onmousemove")("click()")
+          ("onmouseup")("click()")()
           ()
           ()
           ;
