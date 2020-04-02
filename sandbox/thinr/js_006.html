@@ -36,21 +36,35 @@ td=tags("td");
 
 svg=tags2("svg");
 circle=tags2("circle");
+  var drag = null;
 
-var event=function(g){
-  var drag = false;
+var eve=function(g){
   var f=function(c){
-    g[c]=function(){
-      drag=true;
+    var ff=function(){
       console.log(drag,Date.now(),arguments);
     };
-    console.log(arguments);
+    ff=(c=="down")?function(e){
+      drag=e;
+    }:ff;
+    ff=(c=="up")?function(e){
+      drag=null;
+    }:ff;
+    ff=(c=="move")?function(e){
+      (drag)?function(){
+        drag.target.cx.baseVal.value=e.clientX;
+        drag.target.cy.baseVal.value=e.clientY;
+      }():0;
+    }:ff;
+
+    g[c]=ff;
     return f;
   };
-  drag = false;
   return f;
 };
-event(window)("click");
+eve(window)("click");
+eve(window)("down");
+eve(window)("move");
+eve(window)("up");
 
 (function (w,flg){
   return function(d,flg){
@@ -97,17 +111,17 @@ event(window)("click");
           ("innerHTML")("table Void")
           ("onclick")(click)()
         (svg)
-          ("height")("100")
-          ("width")("100")
+          ("height")("500")
+          ("width")("500")
+          ("onmousemove")("move(event)")
           (circle)
             ("cx")("50")
             ("cy")("50")
             ("r")("40")
             ("fill")("red")
             ("stroke")("black")
-          ("onmousedown")("click()")
-          ("onmousemove")("click()")
-          ("onmouseup")("click()")()
+            ("onmousedown")("down(event)")
+            ("onmouseup")("up(event)")()
           ()
           ()
           ;
