@@ -1,0 +1,100 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+</html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+
+var tags=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+}
+script=tags("script");
+div=tags("div");
+link=tags("link");
+span=tags("span");
+//<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+
+button=tags("button");
+flavor_1=["btn","btn-primary","btn-sm"];
+flavor_2=["btn","btn-secondary","btn-sm"];
+flavor_3=["btn","btn-primary","btn-lg"];
+(function (w,flg){
+  return function(d,flg){
+
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+        (typeof c=="object")?(function(){
+            c=(typeof c["join"]=="function")?c["join"](" "):c;
+          //a = Object.assign(a,c);
+        }()):0;
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+        (link)
+          ("rel")("stylesheet")
+          ("href")("https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
+          ()
+        (div)
+          ("innerHTML")("button flavors")
+          ("onclick")(console.log)()
+        (button)
+          ("type")("button")
+          ("innerHTML")("Small button")
+          ("className")(flavor_1)
+          ("onclick")(console.log)
+          ()
+        (button)
+          ("type")("button")
+          ("innerHTML")("Small button")
+          ("className")(flavor_2)
+          ("onclick")(console.log)
+          ()
+        (button)
+          ("type")("button")
+          ("innerHTML")("Small button")
+          ("className")(flavor_3)
+          ("onclick")(console.log)
+          ()
+        (span)
+          ("className")("glyphicon glyphicon-heart")
+          ("style")("font-size: 72px")
+          ()
+
+ ()          ;
+</script>

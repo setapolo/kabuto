@@ -1,0 +1,122 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+  <script>
+    function init() {
+      [width,height]=[960,540];
+      //https://github.com/ics-creative/tutorial-three
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#myCanvas')
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 0, +1000);
+      const geometry = new THREE.BoxGeometry(400, 400, 400);
+      const material = new THREE.MeshNormalMaterial();
+      const box = new THREE.Mesh(geometry, material);
+      scene.add(box);
+      var tick = function() {
+        box.rotation.y += 0.01;
+        renderer.render(scene, camera); 
+        requestAnimationFrame(tick);
+      };
+      tick();
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+
+var tags=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+}
+var _ns_svg="http://www.w3.org/2000/svg";
+var tags2=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElementNS(_ns_svg,s);
+      Object.keys(a).map(function(c,i){
+        e.setAttribute(c,a[c]);
+      })
+      p.appendChild(e);
+      return e
+    }
+  }
+}
+script=tags("script");
+div=tags("div");
+table=tags("table");
+tr=tags("tr");
+td=tags("td");
+canvas=tags("canvas");
+
+svg=tags2("svg");
+circle=tags2("circle");
+g=tags2("g");
+fill=tags2("fill");
+path=tags2("path");
+
+(function (w,flg){
+  return function(d,flg){
+
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+        (typeof c=="object")?(function(){
+          a = Object.assign(a,c);
+        }()):0;
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+        (script)
+          ("type")("text/javascript")
+          ("src")("https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js")
+          ("onload")(init)
+          ()
+        (canvas)
+          ("id")("myCanvas")()
+        (div)
+          ("innerHTML")("three.js BOX")
+          ("onclick")(console.log)()
+ ()          ;
+ //   init();
+</script>
