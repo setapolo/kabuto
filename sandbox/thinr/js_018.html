@@ -1,0 +1,148 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+var init = function(dat){
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, dat);
+}
+var tags=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+};
+script=tags("script");
+canvas=tags("canvas");
+div=tags("div");
+link=tags("link");
+span=tags("span");
+button=tags("button");
+img=tags("img");
+iframe=tags("iframe");
+table=tags("table");
+tr=tags("tr");
+td=tags("td");
+data_x = function(s){
+          window[s]={};
+          return function(p){
+            console.log(arguments);
+            return function(c){
+              p=(document.body)?{}:p;
+              window[s]=c;
+              return s;
+            }
+          }
+        };
+databegin = data_x("databegin");
+data_x2=function(s){
+        window[s]={};
+        return function(p){
+            console.log(arguments);
+          return function(c){
+             window[p][s]=c;
+             window[s]=c;
+            return s;
+        }
+      }};
+data = data_x2("data");
+data_x3=function(s){
+        window[s]={};
+          return function(p){
+            console.log(arguments);
+            return function(c){
+              window[p][s]=[c];
+              window[s]=c;
+              return s;
+          }
+        }
+};
+datasets = data_x3("datasets");      
+(function (w,flg){
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+//        (typeof c=="object")?(function(){
+//              console.log(window[c.source]);
+//              c=(window[c.source])?window[c.source]:c;
+//              a = Object.assign(a,c);
+//        }()):0;
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document) 
+      (canvas)
+        ("id")("myChart")
+        ("width")("400")
+        ("height")("400")()
+      (databegin)
+      ("type")("bar")
+      (data)
+        ("labels")(['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'])
+        (datasets)
+          ("label") ('# of Votes') 
+          ("data")([12, 19, 3, 5, 2, 3])
+          ("backgroundColor")([
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ])
+          ("borderColor")([
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ])
+          ("borderWidth")("1")
+        ()
+ ()
+           ;
+
+init(databegin);
+console.log("cons",databegin);
+</script>
+<script>
+
+</script>

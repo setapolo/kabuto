@@ -1,0 +1,132 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+</html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: '4HAIHSqiwAA'
+    });
+  }
+var tags=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+};
+script=tags("script");
+div=tags("div");
+link=tags("link");
+span=tags("span");
+button=tags("button");
+img=tags("img");
+iframe=tags("iframe");
+table=tags("table");
+tr=tags("tr");
+td=tags("td");
+set= (function(){
+          return function(a){
+            var aa={};
+            Object.keys(a).map(function(c,i,aaa){
+              aa[c]=a[c];
+              (i==(aaa.length-1))?(window[c]=aa):0;
+            });
+          };
+        }); 
+set2=function(){
+          return function(a){
+            tit=[];
+            Object.keys(a).map(function(c,i,aaa){
+              (i==aaa.length-1)?window[c]=a[c](tit)():(a[c])?(tit.push(a[c])):0;
+            });
+          }
+        };
+covid=function(_titles){
+              titles=["date","confirmed","deaths","recovered"];
+              titles=(_titles)?_titles:titles;
+              return function(){
+                var p = table(document.body)({border:"1"});  
+                var pp;
+                return function(data){
+                  var out = function(key,i,keys){
+                    var maxindex =data[key].length-1;
+                    var attributes={};
+                    pp = tr(p)(attributes);  
+                    attributes["innerHTML"]=i;
+                    td(pp)(attributes);  
+                    attributes["innerHTML"]=key;
+                    td(pp)(attributes);  
+                    titles.map(function(col){
+                      attributes["innerHTML"]=data[key][maxindex][col];
+                      td(pp)(attributes);  
+                    });
+                  };
+                  Object.keys(data).map(out);
+                };
+              };
+            };
+(function (w,flg){
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+        (typeof c=="object")?(function(){
+              console.log(window[c.source]);
+              c=(window[c.source])?window[c.source]:c;
+              a = Object.assign(a,c);
+        }()):0;
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document) 
+        (set2)
+          ("0")("date")
+          ("1")("confirmed")
+          ("2")("deaths")
+          ("3")("recovered")
+          ("proc")
+            (covid)
+          ()
+        (div)
+          ("id")("data")
+          (script)("src")("data.json")
+          ()()
+ ()          ;
+
+
+</script>
