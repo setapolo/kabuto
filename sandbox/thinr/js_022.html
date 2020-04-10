@@ -1,0 +1,192 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<body>
+  <script>
+var init=function(){    
+
+  window.node = d3.select("svg")
+    .selectAll("circle")
+    .data(nodesData)
+    .enter()
+    .append("circle")
+    .attr("r", function(d) { return d.r })
+    .attr("fill", "aquamarine")
+    .attr("stroke", "gray")
+    .call(d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended));
+ 
+  window.simulation = d3.forceSimulation()
+    .force("collide",
+      d3.forceCollide()
+      .radius(function(d) { return d.r })
+      .strength(1.0)
+      .iterations(16))
+    .force("charge", d3.forceManyBody().strength(5))
+    .force("x", d3.forceX().strength(0.1).x(400))
+    .force("y", d3.forceY().strength(0.1).y(300));
+  simulation
+    .nodes(nodesData)
+    .on("tick", ticked);
+ 
+
+}
+   window.ticked=function() {
+    node
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+  }
+ 
+   window.dragstarted=function(d) {
+    if(!d3.event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+ 
+   window.dragged=function(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+ 
+   window.dragended=function(d) {
+    if(!d3.event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+  }
+
+  </script>
+</body>
+</html>
+
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+var tags=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+};
+var _ns_svg="http://www.w3.org/2000/svg";
+var tags2=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElementNS(_ns_svg,s);
+      (s=="svg")?a["onclick"]="desp(this)":0;
+      Object.keys(a).map(function(c,i){
+        e.setAttribute(c,a[c]);
+      })
+      p.appendChild(e);
+      return e
+    }
+  }
+}
+
+script=tags("script");
+canvas=tags("canvas");
+div=tags("div");
+link=tags("link");
+span=tags("span");
+button=tags("button");
+img=tags("img");
+iframe=tags("iframe");
+table=tags("table");
+tr=tags("tr");
+td=tags("td");
+p=tags("p");
+svg=tags2("svg");
+
+set=function(yyy){
+  return function(a){
+    Object.keys(a).map(function(c,i){
+      window[c]=a[c];
+    })
+    return "a";
+
+  }
+};
+cal=function(xxx){
+  return function(a){
+    Object.keys(a).map(function(c,i){
+      window[c]=a[c];
+      window[c][0](xxx);
+    })
+    return "b";
+
+  }
+};
+
+(function (w,flg){
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+//        (typeof c=="object")?(function(){
+//              console.log(window[c.source]);
+//              c=(window[c.source])?window[c.source]:c;
+//              a = Object.assign(a,c);
+//        }()):0;
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+                console.log(parent);
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document) 
+      (set)
+        ("nodesData")([])
+      (cal)
+        ("initball")([function(a){
+          console.log("a",a);
+          console.log("t",this);
+          for(var i = 0; i < 50; i++) {
+            nodesData.push({
+              "x": 800 * Math.random(),
+              "y": 600 * Math.random(),
+              "r": 20 * Math.random() + 3
+            });
+          }
+        }])()()
+      (svg)
+      ("width")("800")
+      ("height")("600")()
+      (script)
+        ("src")("https://d3js.org/d3.v5.min.js")
+        ("onload")(init)()
+      (div)
+        ("innerHTML")("forked from https://wizardace.com/d3-forcesimulation-onlynode/")()
+
+ ()
+           ;
+
+</script>
