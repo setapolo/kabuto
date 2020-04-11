@@ -168,11 +168,22 @@ cal=function(xxx){
         ("initball")([function(a){
           a.map(function(c){
             console.log("this is ",c);
-            for(var i = 0; i < 50; i++) {
+            h={
+              maxball:100,
+              mes:function(max){
+                return function(f){
+                  return function(min){
+                    min=(min)?min:0;
+                    return (f()*max)+min;
+                  }  
+                }
+              }
+            };
+            for(var i = 0; i < h.maxball; i++) {
               window[c].push({
-                "x": 800 * Math.random(),
-                "y": 600 * Math.random(),
-                "r": 20 * Math.random() + 3
+                "x": h.mes(800)(Math.random)(),
+                "y": h.mes(600)(Math.random)(),
+                "r": h.mes(20)(Math.random)(3)
               });
             }
           });
