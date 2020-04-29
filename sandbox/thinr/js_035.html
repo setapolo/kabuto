@@ -1,0 +1,204 @@
+
+ <!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<title>15 Puzzle</title>
+<script>
+  //http://www.rosettacode.org/wiki/15_Puzzle_Game#JavaScript
+var board, zx, zy, clicks, possibles, clickCounter, oldzx = -1, oldzy = -1;
+var maxpuzzleount=16;
+var widthHegiht=4;
+function getPossibles() {
+    var ii, jj, cx = [-1, 0, 1, 0], cy = [0, -1, 0, 1];
+    possibles = [];
+    for( var i = 0; i < widthHegiht; i++ ) {
+        ii = zx + cx[i]; jj = zy + cy[i];
+        if( ii < 0 || ii > 3 || jj < 0 || jj > 3 ) continue;
+        possibles.push( { x: ii, y: jj } );
+    }
+}
+function updateBtns() {
+    var b, v, id;
+    for( var j = 0; j < widthHegiht; j++ ) {
+        for( var i = 0; i < widthHegiht; i++ ) {
+            id = "btn" + ( i + j * widthHegiht );
+            b = document.getElementById( id );
+            v = board[i][j];
+            if( v < maxpuzzleount ) {
+                b.innerHTML = ( "" + v );
+                b.className = "button"
+            }
+            else {
+                b.innerHTML = ( "" );
+                b.className = "empty";
+            }
+        }
+    }
+    clickCounter.innerHTML = "Clicks: " + clicks;
+}
+function shuffle() {
+    var v = 0, t; 
+    do {
+        getPossibles();
+        while( true ) {
+            t = possibles[Math.floor( Math.random() * possibles.length )];
+            console.log( t.x, oldzx, t.y, oldzy )
+            if( t.x != oldzx || t.y != oldzy ) break;
+        }
+        oldzx = zx; oldzy = zy;
+        board[zx][zy] = board[t.x][t.y];
+        zx = t.x; zy = t.y;
+        board[zx][zy] = maxpuzzleount; 
+    } while( ++v < 200 );
+}
+function restart() {
+    shuffle();
+    clicks = 0;
+    updateBtns();
+}
+function checkFinished() {
+    var a = 0;
+    for( var j = 0; j < widthHegiht; j++ ) {
+        for( var i = 0; i < widthHegiht; i++ ) {
+            if( board[i][j] < a ) return false;
+            a = board[i][j];
+        }
+    }
+    return true;
+}
+function btnHandle( e ) {
+    getPossibles();
+    var c = e.target.i, r = e.target.j, p = -1;
+    for( var i = 0; i < possibles.length; i++ ) {
+        if( possibles[i].x == c && possibles[i].y == r ) {
+            p = i;
+            break;
+        }
+    }
+    if( p > -1 ) {
+        clicks++;
+        var t = possibles[p];
+        board[zx][zy] = board[t.x][t.y];
+        zx = t.x; zy = t.y;
+        board[zx][zy] = maxpuzzleount;
+        updateBtns();
+        if( checkFinished() ) {
+            setTimeout(function(){ 
+                alert( "WELL DONE!" );
+                restart();
+            }, 1);
+        }
+    }
+}
+function createBoard() {
+    board = new Array( widthHegiht );
+    for( var i = 0; i < widthHegiht; i++ ) {
+        board[i] = new Array( widthHegiht );
+    }
+    for( var j = 0; j < widthHegiht; j++ ) {
+        for( var i = 0; i < widthHegiht; i++ ) {
+            board[i][j] = ( i + j * widthHegiht ) + 1;
+        }
+    }
+    zx = zy = 3; board[zx][zy] = maxpuzzleount;
+}
+
+function start() {
+    //createBtns();
+    clickCounter = document.createElement( "p" );
+    clickCounter.className += "txt";
+    document.body.appendChild( clickCounter );
+    createBoard();
+    updateBtns()
+    restart();
+}  
+</script>
+</html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+(function (g,flg){
+  g.ferrorod=function(s){
+    return function(p){
+      return function(a){
+        var e = document.createElement(s);
+        Object.keys(a).map(function(c,i){
+          e.setAttribute(c,a[c]);
+        })
+        e = Object.assign(e,a);
+        p.appendChild(e);
+        return e
+      }
+    }
+  };
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (typeof c=="object")?(function(){
+         _f=(c.source)?ferrorod(c.source):_f;
+        }()):0;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+      (/div/)("className")("board")
+      (/button/)("id")("btn0")("innerHTML")("1")("j")("0")("i")("0")("onclick")(btnHandle)()
+      (/button/)("id")("btn1")("innerHTML")("2")("j")("0")("i")("1")("onclick")(btnHandle)()
+      (/button/)("id")("btn2")("innerHTML")("3")("j")("0")("i")("2")("onclick")(btnHandle)()
+      (/button/)("id")("btn3")("innerHTML")("4")("j")("0")("i")("3")("onclick")(btnHandle)()
+      (/button/)("id")("btn4")("innerHTML")("5")("j")("1")("i")("0")("onclick")(btnHandle)()
+      (/button/)("id")("btn5")("innerHTML")("6")("j")("1")("i")("1")("onclick")(btnHandle)()
+      (/button/)("id")("btn6")("innerHTML")("7")("j")("1")("i")("2")("onclick")(btnHandle)()
+      (/button/)("id")("btn7")("innerHTML")("8")("j")("1")("i")("3")("onclick")(btnHandle)()
+      (/button/)("id")("btn8")("innerHTML")("9")("j")("2")("i")("0")("onclick")(btnHandle)()
+      (/button/)("id")("btn9")("innerHTML")("10")("j")("2")("i")("1")("onclick")(btnHandle)()
+      (/button/)("id")("btn10")("innerHTML")("11")("j")("2")("i")("2")("onclick")(btnHandle)()
+      (/button/)("id")("btn11")("innerHTML")("12")("j")("2")("i")("3")("onclick")(btnHandle)()
+      (/button/)("id")("btn12")("innerHTML")("13")("j")("3")("i")("0")("onclick")(btnHandle)()
+      (/button/)("id")("btn13")("innerHTML")("14")("j")("3")("i")("1")("onclick")(btnHandle)()
+      (/button/)("id")("btn14")("innerHTML")("15")("j")("3")("i")("2")("onclick")(btnHandle)()
+      (/button/)("id")("btn15")("innerHTML")("")("j")("3")("i")("3")("onclick")(btnHandle)()
+      ()
+      (/style/)
+        ("innerHTML")(`
+    html,body{padding:0; margin:0;padding-top:8vh;background:#222;color:#111}
+    .txt{color:#fff;text-align:center;font-size:5vh}
+    .board{padding:0;margin:auto;width:33vh;height:33vh}
+    .button, .empty{border:0;font-size:3.5vh;margin:0.5vh;padding:0;height:6vh;width:7.25vh;line-height:5vh;
+    vertical-align:middle;background:#fff;text-align:center;border-radius:3px;cursor:pointer;float:left}
+    .empty{background:#333;border:1px solid #111}
+          `)()
+      (/script/)
+      ("src")("https://cdnjs.cloudflare.com/ajax/libs/js-url/2.5.3/url-tld.min.js")
+      ("onload")(start)
+      ()
+
+
+
+        ;
+</script>

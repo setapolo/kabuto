@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<script src="https://pintergabor.eu/www/jseyes/jseyes.js"></script>
+
+</html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+(function (g,flg){
+  g.ferrorod=function(s){
+    return function(p){
+      return function(a){
+        var e = document.createElement(s);
+        Object.keys(a).map(function(c,i){
+          e.setAttribute(c,a[c]);
+        })
+        e = Object.assign(e,a);
+        p.appendChild(e);
+        return e
+      }
+    }
+  };
+  g.according_to=function(){
+          func=arguments[0];
+          return function(a){
+           func(a);
+           return document.body;
+          }
+        };
+    
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+
+        (typeof c=="object")?(function(){
+         _f=(c.source)?ferrorod(c.source):_f;
+
+         _f=((/([^0-9]*)([0-9]*)(times)/ig).exec(c.source))?function(){
+           return function(aaaa){
+            [re,tag, m ,com] =(/([^0-9]*)([0-9]*)(times)/ig).exec(c.source);
+            m--;
+            bk=aaaa["background-color"];
+             ddd=function(aaaaa){
+              var base=a["innerHTML"]; 
+              var hex = parseInt(bk, 16); 
+              var fx=function(c,i){
+                hex = hex + 40;
+                var s=hex.toString(16).toUpperCase();
+                aaaaa["style"]="background-color:#"+s+";";
+                aaaaa["innerHTML"]=base+"_"+(i+1);
+                ferrorod(tag)
+                  (document.body)
+                    (aaaaa);
+                return document.body;    
+              };
+              aaaaa=Object.assign(aaaaa,aaaa);
+              "_".repeat(m).split(/./).map(fx);//x times
+             }
+             return ddd; 
+           }
+         }:_f;
+        _f=(/xeyes/ig).exec(c.source)?function(){
+          return function(a){
+            console.log(a)
+            myeyes= new jseyes();
+            myeyes.link= (a.link)?a.link:"https://pintergabor.eu/";
+            myeyes.main.img="https://pintergabor.eu/www/jseyes/jseyes.gif";
+            myeyes.eye1.img=(a.eye1)?a.eye1:"https://pintergabor.eu/www/jseyes/jseyeblue.gif";
+            myeyes.eye2.img=(a.eye2)?a.eye2:"https://pintergabor.eu/www/jseyes/jseyeblue.gif";
+            myeyes.write();
+            return document.body
+          }
+        }:_f;
+        }()):0;
+
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+      (/a/)
+        ("HREF")("https://pintergabor.eu/www/jseyes/jseyes.js")
+        ("innerHTML")("jseyes.js")
+      (/xeyes/)
+        ("link")("https://pintergabor.eu/www/jseyes/jseyes.js")
+        ("eye1")("https://img.icons8.com/color/48/000000/hongkong-circular.png")
+        ()
+      (/div5times/)
+        ("background-color")("EDF7FF")
+        (according_to)("innerHTML")("div")
+        ()()
+      (/li3times/)
+        ("background-color")("EDFFFF")
+        (according_to)("innerHTML")("li tag")
+        ()()
+      ()
+
+        ;
+</script>
+

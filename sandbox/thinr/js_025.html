@@ -1,0 +1,669 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+</html>
+
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+var tags=function(s){
+  return function(p){
+    return function(a){
+      var e = document.createElement(s);
+      e = Object.assign(e,a);
+      p.appendChild(e);
+      return e
+    }
+  }
+};
+
+script=tags("script");
+canvas=tags("canvas");
+div=tags("div");
+
+enchantjs=function(yyy){
+  return function(a){
+    var name = (a["name"])?a["name"]:"holder";
+    var width = (a["width"])?a["width"]:"320";
+    var height = (a["height"])?a["height"]:"360";
+    var ret=[function(){
+    // 定数
+     window.BLC = 0;
+     window.FCM = 1;
+     window.SCM = 11;
+     window.SLT = 12;
+     window.SCT = 13;
+     window.SRT = 14;
+     window.SRM = 15;
+     window.SRB = 16;
+     window.SCB = 17;
+     window.SLB = 18;
+     window.SLM = 19;
+     window.WCM = 51;
+     window.WLT = 52;
+     window.WCT = 53;
+     window.WRT = 54;
+     window.WRM = 55;
+     window.WRB = 56;
+     window.WCB = 57;
+     window.WLB = 58;
+     window.WLM = 59;
+     window.TRE = 71;
+     window.REMOVE_ATACK_EVENT = "removeAtack";
+     window.ADD_ATACK_EVENT = "addAtack";
+     window.REVIVE_PLAYER_EVENT = "revivePlayer";
+     window.REVIVE_ENEMIES_EVENT = "reviveEnemies";
+      enchant();
+      window.game = new Core(width, height);
+      game.preload([
+          "player01.png", "enemy01.png", "enemy02.png", "enemy03.png", "map01.png"
+      ]);
+      game.keybind(32, "shift");
+      game.fps = 30;
+
+    }];
+
+
+    return ret;
+  }
+};
+fld=function(xxx){
+  return function(a){
+    var width = (a["width"])?a["width"]:"32";
+    var height = (a["height"])?a["height"]:"32";
+    var _r = (a["r"])?a["r"]:"10";
+    xxx.push(function(){
+        /* ---------- Field ---------- */
+        window.Field = Class.create(Map, {
+            initialize: function (image, loadData, collisionData) {
+                Map.call(this, width, height);
+                this.image = image;
+                this.loadData(loadData);
+                if (collisionData) this.collisionData = collisionData;
+            }
+        });
+    });
+    var aa=Object.keys(a).map(function(c,i){
+      return c;
+    });
+    return xxx;
+  }
+};
+atk=function(xxx){
+  return function(a){
+    var x = (a["x"])?a["x"]:"0";
+    var y = (a["y"])?a["y"]:"0";
+    var text = (a["text"])?a["text"]:"text";
+    xxx.push(function(){
+        /* ---------- Atack ---------- */
+
+        window.Atack = Class.create(Sprite, {
+            initialize: function (x, y, r) {
+                Sprite.call(this, 8, 16);
+                this.x = x;
+                this.y = y;
+                this.rotation = r;
+                this.tl.delay(5).then(function () {
+                    var e = new enchant.Event(REMOVE_ATACK_EVENT);
+                    e.currentTarget = this;
+                    game.rootScene.dispatchEvent(e);
+                })
+            }
+        });
+            });
+    var aa=Object.keys(a).map(function(c,i){
+      return c;
+    });
+    return xxx;
+  }
+};
+plr=function(xxx){
+  return function(a){
+    var x = (a["x"])?a["x"]:"0";
+    var y = (a["y"])?a["y"]:"0";
+    var text = (a["text"])?a["text"]:"text";
+    xxx.push(function(){
+         /* ---------- Player ---------- */
+
+        window.Player = Class.create(Sprite, {
+            atackCount: 0,
+            isDie: false,
+            isAtack: false,
+            isMove: false,
+            rot: 0,
+            speed: 3,
+            initialize: function (x, y) {
+                Sprite.call(this, 32, 32);
+                this.x = x;
+                this.y = y;
+                this.image = game.assets["player01.png"];
+                this.addEventListener(enchant.Event.ENTER_FRAME, this.onEnterFrame);
+            },
+            onEnterFrame: function () {
+                if (this.isDie) return;
+                var moveX = 0;
+                var moveY = 0;
+                this.isMove = false;
+                if (game.input.shift) {
+                    if (!this.isAtack) {
+                        var e = new enchant.Event(ADD_ATACK_EVENT);
+                        switch (this.rot) {
+                            case 0:
+                                e.tagR = 90;
+                                e.tagX = this.x + 12;
+                                e.tagY = this.y + 32;
+                                break;
+                            case 9:
+                                e.tagR = 0;
+                                e.tagX = this.x - 8;
+                                e.tagY = this.y + 8;
+                                break;
+                            case 18:
+                                e.tagR = 0;
+                                e.tagX = this.x + 32;
+                                e.tagY = this.y + 8;
+                                break;
+                            case 27:
+                                e.tagR = 90;
+                                e.tagX = this.x + 12;
+                                e.tagY = this.y - 12;
+                                break;
+                        }
+                        game.rootScene.dispatchEvent(e);
+                    }
+                    this.isAtack = true;
+                }
+                if (2 < this.atackCount) {
+                    this.isAtack = false;
+                    this.atackCount = 0;
+                }
+                if (game.input.left) {
+                    moveX = -this.speed;
+                    this.rot = 9;
+                    this.isMove = true;
+                }
+                if (game.input.right) {
+                    moveX = this.speed;
+                    this.rot = 18;
+                    this.isMove = true;
+                }
+                if (game.input.up) {
+                    moveY = -this.speed;
+                    this.rot = 27;
+                    this.isMove = true;
+                }
+                if (game.input.down) {
+                    moveY = this.speed;
+                    this.rot = 0;
+                    this.isMove = true;
+                }
+                if (field2.hitTest(this.x + moveX + 8, this.y + moveY + 8)) {
+                    this.isMove = false;
+                } else if (field2.hitTest(this.x + moveX + 22, this.y + moveY + 8)) {
+                    this.isMove = false;
+                } else if (field2.hitTest(this.x + moveX + 22, this.y + moveY + 24)) {
+                    this.isMove = false;
+                } else if (field2.hitTest(this.x + moveX + 8, this.y + moveY + 24)) {
+                    this.isMove = false;
+                }
+                if (this.isAtack) {
+                    this.frame = Math.floor(this.atackCount) + 6 + this.rot;
+                    this.atackCount += 0.25;
+                } else if (this.isMove) {
+                    if (0 <= this.x + moveX && this.x + moveX <= game.width - 32) {
+                        this.x += moveX;
+                    }
+                    if (0 <= this.y + moveY && this.y + moveY <= game.height - 32) {
+                        this.y += moveY;
+                    }
+                    this.frame = this.age / 4 % 3 + this.rot;
+                } else {
+                    this.frame = this.rot;
+                }
+            },
+            die: function () {
+                if (this.isDie) return;
+                this.isDie = true;
+                var scope = this;
+                this.frame = 0;
+                this.tl.tween({
+                    rotation: 180,
+                    time: 7
+                }).tween({
+                        rotation: 360,
+                        time: 7
+                    }).then(function () {
+                        scope.rotation = 0;
+                    }).tween({
+                        scaleX: 0,
+                        scaleY: 0,
+                        rotation: 180,
+                        time: 7
+                    }).then(function () {
+                        scope.visible = false;
+                        game.rootScene.removeChild(this);
+                        game.rootScene.dispatchEvent(new enchant.Event(REVIVE_PLAYER_EVENT));
+                    })
+            }
+        });
+            });
+    var aa=Object.keys(a).map(function(c,i){
+      return c;
+    });
+    return xxx;
+  }
+};
+monsters=function(xxx){
+  return function(a){
+    var width = (a["width"])?a["width"]:"32";
+    var height = (a["height"])?a["height"]:"32";
+    var _r = (a["r"])?a["r"]:"10";
+    xxx.push(function(){
+       window.Slime = Class.create(BaseEnemy, {
+            initialize: function (x, y) {
+                BaseEnemy.call(this, x, y, game.assets["enemy01.png"], 1, 20);
+                this.x = x;
+                this.y = y;
+            }
+        });
+
+        window.Wizard = Class.create(BaseEnemy, {
+            initialize: function (x, y) {
+                BaseEnemy.call(this, x, y, game.assets["enemy02.png"], 2, 50);
+                this.x = x;
+                this.y = y;
+            }
+        });
+
+        window.Knight = Class.create(BaseEnemy, {
+            initialize: function (x, y) {
+                BaseEnemy.call(this, x, y, game.assets["enemy03.png"], 3, 100);
+                this.x = x;
+                this.y = y;
+            }
+        });
+
+    });
+    var aa=Object.keys(a).map(function(c,i){
+      return c;
+    });
+    return xxx;
+  }
+};
+
+set_controls=function(xxx){
+  return function(a){
+    initi=function(){
+      xxx.map(function(c){
+        console.log(c());
+      });
+    game.onload = function () {
+    console.log("onload");
+        /* ---------- ACTION ---------- */
+        window.field = null;
+        window.field2 = null;
+        window.player = null;
+        window.atackGroup = null;
+        window.enemies = [];
+        // フィールド設定
+        setField();
+        // プレーヤー配置
+        setPlayer();
+        // スライム配置
+        setSlime();
+        // 魔法使い配置
+        setWizard();
+        // ナイト配置
+        setKnight();
+        // ゲームイベント
+        game.rootScene.addEventListener(enchant.Event.ENTER_FRAME, function () {
+            if (1 <= enemies.length && 0 == this.age % 3) {
+                var arr = [];
+                // アタリ判定
+                var i = 0, max;
+                for (i = 0, max = enemies.length; i < max; i = i + 1) {
+                    if (!enemies[i].isDie && player.within(enemies[i], 20)) {
+                        player.die();
+                    }
+                    if (atackGroup.lastChild && enemies[i].intersect(atackGroup.lastChild)) {
+                        enemies[i].die();
+                    } else {
+                        arr.push(enemies[i]);
+                    }
+                }
+                enemies = arr;
+                if (enemies.length <= 0) game.rootScene.dispatchEvent(new enchant.Event(REVIVE_ENEMIES_EVENT));
+            }
+        });
+        game.rootScene.addEventListener(ADD_ATACK_EVENT, function (e) {
+            atackGroup.addChild(new Atack(e.tagX, e.tagY, e.tagR));
+        });
+        game.rootScene.addEventListener(REMOVE_ATACK_EVENT, function (e) {
+            atackGroup.removeChild(e.currentTarget);
+        });
+        game.rootScene.addEventListener(REVIVE_PLAYER_EVENT, function (e) {
+            // プレーヤー配置
+            setPlayer();
+        });
+        game.rootScene.addEventListener(REVIVE_ENEMIES_EVENT, function (e) {
+            // スライム配置
+            setSlime();
+            // 魔法使い配置
+            setWizard();
+            // ナイト配置
+            setKnight();
+        });
+    };
+        // フィールド設定
+        var setField=function() {
+            field = new Field(game.assets["map01.png"], [
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, SLM, SCM],
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, SLB, SCB],
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM],
+                [FCM, FCM, SLT, SCT, SCT, SRT, FCM, FCM, FCM, FCM],
+                [FCM, FCM, SLM, SCM, SCM, SRM, FCM, FCM, FCM, FCM],
+                [FCM, FCM, SLM, SCM, SCM, SRM, FCM, FCM, FCM, FCM],
+                [FCM, FCM, SLB, SCB, SCB, SRB, FCM, FCM, FCM, FCM],
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM],
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM],
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM],
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM],
+                [FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM, FCM]
+            ]);
+            field2 = new Field(game.assets["map01.png"], [
+                [WCM, WRM, TRE, BLC, BLC, BLC, TRE, BLC, BLC, BLC],
+                [WCM, WRM, BLC, TRE, BLC, BLC, BLC, BLC, BLC, BLC],
+                [WCB, WRB, BLC, BLC, BLC, BLC, BLC, BLC, BLC, BLC],
+                [BLC, BLC, BLC, BLC, BLC, BLC, BLC, TRE, BLC, BLC],
+                [BLC, TRE, BLC, BLC, BLC, BLC, BLC, BLC, BLC, BLC],
+                [BLC, BLC, BLC, BLC, BLC, BLC, BLC, BLC, BLC, BLC],
+                [BLC, BLC, BLC, BLC, BLC, BLC, BLC, TRE, BLC, TRE],
+                [BLC, TRE, BLC, BLC, BLC, BLC, BLC, BLC, BLC, BLC],
+                [BLC, BLC, BLC, BLC, TRE, TRE, WLT, WCT, WCT, WCT],
+                [BLC, BLC, BLC, BLC, TRE, BLC, WLM, WCM, WCM, WCM],
+                [BLC, BLC, BLC, BLC, BLC, BLC, WLM, WCM, WCM, WCM],
+                [BLC, BLC, BLC, BLC, BLC, BLC, WLM, WCM, WCM, WCM]
+            ], [
+                [1, 1, 1, 0, 0, 0, 1, 0, 0, 0],
+                [1, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+                [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
+                [0, 0, 0, 0, 1, 0, 1, 1, 1, 1],
+                [0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+                [0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
+            ]);
+            game.rootScene.addChild(field);
+            game.rootScene.addChild(field2);
+var myLabel = new Label("this is fork from https://www.knockknock.jp/archives/367");
+myLabel.font = "16px Palatino";
+myLabel.x = 10; // X座標
+myLabel.y = 5; // Y座標
+// ラベルを画面に表示
+game.rootScene.addChild(myLabel);
+
+
+
+        }
+
+        // プレーヤー配置
+        window.setPlayer=function() {
+            player = new Player(game.width / 2 - 16, game.height / 2 - 16);
+            game.rootScene.addChild(player);
+            if (atackGroup) game.rootScene.removeChild(atackGroup);
+            atackGroup = new Group(320, 360);
+            game.rootScene.addChild(atackGroup);
+        }
+
+        // スライム配置
+        window.setSlime=function() {
+            var tagX = 0;
+            var tagY = 0;
+            var i = 0, max;
+            for (i = 0, max = 10; i < max; i = i + 1) {
+                if (0 == i % 2) {
+                    tagX = 32;
+                    tagY = game.height - 64;
+                } else {
+                    tagX = game.width - 64;
+                    tagY = 32;
+                }
+                var slime = new Slime(tagX, tagY);
+                game.rootScene.addChild(slime);
+                enemies.push(slime);
+            }
+        }
+
+        // 魔法使い配置
+        window.setWizard=function() {
+            var tagX = 0;
+            var tagY = 0;
+            var i = 0, max;
+            for (i = 0, max = 5; i < max; i = i + 1) {
+                if (0 == i % 2) {
+                    tagX = 32;
+                    tagY = game.height - 64;
+                } else {
+                    tagX = game.width - 64;
+                    tagY = 32;
+                }
+                var wizard = new Wizard(tagX, tagY);
+                game.rootScene.addChild(wizard);
+                enemies.push(wizard);
+            }
+        }
+
+        // ナイト配置
+        window.setKnight=function() {
+            var tagX = 0;
+            var tagY = 0;
+            var i = 0, max;
+            for (i = 0, max = 2; i < max; i = i + 1) {
+                tagX = 0;
+                tagY = 0;
+                if (0 == i % 2) {
+                    tagX = 32;
+                    tagY = game.height - 64;
+                } else {
+                    tagX = game.width - 64;
+                    tagY = 32;
+                }
+                var knight = new Knight(tagX, tagY);
+                game.rootScene.addChild(knight);
+                enemies.push(knight);
+            }
+        }
+    console.log("start");
+    game.start();
+    }
+    return null;
+  }
+};
+
+enmy=function(xxx){
+  return function(a){
+    var width = (a["width"])?a["width"]:"32";
+    var height = (a["height"])?a["height"]:"32";
+    var _r = (a["r"])?a["r"]:"10";
+    xxx.push(function(){
+        /* ---------- Enemy ---------- */
+
+        window.BaseEnemy = Class.create(Sprite, {
+            moveX: 0,
+            moveY: 0,
+            isDie: false,
+            isAction: true,
+            isMove: false,
+            rot: 0,
+            speed: 2,
+            activity: 100,
+            initialize: function (x, y, image, speed, activity) {
+                Sprite.call(this, 32, 32);
+                this.image = image;
+                this.x = x;
+                this.y = y;
+                if (speed) this.speed = speed;
+                if (activity) this.activity = activity;
+                this.addEventListener(enchant.Event.ENTER_FRAME, this.onEnterFrame);
+            },
+            onEnterFrame: function () {
+                if (this.isDie) return;
+                if (this.isAction || 0 == this.age % this.activity) {
+                    this.isAction = false;
+                    this.moveX = 0;
+                    this.moveY = 0;
+                    var num = Math.floor(Math.random() * 5);
+                    switch (num) {
+                        case 0:
+                            this.moveX = -this.speed;
+                            this.rot = 3;
+                            this.isMove = true;
+                            break;
+                        case 1:
+                            this.moveX = this.speed;
+                            this.rot = 6;
+                            this.isMove = true;
+                            break;
+                        case 2:
+                            this.moveY = -this.speed;
+                            this.rot = 9;
+                            this.isMove = true;
+                            break;
+                        case 3:
+                            this.moveY = this.speed;
+                            this.rot = 0;
+                            this.isMove = true;
+                            break;
+                        default:
+                            this.isMove = false;
+                            break;
+                    }
+                }
+                if (field2.hitTest(this.x + this.moveX + 8, this.y + this.moveY + 8)) {
+                    this.isMove = false;
+                    this.isAction = true;
+                } else if (field2.hitTest(this.x + this.moveX + 22, this.y + this.moveY + 8)) {
+                    this.isMove = false;
+                    this.isAction = true;
+                } else if (field2.hitTest(this.x + this.moveX + 22, this.y + this.moveY + 24)) {
+                    this.isMove = false;
+                    this.isAction = true;
+                } else if (field2.hitTest(this.x + this.moveX + 8, this.y + this.moveY + 24)) {
+                    this.isMove = false;
+                    this.isAction = true;
+                }
+                if (this.isMove) {
+                    if (0 <= this.x + this.moveX && this.x + this.moveX <= game.width - 32) {
+                        this.x += this.moveX;
+                    } else {
+                        this.isAction = true;
+                    }
+                    if (0 <= this.y + this.moveY && this.y + this.moveY <= game.height - 32) {
+                        this.y += this.moveY;
+                    } else {
+                        this.isAction = true;
+                    }
+                    this.frame = this.age / 4 % 3 + this.rot;
+                } else {
+                    this.frame = this.rot;
+                }
+            },
+            die: function () {
+                if (this.isDie) return;
+                this.isDie = true;
+                var scope = this;
+                this.frame = 0;
+                this.tl.tween({
+                    rotation: 180,
+                    time: 7
+                }).tween({
+                        rotation: 360,
+                        time: 7
+                    }).then(function () {
+                        scope.rotation = 0;
+                    }).tween({
+                        scaleX: 0,
+                        scaleY: 0,
+                        rotation: 180,
+                        time: 7
+                    }).then(function () {
+                        game.rootScene.removeChild(this);
+                    })
+            }
+        });
+
+    });
+    var aa=Object.keys(a).map(function(c,i){
+      return c;
+    });
+    return xxx;
+  }
+};
+(function (w,flg){
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+//        (typeof c=="object")?(function(){
+//              console.log(window[c.source]);
+//              c=(window[c.source])?window[c.source]:c;
+//              a = Object.assign(a,c);
+//        }()):0;
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+      (div)
+        ("innerHTML")("forked from https://www.knockknock.jp/archives/367")()
+      (div)
+        ("id")("holder")()
+      (enchantjs)
+        ("width")("320")
+        ("height")("360")
+        (fld)
+          ("width")("32")
+          ("height")("32")()
+        (atk)()
+        (plr)()
+        (enmy)()
+        (monsters)()
+        (set_controls)
+      ()()  
+      (script)
+        ("src")("enchant.js")
+        ("onload")(initi)()
+        ()
+           ;
+</script>
+https://www.knockknock.jp/archives/367

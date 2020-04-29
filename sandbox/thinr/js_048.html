@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/loaders.css/0.1.2/loaders.min.css" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box}body,html{font-family:Untitled Sans,sans-serif;color:#1f1f1f;margin:0;min-height:100%;padding:0;width:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}main{min-height:100vh}fieldset{border:0}body{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:#6f7c82;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6{font-feature-settings:"liga","dlig";font-weight:200;margin-bottom:.7em;margin-top:0}h1{font-size:1.9em}h2{font-size:1.7em}.wordy{display:inline-block;border-bottom:1px dashed #fff}.wordy:hover{cursor:pointer}a{background:0 0;color:inherit;text-decoration:none}a:hover{cursor:pointer}p{font-family:Untitled Sans,sans-serif;font-size:13pt;line-height:1.6em;padding:0;margin:0 0 1.3em}ol,ul{margin-bottom:15px;padding-left:20px}ul{list-style-type:circle}@keyframes a{0%{opactity:0}to{opactity:1}}body,html{background:#ed5565;color:#fff}h1{font-size:2.8em;font-weight:700;letter-spacing:-1px;margin:.6rem 0}h1>span,h2{font-weight:300}h2{font-size:1.15em;margin:.3rem 0}main{width:95%;max-width:1000px;margin:4em auto;animation:a 1s ease-in}main header{width:100%}main header>div{width:50%}main header>.left,main header>.right{height:100%}main .loaders{width:100%;-ms-flex:0 1 auto;flex:0 1 auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap}main .loaders,main .loaders .loader{box-sizing:border-box;display:-ms-flexbox;display:flex}main .loaders .loader{-ms-flex:0 1 auto;flex:0 1 auto;-ms-flex-direction:column;flex-direction:column;-ms-flex-positive:1;flex-grow:1;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%;height:200px;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}.left{float:left}.right{float:right}.cf,main header{content:"";display:table;clear:both}.btn{color:#fff;padding:.75rem 1.25rem;border:2px solid #fff;border-radius:4px;text-decoration:none;transition:transform .1s ease-out,border .1s ease-out,background-color .15s ease-out,color .1s ease-out;margin:2rem 0}.btn:hover{transform:scale(1.02);background-color:#fff;color:#ed5565}
+</style>
+<script>
+  var fx=[];
+  var show=function(){
+    return function(){
+      //var id = setTimeout(make(), 1000);      
+      fx.push("show");
+      return fx
+    }
+  };
+  make=function(){
+    return function(){
+      var c=fx.shift();
+      (c=="show")?function(){
+        table = ferrorod("table")(document.body)({innerHTML:""});
+        console.log(lib);
+        var aaa={};
+        lib.results.map(function(c,i){
+          aaa[c.name]=c.latest;
+          //ferrorod("div")(document.body)({innerHTML:c.name});
+//          tr =(i%8==0)? ferrorod("tr")(table)({innerHTML:""}):tr;
+//          td =ferrorod("td")(tr)({innerHTML:""});
+//          ferrorod("a")(tr)({innerHTML:c,href:"https://www.google.com/search?q=three.js%20"+c})
+        });
+
+        table = ferrorod("table")(document.body)({innerHTML:""});
+        table.className = "table";
+
+        Object.keys(aaa).sort().map(function(c,i){
+//          ferrorod("div")(document.body)({innerHTML:c});
+          tr =(i%8==0)? ferrorod("tr")(table)({innerHTML:""}):tr;
+          td =ferrorod("td")(tr)({innerHTML:""});
+          ee=ferrorod("a")(tr)({innerHTML:c,href:"https://www.google.com/search?q="+c})
+//          ee=ferrorod("div")(document.body)({innerHTML:c})
+        });
+
+        setTimeout(make(), 3000);
+      }():function(){
+        var e = document.createElement("script");
+        e["src"]=c;
+        e["onload"]=(fx.length>0)?make():"";
+        document.body.appendChild(e);
+      }();
+    }
+  }
+  load=function(p){
+    return function(a){
+      console.log(a);
+      fx.push(a["src"]);
+      console.log(a["onload"]!=null?(0):(make()()));
+    return document.body;
+    }
+  }
+</script>
+
+</html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+(function (g,flg){
+  g.ferrorod=function(s){
+    return function(p){
+      return function(a){
+        var e = document.createElement(s);
+        Object.keys(a).map(function(c,i){
+          e.setAttribute(c,a[c]);
+        });
+        e = Object.assign(e,a);
+        p.appendChild(e);
+        return e
+      }
+    }
+  };
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (typeof c=="object")?(function(){
+         _f=(c.source)?ferrorod(c.source):_f;
+        }()):0;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+      (/div/)("className")("loader")
+        (/div/)("className")("ball-pulse")
+          (/div/)()
+          (/div/)()
+          (/div/)()()()
+      (/div/)("className")("loader")
+        (/div/)("className")("ball-grid-pulse")
+          (/div/)()
+          (/div/)()
+          (/div/)()
+          (/div/)()
+          (/div/)()
+          (/div/)()
+          (/div/)()()()
+      (/div/)("className")("loader")
+        (/div/)("className")("ball-clip-rotate")
+          (/div/)()()
+        (/div/)("className")("ball-clip-rotate-pulse")
+          (/div/)()()
+
+          ;
+</script>
+
+

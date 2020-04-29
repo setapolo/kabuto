@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        canvas {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+//CCas Closure Cascading v.0.03 2020/3/28 moka
+(function (g,flg){
+  g.ferrorod=function(s){
+    return function(p){
+      return function(a){
+        var e = document.createElement(s);
+        Object.keys(a).map(function(c,i){
+          e.setAttribute(c,a[c]);
+        })
+        e = Object.assign(e,a);
+        p.appendChild(e);
+        return e
+      }
+    }
+  };
+
+
+
+  g.Draw_a_cuboid=function(){
+        return function(a){//http://www.rosettacode.org/wiki/Draw_a_cuboid#JavaScript
+        var canvas = document.querySelector("canvas");
+        var g = canvas.getContext("2d");
+        var main=function(){
+          var nodes = [[-1, -1, -1], [-1, -1, 1], [-1, 1, -1], [-1, 1, 1],
+          [1, -1, -1], [1, -1, 1], [1, 1, -1], [1, 1, 1]];
+          var mouseX = 0, prevMouseX, mouseY = 0, prevMouseY;
+        function rotateCuboid(angleX, angleY) {
+            var sinX = Math.sin(angleX);
+            var cosX = Math.cos(angleX);
+ 
+            var sinY = Math.sin(angleY);
+            var cosY = Math.cos(angleY);
+ 
+            nodes.forEach(function (node) {
+                var x = node[0];
+                var y = node[1];
+                var z = node[2];
+ 
+                node[0] = x * cosX - z * sinX;
+                node[2] = z * cosX + x * sinX;
+ 
+                z = node[2];
+ 
+                node[1] = y * cosY - z * sinY;
+                node[2] = z * cosY + y * sinY;
+            });
+        }
+        function drawCuboid() {
+          var edges = [[0, 1], [1, 3], [3, 2], [2, 0], [4, 5], [5, 7], [7, 6],
+          [6, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
+
+            g.save();
+ 
+            g.clearRect(0, 0, canvas.width, canvas.height);
+            g.translate(canvas.width / 2, canvas.height / 2);
+            g.strokeStyle = "#FFFFFF";
+            g.beginPath();
+ 
+            edges.forEach(function (edge) {
+                var p1 = nodes[edge[0]];
+                var p2 = nodes[edge[1]];
+                g.moveTo(p1[0], p1[1]);
+                g.lineTo(p2[0], p2[1]);
+            });
+ 
+            g.closePath();
+            g.stroke();
+ 
+            g.restore();
+        }
+
+        function scale(factor0, factor1, factor2) {
+          console.log("scale");
+            nodes.forEach(function (node) {
+                node[0] *= factor0;
+                node[1] *= factor1;
+                node[2] *= factor2;
+            });
+        }
+        console.log(a["scale"]);
+//        scale(80, 120, 160);
+        scale.apply(this,a["scale"]);
+        rotateCuboid(Math.PI / 5, Math.PI / 9);
+        drawCuboid();
+          return function (event) {
+            prevMouseX = mouseX;
+            prevMouseY = mouseY;
+            mouseX = event.x;
+            mouseY = event.y;
+ 
+            var incrX = (mouseX - prevMouseX) * 0.01;
+            var incrY = (mouseY - prevMouseY) * 0.01;
+ 
+            rotateCuboid(incrX, incrY);
+            drawCuboid();
+          }
+        }();
+        canvas.addEventListener("mousemove", main);
+          return g;
+         }        
+      }
+  return function(d,flg){
+    var a={};
+    var aa=[null];
+    var aaa=[];
+    var lv=[document.body];
+    var k=null;
+    var parent=document.body;
+    var f= function(c){
+        var _f = (typeof c=="function")?c:null;
+        (typeof c=="object")?(function(){
+         _f=(c.source)?ferrorod(c.source):_f;
+        }()):0;
+        (k==null)?(_f!=null)?function(){
+          aaa.push(a);
+          aa.push(_f);
+          a={};
+        }():0:0;        
+        (c==null)?(function(){
+            (a!=null)?(aaa.push(a)):0;
+            aa.map(function(cc,i){
+                parent =  (cc!=null)?cc(lv[lv.length -1])(aaa[i]):document.body;
+                (parent != document.body)?lv.push(parent):0;
+            });
+            lv.pop();
+            aaa=[];
+            aa=[null];
+        })():0;
+        var v =(k != null)?c:null;
+        k=(typeof c=="string")?(k==null)?c:k:k;
+        ((k!=null)&&(v!=null))?a[k]=v:0;
+        k=((k!=null)&&(v!=null))?null:k;
+      return f;
+    }
+    return f;
+  };
+})(window)
+    (document)
+      (/canvas/)
+        ("width")(window.innerWidth)
+        ("height")(window.innerHeight)
+      ()
+      (Draw_a_cuboid)
+      ("scale")([80, 80, 160])
+          (function(){
+            var aa = {innerHTML:arguments[0]};
+            return function(a){
+              a = Object.assign(a,aa);
+              ferrorod("div")(document.body)(a)
+              console.log(arguments);
+            }
+          })("style")("background-color: black;")
+        ()
+
+
+        ;
+</script>
+
+    <script>
+
+    </script>
